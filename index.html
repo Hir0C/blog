@@ -59,7 +59,7 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="./yun-wei/2016-03-22-18-15.html"><h1>VIM插件安装</h1></a>
+            <a href="./ri-chang/2016-03-22-18-30.html"><h1>HiroC's Blog</h1></a>
 二 22 三月 2016
 
 by <a class="url fn" href="./author/hir0c.html">Hir0C</a>
@@ -69,7 +69,50 @@ by <a class="url fn" href="./author/hir0c.html">Hir0C</a>
  
         </div>
         
-        <div><h2>vim ide 基本配置</h2>
+        <div><h3>博客主题</h3>
+<p>This is the content of my blog.</p></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="./yun-wei/2016-03-22-18-26.html"><h2>sublime插件安装</h2></a>
+        <div class= "well small"> 二 22 三月 2016
+
+by <a class="url fn" href="./author/hir0c.html">Hir0C</a>
+ 
+
+
+ </div>
+        <div class="summary"><ul>
+<li>使用Package Control组件，在sublime3下安装插件，按照网上方法会出现urllib2模块找不到的报错，但是之前并没出现过错误，查看了下之前是使用的urllib，在此记录下。</li>
+</ul>
+<h2>简单说下导入步骤：</h2>
+<h3>1. `ctrl + ``键，呼出命令行，键入命令:</h3>
+<div class="highlight"><pre><span></span>    <span class="kn">import</span> <span class="nn">urllib.request</span><span class="o">,</span><span class="nn">os</span><span class="p">;</span> <span class="n">pf</span> <span class="o">=</span> <span class="s1">&#39;Package Control.sublime-package&#39;</span><span class="p">;</span> <span class="n">ipp</span> <span class="o">=</span> <span class="n">sublime</span><span class="o">.</span><span class="n">installed_packages_path</span><span class="p">();</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">install_opener</span><span class="p">(</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">build_opener</span><span class="p">(</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">ProxyHandler</span><span class="p">())</span> <span class="p">);</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ipp</span><span class="p">,</span> <span class="n">pf</span><span class="p">),</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span> <span class="s1">&#39;http://sublime.wbond.net/&#39;</span> <span class="o">+</span> <span class="n">pf</span><span class="o">.</span><span class="n">replace ...</span></pre></div> <a class="btn btn-info xsmall" href="./yun-wei/2016-03-22-18-26.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="./yun-wei/2016-03-22-18-15.html"><h2>VIM插件安装</h2></a>
+        <div class= "well small"> 二 22 三月 2016
+
+by <a class="url fn" href="./author/hir0c.html">Hir0C</a>
+ 
+
+
+ </div>
+        <div class="summary"><h2>vim ide 基本配置</h2>
 <h3>一、安装VIM</h3>
 <p>只是记录下vim的编译选项</p>
 <blockquote>
@@ -86,23 +129,16 @@ by <a class="url fn" href="./author/hir0c.html">Hir0C</a>
 
 <h3>二、插件安装</h3>
 <ul>
-<li>VJDE <a href="http://www.vim.org/scripts/script.php?script_id=1213">link</a><div class="highlight"><pre><span></span>tar -xzf vjde.tgz -C /usr/share/vim/vimfiles 
+<li><a href="http://www.vim.org/scripts/script.php?script_id=1213">VJDE</a><div class="highlight"><pre><span></span>tar -xzf vjde.tgz -C /usr/share/vim/vimfiles 
 chmod +x /usr/share/vim/vimfiles/plugin/vjde/readtags
 </pre></div>
 
 
 </li>
 </ul>
-<p>使用官网的方法就可以，自己编译安装的vim就解压到 <code>/usr/local/vim/share/vim/vim74/</code></p>
-<ul>
-<li>括号自动补全插件AutoPairs</li>
-</ul>
-<p>从<a href="http//www.vim.org/scripts/script.php?script_id=3599">AutoPairs</a></p>
-<p>下载AutoPairs插件</p>
-<p>解压auto_pairs.vim到~/.vim/Plugin/目录下即可</p></div>
-        <hr />
-    </div>
-		
+<p>使用官网的方法就可以，自己编译安装的vim就解压到 <code>/usr/local ...</code></p> <a class="btn btn-info xsmall" href="./yun-wei/2016-03-22-18-15.html">read more</a></div>
+    </div>	
+				
 
  
         
@@ -276,6 +312,7 @@ write_enable ...</pre></div></li></ol> <a class="btn btn-info xsmall" href="./yu
                 Categories
                 </li>
                 
+                <li><a href="./ri-chang/index.html">日常</a></li>
                 <li><a href="./yun-wei/index.html">运维</a></li>
                    
             </ul>

@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8">
-    <title>Hir0C blog - VIM插件安装</title>
+    <title>Hir0C blog - HiroC's Blog</title>
     <meta name="description" content="">
     <meta name="author" content="Hir0C">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,7 +54,7 @@
         <div class="span9">
     <div class='article'>
         <div class="content-title">
-            <h1>VIM插件安装</h1>
+            <h1>HiroC's Blog</h1>
 二 22 三月 2016
 
 by <a class="url fn" href="../author/hir0c.html">Hir0C</a>
@@ -63,36 +63,8 @@ by <a class="url fn" href="../author/hir0c.html">Hir0C</a>
 
         </div>
 	
-        <div><h2>vim ide 基本配置</h2>
-<h3>一、安装VIM</h3>
-<p>只是记录下vim的编译选项</p>
-<blockquote>
-<p>--with-features=huge 一定要加</p>
-</blockquote>
-<div class="highlight"><pre><span></span>    ./configure --prefix=/usr/local/vim74 \
-     **--with-features=huge** \
-     --enable-pythoninterp --enable-perlinterp \
-     --enable-rubyinterp --enable-luainterp \
-     --enable-multibyte --enable-sniff --enable-fontset \
-     --disable-selinux --enable-cscope
-</pre></div>
-
-
-<h3>二、插件安装</h3>
-<ul>
-<li><a href="http://www.vim.org/scripts/script.php?script_id=1213">VJDE</a><div class="highlight"><pre><span></span>tar -xzf vjde.tgz -C /usr/share/vim/vimfiles 
-chmod +x /usr/share/vim/vimfiles/plugin/vjde/readtags
-</pre></div>
-
-
-</li>
-</ul>
-<p>使用官网的方法就可以，自己编译安装的vim就解压到 <code>/usr/local/vim/share/vim/vim74/</code></p>
-<ul>
-<li>括号自动补全插件<a href="http//www.vim.org/scripts/script.php?script_id=3599">AutoPairs</a></li>
-</ul>
-<p>下载AutoPairs插件</p>
-<p>解压auto_pairs.vim到~/.vim/Plugin/目录下即可</p></div>
+        <div><h3>博客主题</h3>
+<p>This is the content of my blog.</p></div>
 	
         <hr>
 
@@ -100,7 +72,7 @@ chmod +x /usr/share/vim/vimfiles/plugin/vjde/readtags
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'HiroC'; 
-    var disqus_title = 'VIM插件安装';
+    var disqus_title = 'HiroC's Blog';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
