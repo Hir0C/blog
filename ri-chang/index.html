@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8">
-    <title>Hir0C blog - linux</title>
+    <title>Hir0C blog - 日常</title>
     <meta name="description" content="">
     <meta name="author" content="Hir0C">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,7 +59,7 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="../yun-wei/2016-03-22-16-12.html"><h1>vsftpd 虚拟用户配置</h1></a>
+            <a href="../ri-chang/2016-03-22-18-09.html"><h1>storm 基本安装</h1></a>
 二 22 三月 2016
 
 by <a class="url fn" href="../author/hir0c.html">Hir0C</a>
@@ -69,66 +69,82 @@ by <a class="url fn" href="../author/hir0c.html">Hir0C</a>
  
         </div>
         
-        <div><h3>简介</h3>
-<p>ftp 虚拟用户配置</p>
-<h3>配置</h3>
+        <div><h3>storm安装步骤:</h3>
+<h4>一、安装zookeeper</h4>
 <ol>
 <li>
-<p>创建nologin用户</p>
-<div class="highlight"><pre><span></span>useradd -s /sbin/nologin -d /opt/ftp vftp
+<p>全部选用CDH的产品，不用担心版本问题，省心。
+包都在这里:http://archive.cloudera.com/cdh4/cdh/4/</p>
+</li>
+<li>
+<p>配置zookeeper
+解压稍微修改配置就可以使用，只需要定义dataDir和server.1/2/3</p>
+<div class="highlight"><pre><span></span>dataDir=/data/zookeeper/tmp
+hostname1:2888:3888
+hostname2:2888:3888
+hostname3:2888:3888
 </pre></div>
 
 
 </li>
 <li>
-<p>创建虚拟用户密码</p>
-<div class="highlight"><pre><span></span>db_load -T -t hash -f vftpusers.txt /mnt/vftpusers.db
+<p>启动
+        ./zkServer.sh start</p>
+</li>
+</ol>
+<h4>二、安装消息队列ZeroMQ</h4>
+<ol>
+<li>直接上最新版本zeromq-4.0.3</li>
+</ol>
+<p>http://download.zeromq.org/zeromq-4.0.3.tar.gz
+编译安装:<code>./configure &amp;&amp; make &amp;&amp; make install &amp;&amp; ldconfig</code>
+不要忘记<code>ldconfig</code></p>
+<ol>
+<li>安装zemq</li>
+</ol>
+<p>https://github.com/zeromq/jzmq
+编译安装:<code>./configure &amp;&amp; make &amp;&amp; make install &amp;&amp; ldconfig</code></p>
+<p>两个模块都默认安装/usr/local/了，这样storm就不用单独配置java.library.path了</p>
+<h4>三、安装storm</h4>
+<ol>
+<li>
+<p>storm需要python2.6以上版本。安装略</p>
+</li>
+<li>
+<p>storm配置</p>
+<div class="highlight"><pre><span></span>storm.zookeeper.servers: 需要指定zookeeper集群ip 
+storm.local.dir:本地目录位置
+storm.zookeeper.root:zookeeper根目录
+nimbus.host: &quot;IP&quot; 
+worker.childopts:&quot;-Xmx    m&quot; 
+ui.port: 8080
 </pre></div>
 
 
 </li>
 <li>
-<p>添加pam认证
-/etc/pam.d/vsftpd起始两行添加：</p>
-<div class="highlight"><pre><span></span>auth sufficient /lib64/security/pam_userdb.so db=vftpusers
-account sufficient /lib64/security/pam_userdb.so db=vftpusers
+<p>启动storm</p>
+</li>
+</ol>
+<p>ui的机器</p>
+<div class="highlight"><pre><span></span>    ./storm nimbus &gt;/dev/null 2&gt;&amp;1 &amp;
 </pre></div>
 
 
-</li>
-<li>
-<p>修改ftp配置(使用主动模式)</p>
-<div class="highlight"><pre><span></span>port_enable=YES
-write_enable=YES
-connect_from_port_20=YES
-anonymous_enable=NO
-local_enable=YES
-local_umask=022
-dirmessage_enable=YES
-xferlog_enable=YES
-connect_from_port_20=YES
-xferlog_file=/var/log/vsftpd.log
-xferlog_std_format=YES
-ascii_upload_enable=YES
-ascii_download_enable=YES
-listen=YES
-chroot_local_user=YES
-guest_enable=YES
-guest_username=vftpusers
-pam_service_name=vsftpd
-user_config_dir=vftpusers_conf
-virtual_use_local_privs=YES
-use_localtime=YES
-cmds_allowed=ABOR,CWD,LIST,MDTM,MKD,NLST,PASS,PASV,PORT,PWD,QUIT,RETR,RNFR,RNTO,SIZE,STOR,TYPE,USER,REST,CDUP,HELP,MODE,NOOP,REIN,STAT,STOU,STRU,SYST,FEAT
-file_open_mode=0444
+<p>work</p>
+<div class="highlight"><pre><span></span>    ./storm supervisor &gt;/dev/null 2&gt;&amp;1 &amp;
 </pre></div>
 
 
-</li>
-<li>
-<p>重启vsftpd，登陆验证。</p>
-</li>
-</ol></div>
+<p>ui</p>
+<div class="highlight"><pre><span></span>    ./storm ui &gt;/dev/null 2&gt;&amp;1 &amp;
+</pre></div>
+
+
+<p>要注意的是,RELEASE文件时必须的,否则启动会报错</p>
+<blockquote>
+<p>only be run from with in a release</p>
+</blockquote></div>
         <hr />
     </div>
 		
@@ -136,7 +152,7 @@ file_open_mode=0444
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
 
-    <li class="active"><a href="../tag/linux.html">1</a></li>
+    <li class="active"><a href="../ri-chang/index.html">1</a></li>
 
     <li class="next disabled"><a href="#">&rarr; Next</a></li>
 
