@@ -5,21 +5,21 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>blog/</loc>
-<lastmod>2016-03-22T18:24:11-00:00</lastmod>
+<lastmod>2016-03-22T18:25:32-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>blog/archives.html</loc>
-<lastmod>2016-03-22T18:24:11-00:00</lastmod>
+<lastmod>2016-03-22T18:25:32-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>blog/categories.html</loc>
-<lastmod>2016-03-22T18:24:11-00:00</lastmod>
+<lastmod>2016-03-22T18:25:32-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
