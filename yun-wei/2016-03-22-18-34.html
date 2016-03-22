@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8">
-    <title>Hir0C blog - storm 基本安装</title>
+    <title>Hir0C blog - wordpress on nginx 搭建</title>
     <meta name="description" content="">
     <meta name="author" content="Hir0C">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,7 +54,7 @@
         <div class="span9">
     <div class='article'>
         <div class="content-title">
-            <h1>storm 基本安装</h1>
+            <h1>wordpress on nginx 搭建</h1>
 二 22 三月 2016
 
 by <a class="url fn" href="../author/hir0c.html">Hir0C</a>
@@ -63,82 +63,60 @@ by <a class="url fn" href="../author/hir0c.html">Hir0C</a>
 
         </div>
 	
-        <div><h3>storm安装步骤:</h3>
-<h4>一、安装zookeeper</h4>
-<ol>
+        <div><p><em>内网搞了了bolg，采用了nginx+php+mysql+wordpress。整个过程并不复杂，记录下遇到的问题。</em></p>
+<h3>1. 安装nginx</h3>
+<div class="highlight"><pre><span></span>    ./configure --prefix=/usr/local/nginx --with-zlib --with-pcre=/opt/ftp/http-server/pcre-8.34 --with-http_perl_module --with-http_stub_status_module --with-http_image_filter_module --with-http_gunzip_module --with-http_gzip_static_module
+</pre></div>
+
+
+<h3>2. php</h3>
+<div class="highlight"><pre><span></span>    ./configure --prefix=/usr/local/php &#39;--with-config-file-path=/usr/local/php-5.4.23/etc&#39; &#39;--enable-fpm&#39; &#39;--enable-pcntl&#39; &#39;--enable-shmop&#39; &#39;--enable-sysvsem&#39; &#39;--enable-inline-optimization&#39; &#39;--disable-rpath&#39; &#39;--enable-safe-mode&#39; &#39;--with-mysql=mysqlnd&#39; &#39;--with-mysqli=mysqlnd&#39; &#39;--with-pdo-mysql=mysqlnd&#39; &#39;--with-libxml-dir=/usr/local&#39; &#39;--enable-xml=/usr/local&#39; &#39;--with-openssl&#39; --with-zlib &#39;--enable-bcmath&#39; &#39;--with-bz2&#39; &#39;--enable-zip&#39; &#39;--enable-exif&#39; &#39;--with-gd&#39; &#39;--enable-gd-native-ttf&#39; &#39;--with-freetype-dir=/usr/local&#39; &#39;--with-jpeg-dir=/usr/local&#39; &#39;--with-png-dir&#39; &#39;--with-mhash&#39; &#39;--with-mcrypt=/usr/local&#39; &#39;--enable-mbstring&#39; &#39;--enable-mbregex&#39; &#39;--with-iconv-dir=/usr/local&#39; &#39;--with-curl&#39; &#39;--with-curlwrappers&#39; &#39;--enable-ftp&#39; &#39;--enable-sockets&#39;
+</pre></div>
+
+
+<h3>3. mysql</h3>
+<div class="highlight"><pre><span></span>    cmake -DCMAKE_INSTALL_PREFIX=/opt/mysql/ -DSYSCONFDIR=/etc/my.cnf -DMYSQL_UNIX_ADDR=/opt/mysql/tmp/mysqld.sock -DMYSQL_USER=mysql -DDEFAULT_CHARSET=all -DDEFAULT_CHARSET=utf8 -DDEFAULT_COLLATION=utf8_general_ci -DWITH_INNOBASE_STORAGE_ENGINE=1 -DWITH_ZLIB=/usr/local/lib/ -DWITH_READLINE=1 -DWITH_DATADIR=/opt/mysql/data/ -DWITH_SSL=bundled -DENABLED_LOCAL_INFILE=1-DWITH_READLINE=1 -DWITH_DEBUG=0
+
+    make &amp;&amp; make install
+</pre></div>
+
+
+<h3>4. wordpress安装</h3>
+<p>略</p>
+<h3>5. 配置</h3>
+<p>这次遇到麻烦的地方主要有三点:</p>
+<ul>
 <li>
-<p>全部选用CDH的产品，不用担心版本问题，省心。
-包都在这里:http://archive.cloudera.com/cdh4/cdh/4/</p>
-</li>
-<li>
-<p>配置zookeeper
-解压稍微修改配置就可以使用，只需要定义dataDir和server.1/2/3</p>
-<div class="highlight"><pre><span></span>dataDir=/data/zookeeper/tmp
-hostname1:2888:3888
-hostname2:2888:3888
-hostname3:2888:3888
+<p>mysql初始化</p>
+<div class="highlight"><pre><span></span>scripts/mysql_install_db --user mysql --basedir= --datadir=
 </pre></div>
 
 
 </li>
 <li>
-<p>启动
-        ./zkServer.sh start</p>
-</li>
-</ol>
-<h4>二、安装消息队列ZeroMQ</h4>
-<ol>
-<li>直接上最新版本zeromq-4.0.3</li>
-</ol>
-<p>http://download.zeromq.org/zeromq-4.0.3.tar.gz
-编译安装:<code>./configure &amp;&amp; make &amp;&amp; make install &amp;&amp; ldconfig</code>
-不要忘记<code>ldconfig</code></p>
-<ol>
-<li>安装zemq</li>
-</ol>
-<p>https://github.com/zeromq/jzmq
-编译安装:<code>./configure &amp;&amp; make &amp;&amp; make install &amp;&amp; ldconfig</code></p>
-<p>两个模块都默认安装/usr/local/了，这样storm就不用单独配置java.library.path了</p>
-<h4>三、安装storm</h4>
-<ol>
-<li>
-<p>storm需要python2.6以上版本。安装略</p>
-</li>
-<li>
-<p>storm配置</p>
-<div class="highlight"><pre><span></span>storm.zookeeper.servers: 需要指定zookeeper集群ip 
-storm.local.dir:本地目录位置
-storm.zookeeper.root:zookeeper根目录
-nimbus.host: &quot;IP&quot; 
-worker.childopts:&quot;-Xmx    m&quot; 
-ui.port: 8080
+<p>mysql设置密码需要先执行</p>
+<div class="highlight"><pre><span></span>set old_passwords = 0;
 </pre></div>
 
 
 </li>
 <li>
-<p>启动storm</p>
+<p>nginx重写规则</p>
+<div class="highlight"><pre><span></span><span class="x">if (-f </span><span class="p">$</span><span class="nv">request_filename</span><span class="x">/index.html)</span><span class="err">{</span><span class="x"></span>
+<span class="x">    rewrite (.*) </span><span class="p">$</span><span class="x">1/index.html break;</span>
+<span class="x">}</span>
+<span class="x">if (-f </span><span class="p">$</span><span class="nv">request_filename</span><span class="x">/index.php)</span><span class="err">{</span><span class="x"></span>
+<span class="x">    rewrite (.*) </span><span class="p">$</span><span class="x">1/index.php;</span>
+<span class="x">}</span>
+<span class="x">if (!-f </span><span class="p">$</span><span class="nv">request_filename</span><span class="x">)</span><span class="err">{</span><span class="x"></span>
+<span class="x">    rewrite (.*) /index.php;</span>
+<span class="x">}</span>
+</pre></div>
+
+
 </li>
-</ol>
-<p>ui的机器</p>
-<div class="highlight"><pre><span></span>    ./storm nimbus &gt;/dev/null 2&gt;&amp;1 &amp;
-</pre></div>
-
-
-<p>work</p>
-<div class="highlight"><pre><span></span>    ./storm supervisor &gt;/dev/null 2&gt;&amp;1 &amp;
-</pre></div>
-
-
-<p>ui</p>
-<div class="highlight"><pre><span></span>    ./storm ui &gt;/dev/null 2&gt;&amp;1 &amp;
-</pre></div>
-
-
-<p>要注意的是,RELEASE文件时必须的,否则启动会报错</p>
-<blockquote>
-<p>only be run from with in a release</p>
-</blockquote></div>
+</ul>
+<p>这样访问目录时就会自动访问下面的index.php了。</p></div>
 	
         <hr>
 
@@ -146,7 +124,7 @@ ui.port: 8080
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'HiroC'; 
-    var disqus_title = 'storm 基本安装';
+    var disqus_title = 'wordpress on nginx 搭建';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
