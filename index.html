@@ -59,7 +59,7 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="./2016-03-22-16-08.html"><h1>HiroC's Blog</h1></a>
+            <a href="./2016-03-22-16-12.html"><h1>vsftpd 虚拟用户配置</h1></a>
 二 22 三月 2016
 
 by <a class="url fn" href="./author/hir0c.html">Hir0C</a>
@@ -69,8 +69,63 @@ by <a class="url fn" href="./author/hir0c.html">Hir0C</a>
  
         </div>
         
-        <div><h3>博客主题</h3>
-<p>This is the content of my blog.</p></div>
+        <div><h3>简介</h3>
+<p>ftp 虚拟用户配置</p>
+<h3>配置</h3>
+<ol>
+<li>
+<p>创建nologin用户</p>
+<p></code></pre>
+useradd -s /sbin/nologin -d /opt/ftp vftp
+</code></pre></p>
+</li>
+<li>
+<p>创建虚拟用户密码</p>
+<p></code></pre>
+db_load -T -t hash -f vftpusers.txt /mnt/vftpusers.db
+</code></pre></p>
+</li>
+<li>
+<p>添加pam认证
+</code></pre>
+    /etc/pam.d/vsftpd
+    起始两行添加：
+    auth sufficient /lib64/security/pam_userdb.so db=vftpusers
+    account sufficient /lib64/security/pam_userdb.so db=vftpusers
+</code></pre></p>
+</li>
+<li>
+<p>修改ftp配置(使用主动模式)
+<pre><code>
+    port_enable=YES
+    write_enable=YES
+    connect_from_port_20=YES
+    anonymous_enable=NO
+    local_enable=YES
+    local_umask=022
+    dirmessage_enable=YES
+    xferlog_enable=YES
+    connect_from_port_20=YES
+    xferlog_file=/var/log/vsftpd.log
+    xferlog_std_format=YES
+    ascii_upload_enable=YES
+    ascii_download_enable=YES
+    listen=YES
+    chroot_local_user=YES</p>
+<p>guest_enable=YES
+guest_username=vftpusers
+pam_service_name=vsftpd
+user_config_dir=vftpusers_conf
+virtual_use_local_privs=YES
+use_localtime=YES
+ cmds_allowed=ABOR,CWD,LIST,MDTM,MKD,NLST,PASS,PASV,PORT,PWD,QUIT,RETR,RNFR,RNTO,SIZE,STOR,TYPE,USER,REST,CDUP,HELP,MODE,NOOP,REIN,STAT,STOU,STRU,SYST,FEAT
+file_open_mode=0444
+</code></pre></p>
+</li>
+<li>
+<p>重启vsftpd，登陆验证。</p>
+</li>
+</ol></div>
         <hr />
     </div>
 		

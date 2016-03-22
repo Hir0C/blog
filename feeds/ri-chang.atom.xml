@@ -1,3 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Hir0C blog</title><link href="blog/" rel="alternate"></link><link href="blog/feeds/ri-chang.atom.xml" rel="self"></link><id>blog/</id><updated>2016-03-22T16:08:00+08:00</updated><entry><title>HiroC's Blog</title><link href="blog/2016-03-22-16-08.html" rel="alternate"></link><updated>2016-03-22T16:08:00+08:00</updated><author><name>Hir0C</name></author><id>tag:,2016-03-22:blog/2016-03-22-16-08.html</id><summary type="html">&lt;h3&gt;博客主题&lt;/h3&gt;
-&lt;p&gt;This is the content of my blog.&lt;/p&gt;</summary><category term="日常"></category></entry></feed>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Hir0C blog</title><link href="blog/" rel="alternate"></link><link href="blog/feeds/ri-chang.atom.xml" rel="self"></link><id>blog/</id><updated>2016-03-22T16:12:00+08:00</updated><entry><title>vsftpd 虚拟用户配置</title><link href="blog/2016-03-22-16-12.html" rel="alternate"></link><updated>2016-03-22T16:12:00+08:00</updated><author><name>Hir0C</name></author><id>tag:,2016-03-22:blog/2016-03-22-16-12.html</id><summary type="html">&lt;h3&gt;简介&lt;/h3&gt;
+&lt;p&gt;ftp 虚拟用户配置&lt;/p&gt;
+&lt;h3&gt;配置&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;创建nologin用户&lt;/p&gt;
+&lt;p&gt;&lt;/code&gt;&lt;/pre&gt;
+useradd -s /sbin/nologin -d /opt/ftp vftp
+&lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;创建虚拟用户密码&lt;/p&gt;
+&lt;p&gt;&lt;/code&gt;&lt;/pre&gt;
+db_load -T -t hash -f vftpusers.txt /mnt/vftpusers.db
+&lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;添加pam认证
+&lt;/code&gt;&lt;/pre&gt;
+    /etc/pam.d/vsftpd
+    起始两行添加：
+    auth sufficient /lib64/security/pam_userdb.so db=vftpusers
+    account sufficient /lib64/security/pam_userdb.so db=vftpusers
+&lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;修改ftp配置(使用主动模式)
+&lt;pre&gt;&lt;code&gt;
+    port_enable=YES
+    write_enable=YES
+    connect_from_port_20=YES
+    anonymous_enable=NO
+    local_enable=YES
+    local_umask=022
+    dirmessage_enable=YES
+    xferlog_enable=YES
+    connect_from_port_20=YES
+    xferlog_file=/var/log/vsftpd.log
+    xferlog_std_format=YES
+    ascii_upload_enable=YES
+    ascii_download_enable=YES
+    listen=YES
+    chroot_local_user=YES&lt;/p&gt;
+&lt;p&gt;guest_enable=YES
+guest_username=vftpusers
+pam_service_name=vsftpd
+user_config_dir=vftpusers_conf
+virtual_use_local_privs=YES
+use_localtime=YES
+ cmds_allowed=ABOR,CWD,LIST,MDTM,MKD,NLST,PASS,PASV,PORT,PWD,QUIT,RETR,RNFR,RNTO,SIZE,STOR,TYPE,USER,REST,CDUP,HELP,MODE,NOOP,REIN,STAT,STOU,STRU,SYST,FEAT
+file_open_mode=0444
+&lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;重启vsftpd，登陆验证。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</summary><category term="日常"></category></entry></feed>
