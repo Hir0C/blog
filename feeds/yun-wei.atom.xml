@@ -41,10 +41,8 @@ xferlog_std_format=YES
 ascii_upload_enable=YES
 ascii_download_enable=YES
 listen=YES
-chroot_local_user=YES&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;guest_enable=YES
+chroot_local_user=YES
+guest_enable=YES
 guest_username=vftpusers
 pam_service_name=vsftpd
 user_config_dir=vftpusers_conf
@@ -53,6 +51,8 @@ use_localtime=YES
 cmds_allowed=ABOR,CWD,LIST,MDTM,MKD,NLST,PASS,PASV,PORT,PWD,QUIT,RETR,RNFR,RNTO,SIZE,STOR,TYPE,USER,REST,CDUP,HELP,MODE,NOOP,REIN,STAT,STOU,STRU,SYST,FEAT
 file_open_mode=0444
 &lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;重启vsftpd，登陆验证。&lt;/li&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;重启vsftpd，登陆验证。&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;</summary><category term="运维"></category><category term="linux"></category></entry></feed>
