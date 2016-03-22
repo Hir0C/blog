@@ -69,29 +69,30 @@ by <a class="url fn" href="./author/hir0c.html">Hir0C</a>
 <ol>
 <li>
 <p>创建nologin用户</p>
-<p></code></pre>
-useradd -s /sbin/nologin -d /opt/ftp vftp
-</code></pre></p>
+<div class="highlight"><pre><span></span>useradd -s /sbin/nologin -d /opt/ftp vftp
+</pre></div>
+
+
 </li>
 <li>
 <p>创建虚拟用户密码</p>
-<p></code></pre>
-db_load -T -t hash -f vftpusers.txt /mnt/vftpusers.db
-</code></pre></p>
+<div class="highlight"><pre><span></span>db_load -T -t hash -f vftpusers.txt /mnt/vftpusers.db
+</pre></div>
+
+
 </li>
 <li>
 <p>添加pam认证
-</code></pre>
-    /etc/pam.d/vsftpd
-    起始两行添加：
-    auth sufficient /lib64/security/pam_userdb.so db=vftpusers
-    account sufficient /lib64/security/pam_userdb.so db=vftpusers
-</code></pre></p>
+/etc/pam.d/vsftpd起始两行添加：</p>
+<div class="highlight"><pre><span></span>auth sufficient /lib64/security/pam_userdb.so db=vftpusers
+account sufficient /lib64/security/pam_userdb.so db=vftpusers
+</pre></div>
+
+
 </li>
 <li>
-<p>修改ftp配置(使用主动模式)
-<pre><code>
-port_enable=YES
+<p>修改ftp配置(使用主动模式)</p>
+<div class="highlight"><pre><span></span>port_enable=YES
 write_enable=YES
 connect_from_port_20=YES
 anonymous_enable=NO
@@ -114,7 +115,9 @@ virtual_use_local_privs=YES
 use_localtime=YES
 cmds_allowed=ABOR,CWD,LIST,MDTM,MKD,NLST,PASS,PASV,PORT,PWD,QUIT,RETR,RNFR,RNTO,SIZE,STOR,TYPE,USER,REST,CDUP,HELP,MODE,NOOP,REIN,STAT,STOU,STRU,SYST,FEAT
 file_open_mode=0444
-</code></pre></p>
+</pre></div>
+
+
 </li>
 <li>
 <p>重启vsftpd，登陆验证。</p>

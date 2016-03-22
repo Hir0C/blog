@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8">
-    <title>Hir0C blog - Hir0C</title>
+    <title>Hir0C blog - 编辑器</title>
     <meta name="description" content="">
     <meta name="author" content="Hir0C">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -156,59 +156,11 @@ zshrc</p>
         <hr />
     </div>
 		
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../2016-03-22-16-12.html"><h2>vsftpd 虚拟用户配置</h2></a>
-        <div class= "well small"> 二 22 三月 2016
-
-by <a class="url fn" href="../author/hir0c.html">Hir0C</a>
- 
-
-
- </div>
-        <div class="summary"><h3>简介</h3>
-<p>ftp 虚拟用户配置</p>
-<h3>配置</h3>
-<ol>
-<li>
-<p>创建nologin用户</p>
-<div class="highlight"><pre><span></span>useradd -s /sbin/nologin -d /opt/ftp vftp
-</pre></div>
-
-
-</li>
-<li>
-<p>创建虚拟用户密码</p>
-<div class="highlight"><pre><span></span>db_load -T -t hash -f vftpusers.txt /mnt/vftpusers.db
-</pre></div>
-
-
-</li>
-<li>
-<p>添加pam认证
-/etc/pam.d/vsftpd起始两行添加：</p>
-<div class="highlight"><pre><span></span>auth sufficient /lib64/security/pam_userdb.so db=vftpusers
-account sufficient /lib64/security/pam_userdb.so db=vftpusers
-</pre></div>
-
-
-</li>
-<li>
-<p>修改ftp配置(使用主动模式)</p>
-<div class="highlight"><pre><span></span>port_enable=YES
-write_enable ...</pre></div></li></ol> <a class="btn btn-info xsmall" href="../2016-03-22-16-12.html">read more</a></div>
-    </div>	
-				
 <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
 
-    <li class="active"><a href="../author/hir0c.html">1</a></li>
+    <li class="active"><a href="../tag/bian-ji-qi.html">1</a></li>
 
     <li class="next disabled"><a href="#">&rarr; Next</a></li>
 

@@ -1,33 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Hir0C blog</title><link href="blog/" rel="alternate"></link><link href="blog/feeds/all.atom.xml" rel="self"></link><id>blog/</id><updated>2016-03-22T16:12:00+08:00</updated><entry><title>vsftpd 虚拟用户配置</title><link href="blog/2016-03-22-16-12.html" rel="alternate"></link><updated>2016-03-22T16:12:00+08:00</updated><author><name>Hir0C</name></author><id>tag:,2016-03-22:blog/2016-03-22-16-12.html</id><summary type="html">&lt;h3&gt;简介&lt;/h3&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Hir0C blog</title><link href="blog/" rel="alternate"></link><link href="blog/feeds/all.atom.xml" rel="self"></link><id>blog/</id><updated>2016-03-22T17:05:00+08:00</updated><entry><title>HiroC's Blog</title><link href="blog/2016-03-22-16-56.html" rel="alternate"></link><updated>2016-03-22T17:05:00+08:00</updated><author><name>Hir0C</name></author><id>tag:,2016-03-22:blog/2016-03-22-16-56.html</id><summary type="html">&lt;h2&gt;zsh是个好东西，关键是能装逼&lt;/h2&gt;
+&lt;h3&gt;一、安装zsh&lt;/h3&gt;
+&lt;p&gt;略&lt;/p&gt;
+&lt;h4&gt;二、切换用户使用shell&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    usermod -s /usr/local/bin/zsh root
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;或者&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    chsh -s /bin/zsh
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;三、git安装&lt;/h4&gt;
+&lt;p&gt;没啥好说的，官网步骤都有&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel -y
+    make prefix=/usr/local all
+    make prefix=/usr/local install
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;四、安装python2.7.x&lt;/h4&gt;
+&lt;p&gt;老三步&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    ./configure --prefix=/usr/local/python2.7.11 --with-ensurepip=yes --disable-ipv6 --with-threads --with-pymalloc --with-fpectl
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;五、下载安装oh-my-zsh&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;github地址：https://github.com/robbyrussell/oh-my-zsh&lt;/li&gt;
+&lt;li&gt;解压后 mv 到/root/目录下改名为.oh-my-zsh&lt;/li&gt;
+&lt;li&gt;cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;改了小部分配置：
+zshrc&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;plugins=(git osx autojump cp history systemadmin mvn screen)
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;themes/robbyrussell.zsh-theme&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;PROMPT=&amp;#39;%&lt;/span&gt;&lt;span class="cp"&gt;{&lt;/span&gt;&lt;span class="nv"&gt;$fg_bold&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="na"&gt;green&lt;/span&gt;&lt;span class="o"&gt;]%&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&lt;span class="x"&gt;`hostname` %&lt;/span&gt;&lt;span class="cp"&gt;{&lt;/span&gt;&lt;span class="nv"&gt;$fg_bold&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="na"&gt;cyan&lt;/span&gt;&lt;span class="o"&gt;]%&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&lt;span class="x"&gt;-&amp;gt;&lt;/span&gt;
+&lt;span class="x"&gt;%&lt;/span&gt;&lt;span class="cp"&gt;{&lt;/span&gt;&lt;span class="nv"&gt;$fg_bold&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="na"&gt;green&lt;/span&gt;&lt;span class="o"&gt;]%&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&lt;span class="x"&gt;%p%&lt;/span&gt;&lt;span class="cp"&gt;{&lt;/span&gt;&lt;span class="nv"&gt;$fg&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="na"&gt;yellow&lt;/span&gt;&lt;span class="o"&gt;]%&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&lt;span class="x"&gt;%c&lt;/span&gt;
+&lt;span class="x"&gt;%&lt;/span&gt;&lt;span class="cp"&gt;{&lt;/span&gt;&lt;span class="nv"&gt;$fg_bold&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="na"&gt;cyan&lt;/span&gt;&lt;span class="o"&gt;]%&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&lt;span class="x"&gt;$(git_prompt_info)%&lt;/span&gt;&lt;span class="cp"&gt;{&lt;/span&gt;&lt;span class="nv"&gt;$fg_bold&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="na"&gt;cyan&lt;/span&gt;&lt;span class="o"&gt;]%&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&lt;span class="x"&gt;%&lt;/span&gt;
+&lt;span class="x"&gt;%&lt;/span&gt;&lt;span class="cp"&gt;{&lt;/span&gt;&lt;span class="nv"&gt;$reset_color&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&lt;span class="x"&gt;&amp;gt;&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装autojump
+直接./install 安装
+.zshrc添加&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;[[ -s /etc/profile.d/autojump.zsh ]] &amp;amp;&amp;amp; . /etc/profile.d/autojump.zsh
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4&gt;六、zsh使用&lt;/h4&gt;
+&lt;p&gt;直接引用MacTalk-池建强大神的介绍
+1. 兼容 bash，原来使用 bash 的兄弟切换过来毫无压力，该咋用咋用。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;强大的历史纪录功能，输入 grep 然后用上下箭头可以翻阅你执行的所有 grep 命令。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;智能拼写纠正，输入gtep mactalk # -R，系统会提示：zsh: correct ‘gtep’ to ‘grep’ [nyae]? 比妹纸贴心吧，她们向来都是让你猜的……&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;各种补全：路径补全、命令补全，命令参数补全，插件内容补全等等。触发补全只需要按一下或两下 tab 键，补全项可以使用 ctrl+n/p/f/b上下左右切换。比如你想杀掉 java 的进程，只需要输入 kill java + tab键，如果只有一个 java 进程，zsh 会自动替换为进程的 pid，如果有多个则会出现选择项供你选择。ssh + 空格 + 两个tab键，zsh会列出所有访问过的主机和用户名进行补全&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;智能跳转，安装了autojump之后，zsh 会自动记录你访问过的目录，通过 j + 目录名 可以直接进行目录跳转，而且目录名支持模糊匹配和自动补全，例如你访问过hadoop-1.0.0目录，输入j hado 即可正确跳转。j –stat 可以看你的历史路径库。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;目录浏览和跳转：输入 d，即可列出你在这个会话里访问的目录列表，输入列表前的序号，即可直接跳转。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在当前目录下输入 .. 或 … ，或直接输入当前目录名都可以跳转，你甚至不再需要输入 cd 命令了。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;通配符搜索：ls -l ##/#.sh，可以递归显示当前目录下的 shell 文件，文件少时可以代替 find，文件太多就歇菜了。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</summary><category term="bash"></category><category term="编辑器"></category></entry><entry><title>vsftpd 虚拟用户配置</title><link href="blog/2016-03-22-16-12.html" rel="alternate"></link><updated>2016-03-22T16:25:00+08:00</updated><author><name>Hir0C</name></author><id>tag:,2016-03-22:blog/2016-03-22-16-12.html</id><summary type="html">&lt;h3&gt;简介&lt;/h3&gt;
 &lt;p&gt;ftp 虚拟用户配置&lt;/p&gt;
 &lt;h3&gt;配置&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;创建nologin用户&lt;/p&gt;
-&lt;p&gt;&lt;/code&gt;&lt;/pre&gt;
-useradd -s /sbin/nologin -d /opt/ftp vftp
-&lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;useradd -s /sbin/nologin -d /opt/ftp vftp
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;创建虚拟用户密码&lt;/p&gt;
-&lt;p&gt;&lt;/code&gt;&lt;/pre&gt;
-db_load -T -t hash -f vftpusers.txt /mnt/vftpusers.db
-&lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;db_load -T -t hash -f vftpusers.txt /mnt/vftpusers.db
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;添加pam认证
-&lt;/code&gt;&lt;/pre&gt;
-    /etc/pam.d/vsftpd
-    起始两行添加：
-    auth sufficient /lib64/security/pam_userdb.so db=vftpusers
-    account sufficient /lib64/security/pam_userdb.so db=vftpusers
-&lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+/etc/pam.d/vsftpd起始两行添加：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;auth sufficient /lib64/security/pam_userdb.so db=vftpusers
+account sufficient /lib64/security/pam_userdb.so db=vftpusers
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;修改ftp配置(使用主动模式)
-&lt;pre&gt;&lt;code&gt;
-port_enable=YES
+&lt;p&gt;修改ftp配置(使用主动模式)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;port_enable=YES
 write_enable=YES
 connect_from_port_20=YES
 anonymous_enable=NO
@@ -50,7 +134,9 @@ virtual_use_local_privs=YES
 use_localtime=YES
 cmds_allowed=ABOR,CWD,LIST,MDTM,MKD,NLST,PASS,PASV,PORT,PWD,QUIT,RETR,RNFR,RNTO,SIZE,STOR,TYPE,USER,REST,CDUP,HELP,MODE,NOOP,REIN,STAT,STOU,STRU,SYST,FEAT
 file_open_mode=0444
-&lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;重启vsftpd，登陆验证。&lt;/p&gt;

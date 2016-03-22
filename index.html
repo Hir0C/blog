@@ -59,7 +59,7 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="./2016-03-22-16-12.html"><h1>vsftpd 虚拟用户配置</h1></a>
+            <a href="./2016-03-22-16-56.html"><h1>HiroC's Blog</h1></a>
 二 22 三月 2016
 
 by <a class="url fn" href="./author/hir0c.html">Hir0C</a>
@@ -69,66 +69,141 @@ by <a class="url fn" href="./author/hir0c.html">Hir0C</a>
  
         </div>
         
-        <div><h3>简介</h3>
-<p>ftp 虚拟用户配置</p>
-<h3>配置</h3>
+        <div><h2>zsh是个好东西，关键是能装逼</h2>
+<h3>一、安装zsh</h3>
+<p>略</p>
+<h4>二、切换用户使用shell</h4>
+<div class="highlight"><pre><span></span>    usermod -s /usr/local/bin/zsh root
+</pre></div>
+
+
+<p>或者</p>
+<div class="highlight"><pre><span></span>    chsh -s /bin/zsh
+</pre></div>
+
+
+<h4>三、git安装</h4>
+<p>没啥好说的，官网步骤都有</p>
+<div class="highlight"><pre><span></span>    yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel -y
+    make prefix=/usr/local all
+    make prefix=/usr/local install
+</pre></div>
+
+
+<h4>四、安装python2.7.x</h4>
+<p>老三步</p>
+<div class="highlight"><pre><span></span>    ./configure --prefix=/usr/local/python2.7.11 --with-ensurepip=yes --disable-ipv6 --with-threads --with-pymalloc --with-fpectl
+</pre></div>
+
+
+<h4>五、下载安装oh-my-zsh</h4>
+<ol>
+<li>github地址：https://github.com/robbyrussell/oh-my-zsh</li>
+<li>解压后 mv 到/root/目录下改名为.oh-my-zsh</li>
+<li>cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc</li>
+<li>
+<p>改了小部分配置：
+zshrc</p>
+<div class="highlight"><pre><span></span>plugins=(git osx autojump cp history systemadmin mvn screen)
+</pre></div>
+
+
+<p>themes/robbyrussell.zsh-theme</p>
+<div class="highlight"><pre><span></span><span class="x">PROMPT=&#39;%</span><span class="cp">{</span><span class="nv">$fg_bold</span><span class="o">[</span><span class="na">green</span><span class="o">]%</span><span class="cp">}</span><span class="x">`hostname` %</span><span class="cp">{</span><span class="nv">$fg_bold</span><span class="o">[</span><span class="na">cyan</span><span class="o">]%</span><span class="cp">}</span><span class="x">-&gt;</span>
+<span class="x">%</span><span class="cp">{</span><span class="nv">$fg_bold</span><span class="o">[</span><span class="na">green</span><span class="o">]%</span><span class="cp">}</span><span class="x">%p%</span><span class="cp">{</span><span class="nv">$fg</span><span class="o">[</span><span class="na">yellow</span><span class="o">]%</span><span class="cp">}</span><span class="x">%c</span>
+<span class="x">%</span><span class="cp">{</span><span class="nv">$fg_bold</span><span class="o">[</span><span class="na">cyan</span><span class="o">]%</span><span class="cp">}</span><span class="x">$(git_prompt_info)%</span><span class="cp">{</span><span class="nv">$fg_bold</span><span class="o">[</span><span class="na">cyan</span><span class="o">]%</span><span class="cp">}</span><span class="x">%</span>
+<span class="x">%</span><span class="cp">{</span><span class="nv">$reset_color</span><span class="o">%</span><span class="cp">}</span><span class="x">&gt;&#39;</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>安装autojump
+直接./install 安装
+.zshrc添加</p>
+<div class="highlight"><pre><span></span>[[ -s /etc/profile.d/autojump.zsh ]] &amp;&amp; . /etc/profile.d/autojump.zsh
+</pre></div>
+
+
+</li>
+</ol>
+<h4>六、zsh使用</h4>
+<p>直接引用MacTalk-池建强大神的介绍
+1. 兼容 bash，原来使用 bash 的兄弟切换过来毫无压力，该咋用咋用。</p>
 <ol>
 <li>
-<p>创建nologin用户</p>
-<p></code></pre>
-useradd -s /sbin/nologin -d /opt/ftp vftp
-</code></pre></p>
+<p>强大的历史纪录功能，输入 grep 然后用上下箭头可以翻阅你执行的所有 grep 命令。</p>
 </li>
 <li>
-<p>创建虚拟用户密码</p>
-<p></code></pre>
-db_load -T -t hash -f vftpusers.txt /mnt/vftpusers.db
-</code></pre></p>
+<p>智能拼写纠正，输入gtep mactalk # -R，系统会提示：zsh: correct ‘gtep’ to ‘grep’ [nyae]? 比妹纸贴心吧，她们向来都是让你猜的……</p>
 </li>
 <li>
-<p>添加pam认证
-</code></pre>
-    /etc/pam.d/vsftpd
-    起始两行添加：
-    auth sufficient /lib64/security/pam_userdb.so db=vftpusers
-    account sufficient /lib64/security/pam_userdb.so db=vftpusers
-</code></pre></p>
+<p>各种补全：路径补全、命令补全，命令参数补全，插件内容补全等等。触发补全只需要按一下或两下 tab 键，补全项可以使用 ctrl+n/p/f/b上下左右切换。比如你想杀掉 java 的进程，只需要输入 kill java + tab键，如果只有一个 java 进程，zsh 会自动替换为进程的 pid，如果有多个则会出现选择项供你选择。ssh + 空格 + 两个tab键，zsh会列出所有访问过的主机和用户名进行补全</p>
 </li>
 <li>
-<p>修改ftp配置(使用主动模式)
-<pre><code>
-port_enable=YES
-write_enable=YES
-connect_from_port_20=YES
-anonymous_enable=NO
-local_enable=YES
-local_umask=022
-dirmessage_enable=YES
-xferlog_enable=YES
-connect_from_port_20=YES
-xferlog_file=/var/log/vsftpd.log
-xferlog_std_format=YES
-ascii_upload_enable=YES
-ascii_download_enable=YES
-listen=YES
-chroot_local_user=YES
-guest_enable=YES
-guest_username=vftpusers
-pam_service_name=vsftpd
-user_config_dir=vftpusers_conf
-virtual_use_local_privs=YES
-use_localtime=YES
-cmds_allowed=ABOR,CWD,LIST,MDTM,MKD,NLST,PASS,PASV,PORT,PWD,QUIT,RETR,RNFR,RNTO,SIZE,STOR,TYPE,USER,REST,CDUP,HELP,MODE,NOOP,REIN,STAT,STOU,STRU,SYST,FEAT
-file_open_mode=0444
-</code></pre></p>
+<p>智能跳转，安装了autojump之后，zsh 会自动记录你访问过的目录，通过 j + 目录名 可以直接进行目录跳转，而且目录名支持模糊匹配和自动补全，例如你访问过hadoop-1.0.0目录，输入j hado 即可正确跳转。j –stat 可以看你的历史路径库。</p>
 </li>
 <li>
-<p>重启vsftpd，登陆验证。</p>
+<p>目录浏览和跳转：输入 d，即可列出你在这个会话里访问的目录列表，输入列表前的序号，即可直接跳转。</p>
+</li>
+<li>
+<p>在当前目录下输入 .. 或 … ，或直接输入当前目录名都可以跳转，你甚至不再需要输入 cd 命令了。</p>
+</li>
+<li>
+<p>通配符搜索：ls -l ##/#.sh，可以递归显示当前目录下的 shell 文件，文件少时可以代替 find，文件太多就歇菜了。</p>
 </li>
 </ol></div>
         <hr />
     </div>
 		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="./2016-03-22-16-12.html"><h2>vsftpd 虚拟用户配置</h2></a>
+        <div class= "well small"> 二 22 三月 2016
+
+by <a class="url fn" href="./author/hir0c.html">Hir0C</a>
+ 
+
+
+ </div>
+        <div class="summary"><h3>简介</h3>
+<p>ftp 虚拟用户配置</p>
+<h3>配置</h3>
+<ol>
+<li>
+<p>创建nologin用户</p>
+<div class="highlight"><pre><span></span>useradd -s /sbin/nologin -d /opt/ftp vftp
+</pre></div>
+
+
+</li>
+<li>
+<p>创建虚拟用户密码</p>
+<div class="highlight"><pre><span></span>db_load -T -t hash -f vftpusers.txt /mnt/vftpusers.db
+</pre></div>
+
+
+</li>
+<li>
+<p>添加pam认证
+/etc/pam.d/vsftpd起始两行添加：</p>
+<div class="highlight"><pre><span></span>auth sufficient /lib64/security/pam_userdb.so db=vftpusers
+account sufficient /lib64/security/pam_userdb.so db=vftpusers
+</pre></div>
+
+
+</li>
+<li>
+<p>修改ftp配置(使用主动模式)</p>
+<div class="highlight"><pre><span></span>port_enable=YES
+write_enable ...</pre></div></li></ol> <a class="btn btn-info xsmall" href="./2016-03-22-16-12.html">read more</a></div>
+    </div>	
+				
 <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>

@@ -2,21 +2,21 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8">
-    <title>Hir0C blog - Hir0C</title>
+    <title>Hir0C blog - HiroC's Blog</title>
     <meta name="description" content="">
     <meta name="author" content="Hir0C">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
-    <script src="../theme/html5.js"></script>
+    <script src="./theme/html5.js"></script>
     <![endif]-->
 
     <!-- Le styles -->
-    <link href="../theme/bootstrap.min.css" rel="stylesheet">
-    <link href="../theme/bootstrap.min.responsive.css" rel="stylesheet">
-    <link href="../theme/local.css" rel="stylesheet">
-    <link href="../theme/pygments.css" rel="stylesheet">
+    <link href="./theme/bootstrap.min.css" rel="stylesheet">
+    <link href="./theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="./theme/local.css" rel="stylesheet">
+    <link href="./theme/pygments.css" rel="stylesheet">
 
     <!-- So Firefox can bookmark->"abo this site" -->
         <link href="blog/feeds/all.atom.xml" rel="alternate" title="Hir0C blog" type="application/atom+xml">
@@ -35,7 +35,7 @@
              <span class="icon-bar"></span>
          </a>
 
-        <a class="brand" href="..">Hir0C blog</a>
+        <a class="brand" href=".">Hir0C blog</a>
 
         <div class="nav-collapse">
         <ul class="nav">
@@ -52,23 +52,17 @@
     <div class="row">
 
         <div class="span9">
-        
-
-        
-
-
     <div class='article'>
         <div class="content-title">
-            <a href="../2016-03-22-16-56.html"><h1>HiroC's Blog</h1></a>
+            <h1>HiroC's Blog</h1>
 二 22 三月 2016
 
-by <a class="url fn" href="../author/hir0c.html">Hir0C</a>
+by <a class="url fn" href="./author/hir0c.html">Hir0C</a>
  
 
 
- 
         </div>
-        
+	
         <div><h2>zsh是个好东西，关键是能装逼</h2>
 <h3>一、安装zsh</h3>
 <p>略</p>
@@ -153,69 +147,10 @@ zshrc</p>
 <p>通配符搜索：ls -l ##/#.sh，可以递归显示当前目录下的 shell 文件，文件少时可以代替 find，文件太多就歇菜了。</p>
 </li>
 </ol></div>
-        <hr />
+	
+        <hr>
+
     </div>
-		
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../2016-03-22-16-12.html"><h2>vsftpd 虚拟用户配置</h2></a>
-        <div class= "well small"> 二 22 三月 2016
-
-by <a class="url fn" href="../author/hir0c.html">Hir0C</a>
- 
-
-
- </div>
-        <div class="summary"><h3>简介</h3>
-<p>ftp 虚拟用户配置</p>
-<h3>配置</h3>
-<ol>
-<li>
-<p>创建nologin用户</p>
-<div class="highlight"><pre><span></span>useradd -s /sbin/nologin -d /opt/ftp vftp
-</pre></div>
-
-
-</li>
-<li>
-<p>创建虚拟用户密码</p>
-<div class="highlight"><pre><span></span>db_load -T -t hash -f vftpusers.txt /mnt/vftpusers.db
-</pre></div>
-
-
-</li>
-<li>
-<p>添加pam认证
-/etc/pam.d/vsftpd起始两行添加：</p>
-<div class="highlight"><pre><span></span>auth sufficient /lib64/security/pam_userdb.so db=vftpusers
-account sufficient /lib64/security/pam_userdb.so db=vftpusers
-</pre></div>
-
-
-</li>
-<li>
-<p>修改ftp配置(使用主动模式)</p>
-<div class="highlight"><pre><span></span>port_enable=YES
-write_enable ...</pre></div></li></ol> <a class="btn btn-info xsmall" href="../2016-03-22-16-12.html">read more</a></div>
-    </div>	
-				
-<div class="pagination">
-<ul>
-    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
-
-    <li class="active"><a href="../author/hir0c.html">1</a></li>
-
-    <li class="next disabled"><a href="#">&rarr; Next</a></li>
-
-</ul>
-</div>
- 
-  
         </div>
         
         <div class="span3">
@@ -226,8 +161,8 @@ write_enable ...</pre></div></li></ol> <a class="btn btn-info xsmall" href="../2
                 Site
                 </li>
             
-                <li><a href="../archives.html">Archives</a>
-                <li><a href="../tags.html">Tags</a>
+                <li><a href="./archives.html">Archives</a>
+                <li><a href="./tags.html">Tags</a>
 
 
 
@@ -243,7 +178,7 @@ write_enable ...</pre></div></li></ol> <a class="btn btn-info xsmall" href="../2
                 Categories
                 </li>
                 
-                <li><a href="../category/yun-wei.html">运维</a></li>
+                <li><a href="./category/yun-wei.html">运维</a></li>
                    
             </ul>
             </div>
@@ -256,12 +191,12 @@ write_enable ...</pre></div></li></ol> <a class="btn btn-info xsmall" href="../2
     </div>     </div> 
 <footer>
 <br />
-<p><a href="..">Hir0C blog</a> &copy; Hir0C 2016</p>
+<p><a href=".">Hir0C blog</a> &copy; Hir0C 2016</p>
 </footer>
 
 </div> <!-- /container -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="../theme/bootstrap-collapse.js"></script>
+<script src="./theme/bootstrap-collapse.js"></script>
 <a href="http://github.com/hir0C"><img style="position: absolute; top: 40px; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png" alt="Fork me on GitHub" /></a>
  
 </body>
