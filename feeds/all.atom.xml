@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Hir0C blog</title><link href="blog/" rel="alternate"></link><link href="blog/feeds/all.atom.xml" rel="self"></link><id>blog/</id><updated>2016-03-22T18:09:00+08:00</updated><entry><title>storm 基本安装</title><link href="blog/ri-chang/2016-03-22-18-09.html" rel="alternate"></link><updated>2016-03-22T18:09:00+08:00</updated><author><name>Hir0C</name></author><id>tag:,2016-03-22:blog/ri-chang/2016-03-22-18-09.html</id><summary type="html">&lt;h3&gt;storm安装步骤:&lt;/h3&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Hir0C blog</title><link href="blog/" rel="alternate"></link><link href="blog/feeds/all.atom.xml" rel="self"></link><id>blog/</id><updated>2016-03-22T18:09:00+08:00</updated><entry><title>storm 基本安装</title><link href="blog/yun-wei/2016-03-22-18-09.html" rel="alternate"></link><updated>2016-03-22T18:09:00+08:00</updated><author><name>Hir0C</name></author><id>tag:,2016-03-22:blog/yun-wei/2016-03-22-18-09.html</id><summary type="html">&lt;h3&gt;storm安装步骤:&lt;/h3&gt;
 &lt;h4&gt;一、安装zookeeper&lt;/h4&gt;
 &lt;ol&gt;
 &lt;li&gt;
@@ -74,7 +74,7 @@ ui.port: 8080
 &lt;p&gt;要注意的是,RELEASE文件时必须的,否则启动会报错&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;only be run from with in a release&lt;/p&gt;
-&lt;/blockquote&gt;</summary><category term="日常"></category></entry><entry><title>Zsh安装配置</title><link href="blog/yun-wei/2016-03-22-16-56.html" rel="alternate"></link><updated>2016-03-22T17:05:00+08:00</updated><author><name>Hir0C</name></author><id>tag:,2016-03-22:blog/yun-wei/2016-03-22-16-56.html</id><summary type="html">&lt;h2&gt;zsh是个好东西，关键是能装逼&lt;/h2&gt;
+&lt;/blockquote&gt;</summary><category term="storm"></category></entry><entry><title>Zsh安装配置</title><link href="blog/yun-wei/2016-03-22-16-56.html" rel="alternate"></link><updated>2016-03-22T17:05:00+08:00</updated><author><name>Hir0C</name></author><id>tag:,2016-03-22:blog/yun-wei/2016-03-22-16-56.html</id><summary type="html">&lt;h2&gt;zsh是个好东西，关键是能装逼&lt;/h2&gt;
 &lt;h3&gt;一、安装zsh&lt;/h3&gt;
 &lt;p&gt;略&lt;/p&gt;
 &lt;h4&gt;二、切换用户使用shell&lt;/h4&gt;
@@ -216,4 +216,4 @@ file_open_mode=0444
 &lt;li&gt;
 &lt;p&gt;重启vsftpd，登陆验证。&lt;/p&gt;
 &lt;/li&gt;
-&lt;/ol&gt;</summary><category term="运维"></category><category term="linux"></category></entry></feed>
+&lt;/ol&gt;</summary><category term="运维"></category><category term="vsftpd"></category></entry></feed>

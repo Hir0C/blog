@@ -59,7 +59,7 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="../yun-wei/2016-03-22-16-56.html"><h1>Zsh安装配置</h1></a>
+            <a href="../yun-wei/2016-03-22-18-09.html"><h1>storm 基本安装</h1></a>
 二 22 三月 2016
 
 by <a class="url fn" href="../author/hir0c.html">Hir0C</a>
@@ -69,7 +69,101 @@ by <a class="url fn" href="../author/hir0c.html">Hir0C</a>
  
         </div>
         
-        <div><h2>zsh是个好东西，关键是能装逼</h2>
+        <div><h3>storm安装步骤:</h3>
+<h4>一、安装zookeeper</h4>
+<ol>
+<li>
+<p>全部选用CDH的产品，不用担心版本问题，省心。
+包都在这里:http://archive.cloudera.com/cdh4/cdh/4/</p>
+</li>
+<li>
+<p>配置zookeeper
+解压稍微修改配置就可以使用，只需要定义dataDir和server.1/2/3</p>
+<div class="highlight"><pre><span></span>dataDir=/data/zookeeper/tmp
+hostname1:2888:3888
+hostname2:2888:3888
+hostname3:2888:3888
+</pre></div>
+
+
+</li>
+<li>
+<p>启动
+        ./zkServer.sh start</p>
+</li>
+</ol>
+<h4>二、安装消息队列ZeroMQ</h4>
+<ol>
+<li>直接上最新版本zeromq-4.0.3</li>
+</ol>
+<p>http://download.zeromq.org/zeromq-4.0.3.tar.gz
+编译安装:<code>./configure &amp;&amp; make &amp;&amp; make install &amp;&amp; ldconfig</code>
+不要忘记<code>ldconfig</code></p>
+<ol>
+<li>安装zemq</li>
+</ol>
+<p>https://github.com/zeromq/jzmq
+编译安装:<code>./configure &amp;&amp; make &amp;&amp; make install &amp;&amp; ldconfig</code></p>
+<p>两个模块都默认安装/usr/local/了，这样storm就不用单独配置java.library.path了</p>
+<h4>三、安装storm</h4>
+<ol>
+<li>
+<p>storm需要python2.6以上版本。安装略</p>
+</li>
+<li>
+<p>storm配置</p>
+<div class="highlight"><pre><span></span>storm.zookeeper.servers: 需要指定zookeeper集群ip 
+storm.local.dir:本地目录位置
+storm.zookeeper.root:zookeeper根目录
+nimbus.host: &quot;IP&quot; 
+worker.childopts:&quot;-Xmx    m&quot; 
+ui.port: 8080
+</pre></div>
+
+
+</li>
+<li>
+<p>启动storm</p>
+</li>
+</ol>
+<p>ui的机器</p>
+<div class="highlight"><pre><span></span>    ./storm nimbus &gt;/dev/null 2&gt;&amp;1 &amp;
+</pre></div>
+
+
+<p>work</p>
+<div class="highlight"><pre><span></span>    ./storm supervisor &gt;/dev/null 2&gt;&amp;1 &amp;
+</pre></div>
+
+
+<p>ui</p>
+<div class="highlight"><pre><span></span>    ./storm ui &gt;/dev/null 2&gt;&amp;1 &amp;
+</pre></div>
+
+
+<p>要注意的是,RELEASE文件时必须的,否则启动会报错</p>
+<blockquote>
+<p>only be run from with in a release</p>
+</blockquote></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="../yun-wei/2016-03-22-16-56.html"><h2>Zsh安装配置</h2></a>
+        <div class= "well small"> 二 22 三月 2016
+
+by <a class="url fn" href="../author/hir0c.html">Hir0C</a>
+ 
+
+
+ </div>
+        <div class="summary"><h2>zsh是个好东西，关键是能装逼</h2>
 <h3>一、安装zsh</h3>
 <p>略</p>
 <h4>二、切换用户使用shell</h4>
@@ -92,70 +186,9 @@ by <a class="url fn" href="../author/hir0c.html">Hir0C</a>
 
 <h4>四、安装python2.7.x</h4>
 <p>老三步</p>
-<div class="highlight"><pre><span></span>    ./configure --prefix=/usr/local/python2.7.11 --with-ensurepip=yes --disable-ipv6 --with-threads --with-pymalloc --with-fpectl
-</pre></div>
-
-
-<h4>五、下载安装oh-my-zsh</h4>
-<ol>
-<li>github地址：https://github.com/robbyrussell/oh-my-zsh</li>
-<li>解压后 mv 到/root/目录下改名为.oh-my-zsh</li>
-<li>cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc</li>
-<li>
-<p>改了小部分配置：
-zshrc</p>
-<div class="highlight"><pre><span></span>plugins=(git osx autojump cp history systemadmin mvn screen)
-</pre></div>
-
-
-<p>themes/robbyrussell.zsh-theme</p>
-<div class="highlight"><pre><span></span><span class="x">PROMPT=&#39;%</span><span class="cp">{</span><span class="nv">$fg_bold</span><span class="o">[</span><span class="na">green</span><span class="o">]%</span><span class="cp">}</span><span class="x">`hostname` %</span><span class="cp">{</span><span class="nv">$fg_bold</span><span class="o">[</span><span class="na">cyan</span><span class="o">]%</span><span class="cp">}</span><span class="x">-&gt;</span>
-<span class="x">%</span><span class="cp">{</span><span class="nv">$fg_bold</span><span class="o">[</span><span class="na">green</span><span class="o">]%</span><span class="cp">}</span><span class="x">%p%</span><span class="cp">{</span><span class="nv">$fg</span><span class="o">[</span><span class="na">yellow</span><span class="o">]%</span><span class="cp">}</span><span class="x">%c</span>
-<span class="x">%</span><span class="cp">{</span><span class="nv">$fg_bold</span><span class="o">[</span><span class="na">cyan</span><span class="o">]%</span><span class="cp">}</span><span class="x">$(git_prompt_info)%</span><span class="cp">{</span><span class="nv">$fg_bold</span><span class="o">[</span><span class="na">cyan</span><span class="o">]%</span><span class="cp">}</span><span class="x">%</span>
-<span class="x">%</span><span class="cp">{</span><span class="nv">$reset_color</span><span class="o">%</span><span class="cp">}</span><span class="x">&gt;&#39;</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>安装autojump
-直接./install 安装
-.zshrc添加</p>
-<div class="highlight"><pre><span></span>[[ -s /etc/profile.d/autojump.zsh ]] &amp;&amp; . /etc/profile.d/autojump.zsh
-</pre></div>
-
-
-</li>
-</ol>
-<h4>六、zsh使用</h4>
-<p>直接引用MacTalk-池建强大神的介绍
-1. 兼容 bash，原来使用 bash 的兄弟切换过来毫无压力，该咋用咋用。</p>
-<ol>
-<li>
-<p>强大的历史纪录功能，输入 grep 然后用上下箭头可以翻阅你执行的所有 grep 命令。</p>
-</li>
-<li>
-<p>智能拼写纠正，输入<code>gtep mactalk</code> # -R，系统会提示：<code>zsh: correct ‘gtep’ to ‘grep’ [nyae]?</code> 比妹纸贴心吧，她们向来都是让你猜的……</p>
-</li>
-<li>
-<p>各种补全：路径补全、命令补全，命令参数补全，插件内容补全等等。触发补全只需要按一下或两下 tab 键，补全项可以使用 ctrl+n/p/f/b上下左右切换。比如你想杀掉 java 的进程，只需要输入 kill java + tab键，如果只有一个 java 进程，zsh 会自动替换为进程的 pid，如果有多个则会出现选择项供你选择。ssh + 空格 + 两个tab键，zsh会列出所有访问过的主机和用户名进行补全</p>
-</li>
-<li>
-<p>智能跳转，安装了autojump之后，zsh 会自动记录你访问过的目录，通过 j + 目录名 可以直接进行目录跳转，而且目录名支持模糊匹配和自动补全，例如你访问过hadoop-1.0.0目录，输入j hado 即可正确跳转。j –stat 可以看你的历史路径库。</p>
-</li>
-<li>
-<p>目录浏览和跳转：输入 d，即可列出你在这个会话里访问的目录列表，输入列表前的序号，即可直接跳转。</p>
-</li>
-<li>
-<p>在当前目录下输入 <code>..</code> 或<code>…</code>，或直接输入当前目录名都可以跳转，你甚至不再需要输入 cd 命令了。</p>
-</li>
-<li>
-<p>通配符搜索：ls -l ##/#.sh，可以递归显示当前目录下的 shell 文件，文件少时可以代替 find，文件太多就歇菜了。</p>
-</li>
-</ol></div>
-        <hr />
-    </div>
-		
+<div class="highlight"><pre><span></span>    ./configure --prefix=/usr/local ...</pre></div> <a class="btn btn-info xsmall" href="../yun-wei/2016-03-22-16-56.html">read more</a></div>
+    </div>	
+				
 
  
         
@@ -243,7 +276,6 @@ write_enable ...</pre></div></li></ol> <a class="btn btn-info xsmall" href="../y
                 Categories
                 </li>
                 
-                <li><a href="../ri-chang/index.html">日常</a></li>
                 <li><a href="../yun-wei/index.html">运维</a></li>
                    
             </ul>
