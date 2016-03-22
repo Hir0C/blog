@@ -1,5 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Hir0C blog</title><link href="blog/" rel="alternate"></link><link href="blog/feeds/yun-wei.atom.xml" rel="self"></link><id>blog/</id><updated>2016-03-22T18:09:00+08:00</updated><entry><title>storm 基本安装</title><link href="blog/yun-wei/2016-03-22-18-09.html" rel="alternate"></link><updated>2016-03-22T18:09:00+08:00</updated><author><name>Hir0C</name></author><id>tag:,2016-03-22:blog/yun-wei/2016-03-22-18-09.html</id><summary type="html">&lt;h3&gt;storm安装步骤:&lt;/h3&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Hir0C blog</title><link href="blog/" rel="alternate"></link><link href="blog/feeds/yun-wei.atom.xml" rel="self"></link><id>blog/</id><updated>2016-03-22T18:15:00+08:00</updated><entry><title>VIM插件安装</title><link href="blog/yun-wei/2016-03-22-18-15.html" rel="alternate"></link><updated>2016-03-22T18:15:00+08:00</updated><author><name>Hir0C</name></author><id>tag:,2016-03-22:blog/yun-wei/2016-03-22-18-15.html</id><summary type="html">&lt;h3&gt;vim ide 基本配置&lt;/h3&gt;
+&lt;h4&gt;一、安装VIM&lt;/h4&gt;
+&lt;p&gt;只是记录下vim的编译选项&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;--with-features=huge 一定要加&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    ./configure --prefix=/usr/local/vim74 \
+     **--with-features=huge** \
+     --enable-pythoninterp --enable-perlinterp \
+     --enable-rubyinterp --enable-luainterp \
+     --enable-multibyte --enable-sniff --enable-fontset \
+     --disable-selinux --enable-cscope
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;二、插件安装&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;VJDE&lt;a href="http://www.vim.org/scripts/script.php?script_id=1213"&gt;link&lt;/a&gt;.&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;tar -xzf vjde.tgz -C /usr/share/vim/vimfiles 
+chmod +x /usr/share/vim/vimfiles/plugin/vjde/readtags
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;使用官网的方法就可以，自己编译安装的vim就解压到&lt;code&gt;/usr/local/vim/share/vim/vim74/&lt;/code&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;括号自动补全插件AutoPairs&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;从&lt;a href="http://%20http://www.vim.org/scripts/script.php?script_id=3599"&gt;AutoPairs&lt;/a&gt; 下载AutoPairs插件
+解压auto_pairs.vim到~/.vim/Plugin/目录下即可&lt;/p&gt;</summary><category term="编辑器"></category></entry><entry><title>storm 基本安装</title><link href="blog/yun-wei/2016-03-22-18-09.html" rel="alternate"></link><updated>2016-03-22T18:09:00+08:00</updated><author><name>Hir0C</name></author><id>tag:,2016-03-22:blog/yun-wei/2016-03-22-18-09.html</id><summary type="html">&lt;h3&gt;storm安装步骤:&lt;/h3&gt;
 &lt;h4&gt;一、安装zookeeper&lt;/h4&gt;
 &lt;ol&gt;
 &lt;li&gt;

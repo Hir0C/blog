@@ -5,22 +5,29 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>blog/</loc>
-<lastmod>2016-03-22T18:15:24-00:00</lastmod>
+<lastmod>2016-03-22T18:19:40-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>blog/archives.html</loc>
-<lastmod>2016-03-22T18:15:24-00:00</lastmod>
+<lastmod>2016-03-22T18:19:40-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>blog/categories.html</loc>
-<lastmod>2016-03-22T18:15:24-00:00</lastmod>
+<lastmod>2016-03-22T18:19:40-00:00</lastmod>
 <changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>blog/yun-wei/2016-03-22-18-15.html</loc>
+<lastmod>2016-03-22T18:15:00+08:00</lastmod>
+<changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
@@ -47,14 +54,14 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>blog/yun-wei/index.html</loc>
-<lastmod>2016-03-22T18:09:00+08:06</lastmod>
+<lastmod>2016-03-22T18:15:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>blog/tag/bian-ji-qi.html</loc>
-<lastmod>2016-03-22T17:05:00+08:06</lastmod>
+<lastmod>2016-03-22T18:15:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -89,7 +96,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>blog/author/hir0c.html</loc>
-<lastmod>2016-03-22T18:09:00+08:06</lastmod>
+<lastmod>2016-03-22T18:15:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

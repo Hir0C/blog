@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8">
-    <title>Hir0C blog - 运维</title>
+    <title>Hir0C blog - VIM插件安装</title>
     <meta name="description" content="">
     <meta name="author" content="Hir0C">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,23 +52,17 @@
     <div class="row">
 
         <div class="span9">
-        
-
-        
-
-
     <div class='article'>
         <div class="content-title">
-            <a href="../yun-wei/2016-03-22-18-15.html"><h1>VIM插件安装</h1></a>
+            <h1>VIM插件安装</h1>
 二 22 三月 2016
 
 by <a class="url fn" href="../author/hir0c.html">Hir0C</a>
  
 
 
- 
         </div>
-        
+	
         <div><h3>vim ide 基本配置</h3>
 <h4>一、安装VIM</h4>
 <p>只是记录下vim的编译选项</p>
@@ -99,155 +93,23 @@ chmod +x /usr/share/vim/vimfiles/plugin/vjde/readtags
 </ol>
 <p>从<a href="http://%20http://www.vim.org/scripts/script.php?script_id=3599">AutoPairs</a> 下载AutoPairs插件
 解压auto_pairs.vim到~/.vim/Plugin/目录下即可</p></div>
-        <hr />
+	
+        <hr>
+
+        <h2>Comments</h2>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'HiroC'; 
+    var disqus_title = 'VIM插件安装';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </div>
-		
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../yun-wei/2016-03-22-18-09.html"><h2>storm 基本安装</h2></a>
-        <div class= "well small"> 二 22 三月 2016
-
-by <a class="url fn" href="../author/hir0c.html">Hir0C</a>
- 
-
-
- </div>
-        <div class="summary"><h3>storm安装步骤:</h3>
-<h4>一、安装zookeeper</h4>
-<ol>
-<li>
-<p>全部选用CDH的产品，不用担心版本问题，省心。
-包都在这里:http://archive.cloudera.com/cdh4/cdh/4/</p>
-</li>
-<li>
-<p>配置zookeeper
-解压稍微修改配置就可以使用，只需要定义dataDir和server.1/2/3</p>
-<div class="highlight"><pre><span></span>dataDir=/data/zookeeper/tmp
-hostname1:2888:3888
-hostname2:2888:3888
-hostname3:2888:3888
-</pre></div>
-
-
-</li>
-<li>
-<p>启动
-        ./zkServer.sh start</p>
-</li>
-</ol>
-<h4>二、安装消息队列ZeroMQ</h4>
-<ol>
-<li>直接上最新版本zeromq-4.0.3</li>
-</ol>
-<p>http://download.zeromq.org/zeromq-4.0.3.tar ...</p> <a class="btn btn-info xsmall" href="../yun-wei/2016-03-22-18-09.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../yun-wei/2016-03-22-16-56.html"><h2>Zsh安装配置</h2></a>
-        <div class= "well small"> 二 22 三月 2016
-
-by <a class="url fn" href="../author/hir0c.html">Hir0C</a>
- 
-
-
- </div>
-        <div class="summary"><h2>zsh是个好东西，关键是能装逼</h2>
-<h3>一、安装zsh</h3>
-<p>略</p>
-<h4>二、切换用户使用shell</h4>
-<div class="highlight"><pre><span></span>    usermod -s /usr/local/bin/zsh root
-</pre></div>
-
-
-<p>或者</p>
-<div class="highlight"><pre><span></span>    chsh -s /bin/zsh
-</pre></div>
-
-
-<h4>三、git安装</h4>
-<p>没啥好说的，官网步骤都有</p>
-<div class="highlight"><pre><span></span>    yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel -y
-    make prefix=/usr/local all
-    make prefix=/usr/local install
-</pre></div>
-
-
-<h4>四、安装python2.7.x</h4>
-<p>老三步</p>
-<div class="highlight"><pre><span></span>    ./configure --prefix=/usr/local ...</pre></div> <a class="btn btn-info xsmall" href="../yun-wei/2016-03-22-16-56.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../yun-wei/2016-03-22-16-12.html"><h2>vsftpd 虚拟用户配置</h2></a>
-        <div class= "well small"> 二 22 三月 2016
-
-by <a class="url fn" href="../author/hir0c.html">Hir0C</a>
- 
-
-
- </div>
-        <div class="summary"><h3>简介</h3>
-<p>ftp 虚拟用户配置</p>
-<h3>配置</h3>
-<ol>
-<li>
-<p>创建nologin用户</p>
-<div class="highlight"><pre><span></span>useradd -s /sbin/nologin -d /opt/ftp vftp
-</pre></div>
-
-
-</li>
-<li>
-<p>创建虚拟用户密码</p>
-<div class="highlight"><pre><span></span>db_load -T -t hash -f vftpusers.txt /mnt/vftpusers.db
-</pre></div>
-
-
-</li>
-<li>
-<p>添加pam认证
-/etc/pam.d/vsftpd起始两行添加：</p>
-<div class="highlight"><pre><span></span>auth sufficient /lib64/security/pam_userdb.so db=vftpusers
-account sufficient /lib64/security/pam_userdb.so db=vftpusers
-</pre></div>
-
-
-</li>
-<li>
-<p>修改ftp配置(使用主动模式)</p>
-<div class="highlight"><pre><span></span>port_enable=YES
-write_enable ...</pre></div></li></ol> <a class="btn btn-info xsmall" href="../yun-wei/2016-03-22-16-12.html">read more</a></div>
-    </div>	
-				
-<div class="pagination">
-<ul>
-    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
-
-    <li class="active"><a href="../yun-wei/index.html">1</a></li>
-
-    <li class="next disabled"><a href="#">&rarr; Next</a></li>
-
-</ul>
-</div>
- 
-  
         </div>
         
         <div class="span3">

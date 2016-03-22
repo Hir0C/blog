@@ -59,7 +59,7 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="../yun-wei/2016-03-22-18-09.html"><h1>storm 基本安装</h1></a>
+            <a href="../yun-wei/2016-03-22-18-15.html"><h1>VIM插件安装</h1></a>
 二 22 三月 2016
 
 by <a class="url fn" href="../author/hir0c.html">Hir0C</a>
@@ -69,7 +69,55 @@ by <a class="url fn" href="../author/hir0c.html">Hir0C</a>
  
         </div>
         
-        <div><h3>storm安装步骤:</h3>
+        <div><h3>vim ide 基本配置</h3>
+<h4>一、安装VIM</h4>
+<p>只是记录下vim的编译选项</p>
+<blockquote>
+<p>--with-features=huge 一定要加</p>
+</blockquote>
+<div class="highlight"><pre><span></span>    ./configure --prefix=/usr/local/vim74 \
+     **--with-features=huge** \
+     --enable-pythoninterp --enable-perlinterp \
+     --enable-rubyinterp --enable-luainterp \
+     --enable-multibyte --enable-sniff --enable-fontset \
+     --disable-selinux --enable-cscope
+</pre></div>
+
+
+<h4>二、插件安装</h4>
+<ol>
+<li>VJDE<a href="http://www.vim.org/scripts/script.php?script_id=1213">link</a>.<div class="highlight"><pre><span></span>tar -xzf vjde.tgz -C /usr/share/vim/vimfiles 
+chmod +x /usr/share/vim/vimfiles/plugin/vjde/readtags
+</pre></div>
+
+
+</li>
+</ol>
+<p>使用官网的方法就可以，自己编译安装的vim就解压到<code>/usr/local/vim/share/vim/vim74/</code></p>
+<ol>
+<li>括号自动补全插件AutoPairs</li>
+</ol>
+<p>从<a href="http://%20http://www.vim.org/scripts/script.php?script_id=3599">AutoPairs</a> 下载AutoPairs插件
+解压auto_pairs.vim到~/.vim/Plugin/目录下即可</p></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="../yun-wei/2016-03-22-18-09.html"><h2>storm 基本安装</h2></a>
+        <div class= "well small"> 二 22 三月 2016
+
+by <a class="url fn" href="../author/hir0c.html">Hir0C</a>
+ 
+
+
+ </div>
+        <div class="summary"><h3>storm安装步骤:</h3>
 <h4>一、安装zookeeper</h4>
 <ol>
 <li>
@@ -96,58 +144,9 @@ hostname3:2888:3888
 <ol>
 <li>直接上最新版本zeromq-4.0.3</li>
 </ol>
-<p>http://download.zeromq.org/zeromq-4.0.3.tar.gz
-编译安装:<code>./configure &amp;&amp; make &amp;&amp; make install &amp;&amp; ldconfig</code>
-不要忘记<code>ldconfig</code></p>
-<ol>
-<li>安装zemq</li>
-</ol>
-<p>https://github.com/zeromq/jzmq
-编译安装:<code>./configure &amp;&amp; make &amp;&amp; make install &amp;&amp; ldconfig</code></p>
-<p>两个模块都默认安装/usr/local/了，这样storm就不用单独配置java.library.path了</p>
-<h4>三、安装storm</h4>
-<ol>
-<li>
-<p>storm需要python2.6以上版本。安装略</p>
-</li>
-<li>
-<p>storm配置</p>
-<div class="highlight"><pre><span></span>storm.zookeeper.servers: 需要指定zookeeper集群ip 
-storm.local.dir:本地目录位置
-storm.zookeeper.root:zookeeper根目录
-nimbus.host: &quot;IP&quot; 
-worker.childopts:&quot;-Xmx    m&quot; 
-ui.port: 8080
-</pre></div>
-
-
-</li>
-<li>
-<p>启动storm</p>
-</li>
-</ol>
-<p>ui的机器</p>
-<div class="highlight"><pre><span></span>    ./storm nimbus &gt;/dev/null 2&gt;&amp;1 &amp;
-</pre></div>
-
-
-<p>work</p>
-<div class="highlight"><pre><span></span>    ./storm supervisor &gt;/dev/null 2&gt;&amp;1 &amp;
-</pre></div>
-
-
-<p>ui</p>
-<div class="highlight"><pre><span></span>    ./storm ui &gt;/dev/null 2&gt;&amp;1 &amp;
-</pre></div>
-
-
-<p>要注意的是,RELEASE文件时必须的,否则启动会报错</p>
-<blockquote>
-<p>only be run from with in a release</p>
-</blockquote></div>
-        <hr />
-    </div>
-		
+<p>http://download.zeromq.org/zeromq-4.0.3.tar ...</p> <a class="btn btn-info xsmall" href="../yun-wei/2016-03-22-18-09.html">read more</a></div>
+    </div>	
+				
 
  
         
