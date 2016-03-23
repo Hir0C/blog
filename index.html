@@ -53,8 +53,102 @@
 
     <div class='row-fluid''>
         <div class="article-title span9">
-            <a href="./yun-wei/2016-03-23-17-24.html"><h1>KAFKA升级0.8.1</h1></a>
+            <a href="./yun-wei/2016-03-23-17-37.html"><h1>自建yum源服务group配置片段</h1></a>
         </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>三 23 三月 2016 </p>
+
+<p style="text-align: left;">
+Filed under <a href="./yun-wei/index.html">运维</a>
+</p>
+<p style="text-align: left;">
+ 
+    Tags <a href="./tag/linux.html">linux</a> <a href="./tag/yum.html">yum</a> </p>
+<p>
+</p>
+      </div>
+      <div class="article-content span8">
+	<p>(yum group制作官方文档)[http://yum.baseurl.org/wiki/YumGroups]{:target="_blank"}</p>
+<p><em>文档里给出了基本格式和初始化命令,以及制定组文件创建repodata</em></p>
+<p><strong>1. 以下是制作SDL_ttf的spec文件</strong></p>
+<div class="highlight"><pre><span></span>    <span class="nl">Summary</span><span class="p">:</span> <span class="n">SDL_ttf</span>
+    <span class="nl">Name</span><span class="p">:</span> <span class="n">SDL_ttf</span>
+    <span class="nl">Version</span><span class="p">:</span> <span class="mf">2.0.11</span>
+    <span class="nl">Release</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="nl">Requires</span><span class="p">:</span> <span class="n">SDL</span>  <span class="err">#这个很重要</span><span class="p">,</span><span class="err">不要加版本号</span><span class="p">,</span><span class="err">否则依赖无法解决</span>
+    <span class="nl">Source0</span><span class="p">:</span> <span class="o">%</span><span class="p">{</span><span class="n">name</span><span class="p">}</span><span class="o">-%</span><span class="p">{</span><span class="n">version</span><span class="p">}.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span>
+    <span class="nl">License</span><span class="p">:</span> <span class="n">GPL</span>
+    <span class="nl">Group</span><span class="p">:</span> <span class="n">Applications</span><span class="o">/</span><span class="n">Productivity</span>
+    <span class="nl">AutoReq</span><span class="p">:</span> <span class="n">no</span>
+    <span class="nl">BuildRoot</span><span class="p">:</span> <span class="o">%</span><span class="p">{</span><span class="n">_builddir</span><span class="p">}</span><span class="o">/%</span><span class="p">{</span><span class="n">name</span><span class="p">}</span><span class="o">-</span><span class="n">root</span>
+    <span class="nf">%description</span>
+    <span class="n">SDL_ttf</span><span class="o">-</span><span class="mf">2.0.11</span> <span class="k">for</span> <span class="n">pygame</span>
+    <span class="nf">%prep</span>
+    <span class="nf">%setup</span> <span class="o">-</span><span class="n">q</span>
+    <span class="nf">%build</span>
+    <span class="p">.</span><span class="o">/</span><span class="n">configure</span>
+    <span class="n">make</span>
+    <span class="nf">%install</span>
+    <span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="n">$RPM_BUILD_ROOT</span>
+    <span class="n">make</span> <span class="n">DESTDIR</span><span class="o">=</span><span class="n">$RPM_BUILD_ROOT</span> <span class="n">install</span>
+    <span class="nf">%clean</span>
+    <span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="n">$RPM_BUILD_ROOT</span>
+    <span class="nf">%files</span>
+    <span class="nf">%defattr</span><span class="p">(</span><span class="o">-</span><span class="p">,</span><span class="n">root</span><span class="p">,</span><span class="n">root</span><span class="p">)</span>
+    <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span>
+</pre></div>
+
+
+<p><strong>2. 生成yum源</strong></p>
+<p>做好rpm包之后，就可以生成yum源了,下面介绍一下生成yum group的方法</p>
+<ul>
+<li>
+<p>首先要创建xml文件<code>group.xml</code></p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="cp">&lt;!DOCTYPE comps PUBLIC &quot;-//Red Hat, Inc.//DTD Comps info//EN&quot; &quot;comps.dtd&quot;&gt;</span>
+<span class="nt">&lt;comps&gt;</span>
+  <span class="nt">&lt;group&gt;</span>
+   <span class="nt">&lt;id&gt;</span>apr-package<span class="nt">&lt;/id&gt;</span>
+   <span class="nt">&lt;default&gt;</span>false<span class="nt">&lt;/default&gt;</span>
+   <span class="nt">&lt;uservisible&gt;</span>true<span class="nt">&lt;/uservisible&gt;</span>
+   <span class="nt">&lt;display_order&gt;</span>1024<span class="nt">&lt;/display_order&gt;</span>
+   <span class="nt">&lt;name&gt;</span>apr-package<span class="nt">&lt;/name&gt;</span>
+   <span class="nt">&lt;description&gt;&lt;/description&gt;</span>
+    <span class="nt">&lt;packagelist&gt;</span>
+      <span class="nt">&lt;packagereq</span> <span class="na">type=</span><span class="s">&quot;mandatory&quot;</span><span class="nt">&gt;</span>apr<span class="nt">&lt;/packagereq&gt;</span>
+      <span class="nt">&lt;packagereq</span> <span class="na">type=</span><span class="s">&quot;mandatory&quot;</span><span class="nt">&gt;</span>apr-util<span class="nt">&lt;/packagereq&gt;</span>
+    <span class="nt">&lt;/packagelist&gt;</span>
+  <span class="nt">&lt;/group&gt;</span>
+<span class="nt">&lt;/comps&gt;</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>然后指定这个文件生成yum源</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span>createrepo -g group.xml
+</pre></div> 
+	<a class="btn btn-mini xsmall" href="./yun-wei/2016-03-23-17-37.html">
+          <i class="icon-comment"></i> Comment </a>
+	<hr />
+      </div>
+      
+    </div>
+    
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="./yun-wei/2016-03-23-17-24.html"><h1>KAFKA升级0.8.1</h1></a>
+      </div>
     </div>
     <div class="row-fluid">
       <div class="span2">
@@ -69,58 +163,19 @@ Filed under <a href="./yun-wei/index.html">运维</a>
 <p>
 </p>
       </div>
-      <div class="article-content span8">
+      <div class="summary span8">
 	<p><strong>kafka 0.8.0 升级 0.8.1 流程</strong></p>
 <p>升级很简单,引用官方的话:</p>
 <div class="highlight"><pre><span></span>    Upgrading from 0.8.0 to 0.8.1
     0.8.1 is fully compatible with 0.8. The upgrade can be done one broker at a time by simply bringing it down, updating the code, and
-    restarting it.
-</pre></div>
-
-
-<ul>
-<li>KAFKA启动命令:</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="nv">JMX_PORT</span><span class="o">=</span><span class="m">9997</span> /opt/kafka_2.9.2-0.8.1/bin/kafka-server-start.sh /opt/kafka_2.9.2-0.8.1/config/server.properties &gt;/dev/null 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
-</pre></div>
-
-
-<ul>
-<li>KAKFA查询topic:</li>
-</ul>
-<div class="highlight"><pre><span></span>./kafka-topics.sh --list --zookeeper 1.1.1.1/kafka-0.8.1
-</pre></div>
-
-
-<ul>
-<li>KAFKA查询topic详细信息:</li>
-</ul>
-<div class="highlight"><pre><span></span>./kafka-topics.sh --describe --zookeeper 1.1.1.1/kafka-0.8.1 --topic countinfo
-</pre></div>
-
-
-<ul>
-<li>KAFKA leader balance:</li>
-</ul>
-<div class="highlight"><pre><span></span>/opt/kafka_2.9.2-0.8.1/bin/kafka-preferred-replica-election.sh --zookeeper 1.1.1.1:2181/kafka-0.8.1
-</pre></div>
-
-
-<ul>
-<li>KAFKA手动指定zookeeper目录,设置自动leader balance</li>
-</ul>
-<p>server.properties:</p>
-<div class="highlight"><pre><span></span>    1.1.1.1:2181,2.2.2.2:2181,3.3.3.3:2181/kafka-0.8.1
-    auto.leader.rebalance.enable=true
-    controlled.shutdown.enable=true
-</pre></div> 
+    restarting it ...</pre></div> 
 	<a class="btn btn-mini xsmall" href="./yun-wei/2016-03-23-17-24.html">
-          <i class="icon-comment"></i> Comment </a>
+          <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
       
     </div>
-    
+      
 
  
         
