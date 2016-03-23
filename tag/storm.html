@@ -1,74 +1,101 @@
-<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
+<!--[if IE 8 ]><html class="ie ie8" lang="zh"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
 <html lang="zh">
-<head>
-
-    <meta charset="utf-8">
-    <title>Hir0C blog <small>storm</small></title>
-    <meta name="description" content="">
-    <meta name="author" content="Hir0C">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-    <!--[if lt IE 9]>
-    <script src="../theme/html5.js"></script>
-    <![endif]-->
+<!--<![endif]-->
+	<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="author" content="Hir0C">
 
 
-    <!-- Le styles -->
-    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.no-icons.min.css" rel="stylesheet">
-    <link href="../theme/local.css" rel="stylesheet">
-    <link href="../theme/pygments.css" rel="stylesheet">
-    <link href="../theme/font-awesome.css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Gudea:400,400italic|Alegreya+SC' rel='stylesheet' type='text/css'>
+        <title>Hir0C blog - Tag storm</title>
 
-</head>
 
-<body>
-<header class="blog-header">
-  <div class="container">
-    <div class="row-fluid">
-      <div class="span9">
-	<a href=".." class="brand">Hir0C blog</a>
-      </div>
+        <!-- CSS -->
+        <link rel="stylesheet" href="../theme/css/style.css">
 
-      <div class="span3" id="blog-nav">
-	<ul class="nav nav-pills pull-right">
-	    <li >
-	      <a href="../yun-wei/index.html ">运维</a>
-	</ul>
-      </div>
-    </div> <!-- End of fluid row-->
-  </div>   <!-- End of Container-->
-</header>
-    
-<div class="container">
-    <div class="content">
-    <div class="row-fluid">
+        <!-- Custom CSS -->
+        	<link rel="stylesheet" href="../theme/css/colors/blue.css" id="colors">
 
-        <div class="span10">
-        
+        <!-- Code highlight color scheme -->
+            <link href="../theme/css/code_blocks/darkly.css" rel="stylesheet">
 
-        
 
-    <div class='row-fluid''>
-        <div class="article-title span9">
-            <a href="../yun-wei/2016-03-22-18-09.html"><h1>storm 基本安装</h1></a>
-        </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span2">
-<p>二 22 三月 2016 </p>
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
-<p style="text-align: left;">
-Filed under <a href="../yun-wei/index.html">运维</a>
-</p>
-<p style="text-align: left;">
- 
-    Tags <a href="../tag/storm.html">storm</a> </p>
-<p>
-</p>
-      </div>
-      <div class="article-content span8">
-	<h3>storm安装步骤:</h3>
+                <meta property="og:locale" content="">
+		<meta property="og:site_name" content="Hir0C blog">
+	</head>
+	<body>
+		<header id="header">
+			<!-- Container -->
+			<div class="container">
+				<!-- Logo / Mobile Menu -->
+				<div class="three columns">
+					<div id="logo">
+						<h1><a href="../">Hir0C blog</a></h1>
+					</div>
+				</div>
+				<!-- Navigation
+				================================================== -->
+				<div class="thirteen columns">
+					
+					<nav id="navigation" class="menu">
+						<ul id="responsive">
+
+							<li><a href="../">Home</a></li>
+
+
+						</ul>
+					</nav>
+				</div>
+			</div>
+			<!-- Container / End -->
+		</header>
+		<!-- Header / End -->
+		
+		<div id="content-wrapper">
+			<section id="titlebar">
+				<!-- Container -->
+				<div class="container">
+					<div class="sixteen columns">						
+						<nav id="breadcrumbs">
+							<ul>
+								<li>You are here:</li>
+								<li><a href="../">Home</a></li>
+<li><a href="../tags">Tags</a></li>
+<li>storm</li>
+							</ul>
+						</nav>
+					</div>
+
+				</div>
+				<!-- Container / End -->
+			</section>
+
+			<div class="container">
+	<div class="twelve alt columns">
+		<!-- Post -->
+		<article class="post medium">
+			<div class="twelve columns">
+				<section class="post-content">
+					<header class="meta">
+						<h2><a href="../yun-wei/2016-03-22-18-09.html" rel="bookmark" title="Permalink to storm 基本安装">storm 基本安装</a></h2>
+						<ul>
+							<li>By <a href="../author/hir0c.html">Hir0C</a></li>
+							<li>二 22 三月 2016</li>
+							<li><a href="../category/运维">运维</a></li>
+						</ul>
+					</header>
+					<p>
+							<h3>storm安装步骤:</h3>
 <h4>一、安装zookeeper</h4>
 <ol>
 <li>
@@ -78,136 +105,55 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <li>
 <p>配置zookeeper
 解压稍微修改配置就可以使用，只需要定义dataDir和server.1/2/3</p>
-<div class="highlight"><pre><span></span>dataDir=/data/zookeeper/tmp
-hostname1:2888:3888
-hostname2:2888:3888
-hostname3:2888:3888
-</pre></div>
+<div ...
+	        		</p>
+					<a href="../yun-wei/2016-03-22-18-09.html" class="button color">Read More</a>
+				</section>
+			</div>
+			<div class="clearfix"></div>
+		</article>
+
+	<!-- Pagination -->
+	<nav class="pagination">
+		<ul>
+			<li>
+			</li>
+			<!-- Page 1 / 1 -->
+		</ul>
+		<div class="clearfix"></div>
+	</nav>
+	</div>
+
+	<!-- Sidebar -->
+	<div class="four columns">
+
+		
+	</div>
+			</div>
+			<!-- Container / End -->
+		</div>
+		<!-- Content Wrapper / End -->
 
 
-</li>
-<li>
-<p>启动
-        ./zkServer.sh start</p>
-</li>
-</ol>
-<h4>二、安装消息队列ZeroMQ</h4>
-<ol>
-<li>直接上最新版本zeromq-4.0.3</li>
-</ol>
-<p>http://download.zeromq.org/zeromq-4.0.3.tar.gz
-编译安装:<code>./configure &amp;&amp; make &amp;&amp; make install &amp;&amp; ldconfig</code>
-不要忘记<code>ldconfig</code></p>
-<ol>
-<li>安装zemq</li>
-</ol>
-<p>https://github.com/zeromq/jzmq
-编译安装:<code>./configure &amp;&amp; make &amp;&amp; make install &amp;&amp; ldconfig</code></p>
-<p>两个模块都默认安装/usr/local/了，这样storm就不用单独配置java.library.path了</p>
-<h4>三、安装storm</h4>
-<ol>
-<li>
-<p>storm需要python2.6以上版本。安装略</p>
-</li>
-<li>
-<p>storm配置</p>
-<div class="highlight"><pre><span></span>storm.zookeeper.servers: 需要指定zookeeper集群ip 
-storm.local.dir:本地目录位置
-storm.zookeeper.root:zookeeper根目录
-nimbus.host: &quot;IP&quot; 
-worker.childopts:&quot;-Xmx    m&quot; 
-ui.port: 8080
-</pre></div>
-
-
-</li>
-<li>
-<p>启动storm</p>
-</li>
-</ol>
-<p>ui的机器</p>
-<div class="highlight"><pre><span></span>    ./storm nimbus &gt;/dev/null 2&gt;&amp;1 &amp;
-</pre></div>
-
-
-<p>work</p>
-<div class="highlight"><pre><span></span>    ./storm supervisor &gt;/dev/null 2&gt;&amp;1 &amp;
-</pre></div>
-
-
-<p>ui</p>
-<div class="highlight"><pre><span></span>    ./storm ui &gt;/dev/null 2&gt;&amp;1 &amp;
-</pre></div>
-
-
-<p>要注意的是,RELEASE文件时必须的,否则启动会报错</p>
-<blockquote>
-<p>only be run from with in a release</p>
-</blockquote> 
-	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-22-18-09.html">
-          <i class="icon-comment"></i> Comment </a>
-	<hr />
-      </div>
-      
-    </div>
-    
-<div class="pagination">
-<ul>
-    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
-
-    <li class="active"><a href="../tag/storm.html">1</a></li>
-
-    <li class="next disabled"><a href="#">&rarr; Next</a></li>
-
-</ul>
-</div>
-
- 
-  
-        </div>
-        
-        
-    </div>     </div> </div>
-
-<!--footer-->
-<div class="container">
-  <div class="well" style="background-color: #E9EFF6">
-    <div id="blog-footer">
-      <div class="row-fluid">
-	<div class="site-nav span2" align="center">
-          <ul class="nav nav-list" id="site-links">
-            <li class="nav-header"> 
-              Site
-            </li>
-            <li><a href=".."><i class="icon-home" style="color: #1f334b">
-                </i>Home</a></li>
-            <li><a href="../archives.html"><i class="icon-list" style="color: #1f334b">
-                </i>Archives</a></li>
-	    <li><a href="../tags.html"><i class="icon-tags" style="color: #1f334b">
-                </i>Tags</a></li>
-	    
-	  </ul>
-
-        </div>
-
-      </div> <!--end of fluid row-->
-    </div> <!--end of blog-footer-->
-    <hr />
-    <p align="center"><a href="..">Hir0C blog</a>
-      &copy; Hir0C
-    Powered by <a href="https://github.com/getpelican/pelican">Pelican</a> and
-        <a href="https://twitter.github.com/bootstrap">Twitter Bootstrap</a>. 
-        Icons by <a href="https://fortawesome.github.com/Font-Awesome">Font Awesome</a> and 
-        <a href="https://gregoryloucas.github.com/Font-Awesome-More">Font Awesome More</a></p>
-
-  </div> <!--end of well -->
-</div> <!--end of container -->
-
-<!--/footer-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
-
-
-
-</body>
+		<div id="footer-bottom">
+			<!-- Container -->
+			<div class="container">
+				<div class="eight columns">Blog powered by <a href="http://getpelican.com">Pelican</a></div>
+			</div>
+			<!-- Container / End -->
+		</div>
+		<!-- Footer Bottom / End -->
+		
+	<!-- Javascripts -->
+	<script src="../theme/js/jquery.min.js"></script>
+<script type="text/javascript">
+    var disqus_shortname = 'HiroC';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+	</body>
 </html>

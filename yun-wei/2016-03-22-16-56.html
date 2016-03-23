@@ -1,72 +1,119 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
+<!--[if IE 8 ]><html class="ie ie8" lang="zh"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
 <html lang="zh">
-<head>
-
-    <meta charset="utf-8">
-    <title>Zsh安装配置 - Hir0C blog</title>
-    <meta name="description" content="">
-    <meta name="author" content="Hir0C">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-    <!--[if lt IE 9]>
-    <script src="../theme/html5.js"></script>
-    <![endif]-->
+<!--<![endif]-->
+	<head>
+            <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="author" content="Hir0C">
 
 
-    <!-- Le styles -->
-    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.no-icons.min.css" rel="stylesheet">
-    <link href="../theme/local.css" rel="stylesheet">
-    <link href="../theme/pygments.css" rel="stylesheet">
-    <link href="../theme/font-awesome.css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Gudea:400,400italic|Alegreya+SC' rel='stylesheet' type='text/css'>
+        <title>Hir0C blog - Zsh安装配置</title>
 
-</head>
 
-<body>
-<header class="blog-header">
-  <div class="container">
-    <div class="row-fluid">
-      <div class="span9">
-	<a href=".." class="brand">Hir0C blog</a>
-      </div>
+        <!-- CSS -->
+        <link rel="stylesheet" href="../theme/css/style.css">
 
-      <div class="span3" id="blog-nav">
-	<ul class="nav nav-pills pull-right">
-	    <li  class="active" >
-	      <a href="../yun-wei/index.html ">运维</a>
-	</ul>
-      </div>
-    </div> <!-- End of fluid row-->
-  </div>   <!-- End of Container-->
-</header>
-    
-<div class="container">
-    <div class="content">
-    <div class="row-fluid">
+        <!-- Custom CSS -->
+        	<link rel="stylesheet" href="../theme/css/colors/blue.css" id="colors">
 
-        <div class="span10">
-    <div class='article'>
-      <div class="row-fluid">
-           <div class="content-title span9">
-             <h1>Zsh安装配置</h1>
-           </div>
-      </div>
-    <div class="row-fluid">
-      <div class="span2">
-<p>二 22 三月 2016 </p>
+        <!-- Code highlight color scheme -->
+            <link href="../theme/css/code_blocks/darkly.css" rel="stylesheet">
 
-<p style="text-align: left;">
-Filed under <a href="../yun-wei/index.html">运维</a>
-</p>
-<p style="text-align: left;">
- 
-    Tags <a href="../tag/bash.html">bash</a> <a href="../tag/bian-ji-qi.html">编辑器</a> </p>
-<p>
-</p>
-      </div>
-      
-      <div class="span8">
-	<h2>zsh是个好东西，关键是能装逼</h2>
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+
+
+
+        <meta name="tags" contents="bash" />
+        <meta name="tags" contents="编辑器" />
+
+	                <meta property="og:locale" content="">
+		<meta property="og:site_name" content="Hir0C blog">
+
+	<meta property="og:type" content="article">
+	<meta property="article:author" content="">
+	<meta property="og:url" content="../yun-wei/2016-03-22-16-56.html">
+	<meta property="og:title" content="Zsh安装配置">
+	<meta property="og:description" content="">
+	   <meta property="og:image" content="../images/guilherme-toti.jpg">
+	<meta property="article:published_time" content="2016-03-22 16:56:00+08:00">
+	</head>
+	<body>
+		<header id="header">
+			<!-- Container -->
+			<div class="container">
+				<!-- Logo / Mobile Menu -->
+				<div class="three columns">
+					<div id="logo">
+						<h1><a href="../">Hir0C blog</a></h1>
+					</div>
+				</div>
+				<!-- Navigation
+				================================================== -->
+				<div class="thirteen columns">
+					
+					<nav id="navigation" class="menu">
+						<ul id="responsive">
+
+							<li><a href="../">Home</a></li>
+
+
+						</ul>
+					</nav>
+				</div>
+			</div>
+			<!-- Container / End -->
+		</header>
+		<!-- Header / End -->
+		
+		<div id="content-wrapper">
+			<section id="titlebar">
+				<!-- Container -->
+				<div class="container">
+					<div class="sixteen columns">						
+						<nav id="breadcrumbs">
+							<ul>
+								<li>You are here:</li>
+								<li><a href="../">Home</a></li>
+<li><a href="../category/运维">运维</a></li>
+<li>Zsh安装配置</li>
+							</ul>
+						</nav>
+					</div>
+
+				</div>
+				<!-- Container / End -->
+			</section>
+
+			<div class="container">
+	<div class="twelve alt columns">
+<article class="post" style="margin: 0; border: 0;">
+	
+	<div class="post-format">
+		<div class="circle"><i class="icon-pencil"></i><span></span></div>
+	</div>
+
+	<section class="post-content">
+
+		<header class="meta">
+			<h2><a href="../yun-wei/2016-03-22-16-56.html">Zsh安装配置</a></h2>
+			<ul>
+				<li>By <a href="../author/hir0c.html">Hir0C</a></li>
+				<li>二 22 三月 2016</li>
+				    <li>Updated on 二 22 三月 2016</li>
+			</ul>
+		</header>
+
+		<h2>zsh是个好东西，关键是能装逼</h2>
 <h3>一、安装zsh</h3>
 <p>略</p>
 <h4>二、切换用户使用shell</h4>
@@ -150,69 +197,66 @@ zshrc</p>
 <p>通配符搜索：ls -l ##/#.sh，可以递归显示当前目录下的 shell 文件，文件少时可以代替 find，文件太多就歇菜了。</p>
 </li>
 </ol>
-	<hr />
-      </div>
-    </div>
-    <div class="span10">
-      <h3>Comments</h3>
-    
-<div id="disqus_thread"></div>
+
+		    <div class="tags">
+		        <p>tags: <a href="../tag/bash.html">bash</a><a href="../tag/bian-ji-qi.html">编辑器</a></p>
+		    </div>
+
+<div class="sharing">
+</div>
+<hr>
+		
+		    <div class="comments">
+		        <div id="disqus_thread"></div>
+		        <script type="text/javascript">
+		            var disqus_shortname = 'HiroC';
+		            var disqus_identifier = 'yun-wei/2016-03-22-16-56.html';
+		            var disqus_url = '../yun-wei/2016-03-22-16-56.html';
+		            (function() {
+		                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		                dsq.src = '//HiroC.disqus.com/embed.js';
+		                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		            })();
+		        </script>
+		        <noscript>Please enable JavaScript to view the comments.</noscript>
+		    </div>
+	</section>
+	<div class="clearfix"></div>
+
+</article>
+
+	</div>
+
+	<!-- Sidebar -->
+	<div class="four columns">
+
+		
+	</div>
+			</div>
+			<!-- Container / End -->
+		</div>
+		<!-- Content Wrapper / End -->
+
+
+		<div id="footer-bottom">
+			<!-- Container -->
+			<div class="container">
+				<div class="eight columns">Blog powered by <a href="http://getpelican.com">Pelican</a></div>
+			</div>
+			<!-- Container / End -->
+		</div>
+		<!-- Footer Bottom / End -->
+		
+	<!-- Javascripts -->
+	<script src="../theme/js/jquery.min.js"></script>
 <script type="text/javascript">
-    var disqus_shortname = 'HiroC'; 
-
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
+    var disqus_shortname = 'HiroC';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>  
-    </div>
-        </div>
-        
-        
-    </div>     </div> </div>
-
-<!--footer-->
-<div class="container">
-  <div class="well" style="background-color: #E9EFF6">
-    <div id="blog-footer">
-      <div class="row-fluid">
-	<div class="site-nav span2" align="center">
-          <ul class="nav nav-list" id="site-links">
-            <li class="nav-header"> 
-              Site
-            </li>
-            <li><a href=".."><i class="icon-home" style="color: #1f334b">
-                </i>Home</a></li>
-            <li><a href="../archives.html"><i class="icon-list" style="color: #1f334b">
-                </i>Archives</a></li>
-	    <li><a href="../tags.html"><i class="icon-tags" style="color: #1f334b">
-                </i>Tags</a></li>
-	    
-	  </ul>
-
-        </div>
-
-      </div> <!--end of fluid row-->
-    </div> <!--end of blog-footer-->
-    <hr />
-    <p align="center"><a href="..">Hir0C blog</a>
-      &copy; Hir0C
-    Powered by <a href="https://github.com/getpelican/pelican">Pelican</a> and
-        <a href="https://twitter.github.com/bootstrap">Twitter Bootstrap</a>. 
-        Icons by <a href="https://fortawesome.github.com/Font-Awesome">Font Awesome</a> and 
-        <a href="https://gregoryloucas.github.com/Font-Awesome-More">Font Awesome More</a></p>
-
-  </div> <!--end of well -->
-</div> <!--end of container -->
-
-<!--/footer-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
-
-
-
-</body>
+	</body>
 </html>

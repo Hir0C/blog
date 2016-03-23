@@ -1,114 +1,124 @@
-<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
+<!--[if IE 8 ]><html class="ie ie8" lang="zh"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
 <html lang="zh">
-<head>
-
-    <meta charset="utf-8">
-    <title>Hir0C blog <small>编辑器</small></title>
-    <meta name="description" content="">
-    <meta name="author" content="Hir0C">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-    <!--[if lt IE 9]>
-    <script src="../theme/html5.js"></script>
-    <![endif]-->
+<!--<![endif]-->
+	<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="author" content="Hir0C">
 
 
-    <!-- Le styles -->
-    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.no-icons.min.css" rel="stylesheet">
-    <link href="../theme/local.css" rel="stylesheet">
-    <link href="../theme/pygments.css" rel="stylesheet">
-    <link href="../theme/font-awesome.css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Gudea:400,400italic|Alegreya+SC' rel='stylesheet' type='text/css'>
+        <title>Hir0C blog - Tag 编辑器</title>
 
-</head>
 
-<body>
-<header class="blog-header">
-  <div class="container">
-    <div class="row-fluid">
-      <div class="span9">
-	<a href=".." class="brand">Hir0C blog</a>
-      </div>
+        <!-- CSS -->
+        <link rel="stylesheet" href="../theme/css/style.css">
 
-      <div class="span3" id="blog-nav">
-	<ul class="nav nav-pills pull-right">
-	    <li >
-	      <a href="../yun-wei/index.html ">运维</a>
-	</ul>
-      </div>
-    </div> <!-- End of fluid row-->
-  </div>   <!-- End of Container-->
-</header>
-    
-<div class="container">
-    <div class="content">
-    <div class="row-fluid">
+        <!-- Custom CSS -->
+        	<link rel="stylesheet" href="../theme/css/colors/blue.css" id="colors">
 
-        <div class="span10">
-        
+        <!-- Code highlight color scheme -->
+            <link href="../theme/css/code_blocks/darkly.css" rel="stylesheet">
 
-        
 
-    <div class='row-fluid''>
-        <div class="article-title span9">
-            <a href="../yun-wei/2016-03-22-18-26.html"><h1>sublime插件安装</h1></a>
-        </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span2">
-<p>二 22 三月 2016 </p>
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
-<p style="text-align: left;">
-Filed under <a href="../yun-wei/index.html">运维</a>
-</p>
-<p style="text-align: left;">
- 
-    Tags <a href="../tag/bian-ji-qi.html">编辑器</a> </p>
-<p>
-</p>
-      </div>
-      <div class="article-content span8">
-	<p><em>使用Package Control组件，在sublime3下安装插件，按照网上方法会出现urllib2模块找不到的报错，但是之前并没出现过错误，查看了下之前是使用的urllib，在此记录下。</em></p>
+                <meta property="og:locale" content="">
+		<meta property="og:site_name" content="Hir0C blog">
+	</head>
+	<body>
+		<header id="header">
+			<!-- Container -->
+			<div class="container">
+				<!-- Logo / Mobile Menu -->
+				<div class="three columns">
+					<div id="logo">
+						<h1><a href="../">Hir0C blog</a></h1>
+					</div>
+				</div>
+				<!-- Navigation
+				================================================== -->
+				<div class="thirteen columns">
+					
+					<nav id="navigation" class="menu">
+						<ul id="responsive">
+
+							<li><a href="../">Home</a></li>
+
+
+						</ul>
+					</nav>
+				</div>
+			</div>
+			<!-- Container / End -->
+		</header>
+		<!-- Header / End -->
+		
+		<div id="content-wrapper">
+			<section id="titlebar">
+				<!-- Container -->
+				<div class="container">
+					<div class="sixteen columns">						
+						<nav id="breadcrumbs">
+							<ul>
+								<li>You are here:</li>
+								<li><a href="../">Home</a></li>
+<li><a href="../tags">Tags</a></li>
+<li>编辑器</li>
+							</ul>
+						</nav>
+					</div>
+
+				</div>
+				<!-- Container / End -->
+			</section>
+
+			<div class="container">
+	<div class="twelve alt columns">
+		<!-- Post -->
+		<article class="post medium">
+			<div class="twelve columns">
+				<section class="post-content">
+					<header class="meta">
+						<h2><a href="../yun-wei/2016-03-22-18-26.html" rel="bookmark" title="Permalink to sublime插件安装">sublime插件安装</a></h2>
+						<ul>
+							<li>By <a href="../author/hir0c.html">Hir0C</a></li>
+							<li>二 22 三月 2016</li>
+							<li><a href="../category/运维">运维</a></li>
+						</ul>
+					</header>
+					<p>
+							<p><em>使用Package Control组件，在sublime3下安装插件，按照网上方法会出现urllib2模块找不到的报错，但是之前并没出现过错误，查看了下之前是使用的urllib，在此记录下。</em></p>
 <h2>简单说下导入步骤：</h2>
 <h3>1. `ctrl + ``键，呼出命令行，键入命令:</h3>
-<div class="highlight"><pre><span></span>    <span class="kn">import</span> <span class="nn">urllib.request</span><span class="o">,</span><span class="nn">os</span><span class="p">;</span> <span class="n">pf</span> <span class="o">=</span> <span class="s1">&#39;Package Control.sublime-package&#39;</span><span class="p">;</span> <span class="n">ipp</span> <span class="o">=</span> <span class="n">sublime</span><span class="o">.</span><span class="n">installed_packages_path</span><span class="p">();</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">install_opener</span><span class="p">(</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">build_opener</span><span class="p">(</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">ProxyHandler</span><span class="p">())</span> <span class="p">);</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ipp</span><span class="p">,</span> <span class="n">pf</span><span class="p">),</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span> <span class="s1">&#39;http://sublime.wbond.net/&#39;</span> <span class="o">+</span> <span class="n">pf</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="s1">&#39;%20&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-</pre></div>
-
-
-<h3>2. <code>ctrl+shift+p</code> 呼出下拉对话框，输入<code>install</code>会调出插件安装界面，输入要安装插件的名字就可以自动安装了。</h3> 
-	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-22-18-26.html">
-          <i class="icon-comment"></i> Comment </a>
-	<hr />
-      </div>
-      
-    </div>
-    
-
- 
-        
-
-
-
-    <div class='row-fluid'>
-      <div class='article-title span9'> 
-        <a href="../yun-wei/2016-03-22-18-15.html"><h1>VIM插件安装</h1></a>
-      </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span2">
-<p>二 22 三月 2016 </p>
-
-<p style="text-align: left;">
-Filed under <a href="../yun-wei/index.html">运维</a>
-</p>
-<p style="text-align: left;">
- 
-    Tags <a href="../tag/bian-ji-qi.html">编辑器</a> </p>
-<p>
-</p>
-      </div>
-      <div class="summary span8">
-	<h2>vim ide 基本配置</h2>
+<div class="highlight"><pre><span></span>    <span class="kn">import</span> <span ...
+	        		</p>
+					<a href="../yun-wei/2016-03-22-18-26.html" class="button color">Read More</a>
+				</section>
+			</div>
+			<div class="clearfix"></div>
+		</article>
+		<!-- Post -->
+		<article class="post medium">
+			<div class="twelve columns">
+				<section class="post-content">
+					<header class="meta">
+						<h2><a href="../yun-wei/2016-03-22-18-15.html" rel="bookmark" title="Permalink to VIM插件安装">VIM插件安装</a></h2>
+						<ul>
+							<li>By <a href="../author/hir0c.html">Hir0C</a></li>
+							<li>二 22 三月 2016</li>
+							<li><a href="../category/运维">运维</a></li>
+						</ul>
+					</header>
+					<p>
+							<h2>vim ide 基本配置</h2>
 <h3>一、安装VIM</h3>
 <p>只是记录下vim的编译选项</p>
 <blockquote>
@@ -116,56 +126,27 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </blockquote>
 <div class="highlight"><pre><span></span>    ./configure --prefix=/usr/local/vim74 \
      **--with-features=huge** \
-     --enable-pythoninterp --enable-perlinterp \
-     --enable-rubyinterp --enable-luainterp \
-     --enable-multibyte --enable-sniff --enable-fontset \
-     --disable-selinux --enable-cscope
-</pre></div>
-
-
-<h3>二、插件安装</h3>
-<ul>
-<li><a href="http://www.vim.org/scripts/script.php?script_id=1213">VJDE</a><div class="highlight"><pre><span></span>tar -xzf vjde.tgz -C /usr/share/vim/vimfiles 
-chmod +x /usr/share/vim/vimfiles/plugin/vjde/readtags
-</pre></div>
-
-
-</li>
-</ul>
-<p>使用官网的方法就可以，自己编译安装的vim就解压到 <code>/usr/local ...</code></p> 
-	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-22-18-15.html">
-          <i class="icon-plus-sign"></i> Read More </a>
-	<hr />
-      </div>
-      
-    </div>
-      
-
- 
-        
-
-
-
-    <div class='row-fluid'>
-      <div class='article-title span9'> 
-        <a href="../yun-wei/2016-03-22-16-56.html"><h1>Zsh安装配置</h1></a>
-      </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span2">
-<p>二 22 三月 2016 </p>
-
-<p style="text-align: left;">
-Filed under <a href="../yun-wei/index.html">运维</a>
-</p>
-<p style="text-align: left;">
- 
-    Tags <a href="../tag/bash.html">bash</a> <a href="../tag/bian-ji-qi.html">编辑器</a> </p>
-<p>
-</p>
-      </div>
-      <div class="summary span8">
-	<h2>zsh是个好东西，关键是能装逼</h2>
+     --enable-pythoninterp ...
+	        		</p>
+					<a href="../yun-wei/2016-03-22-18-15.html" class="button color">Read More</a>
+				</section>
+			</div>
+			<div class="clearfix"></div>
+		</article>
+		<!-- Post -->
+		<article class="post medium">
+			<div class="twelve columns">
+				<section class="post-content">
+					<header class="meta">
+						<h2><a href="../yun-wei/2016-03-22-16-56.html" rel="bookmark" title="Permalink to Zsh安装配置">Zsh安装配置</a></h2>
+						<ul>
+							<li>By <a href="../author/hir0c.html">Hir0C</a></li>
+							<li>二 22 三月 2016</li>
+							<li><a href="../category/运维">运维</a></li>
+						</ul>
+					</header>
+					<p>
+							<h2>zsh是个好东西，关键是能装逼</h2>
 <h3>一、安装zsh</h3>
 <p>略</p>
 <h4>二、切换用户使用shell</h4>
@@ -174,85 +155,55 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 
 
 <p>或者</p>
-<div class="highlight"><pre><span></span>    chsh -s /bin/zsh
-</pre></div>
+<div class="highlight"><pre><span></span>    chsh -s ...
+	        		</p>
+					<a href="../yun-wei/2016-03-22-16-56.html" class="button color">Read More</a>
+				</section>
+			</div>
+			<div class="clearfix"></div>
+		</article>
+
+	<!-- Pagination -->
+	<nav class="pagination">
+		<ul>
+			<li>
+			</li>
+			<!-- Page 1 / 1 -->
+		</ul>
+		<div class="clearfix"></div>
+	</nav>
+	</div>
+
+	<!-- Sidebar -->
+	<div class="four columns">
+
+		
+	</div>
+			</div>
+			<!-- Container / End -->
+		</div>
+		<!-- Content Wrapper / End -->
 
 
-<h4>三、git安装</h4>
-<p>没啥好说的，官网步骤都有</p>
-<div class="highlight"><pre><span></span>    yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel -y
-    make prefix=/usr/local all
-    make prefix=/usr/local install
-</pre></div>
-
-
-<h4>四、安装python2.7.x</h4>
-<p>老三步</p>
-<div class="highlight"><pre><span></span>    ./configure --prefix=/usr/local ...</pre></div> 
-	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-22-16-56.html">
-          <i class="icon-plus-sign"></i> Read More </a>
-	<hr />
-      </div>
-      
-    </div>
-      
-<div class="pagination">
-<ul>
-    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
-
-    <li class="active"><a href="../tag/bian-ji-qi.html">1</a></li>
-
-    <li class="next disabled"><a href="#">&rarr; Next</a></li>
-
-</ul>
-</div>
-
- 
-  
-        </div>
-        
-        
-    </div>     </div> </div>
-
-<!--footer-->
-<div class="container">
-  <div class="well" style="background-color: #E9EFF6">
-    <div id="blog-footer">
-      <div class="row-fluid">
-	<div class="site-nav span2" align="center">
-          <ul class="nav nav-list" id="site-links">
-            <li class="nav-header"> 
-              Site
-            </li>
-            <li><a href=".."><i class="icon-home" style="color: #1f334b">
-                </i>Home</a></li>
-            <li><a href="../archives.html"><i class="icon-list" style="color: #1f334b">
-                </i>Archives</a></li>
-	    <li><a href="../tags.html"><i class="icon-tags" style="color: #1f334b">
-                </i>Tags</a></li>
-	    
-	  </ul>
-
-        </div>
-
-      </div> <!--end of fluid row-->
-    </div> <!--end of blog-footer-->
-    <hr />
-    <p align="center"><a href="..">Hir0C blog</a>
-      &copy; Hir0C
-    Powered by <a href="https://github.com/getpelican/pelican">Pelican</a> and
-        <a href="https://twitter.github.com/bootstrap">Twitter Bootstrap</a>. 
-        Icons by <a href="https://fortawesome.github.com/Font-Awesome">Font Awesome</a> and 
-        <a href="https://gregoryloucas.github.com/Font-Awesome-More">Font Awesome More</a></p>
-
-  </div> <!--end of well -->
-</div> <!--end of container -->
-
-<!--/footer-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
-
-
-
-</body>
+		<div id="footer-bottom">
+			<!-- Container -->
+			<div class="container">
+				<div class="eight columns">Blog powered by <a href="http://getpelican.com">Pelican</a></div>
+			</div>
+			<!-- Container / End -->
+		</div>
+		<!-- Footer Bottom / End -->
+		
+	<!-- Javascripts -->
+	<script src="../theme/js/jquery.min.js"></script>
+<script type="text/javascript">
+    var disqus_shortname = 'HiroC';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+	</body>
 </html>
