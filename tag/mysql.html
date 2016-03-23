@@ -33,6 +33,8 @@
       <div class="span3" id="blog-nav">
 	<ul class="nav nav-pills pull-right">
 	    <li >
+	      <a href="../ri-chang/index.html ">日常</a>
+	    <li >
 	      <a href="../yun-wei/index.html ">运维</a>
 	</ul>
       </div>
@@ -70,18 +72,10 @@ Filed under <a href="../yun-wei/index.html">运维</a>
       <div class="article-content span8">
 	<p>转发的，找不到原文了。。</p>
 <blockquote>
-<p>root@mysql-5.1.51&gt; SET SESSION old_passwords=0; Query OK, 0 rows
-affected (0.00 sec)</p>
-<p>root@mysql-5.1.51&gt; SELECT PASSWORD('123456');
-+-------------------------------------------+ | PASSWORD('123456')                        |
-+-------------------------------------------+ | *6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9 |
-+-------------------------------------------+ 1 row in set (0.00 sec)</p>
-<p>root@mysql-5.1.51&gt; SET SESSION old_passwords=1; Query OK, 0 rows
-affected (0.00 sec)</p>
-<p>root@mysql-5.1.51&gt; SELECT PASSWORD('123456');
-+--------------------+ | PASSWORD('123456') |
-+--------------------+ | 565491d704013245   |
-+--------------------+ 1 row in set (0.00 sec</p>
+<p>SET SESSION old_passwords=0;
+SELECT PASSWORD('123456');
+SET SESSION old_passwords=1;
+SELECT PASSWORD('123456');</p>
 </blockquote>
 <p>实际操作：
 登陆mysql，使用<code>SET SESSION old_passwords=0;</code> //设置老格式密码

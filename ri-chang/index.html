@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>Hir0C blog <small>运维</small></title>
+    <title>Hir0C blog <small>日常</small></title>
     <meta name="description" content="">
     <meta name="author" content="Hir0C">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,7 +32,7 @@
 
       <div class="span3" id="blog-nav">
 	<ul class="nav nav-pills pull-right">
-	    <li >
+	    <li  class="active" >
 	      <a href="../ri-chang/index.html ">日常</a>
 	    <li >
 	      <a href="../yun-wei/index.html ">运维</a>
@@ -53,84 +53,36 @@
 
     <div class='row-fluid''>
         <div class="article-title span9">
-            <a href="../yun-wei/2016-03-22-16-12.html"><h1>vsftpd 虚拟用户配置</h1></a>
+            <a href="../ri-chang/2016-03-23-14-20.html"><h1>推理小说</h1></a>
         </div>
     </div>
     <div class="row-fluid">
       <div class="span2">
-<p>二 22 三月 2016 </p>
+<p>三 23 三月 2016 </p>
 
 <p style="text-align: left;">
-Filed under <a href="../yun-wei/index.html">运维</a>
+Filed under <a href="../ri-chang/index.html">日常</a>
 </p>
 <p style="text-align: left;">
  
-    Tags <a href="../tag/yun-wei.html">运维</a> <a href="../tag/vsftpd.html">vsftpd</a> </p>
+    Tags <a href="../tag/xiao-shuo.html">小说</a> </p>
 <p>
 </p>
       </div>
       <div class="article-content span8">
-	<h3>简介</h3>
-<p>ftp 虚拟用户配置</p>
-<h3>配置</h3>
-<ol>
-<li>
-<p>创建nologin用户</p>
-<div class="highlight"><pre><span></span>useradd -s /sbin/nologin -d /opt/ftp vftp
-</pre></div>
-
-
-</li>
-<li>
-<p>创建虚拟用户密码</p>
-<div class="highlight"><pre><span></span>db_load -T -t hash -f vftpusers.txt /mnt/vftpusers.db
-</pre></div>
-
-
-</li>
-<li>
-<p>添加pam认证
-/etc/pam.d/vsftpd起始两行添加：</p>
-<div class="highlight"><pre><span></span>auth sufficient /lib64/security/pam_userdb.so db=vftpusers
-account sufficient /lib64/security/pam_userdb.so db=vftpusers
-</pre></div>
-
-
-</li>
-<li>
-<p>修改ftp配置(使用主动模式)</p>
-<div class="highlight"><pre><span></span>port_enable=YES
-write_enable=YES
-connect_from_port_20=YES
-anonymous_enable=NO
-local_enable=YES
-local_umask=022
-dirmessage_enable=YES
-xferlog_enable=YES
-connect_from_port_20=YES
-xferlog_file=/var/log/vsftpd.log
-xferlog_std_format=YES
-ascii_upload_enable=YES
-ascii_download_enable=YES
-listen=YES
-chroot_local_user=YES
-guest_enable=YES
-guest_username=vftpusers
-pam_service_name=vsftpd
-user_config_dir=vftpusers_conf
-virtual_use_local_privs=YES
-use_localtime=YES
-cmds_allowed=ABOR,CWD,LIST,MDTM,MKD,NLST,PASS,PASV,PORT,PWD,QUIT,RETR,RNFR,RNTO,SIZE,STOR,TYPE,USER,REST,CDUP,HELP,MODE,NOOP,REIN,STAT,STOU,STRU,SYST,FEAT
-file_open_mode=0444
-</pre></div>
-
-
-</li>
-<li>
-<p>重启vsftpd，登陆验证。</p>
-</li>
-</ol> 
-	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-22-16-12.html">
+	<p>整理了一下最近看的推理小说，记录一下读后感。</p>
+<p><em>无剧透</em></p>
+<p><strong><a href="http://book.douban.com/subject/4277347/" target="_blank">解体诸因</a></strong></p>
+<p>这也是我一直向身边朋友推荐的推理小说，西泽保彦出道作，匠千晓系列的第一篇，可以感觉到当时西泽保彦想通过这种冲击性的剧情引起读者兴趣。
+  全篇由8个分尸案组成，看似不相关的案件，又在第九因(书中以因为章节)串联起来，并推翻了之前的推理。
+  对于<code>分尸</code>情节的小说，我想引用西泽保彦羔羊没的圣诞夜中前言的一段话</p>
+<blockquote>
+<p>在当时的推理小说书写中，这种没有「屍体」的作品还是相当少见的，就像某二十守则说的：「推理小说绝对需要屍体」，屍体可以催化情绪与煽动读者的正义感，对於推理小说本身的娱乐性有着加成的作用。随着时间的演进，推理小说也开始演化了，不再那麽强调血腥与屍体，而着重在谜团本身的吸引力，甚至还颠覆了「犯罪」的本质，让推理小说中的谜团纯粹化，不再带有司法或道德的审判秩序意味。
+  西泽保彦的书基本分为两种SF和安乐椅侦探，以下引用维基百科解释一下安乐椅侦探:
+安乐椅侦探（Armchair Detectives）是侦探小说所塑造的一种侦探。与一般的侦探之间，最大的差异是安乐椅神探无须奔波劳碌，只需坐在舒适的安乐椅，听、看着命案的线索，就能凭借著推理，指出真凶。推理小说史上的第一个安乐椅神探是由奥希兹女男爵的小说《角落里的老人》里的主角。自从这个部作品出版后，安乐椅神探变成所有推理小说作家想要挑战的角色。
+  匠千晓全系列都属于"安乐椅侦探"类型，每个案件都是在极少的线索下主角和朋友的讨论中，不断推理，推翻，再推理，再推翻解决的。如果大家喜欢这种类型的作品，又偏安日系推理小说，匠千晓系列绝对是你的首选。</p>
+</blockquote> 
+	<a class="btn btn-mini xsmall" href="../ri-chang/2016-03-23-14-20.html">
           <i class="icon-comment"></i> Comment </a>
 	<hr />
       </div>
@@ -141,7 +93,7 @@ file_open_mode=0444
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
 
-    <li class="active"><a href="../tag/yun-wei.html">1</a></li>
+    <li class="active"><a href="../ri-chang/index.html">1</a></li>
 
     <li class="next disabled"><a href="#">&rarr; Next</a></li>
 
