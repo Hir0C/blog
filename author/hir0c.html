@@ -51,8 +51,71 @@
 
     <div class='row-fluid''>
         <div class="article-title span9">
-            <a href="../yun-wei/2016-03-23-12-36.html"><h1>pip 本地源搭建</h1></a>
+            <a href="../yun-wei/2016-03-23-14-16.html"><h1>mysql5.6使用老格式密码</h1></a>
         </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>三 23 三月 2016 </p>
+
+<p style="text-align: left;">
+Filed under <a href="../yun-wei/index.html">运维</a>
+</p>
+<p style="text-align: left;">
+ 
+    Tags <a href="../tag/mysql.html">mysql</a> </p>
+<p>
+</p>
+      </div>
+      <div class="article-content span8">
+	<p>转发的，找不到原文了。。</p>
+<blockquote>
+<p>root@mysql-5.1.51&gt; SET SESSION old_passwords=0; Query OK, 0 rows
+affected (0.00 sec)</p>
+<p>root@mysql-5.1.51&gt; SELECT PASSWORD('123456');
++-------------------------------------------+ | PASSWORD('123456')                        |
++-------------------------------------------+ | *6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9 |
++-------------------------------------------+ 1 row in set (0.00 sec)</p>
+<p>root@mysql-5.1.51&gt; SET SESSION old_passwords=1; Query OK, 0 rows
+affected (0.00 sec)</p>
+<p>root@mysql-5.1.51&gt; SELECT PASSWORD('123456');
++--------------------+ | PASSWORD('123456') |
++--------------------+ | 565491d704013245   |
++--------------------+ 1 row in set (0.00 sec</p>
+</blockquote>
+<p>实际操作：
+登陆mysql，使用<code>SET SESSION old_passwords=0;</code> //设置老格式密码
+<code>SET PASSWORD FOR 'webuser'@'localhost' = PASSWORD('123456')</code> //然后为用户设置密码。</p>
+<p>修改配置文件：
+        [client]
+        secure_auth = 0
+        [mysqld]
+        old_passwords=1</p>
+<p>成功登陆！</p>
+<p>忘记用户密码时：
+        [mysqld]
+        skip-grant-tables</p>
+<p>然后不用口令进入mysql修改密码：</p>
+<blockquote>
+<p>UPDATE mysql.user SET Password=PASSWORD("newpassword")  WHERE User='root' and Host='localhost';</p>
+</blockquote> 
+	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-23-14-16.html">
+          <i class="icon-comment"></i> Comment </a>
+	<hr />
+      </div>
+      
+    </div>
+    
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="../yun-wei/2016-03-23-12-36.html"><h1>pip 本地源搭建</h1></a>
+      </div>
     </div>
     <div class="row-fluid">
       <div class="span2">
@@ -67,7 +130,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <p>
 </p>
       </div>
-      <div class="article-content span8">
+      <div class="summary span8">
 	<p><em>先说下选pip而不是eazy_install的理由，pip安装可维护性好，安装卸载都是一条命令搞定，而且还支持多个参数选项，eazy_install卸载只能手动，功能很单一。</em></p>
 <p>在内网机器使用pip安装很不方便，所以准备在内网弄个源server，就用Fabric安装做例子。</p>
 <p>下面说下内网源服务搭建:</p>
@@ -86,18 +149,14 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 
 
 <h2>三、安装</h2>
-<div class="highlight"><pre><span></span>使用命令`pip install Fabric -i http://ip:port` 安装。
-
-
-    pip install numpy --proxy=http://xxxx:3128 -i http://pypi.douban.com/simple
-</pre></div> 
+<div class="highlight"><pre><span></span>使用命令`pip install Fabric -i http://ip:port ...</pre></div> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-23-12-36.html">
-          <i class="icon-comment"></i> Comment </a>
+          <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
       
     </div>
-    
+      
 
  
         
