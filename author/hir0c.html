@@ -1,167 +1,84 @@
-<!DOCTYPE html>
-<html lang="zh">
-<head>
-    <meta charset="utf-8">
-    <title>Hir0C blog - Hir0C</title>
-    <meta name="description" content="">
-    <meta name="author" content="Hir0C">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+  <head>
+    <title>Posts von Hir0C - Hir0C blog</title>
+    <link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../theme/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../theme/pastie.css" />
+    <link href="/" type="application/atom+xml" rel="alternate" title="Hir0C blog Atom Feed" />
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-    <!--[if lt IE 9]>
-    <script src="../theme/html5.js"></script>
-    <![endif]-->
 
-    <!-- Le styles -->
-    <link href="../theme/bootstrap.min.css" rel="stylesheet">
-    <link href="../theme/bootstrap.min.responsive.css" rel="stylesheet">
-    <link href="../theme/local.css" rel="stylesheet">
-    <link href="../theme/pygments.css" rel="stylesheet">
+  </head>
 
-    <!-- So Firefox can bookmark->"abo this site" -->
-
-</head>
-
-<body>
-
-<div class="navbar">
-    <div class="navbar-inner">
+  <body>
     <div class="container">
+      <div class="row">
+        <div class="span8">
+<div id="content">
+<h2>Posts von Hir0C</h2>
 
-         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-             <span class="icon-bar"></span>
-             <span class="icon-bar"></span>
-             <span class="icon-bar"></span>
-         </a>
-
-        <a class="brand" href="..">Hir0C blog</a>
-
-        <div class="nav-collapse">
-        <ul class="nav">
-            
-        </ul>
-        </div>
-        
-    </div>
-    </div>
-</div>
-
-<div class="container">
-    <div class="content">
-    <div class="row">
-
-        <div class="span9">
-        
-
-        
-
-
-    <div class='article'>
-        <div class="content-title">
-            <a href="../yun-wei/2016-03-22-18-34.html"><h1>wordpress on nginx 搭建</h1></a>
-二 22 三月 2016
-
-by <a class="url fn" href="../author/hir0c.html">Hir0C</a>
- 
-
-
- 
-        </div>
-        
-        <div><p><em>内网搞了了bolg，采用了nginx+php+mysql+wordpress。整个过程并不复杂，记录下遇到的问题。</em></p>
+<ul class="unstyled">
+        <li>
+            <div>
+                <div class="header">
+                    <h2>wordpress on nginx 搭建</h2>
+                </div>
+                <p class="meta"><small><span><a href="../author/hir0c/">Hir0C</a> - </span><span>二 22 三月 2016</span> - <span class="tags"><a href="/tag/nginx/">nginx</a>, <a href="/tag/wordpress/">wordpress</a></span></small></p>
+                <div class="entry-content">
+                    <p><em>内网搞了了bolg，采用了nginx+php+mysql+wordpress。整个过程并不复杂，记录下遇到的问题。</em></p>
 <h3>1. 安装nginx</h3>
 <div class="highlight"><pre><span></span>    ./configure --prefix=/usr/local/nginx --with-zlib --with-pcre=/opt/ftp/http-server/pcre-8.34 --with-http_perl_module --with-http_stub_status_module --with-http_image_filter_module --with-http_gunzip_module --with-http_gzip_static_module
 </pre></div>
 
 
 <h3>2. php</h3>
-<div class="highlight"><pre><span></span>    ./configure --prefix=/usr/local/php &#39;--with-config-file-path=/usr/local/php-5.4.23/etc&#39; &#39;--enable-fpm&#39; &#39;--enable-pcntl&#39; &#39;--enable-shmop&#39; &#39;--enable-sysvsem&#39; &#39;--enable-inline-optimization&#39; &#39;--disable-rpath&#39; &#39;--enable-safe-mode&#39; &#39;--with-mysql=mysqlnd&#39; &#39;--with-mysqli=mysqlnd&#39; &#39;--with-pdo-mysql=mysqlnd&#39; &#39;--with-libxml-dir=/usr/local&#39; &#39;--enable-xml=/usr/local&#39; &#39;--with-openssl&#39; --with-zlib &#39;--enable-bcmath&#39; &#39;--with-bz2&#39; &#39;--enable-zip&#39; &#39;--enable-exif&#39; &#39;--with-gd&#39; &#39;--enable-gd-native-ttf&#39; &#39;--with-freetype-dir=/usr/local&#39; &#39;--with-jpeg-dir=/usr/local&#39; &#39;--with-png-dir&#39; &#39;--with-mhash&#39; &#39;--with-mcrypt=/usr/local&#39; &#39;--enable-mbstring&#39; &#39;--enable-mbregex&#39; &#39;--with-iconv-dir=/usr/local&#39; &#39;--with-curl&#39; &#39;--with-curlwrappers&#39; &#39;--enable-ftp&#39; &#39;--enable-sockets&#39;
-</pre></div>
+<div class="highlight"><pre><span></span>    ./configure --prefix=/usr/local/php &#39;--with-config-file-path=/usr/local/php-5.4.23/etc&#39; &#39;--enable-fpm&#39; &#39;--enable-pcntl&#39; &#39;--enable-shmop&#39; &#39;--enable-sysvsem&#39; &#39;--enable-inline-optimization&#39; &#39;--disable-rpath&#39; &#39;--enable-safe-mode&#39; &#39;--with-mysql=mysqlnd&#39; &#39;--with-mysqli ...</pre></div>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                        <a class="btn btn-small disabled" href="../yun-wei/2016-03-22-18-34.html#disqus_thread"></a>
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="../yun-wei/2016-03-22-18-34.html" rel="bookmark" title="Permalink to wordpress on nginx 搭建">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
 
-
-<h3>3. mysql</h3>
-<div class="highlight"><pre><span></span>    cmake -DCMAKE_INSTALL_PREFIX=/opt/mysql/ -DSYSCONFDIR=/etc/my.cnf -DMYSQL_UNIX_ADDR=/opt/mysql/tmp/mysqld.sock -DMYSQL_USER=mysql -DDEFAULT_CHARSET=all -DDEFAULT_CHARSET=utf8 -DDEFAULT_COLLATION=utf8_general_ci -DWITH_INNOBASE_STORAGE_ENGINE=1 -DWITH_ZLIB=/usr/local/lib/ -DWITH_READLINE=1 -DWITH_DATADIR=/opt/mysql/data/ -DWITH_SSL=bundled -DENABLED_LOCAL_INFILE=1-DWITH_READLINE=1 -DWITH_DEBUG=0
-
-    make &amp;&amp; make install
-</pre></div>
-
-
-<h3>4. wordpress安装</h3>
-<p>略</p>
-<h3>5. 配置</h3>
-<p>这次遇到麻烦的地方主要有三点:</p>
-<ul>
-<li>
-<p>mysql初始化</p>
-<div class="highlight"><pre><span></span>scripts/mysql_install_db --user mysql --basedir= --datadir=
-</pre></div>
-
-
-</li>
-<li>
-<p>mysql设置密码需要先执行</p>
-<div class="highlight"><pre><span></span>set old_passwords = 0;
-</pre></div>
-
-
-</li>
-<li>
-<p>nginx重写规则</p>
-<div class="highlight"><pre><span></span><span class="x">if (-f </span><span class="p">$</span><span class="nv">request_filename</span><span class="x">/index.html)</span><span class="err">{</span><span class="x"></span>
-<span class="x">    rewrite (.*) </span><span class="p">$</span><span class="x">1/index.html break;</span>
-<span class="x">}</span>
-<span class="x">if (-f </span><span class="p">$</span><span class="nv">request_filename</span><span class="x">/index.php)</span><span class="err">{</span><span class="x"></span>
-<span class="x">    rewrite (.*) </span><span class="p">$</span><span class="x">1/index.php;</span>
-<span class="x">}</span>
-<span class="x">if (!-f </span><span class="p">$</span><span class="nv">request_filename</span><span class="x">)</span><span class="err">{</span><span class="x"></span>
-<span class="x">    rewrite (.*) /index.php;</span>
-<span class="x">}</span>
-</pre></div>
-
-
-</li>
-</ul>
-<p>这样访问目录时就会自动访问下面的index.php了。</p></div>
-        <hr />
-    </div>
-		
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../yun-wei/2016-03-22-18-26.html"><h2>sublime插件安装</h2></a>
-        <div class= "well small"> 二 22 三月 2016
-
-by <a class="url fn" href="../author/hir0c.html">Hir0C</a>
- 
-
-
- </div>
-        <div class="summary"><p><em>使用Package Control组件，在sublime3下安装插件，按照网上方法会出现urllib2模块找不到的报错，但是之前并没出现过错误，查看了下之前是使用的urllib，在此记录下。</em></p>
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>sublime插件安装</h2>
+                </div>
+                <p class="meta"><small><span><a href="../author/hir0c/">Hir0C</a> - </span><span>二 22 三月 2016</span> - <span class="tags"><a href="/tag/编辑器/">编辑器</a></span></small></p>
+                <div class="entry-content">
+                    <p><em>使用Package Control组件，在sublime3下安装插件，按照网上方法会出现urllib2模块找不到的报错，但是之前并没出现过错误，查看了下之前是使用的urllib，在此记录下。</em></p>
 <h2>简单说下导入步骤：</h2>
 <h3>1. `ctrl + ``键，呼出命令行，键入命令:</h3>
-<div class="highlight"><pre><span></span>    <span class="kn">import</span> <span class="nn">urllib.request</span><span class="o">,</span><span class="nn">os</span><span class="p">;</span> <span class="n">pf</span> <span class="o">=</span> <span class="s1">&#39;Package Control.sublime-package&#39;</span><span class="p">;</span> <span class="n">ipp</span> <span class="o">=</span> <span class="n">sublime</span><span class="o">.</span><span class="n">installed_packages_path</span><span class="p">();</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">install_opener</span><span class="p">(</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">build_opener</span><span class="p">(</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">ProxyHandler</span><span class="p">())</span> <span class="p">);</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ipp</span><span class="p">,</span> <span class="n">pf</span><span class="p">),</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span> <span class="s1">&#39;http://sublime.wbond.net/&#39;</span> <span class="o">+</span> <span class="n">pf</span><span class="o">.</span><span class="n">replace ...</span></pre></div> <a class="btn btn-info xsmall" href="../yun-wei/2016-03-22-18-26.html">read more</a></div>
-    </div>	
-				
+<div class="highlight"><pre><span></span>    <span class="kn">import</span> <span class="nn">urllib.request</span><span class="o">,</span><span class="nn">os</span><span class="p">;</span> <span class="n">pf</span> <span class="o">=</span> <span class="s1">&#39;Package Control.sublime-package&#39;</span><span class="p">;</span> <span class="n">ipp</span> <span class="o">=</span> <span class="n">sublime</span><span class="o">.</span><span class="n">installed_packages_path</span><span class="p">();</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">install_opener</span><span class="p">(</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">build_opener</span><span class="p">(</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">ProxyHandler</span><span class="p">())</span> <span class="p">);</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ipp</span><span class="p">,</span> <span class="n">pf</span><span class="p">),</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span> <span class="s1">&#39;http://sublime.wbond.net/&#39;</span> <span class="o">+</span> <span class="n">pf</span><span class="o">.</span><span class="n">replace ...</span></pre></div>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                        <a class="btn btn-small disabled" href="../yun-wei/2016-03-22-18-26.html#disqus_thread"></a>
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="../yun-wei/2016-03-22-18-26.html" rel="bookmark" title="Permalink to sublime插件安装">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
 
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../yun-wei/2016-03-22-18-15.html"><h2>VIM插件安装</h2></a>
-        <div class= "well small"> 二 22 三月 2016
-
-by <a class="url fn" href="../author/hir0c.html">Hir0C</a>
- 
-
-
- </div>
-        <div class="summary"><h2>vim ide 基本配置</h2>
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>VIM插件安装</h2>
+                </div>
+                <p class="meta"><small><span><a href="../author/hir0c/">Hir0C</a> - </span><span>二 22 三月 2016</span> - <span class="tags"><a href="/tag/编辑器/">编辑器</a></span></small></p>
+                <div class="entry-content">
+                    <h2>vim ide 基本配置</h2>
 <h3>一、安装VIM</h3>
 <p>只是记录下vim的编译选项</p>
 <blockquote>
@@ -185,25 +102,28 @@ chmod +x /usr/share/vim/vimfiles/plugin/vjde/readtags
 
 </li>
 </ul>
-<p>使用官网的方法就可以，自己编译安装的vim就解压到 <code>/usr/local ...</code></p> <a class="btn btn-info xsmall" href="../yun-wei/2016-03-22-18-15.html">read more</a></div>
-    </div>	
-				
+<p>使用官网的方法就可以，自己编译安装的vim就解压到 <code>/usr/local ...</code></p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                        <a class="btn btn-small disabled" href="../yun-wei/2016-03-22-18-15.html#disqus_thread"></a>
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="../yun-wei/2016-03-22-18-15.html" rel="bookmark" title="Permalink to VIM插件安装">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
 
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../yun-wei/2016-03-22-18-09.html"><h2>storm 基本安装</h2></a>
-        <div class= "well small"> 二 22 三月 2016
-
-by <a class="url fn" href="../author/hir0c.html">Hir0C</a>
- 
-
-
- </div>
-        <div class="summary"><h3>storm安装步骤:</h3>
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>storm 基本安装</h2>
+                </div>
+                <p class="meta"><small><span><a href="../author/hir0c/">Hir0C</a> - </span><span>二 22 三月 2016</span> - <span class="tags"><a href="/tag/storm/">storm</a></span></small></p>
+                <div class="entry-content">
+                    <h3>storm安装步骤:</h3>
 <h4>一、安装zookeeper</h4>
 <ol>
 <li>
@@ -230,25 +150,28 @@ hostname3:2888:3888
 <ol>
 <li>直接上最新版本zeromq-4.0.3</li>
 </ol>
-<p>http://download.zeromq.org/zeromq-4.0.3.tar ...</p> <a class="btn btn-info xsmall" href="../yun-wei/2016-03-22-18-09.html">read more</a></div>
-    </div>	
-				
+<p>http://download.zeromq.org/zeromq-4.0.3.tar ...</p>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                        <a class="btn btn-small disabled" href="../yun-wei/2016-03-22-18-09.html#disqus_thread"></a>
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="../yun-wei/2016-03-22-18-09.html" rel="bookmark" title="Permalink to storm 基本安装">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
 
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../yun-wei/2016-03-22-16-56.html"><h2>Zsh安装配置</h2></a>
-        <div class= "well small"> 二 22 三月 2016
-
-by <a class="url fn" href="../author/hir0c.html">Hir0C</a>
- 
-
-
- </div>
-        <div class="summary"><h2>zsh是个好东西，关键是能装逼</h2>
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>Zsh安装配置</h2>
+                </div>
+                <p class="meta"><small><span><a href="../author/hir0c/">Hir0C</a> - </span><span>二 22 三月 2016</span> - <span class="tags"><a href="/tag/bash/">bash</a>, <a href="/tag/编辑器/">编辑器</a></span></small></p>
+                <div class="entry-content">
+                    <h2>zsh是个好东西，关键是能装逼</h2>
 <h3>一、安装zsh</h3>
 <p>略</p>
 <h4>二、切换用户使用shell</h4>
@@ -271,25 +194,28 @@ by <a class="url fn" href="../author/hir0c.html">Hir0C</a>
 
 <h4>四、安装python2.7.x</h4>
 <p>老三步</p>
-<div class="highlight"><pre><span></span>    ./configure --prefix=/usr/local ...</pre></div> <a class="btn btn-info xsmall" href="../yun-wei/2016-03-22-16-56.html">read more</a></div>
-    </div>	
-				
+<div class="highlight"><pre><span></span>    ./configure --prefix=/usr/local ...</pre></div>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                        <a class="btn btn-small disabled" href="../yun-wei/2016-03-22-16-56.html#disqus_thread"></a>
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="../yun-wei/2016-03-22-16-56.html" rel="bookmark" title="Permalink to Zsh安装配置">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
 
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../yun-wei/2016-03-22-16-12.html"><h2>vsftpd 虚拟用户配置</h2></a>
-        <div class= "well small"> 二 22 三月 2016
-
-by <a class="url fn" href="../author/hir0c.html">Hir0C</a>
- 
-
-
- </div>
-        <div class="summary"><h3>简介</h3>
+        <li><hr /></li>
+        <li>
+            <div>
+                <div class="header">
+                    <h2>vsftpd 虚拟用户配置</h2>
+                </div>
+                <p class="meta"><small><span><a href="../author/hir0c/">Hir0C</a> - </span><span>二 22 三月 2016</span> - <span class="tags"><a href="/tag/运维/">运维</a>, <a href="/tag/vsftpd/">vsftpd</a></span></small></p>
+                <div class="entry-content">
+                    <h3>简介</h3>
 <p>ftp 虚拟用户配置</p>
 <h3>配置</h3>
 <ol>
@@ -319,67 +245,64 @@ account sufficient /lib64/security/pam_userdb.so db=vftpusers
 <li>
 <p>修改ftp配置(使用主动模式)</p>
 <div class="highlight"><pre><span></span>port_enable=YES
-write_enable ...</pre></div></li></ol> <a class="btn btn-info xsmall" href="../yun-wei/2016-03-22-16-12.html">read more</a></div>
-    </div>	
-				
-<div class="pagination">
-<ul>
-    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
+write_enable ...</pre></div></li></ol>
+                </div><!-- /.entry-content -->
+                <div class="row">
+                    <div class="span4">
+                        <a class="btn btn-small disabled" href="../yun-wei/2016-03-22-16-12.html#disqus_thread"></a>
+                    </div>
+                    <div class="span1 offset3">
+                        <a class="btn btn-small" href="../yun-wei/2016-03-22-16-12.html" rel="bookmark" title="Permalink to vsftpd 虚拟用户配置">Mehr</a>
+                    </div>
+                </div>
+            </div>
+        </li>
 
-    <li class="active"><a href="../author/hir0c.html">1</a></li>
+        <li><hr /></li>
+</ul><!-- /#posts-list -->
 
-    <li class="next disabled"><a href="#">&rarr; Next</a></li>
-
-</ul>
+<div class="pagination pagination-centered">
+    <ul>
+        <li class="active"><a href="#">1</a></li>
+    </ul>
 </div>
- 
-  
+</div><!-- /#content -->
         </div>
-        
-        <div class="span3">
-
-            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+        <div class="span3 offset1">
+          <div class="well">
             <ul class="nav nav-list">
-                <li class="nav-header"> 
-                Site
-                </li>
-            
-                <li><a href="../archives.html">Archives</a>
-                <li><a href="../tags.html">Tags</a>
-
-
-
-
+              <li class="nav-header">Blog</li>
+              <li ><a href="..">Index</a></li>
+              <li ><a href="../tags/">Tags</a></li>
+              <li ><a href="../archives/">Archiv</a></li>
             </ul>
-            </div>
+          </div><!-- /#menu -->
+        </div>
+      </div>
 
+      <hr />
 
-            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
-            <ul class="nav nav-list">
-                <li class="nav-header"> 
-                Categories
-                </li>
-                
-                <li><a href="../yun-wei/index.html">运维</a></li>
-                   
-            </ul>
-            </div>
+      <div class="row">
+        <div class="span12">
+          <div id="about">
+            <p>Proudly powered by <a href="http://twitter.github.com/bootstrap/">bootstrap</a>, <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a>, <a href="http://python.org">python</a> and <a href="http://www.julo.ch/about/">Alex</a>!</p>
+          </div><!-- /#about -->
+        </div><!-- /#contentinfo -->
+      </div>
+    </div>
 
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'HiroC'; // required: replace example with your forum shortname
 
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
 
-
-
-        </div>  
-    </div>     </div> 
-<footer>
-<br />
-<p><a href="..">Hir0C blog</a> &copy; Hir0C 2016</p>
-</footer>
-
-</div> <!-- /container -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="../theme/bootstrap-collapse.js"></script>
-<a href="http://github.com/hir0C"><img style="position: absolute; top: 40px; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png" alt="Fork me on GitHub" /></a>
- 
-</body>
+  </body>
 </html>
