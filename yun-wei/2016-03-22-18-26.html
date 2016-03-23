@@ -69,13 +69,13 @@ Filed under <a href="../yun-wei/index.html">运维</a>
       
       <div class="span8">
 	<p><em>使用Package Control组件，在sublime3下安装插件，按照网上方法会出现urllib2模块找不到的报错，但是之前并没出现过错误，查看了下之前是使用的urllib，在此记录下。</em></p>
-<h2>简单说下导入步骤：</h2>
-<h3>1. `ctrl + ``键，呼出命令行，键入命令:</h3>
+<h3>简单说下导入步骤：</h3>
+<h4>1. `ctrl + ``键，呼出命令行，键入命令:</h4>
 <div class="highlight"><pre><span></span>    <span class="kn">import</span> <span class="nn">urllib.request</span><span class="o">,</span><span class="nn">os</span><span class="p">;</span> <span class="n">pf</span> <span class="o">=</span> <span class="s1">&#39;Package Control.sublime-package&#39;</span><span class="p">;</span> <span class="n">ipp</span> <span class="o">=</span> <span class="n">sublime</span><span class="o">.</span><span class="n">installed_packages_path</span><span class="p">();</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">install_opener</span><span class="p">(</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">build_opener</span><span class="p">(</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">ProxyHandler</span><span class="p">())</span> <span class="p">);</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ipp</span><span class="p">,</span> <span class="n">pf</span><span class="p">),</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span> <span class="s1">&#39;http://sublime.wbond.net/&#39;</span> <span class="o">+</span> <span class="n">pf</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="s1">&#39;%20&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 </pre></div>
 
 
-<h3>2. <code>ctrl+shift+p</code> 呼出下拉对话框，输入<code>install</code>会调出插件安装界面，输入要安装插件的名字就可以自动安装了。</h3>
+<h4>2. <code>ctrl+shift+p</code> 呼出下拉对话框，输入<code>install</code>会调出插件安装界面，输入要安装插件的名字就可以自动安装了。</h4>
 	<hr />
       </div>
     </div>

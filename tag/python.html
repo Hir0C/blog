@@ -73,26 +73,20 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 	<p><em>先说下选pip而不是eazy_install的理由，pip安装可维护性好，安装卸载都是一条命令搞定，而且还支持多个参数选项，eazy_install卸载只能手动，功能很单一。</em></p>
 <p>在内网机器使用pip安装很不方便，所以准备在内网弄个源server，就用Fabric安装做例子。</p>
 <p>下面说下内网源服务搭建:</p>
-<h2>一、web server</h2>
-<div class="highlight"><pre><span></span>web server可以用python自己的pypiserve，也可以用nginx或者apache，我这里就直接使用nginx。
+<h4>一、web server</h4>
+<p>web server可以用python自己的pypiserve，也可以用nginx或者apache，我这里就直接使用nginx。</p>
+<h4>二、获取安装文件</h4>
+<div class="highlight"><pre><span></span>pip install --no-install Fabric -d /var/www/pypydir
 </pre></div>
 
 
-<h2>二、获取安装文件</h2>
-<div class="highlight"><pre><span></span>&gt; pip install –no-install Fabric -d /var/www/pypydir
-通过命令直接获取，不过前提是你这台机器也要能访问外网。    
+<p>通过命令直接获取，不过前提是你这台机器也要能访问外网。  <br />
 或者
 直接去页面下载改模块，手动放到目标目录下(需要创建以模块名命名的目录，再把压缩包放到目录中)
-下载地址为:https://pypi.python.org/pypi/
-</pre></div>
-
-
-<h2>三、安装</h2>
-<div class="highlight"><pre><span></span>使用命令`pip install Fabric -i http://ip:port` 安装。
-
-
-    pip install numpy --proxy=http://xxxx:3128 -i http://pypi.douban.com/simple
-</pre></div> 
+下载地址为:https://pypi.python.org/pypi/</p>
+<h4>三、安装</h4>
+<p>使用命令<code>pip install Fabric -i http://ip:port</code> 安装。
+    pip install numpy --proxy=http://xxxx:3128 -i http://pypi.douban.com/simple</p> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-23-12-36.html">
           <i class="icon-comment"></i> Comment </a>
 	<hr />

@@ -176,22 +176,19 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 	<p><em>先说下选pip而不是eazy_install的理由，pip安装可维护性好，安装卸载都是一条命令搞定，而且还支持多个参数选项，eazy_install卸载只能手动，功能很单一。</em></p>
 <p>在内网机器使用pip安装很不方便，所以准备在内网弄个源server，就用Fabric安装做例子。</p>
 <p>下面说下内网源服务搭建:</p>
-<h2>一、web server</h2>
-<div class="highlight"><pre><span></span>web server可以用python自己的pypiserve，也可以用nginx或者apache，我这里就直接使用nginx。
+<h4>一、web server</h4>
+<p>web server可以用python自己的pypiserve，也可以用nginx或者apache，我这里就直接使用nginx。</p>
+<h4>二、获取安装文件</h4>
+<div class="highlight"><pre><span></span>pip install --no-install Fabric -d /var/www/pypydir
 </pre></div>
 
 
-<h2>二、获取安装文件</h2>
-<div class="highlight"><pre><span></span>&gt; pip install –no-install Fabric -d /var/www/pypydir
-通过命令直接获取，不过前提是你这台机器也要能访问外网。    
+<p>通过命令直接获取，不过前提是你这台机器也要能访问外网。  <br />
 或者
 直接去页面下载改模块，手动放到目标目录下(需要创建以模块名命名的目录，再把压缩包放到目录中)
-下载地址为:https://pypi.python.org/pypi/
-</pre></div>
-
-
-<h2>三、安装</h2>
-<div class="highlight"><pre><span></span>使用命令`pip install Fabric -i http://ip:port ...</pre></div> 
+下载地址为:https://pypi.python.org/pypi/</p>
+<h4>三、安装</h4>
+<p>使用命令<code>pip install Fabric -i http://ip:port ...</code></p> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-23-12-36.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
@@ -225,12 +222,12 @@ Filed under <a href="../yun-wei/index.html">运维</a>
       </div>
       <div class="summary span8">
 	<p><em>内网搞了了bolg，采用了nginx+php+mysql+wordpress。整个过程并不复杂，记录下遇到的问题。</em></p>
-<h3>1. 安装nginx</h3>
+<h4>1. 安装nginx</h4>
 <div class="highlight"><pre><span></span>    ./configure --prefix=/usr/local/nginx --with-zlib --with-pcre=/opt/ftp/http-server/pcre-8.34 --with-http_perl_module --with-http_stub_status_module --with-http_image_filter_module --with-http_gunzip_module --with-http_gzip_static_module
 </pre></div>
 
 
-<h3>2. php</h3>
+<h4>2. php</h4>
 <div class="highlight"><pre><span></span>    ./configure --prefix=/usr/local/php &#39;--with-config-file-path=/usr/local/php-5.4.23/etc&#39; &#39;--enable-fpm&#39; &#39;--enable-pcntl&#39; &#39;--enable-shmop&#39; &#39;--enable-sysvsem&#39; &#39;--enable-inline-optimization&#39; &#39;--disable-rpath&#39; &#39;--enable-safe-mode&#39; &#39;--with-mysql=mysqlnd&#39; &#39;--with-mysqli ...</pre></div> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-22-18-34.html">
           <i class="icon-plus-sign"></i> Read More </a>
@@ -265,8 +262,8 @@ Filed under <a href="../yun-wei/index.html">运维</a>
       </div>
       <div class="summary span8">
 	<p><em>使用Package Control组件，在sublime3下安装插件，按照网上方法会出现urllib2模块找不到的报错，但是之前并没出现过错误，查看了下之前是使用的urllib，在此记录下。</em></p>
-<h2>简单说下导入步骤：</h2>
-<h3>1. `ctrl + ``键，呼出命令行，键入命令:</h3>
+<h3>简单说下导入步骤：</h3>
+<h4>1. `ctrl + ``键，呼出命令行，键入命令:</h4>
 <div class="highlight"><pre><span></span>    <span class="kn">import</span> <span class="nn">urllib.request</span><span class="o">,</span><span class="nn">os</span><span class="p">;</span> <span class="n">pf</span> <span class="o">=</span> <span class="s1">&#39;Package Control.sublime-package&#39;</span><span class="p">;</span> <span class="n">ipp</span> <span class="o">=</span> <span class="n">sublime</span><span class="o">.</span><span class="n">installed_packages_path</span><span class="p">();</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">install_opener</span><span class="p">(</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">build_opener</span><span class="p">(</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">ProxyHandler</span><span class="p">())</span> <span class="p">);</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ipp</span><span class="p">,</span> <span class="n">pf</span><span class="p">),</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span> <span class="s1">&#39;http://sublime.wbond.net/&#39;</span> <span class="o">+</span> <span class="n">pf</span><span class="o">.</span><span class="n">replace ...</span></pre></div> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-22-18-26.html">
           <i class="icon-plus-sign"></i> Read More </a>
@@ -300,8 +297,8 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="summary span8">
-	<h2>vim ide 基本配置</h2>
-<h3>一、安装VIM</h3>
+	<h3>vim ide 基本配置</h3>
+<h4>一、安装VIM</h4>
 <p>只是记录下vim的编译选项</p>
 <blockquote>
 <p>--with-features=huge 一定要加</p>
@@ -315,7 +312,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </pre></div>
 
 
-<h3>二、插件安装</h3>
+<h4>二、插件安装</h4>
 <ul>
 <li><a href="http://www.vim.org/scripts/script.php?script_id=1213">VJDE</a><div class="highlight"><pre><span></span>tar -xzf vjde.tgz -C /usr/share/vim/vimfiles 
 chmod +x /usr/share/vim/vimfiles/plugin/vjde/readtags
