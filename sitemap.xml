@@ -5,29 +5,36 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/</loc>
-<lastmod>2016-03-23T16:58:47-00:00</lastmod>
+<lastmod>2016-03-23T17:06:30-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/archives.html</loc>
-<lastmod>2016-03-23T16:58:47-00:00</lastmod>
+<lastmod>2016-03-23T17:06:30-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/tags.html</loc>
-<lastmod>2016-03-23T16:58:47-00:00</lastmod>
+<lastmod>2016-03-23T17:06:30-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/categories.html</loc>
-<lastmod>2016-03-23T16:58:47-00:00</lastmod>
+<lastmod>2016-03-23T17:06:30-00:00</lastmod>
 <changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>/yun-wei/2016-03-23-17-04.html</loc>
+<lastmod>2016-03-23T17:04:00+08:00</lastmod>
+<changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
@@ -110,7 +117,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/yun-wei/index.html</loc>
-<lastmod>2016-03-23T14:16:00+08:06</lastmod>
+<lastmod>2016-03-23T17:04:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -137,6 +144,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>/tag/mysql.html</loc>
+<lastmod>2016-03-23T14:16:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>/tag/vsftpd.html</loc>
 <lastmod>2016-03-22T16:25:00+08:06</lastmod>
 <changefreq>daily</changefreq>
@@ -158,8 +172,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>/tag/wordpress.html</loc>
-<lastmod>2016-03-22T18:34:00+08:06</lastmod>
+<loc>/tag/command.html</loc>
+<lastmod>2016-03-23T17:04:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -179,8 +193,15 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>/tag/mysql.html</loc>
-<lastmod>2016-03-23T14:16:00+08:06</lastmod>
+<loc>/tag/linux.html</loc>
+<lastmod>2016-03-23T17:04:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>/tag/wordpress.html</loc>
+<lastmod>2016-03-22T18:34:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -208,7 +229,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/author/hir0c.html</loc>
-<lastmod>2016-03-23T16:08:00+08:06</lastmod>
+<lastmod>2016-03-23T17:04:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
