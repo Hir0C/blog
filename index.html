@@ -103,9 +103,6 @@ git clone git@IP:gitolite-admin
 </li>
 <li>
 <p>使用yum安装http服务，在http.conf添加并修改启动用户为git:</p>
-</li>
-</ol>
-<blockquote>
 <p><VirtualHost *:80>
     ServerName IP
     DocumentRoot /var/www/gitweb
@@ -121,9 +118,10 @@ git clone git@IP:gitolite-admin
     CustomLog logs/gitweb-access_log common 
 </VirtualHost>
 <em>nginx的没搞出来，官方给的例子是apache的</em></p>
-</blockquote>
-<ol>
-<li>gitweb安装</li>
+</li>
+<li>
+<p>gitweb安装</p>
+</li>
 </ol>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> git/ <span class="p">;</span> make <span class="nv">GITWEB_PROJECTROOT</span><span class="o">=</span><span class="s2">&quot;/opt/git&quot;</span>  <span class="nv">prefix</span><span class="o">=</span>/usr gitweb <span class="p">;</span> cp -Rf gitweb /var/www/
 </pre></div>
