@@ -1,163 +1,189 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
+    <meta charset="utf-8">
+    <title>Hir0C blog - nginx</title>
+    <meta name="description" content="">
+    <meta name="author" content="Hir0C">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Hir0C blog - nginx</title>
-        <meta charset="utf-8" />
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="../theme/html5.js"></script>
+    <![endif]-->
 
+    <!-- Le styles -->
+    <link href="../theme/bootstrap.min.css" rel="stylesheet">
+    <link href="../theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="../theme/local.css" rel="stylesheet">
+    <link href="../theme/pygments.css" rel="stylesheet">
 
-        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
-        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
-
-        <link rel="stylesheet" type="text/css" href="../theme/gumby.css" />
-        <link rel="stylesheet" type="text/css" href="../theme/style.css" />
-        <link rel="stylesheet" type="text/css" href="../theme/pygment.css" />
-
-        <script src="../theme/js/libs/modernizr-2.6.2.min.js"></script>
-
-
-
+    <!-- So Firefox can bookmark->"abo this site" -->
 
 </head>
 
-<body id="index" class="home">
+<body>
 
-
+<div class="navbar">
+    <div class="navbar-inner">
     <div class="container">
 
-        <div class="row">
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
 
-          <header id="banner" class="body">
-                  <h1><a href="../">Hir0C blog <strong></strong></a></h1>
-          </header><!-- /#banner -->
+        <a class="brand" href="..">Hir0C blog</a>
 
-            <div id="navigation" class="navbar row">
-              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
-             
-              <ul class="columns">
-                <li><a href="../">Home</a></li>
+        <div class="nav-collapse">
+        <ul class="nav">
+            
+        </ul>
+        </div>
+        
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+        
+
+        
 
 
-              </ul>
-            </div>
+    <div class='article'>
+        <div class="content-title">
+            <a href="../yun-wei/2016-03-22-18-34.html"><h1>wordpress on nginx 搭建</h1></a>
+二 22 三月 2016
 
-<section id="content">
+by <a class="url fn" href="../author/hir0c.html">Hir0C</a>
+ 
 
 
-
-   <div class="row">
-
-
-        <div class="eleven columns">
-                 <ol id="post-list">
-                        <li><article class="hentry">
-                                <header> <h2 class="entry-title"><a href="../yun-wei/2016-03-22-18-34.html" rel="bookmark" title="Permalink to wordpress on nginx 搭建">wordpress on nginx 搭建</a></h2> </header>
-                                <footer class="post-info">
-                                    <abbr class="published" title="2016-03-22T18:34:00+08:00"> 二 22 三月 2016 </abbr>
-                                    <address class="vcard author">By 
-                                    <a class="url fn" href="../author/hir0c.html"> Hir0C</a>
-                                    </address>
-                                </footer><!-- /.post-info -->
-                                <div class="entry-content"> <p><em>内网搞了了bolg，采用了nginx+php+mysql+wordpress。整个过程并不复杂，记录下遇到的问题。</em></p>
+ 
+        </div>
+        
+        <div><p><em>内网搞了了bolg，采用了nginx+php+mysql+wordpress。整个过程并不复杂，记录下遇到的问题。</em></p>
 <h4>1. 安装nginx</h4>
 <div class="highlight"><pre><span></span>    ./configure --prefix=/usr/local/nginx --with-zlib --with-pcre=/opt/ftp/http-server/pcre-8.34 --with-http_perl_module --with-http_stub_status_module --with-http_image_filter_module --with-http_gunzip_module --with-http_gzip_static_module
 </pre></div>
 
 
 <h4>2. php</h4>
-<div class="highlight"><pre><span></span>    ./configure --prefix=/usr/local/php &#39;--with-config-file-path=/usr/local/php-5.4.23/etc&#39; &#39;--enable-fpm&#39; &#39;--enable-pcntl&#39; &#39;--enable-shmop&#39; &#39;--enable-sysvsem&#39; &#39;--enable-inline-optimization&#39; &#39;--disable-rpath&#39; &#39;--enable-safe-mode&#39; &#39;--with-mysql=mysqlnd&#39; &#39;--with-mysqli ...</pre></div> </div><!-- /.entry-content -->
-
-                                <div class="medium primary btn"><a href="../yun-wei/2016-03-22-18-34.html" rel="bookmark" title="Permalink to wordpress on nginx 搭建">Read more <i class="icon-arrow-right"></i></a></div>
-
+<div class="highlight"><pre><span></span>    ./configure --prefix=/usr/local/php &#39;--with-config-file-path=/usr/local/php-5.4.23/etc&#39; &#39;--enable-fpm&#39; &#39;--enable-pcntl&#39; &#39;--enable-shmop&#39; &#39;--enable-sysvsem&#39; &#39;--enable-inline-optimization&#39; &#39;--disable-rpath&#39; &#39;--enable-safe-mode&#39; &#39;--with-mysql=mysqlnd&#39; &#39;--with-mysqli=mysqlnd&#39; &#39;--with-pdo-mysql=mysqlnd&#39; &#39;--with-libxml-dir=/usr/local&#39; &#39;--enable-xml=/usr/local&#39; &#39;--with-openssl&#39; --with-zlib &#39;--enable-bcmath&#39; &#39;--with-bz2&#39; &#39;--enable-zip&#39; &#39;--enable-exif&#39; &#39;--with-gd&#39; &#39;--enable-gd-native-ttf&#39; &#39;--with-freetype-dir=/usr/local&#39; &#39;--with-jpeg-dir=/usr/local&#39; &#39;--with-png-dir&#39; &#39;--with-mhash&#39; &#39;--with-mcrypt=/usr/local&#39; &#39;--enable-mbstring&#39; &#39;--enable-mbregex&#39; &#39;--with-iconv-dir=/usr/local&#39; &#39;--with-curl&#39; &#39;--with-curlwrappers&#39; &#39;--enable-ftp&#39; &#39;--enable-sockets&#39;
+</pre></div>
 
 
-                                <div class="row tag-row">
-                                        <span>Tagged as : </span>
-                                            <a class="danger label" href="../tag/nginx.html">nginx</a>
-                                            <a class="danger label" href="../tag/wordpress.html">wordpress</a>
-                                </div>
+<h4>3. mysql</h4>
+<div class="highlight"><pre><span></span>    cmake -DCMAKE_INSTALL_PREFIX=/opt/mysql/ -DSYSCONFDIR=/etc/my.cnf -DMYSQL_UNIX_ADDR=/opt/mysql/tmp/mysqld.sock -DMYSQL_USER=mysql -DDEFAULT_CHARSET=all -DDEFAULT_CHARSET=utf8 -DDEFAULT_COLLATION=utf8_general_ci -DWITH_INNOBASE_STORAGE_ENGINE=1 -DWITH_ZLIB=/usr/local/lib/ -DWITH_READLINE=1 -DWITH_DATADIR=/opt/mysql/data/ -DWITH_SSL=bundled -DENABLED_LOCAL_INFILE=1-DWITH_READLINE=1 -DWITH_DEBUG=0
+
+    make &amp;&amp; make install
+</pre></div>
 
 
+<h4>4. wordpress安装</h4>
+<p>略</p>
+<h4>5. 配置</h4>
+<p>这次遇到麻烦的地方主要有三点:</p>
+<ul>
+<li>
+<p>mysql初始化</p>
+<div class="highlight"><pre><span></span>scripts/mysql_install_db --user mysql --basedir= --datadir=
+</pre></div>
 
-                        </article></li>
-                </ol><!-- /#posts-list -->
 
-        </div><!-- /.eleven.columns -->
-        
-<div class="three columns">
+</li>
+<li>
+<p>mysql设置密码需要先执行</p>
+<div class="highlight"><pre><span></span>set old_passwords = 0;
+</pre></div>
 
-<h4>Pages</h4>
 
- <ul>
-  </ul>
+</li>
+<li>
+<p>nginx重写规则</p>
+<div class="highlight"><pre><span></span><span class="x">if (-f </span><span class="p">$</span><span class="nv">request_filename</span><span class="x">/index.html)</span><span class="err">{</span><span class="x"></span>
+<span class="x">    rewrite (.*) </span><span class="p">$</span><span class="x">1/index.html break;</span>
+<span class="x">}</span>
+<span class="x">if (-f </span><span class="p">$</span><span class="nv">request_filename</span><span class="x">/index.php)</span><span class="err">{</span><span class="x"></span>
+<span class="x">    rewrite (.*) </span><span class="p">$</span><span class="x">1/index.php;</span>
+<span class="x">}</span>
+<span class="x">if (!-f </span><span class="p">$</span><span class="nv">request_filename</span><span class="x">)</span><span class="err">{</span><span class="x"></span>
+<span class="x">    rewrite (.*) /index.php;</span>
+<span class="x">}</span>
+</pre></div>
 
-<h4>Categories</h4>
-<ul class="blank">
-		<li><a href="../ri-chang/index.html">日常</a></li>
-		<li><a href="../yun-wei/index.html">运维</a></li>
+
+</li>
 </ul>
-
-
-<h4>Tags</h4>
-	<ul class="blank">
-</ul>
-
-
-
-</div> </div><!-- /.row -->
-
-<p class="paginator">
-    Page 1 / 1
-</p>
-</section><!-- /#content -->
-
-       </div><!-- /.row -->
-    </div><!-- /.container -->
-
-
-       <div class="container.nopad bg">
-
-    
-        <footer id="credits" class="row">
-          <div class="seven columns left-center">
-
-                   <address id="about" class="vcard body">
-                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
-                    which takes great advantage of <a href="http://python.org">Python</a>.
-                    <br />
-                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
-                    </address>
-          </div>
-
-
-          <div class="seven columns">
-            <div class="row">
-              <ul class="socbtns">
-
-                <li><div class="btn primary"><a href="http://github.com/hir0C" target="_blank">Github</a></div></li>
-
-
-
-
-              </ul>
-            </div>
-          </div>
-        </footer>
-
+<p>这样访问目录时就会自动访问下面的index.php了。</p></div>
+        <hr />
     </div>
+		
+<div class="pagination">
+<ul>
+    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
+
+    <li class="active"><a href="../tag/nginx.html">1</a></li>
+
+    <li class="next disabled"><a href="#">&rarr; Next</a></li>
+
+</ul>
+</div>
+ 
+  
+        </div>
+        
+        <div class="span3">
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Site
+                </li>
+            
+                <li><a href="../archives.html">Archives</a>
+                <li><a href="../tags.html">Tags</a>
 
 
-<script type="text/javascript">
-    var disqus_shortname = 'HiroC';
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
-  <script src="../theme/js/libs/jquery-1.9.1.min.js"></script>
-  <script src="../theme/js/libs/gumby.min.js"></script>
-  <script src="../theme/js/plugins.js"></script>
+
+
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Categories
+                </li>
+                
+                <li><a href="../ri-chang/index.html">日常</a></li>
+                <li><a href="../yun-wei/index.html">运维</a></li>
+                   
+            </ul>
+            </div>
+
+
+
+
+
+        </div>  
+    </div>     </div> 
+<footer>
+<br />
+<p><a href="..">Hir0C blog</a> &copy; Hir0C 2016</p>
+</footer>
+
+</div> <!-- /container -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="../theme/bootstrap-collapse.js"></script>
+<a href="http://github.com/hir0C"><img style="position: absolute; top: 40px; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png" alt="Fork me on GitHub" /></a>
+ 
 </body>
 </html>
