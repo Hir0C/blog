@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+
+    <meta charset="utf-8">
+    <title>Hir0C blog <small>kafka</small></title>
+    <meta name="description" content="">
+    <meta name="author" content="Hir0C">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="../theme/html5.js"></script>
+    <![endif]-->
+
+
+    <!-- Le styles -->
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.no-icons.min.css" rel="stylesheet">
+    <link href="../theme/local.css" rel="stylesheet">
+    <link href="../theme/pygments.css" rel="stylesheet">
+    <link href="../theme/font-awesome.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Gudea:400,400italic|Alegreya+SC' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+<header class="blog-header">
+  <div class="container">
+    <div class="row-fluid">
+      <div class="span9">
+	<a href=".." class="brand">Hir0C blog</a>
+      </div>
+
+      <div class="span3" id="blog-nav">
+	<ul class="nav nav-pills pull-right">
+	    <li >
+	      <a href="../ri-chang/index.html ">日常</a>
+	    <li >
+	      <a href="../yun-wei/index.html ">运维</a>
+	</ul>
+      </div>
+    </div> <!-- End of fluid row-->
+  </div>   <!-- End of Container-->
+</header>
+    
+<div class="container">
+    <div class="content">
+    <div class="row-fluid">
+
+        <div class="span10">
+        
+
+        
+
+    <div class='row-fluid''>
+        <div class="article-title span9">
+            <a href="../yun-wei/2016-03-23-17-24.html"><h1>KAFKA升级0.8.1</h1></a>
+        </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>三 23 三月 2016 </p>
+
+<p style="text-align: left;">
+Filed under <a href="../yun-wei/index.html">运维</a>
+</p>
+<p style="text-align: left;">
+ 
+    Tags <a href="../tag/kafka.html">kafka</a> </p>
+<p>
+</p>
+      </div>
+      <div class="article-content span8">
+	<p><strong>kafka 0.8.0 升级 0.8.1 流程</strong></p>
+<p>升级很简单,引用官方的话:
+        Upgrading from 0.8.0 to 0.8.1
+        0.8.1 is fully compatible with 0.8. The upgrade can be done one broker at a time by simply bringing it down, updating the code, and
+        restarting it.</p>
+<ul>
+<li>KAFKA启动命令:</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="nv">JMX_PORT</span><span class="o">=</span><span class="m">9997</span> /opt/kafka_2.9.2-0.8.1/bin/kafka-server-start.sh /opt/kafka_2.9.2-0.8.1/config/server.properties &gt;/dev/null 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
+</pre></div>
+
+
+<ul>
+<li>KAKFA查询topic:</li>
+</ul>
+<div class="highlight"><pre><span></span>./kafka-topics.sh --list --zookeeper 1.1.1.1/kafka-0.8.1
+</pre></div>
+
+
+<ul>
+<li>KAFKA查询topic详细信息:</li>
+</ul>
+<div class="highlight"><pre><span></span>./kafka-topics.sh --describe --zookeeper 1.1.1.1/kafka-0.8.1 --topic countinfo
+</pre></div>
+
+
+<ul>
+<li>KAFKA leader balance:</li>
+</ul>
+<div class="highlight"><pre><span></span>/opt/kafka_2.9.2-0.8.1/bin/kafka-preferred-replica-election.sh --zookeeper 1.1.1.1:2181/kafka-0.8.1
+</pre></div>
+
+
+<ul>
+<li>KAFKA手动指定zookeeper目录,设置自动leader balance:
+server.properties:<div class="highlight"><pre><span></span>1.1.1.1:2181,2.2.2.2:2181,3.3.3.3:2181/kafka-0.8.1
+auto.leader.rebalance.enable=true
+controlled.shutdown.enable=true
+</pre></div>
+
+
+</li>
+</ul> 
+	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-23-17-24.html">
+          <i class="icon-comment"></i> Comment </a>
+	<hr />
+      </div>
+      
+    </div>
+    
+<div class="pagination">
+<ul>
+    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
+
+    <li class="active"><a href="../tag/kafka.html">1</a></li>
+
+    <li class="next disabled"><a href="#">&rarr; Next</a></li>
+
+</ul>
+</div>
+
+ 
+  
+        </div>
+        
+        
+    </div>     </div> </div>
+
+<!--footer-->
+<div class="container">
+  <div class="well" style="background-color: #E9EFF6">
+    <div id="blog-footer">
+      <div class="row-fluid">
+	<div class="site-nav span2" align="center">
+          <ul class="nav nav-list" id="site-links">
+            <li class="nav-header"> 
+              Site
+            </li>
+            <li><a href=".."><i class="icon-home" style="color: #1f334b">
+                </i>Home</a></li>
+            <li><a href="../archives.html"><i class="icon-list" style="color: #1f334b">
+                </i>Archives</a></li>
+	    <li><a href="../tags.html"><i class="icon-tags" style="color: #1f334b">
+                </i>Tags</a></li>
+	    
+	  </ul>
+
+        </div>
+
+      </div> <!--end of fluid row-->
+    </div> <!--end of blog-footer-->
+    <hr />
+    <p align="center"><a href="..">Hir0C blog</a>
+      &copy; Hir0C
+    Powered by <a href="https://github.com/getpelican/pelican">Pelican</a> and
+        <a href="https://twitter.github.com/bootstrap">Twitter Bootstrap</a>. 
+        Icons by <a href="https://fortawesome.github.com/Font-Awesome">Font Awesome</a> and 
+        <a href="https://gregoryloucas.github.com/Font-Awesome-More">Font Awesome More</a></p>
+
+  </div> <!--end of well -->
+</div> <!--end of container -->
+
+<!--/footer-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+
+
+
+</body>
+</html>

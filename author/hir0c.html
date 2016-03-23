@@ -53,8 +53,83 @@
 
     <div class='row-fluid''>
         <div class="article-title span9">
-            <a href="../yun-wei/2016-03-23-17-06.html"><h1>Gitolite+gitweb 源码搭建及迁移</h1></a>
+            <a href="../yun-wei/2016-03-23-17-24.html"><h1>KAFKA升级0.8.1</h1></a>
         </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>三 23 三月 2016 </p>
+
+<p style="text-align: left;">
+Filed under <a href="../yun-wei/index.html">运维</a>
+</p>
+<p style="text-align: left;">
+ 
+    Tags <a href="../tag/kafka.html">kafka</a> </p>
+<p>
+</p>
+      </div>
+      <div class="article-content span8">
+	<p><strong>kafka 0.8.0 升级 0.8.1 流程</strong></p>
+<p>升级很简单,引用官方的话:
+        Upgrading from 0.8.0 to 0.8.1
+        0.8.1 is fully compatible with 0.8. The upgrade can be done one broker at a time by simply bringing it down, updating the code, and
+        restarting it.</p>
+<ul>
+<li>KAFKA启动命令:</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="nv">JMX_PORT</span><span class="o">=</span><span class="m">9997</span> /opt/kafka_2.9.2-0.8.1/bin/kafka-server-start.sh /opt/kafka_2.9.2-0.8.1/config/server.properties &gt;/dev/null 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
+</pre></div>
+
+
+<ul>
+<li>KAKFA查询topic:</li>
+</ul>
+<div class="highlight"><pre><span></span>./kafka-topics.sh --list --zookeeper 1.1.1.1/kafka-0.8.1
+</pre></div>
+
+
+<ul>
+<li>KAFKA查询topic详细信息:</li>
+</ul>
+<div class="highlight"><pre><span></span>./kafka-topics.sh --describe --zookeeper 1.1.1.1/kafka-0.8.1 --topic countinfo
+</pre></div>
+
+
+<ul>
+<li>KAFKA leader balance:</li>
+</ul>
+<div class="highlight"><pre><span></span>/opt/kafka_2.9.2-0.8.1/bin/kafka-preferred-replica-election.sh --zookeeper 1.1.1.1:2181/kafka-0.8.1
+</pre></div>
+
+
+<ul>
+<li>KAFKA手动指定zookeeper目录,设置自动leader balance:
+server.properties:<div class="highlight"><pre><span></span>1.1.1.1:2181,2.2.2.2:2181,3.3.3.3:2181/kafka-0.8.1
+auto.leader.rebalance.enable=true
+controlled.shutdown.enable=true
+</pre></div>
+
+
+</li>
+</ul> 
+	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-23-17-24.html">
+          <i class="icon-comment"></i> Comment </a>
+	<hr />
+      </div>
+      
+    </div>
+    
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="../yun-wei/2016-03-23-17-06.html"><h1>Gitolite+gitweb 源码搭建及迁移</h1></a>
+      </div>
     </div>
     <div class="row-fluid">
       <div class="span2">
@@ -69,7 +144,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <p>
 </p>
       </div>
-      <div class="article-content span8">
+      <div class="summary span8">
 	<h3>推荐使用gitlab</h3>
 <h4>一、软件下载</h4>
 <p>gitolite下载：<code>git clone git://github.com/sitaramc/gitolite</code>
@@ -91,84 +166,14 @@ ssh-keygen
 <ol>
 <li>安装并初始化gitolite</li>
 </ol>
-<div class="highlight"><pre><span></span>gitolite/install -to /usr/local/bin/
-gitolite setup -pk <span class="nv">$HOME</span>/scott.pub <span class="o">(</span>key要以隐藏文件形式指定，默认初始化在家目录下<span class="o">)</span>
-git clone git@IP:gitolite-admin
-</pre></div>
-
-
-<ol>
-<li>
-<p>gitweb安装配置</p>
-</li>
-<li>
-<p>使用yum安装http服务，在http.conf添加并修改启动用户为git:</p>
-<div class="highlight"><pre><span></span><span class="nt">&lt;VirtualHost</span> <span class="err">*:80</span><span class="nt">&gt;</span>
-    ServerName IP
-    DocumentRoot /var/www/gitweb
-    <span class="nt">&lt;Directory</span> <span class="err">/var/www/gitweb</span><span class="nt">&gt;</span>
-        Options ExecCGI +FollowSymLinks +SymLinksIfOwnerMatch
-        AllowOverride All
-        order allow,deny
-        Allow from all
-        AddHandler cgi-script cgi
-        DirectoryIndex gitweb.cgi
-    <span class="nt">&lt;/Directory&gt;</span>
-    ErrorLog logs/gitweb-error_log
-    CustomLog logs/gitweb-access_log common 
-<span class="nt">&lt;/VirtualHost&gt;</span>
-</pre></div>
-
-
-</li>
-</ol>
-<p><em>nginx的没搞出来，官方给的例子是apache的</em></p>
-<ol>
-<li>gitweb安装</li>
-</ol>
-<div class="highlight"><pre><span></span><span class="nb">cd</span> git/ <span class="p">;</span> make <span class="nv">GITWEB_PROJECTROOT</span><span class="o">=</span><span class="s2">&quot;/opt/git&quot;</span>  <span class="nv">prefix</span><span class="o">=</span>/usr gitweb <span class="p">;</span> cp -Rf gitweb /var/www/
-</pre></div>
-
-
-<ol>
-<li>修改cgi文件git命令地址，lists等，前端样式定制(待研究)</li>
-</ol>
-<p><em>至此全部搭建完毕！</em>  </p>
-<h4>四、迁移</h4>
-<ol>
-<li>进入gitolite初始化后的目录gitolite-admin内，将之前线上config和keydir内文件全部拷贝过来。</li>
-<li>git push后 client就有权限做操作了。</li>
-<li>将原有服务repositories目录打包拷贝至git家目录下。</li>
-<li>替换gitolite-admin.git目录。
-<em>迁移详细步骤记不清了，实际操作还需结合google。 X )</em></li>
-</ol>
-<p>迁移完毕！</p>
-<h4>五、gitweb样式优化</h4>
-<ol>
-<li>
-<p>网上提供了开源方案
-<em>gitweb-theme</em>
-解压进入clone下来的gitweb-theme
-修改setup文件，修改target目录至Gtiweb项目目录</p>
-</li>
-<li>
-<p>下载，修改setup文件，安装，一气呵成</p>
-</li>
-</ol>
-<div class="highlight"><pre><span></span>./setup -vi --install
-</pre></div>
-
-
-<p>最后启用git:// 只读协议</p>
-<div class="highlight"><pre><span></span>git daemon --reuseaddr --base-path<span class="o">=</span>/home/git 
-</pre></div> 
+<div class="highlight"><pre><span></span>gitolite/install -to /usr/local ...</pre></div> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-23-17-06.html">
-          <i class="icon-comment"></i> Comment </a>
+          <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
       
     </div>
-    
+      
 
  
         
