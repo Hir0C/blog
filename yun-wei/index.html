@@ -103,25 +103,28 @@ git clone git@IP:gitolite-admin
 </li>
 <li>
 <p>使用yum安装http服务，在http.conf添加并修改启动用户为git:</p>
-<p><VirtualHost *:80>
+<div class="highlight"><pre><span></span><span class="nt">&lt;VirtualHost</span> <span class="err">*:80</span><span class="nt">&gt;</span>
     ServerName IP
     DocumentRoot /var/www/gitweb
-    <Directory /var/www/gitweb>
+    <span class="nt">&lt;Directory</span> <span class="err">/var/www/gitweb</span><span class="nt">&gt;</span>
         Options ExecCGI +FollowSymLinks +SymLinksIfOwnerMatch
         AllowOverride All
         order allow,deny
         Allow from all
         AddHandler cgi-script cgi
         DirectoryIndex gitweb.cgi
-    </Directory>
+    <span class="nt">&lt;/Directory&gt;</span>
     ErrorLog logs/gitweb-error_log
     CustomLog logs/gitweb-access_log common 
-</VirtualHost>
-<em>nginx的没搞出来，官方给的例子是apache的</em></p>
+<span class="nt">&lt;/VirtualHost&gt;</span>
+</pre></div>
+
+
 </li>
-<li>
-<p>gitweb安装</p>
-</li>
+</ol>
+<p><em>nginx的没搞出来，官方给的例子是apache的</em></p>
+<ol>
+<li>gitweb安装</li>
 </ol>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> git/ <span class="p">;</span> make <span class="nv">GITWEB_PROJECTROOT</span><span class="o">=</span><span class="s2">&quot;/opt/git&quot;</span>  <span class="nv">prefix</span><span class="o">=</span>/usr gitweb <span class="p">;</span> cp -Rf gitweb /var/www/
 </pre></div>
