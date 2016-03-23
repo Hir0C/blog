@@ -5,29 +5,36 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/</loc>
-<lastmod>2016-03-23T16:06:29-00:00</lastmod>
+<lastmod>2016-03-23T16:41:29-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/archives.html</loc>
-<lastmod>2016-03-23T16:06:29-00:00</lastmod>
+<lastmod>2016-03-23T16:41:29-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/tags.html</loc>
-<lastmod>2016-03-23T16:06:29-00:00</lastmod>
+<lastmod>2016-03-23T16:41:29-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/categories.html</loc>
-<lastmod>2016-03-23T16:06:29-00:00</lastmod>
+<lastmod>2016-03-23T16:41:29-00:00</lastmod>
 <changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>/ri-chang/2016-03-23-16-08.html</loc>
+<lastmod>2016-03-23T16:08:00+08:00</lastmod>
+<changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
@@ -96,7 +103,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/ri-chang/index.html</loc>
-<lastmod>2016-03-23T14:20:00+08:06</lastmod>
+<lastmod>2016-03-23T16:08:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -123,7 +130,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>/tag/xiao-shuo.html</loc>
+<loc>/tag/xi-ze-bao-yan.html</loc>
 <lastmod>2016-03-23T14:20:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
@@ -144,6 +151,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>/tag/you-qi-chuan-you-qi.html</loc>
+<lastmod>2016-03-23T16:08:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>/tag/wordpress.html</loc>
 <lastmod>2016-03-22T18:34:00+08:06</lastmod>
 <changefreq>daily</changefreq>
@@ -151,8 +165,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>/tag/yun-wei.html</loc>
-<lastmod>2016-03-22T16:25:00+08:06</lastmod>
+<loc>/tag/bash.html</loc>
+<lastmod>2016-03-22T17:05:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -172,22 +186,29 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>/tag/xi-ze-bao-yan.html</loc>
+<loc>/tag/xiao-shuo.html</loc>
 <lastmod>2016-03-23T14:20:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/tag/bash.html</loc>
-<lastmod>2016-03-22T17:05:00+08:06</lastmod>
+<loc>/tag/tui-li-xiao-shuo.html</loc>
+<lastmod>2016-03-23T16:08:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>/tag/yun-wei.html</loc>
+<lastmod>2016-03-22T16:25:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/author/hir0c.html</loc>
-<lastmod>2016-03-23T14:20:00+08:06</lastmod>
+<lastmod>2016-03-23T16:08:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
