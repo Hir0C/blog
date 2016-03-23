@@ -71,10 +71,13 @@ Filed under <a href="./yun-wei/index.html">运维</a>
       </div>
       <div class="article-content span8">
 	<p><strong>kafka 0.8.0 升级 0.8.1 流程</strong></p>
-<p>升级很简单,引用官方的话:
-        Upgrading from 0.8.0 to 0.8.1
-        0.8.1 is fully compatible with 0.8. The upgrade can be done one broker at a time by simply bringing it down, updating the code, and
-        restarting it.</p>
+<p>升级很简单,引用官方的话:</p>
+<div class="highlight"><pre><span></span>    Upgrading from 0.8.0 to 0.8.1
+    0.8.1 is fully compatible with 0.8. The upgrade can be done one broker at a time by simply bringing it down, updating the code, and
+    restarting it.
+</pre></div>
+
+
 <ul>
 <li>KAFKA启动命令:</li>
 </ul>
@@ -104,15 +107,13 @@ Filed under <a href="./yun-wei/index.html">运维</a>
 
 
 <ul>
-<li>KAFKA手动指定zookeeper目录,设置自动leader balance:
-server.properties:<div class="highlight"><pre><span></span>1.1.1.1:2181,2.2.2.2:2181,3.3.3.3:2181/kafka-0.8.1
-auto.leader.rebalance.enable=true
-controlled.shutdown.enable=true
-</pre></div>
-
-
-</li>
-</ul> 
+<li>KAFKA手动指定zookeeper目录,设置自动leader balance</li>
+</ul>
+<p>server.properties:</p>
+<div class="highlight"><pre><span></span>    1.1.1.1:2181,2.2.2.2:2181,3.3.3.3:2181/kafka-0.8.1
+    auto.leader.rebalance.enable=true
+    controlled.shutdown.enable=true
+</pre></div> 
 	<a class="btn btn-mini xsmall" href="./yun-wei/2016-03-23-17-24.html">
           <i class="icon-comment"></i> Comment </a>
 	<hr />
