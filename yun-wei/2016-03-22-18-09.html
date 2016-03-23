@@ -1,112 +1,27 @@
-<!doctype html>
-<html class="no-js" lang="en">
-    <head>
-        <link rel="shortcut icon" href="" />
-
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="author" content="Hir0C" />
-        <title>storm 基本安装</title>
-        
-<meta name="description" content="&lt;h3&gt;storm安装步骤:&lt;/h3&gt;
-&lt;h4&gt;一、安装zookeeper&lt;/h4&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;全部选用CDH的产品，不用担心版本问题，省心。
-包都在这里:http://archive.cloudera.com/cdh4/cdh/4/&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;配置zookeeper
-解压稍微修改配置就可以使用，只需要定义dataDir和server.1/2/3&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;dataDir=/data/zookeeper/tmp
-hostname1:2888:3888
-hostname2:2888:3888
-hostname3:2888:3888
-&lt;/pre&gt;&lt;/div&gt;
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+  <head>
+    <title>storm 基本安装 - Hir0C blog</title>
+    <link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../theme/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../theme/pastie.css" />
+    <link href="/" type="application/atom+xml" rel="alternate" title="Hir0C blog Atom Feed" />
 
 
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;启动
-        ./zkServer.sh start&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4&gt;二、安装消息队列ZeroMQ&lt;/h4&gt;
-&lt;ol&gt;
-&lt;li&gt;直接上最新版本zeromq-4.0.3&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;http://download.zeromq.org/zeromq-4.0.3.tar ...&lt;/p&gt;" />
-<meta name="keywords" content=" storm  "/>
+  </head>
 
-        <!--[if !IE 7]>
-        <style type="text/css">
-            #main-content {display:table;height:100%}
-        </style>
-        <![endif]-->
-        <link rel="stylesheet" href="../theme/css/backdrop.css" />
-        <link rel="stylesheet" href="../theme/css/pygments.css" />
-        <script src="../theme/js/modernizr.js"></script>
-
-
-        <script type="text/javascript">
-            var disqus_shortname = 'HiroC'; 
-
-            (function () {
-                var s = document.createElement('script'); s.async = true;
-                s.type = 'text/javascript';
-                s.src = '//' + disqus_shortname + '.disqus.com/count.js';
-                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-            }());
-        </script>
-    </head>
-      
-
-    <body>
-        <div class="master-row">
-
-            <div class="content-pane main-content">
-                <nav class="top-bar" data-topbar role="navigation">
-                    <ul class="title-area">
-                        <li class="name"><!-- Leave this empty --></li>
-                        <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
-                    </ul>
-                    <section class="top-bar-section">
-                        <ul class="left">
-                        </ul>
-                        <ul class="right">
-                            <li class="active"><a href="../yun-wei/index.html">运维</a></li>
-                        </ul>
-                    </section>
-                </nav>
-
-                <div class="row title-bar">
-                    <div class="small-12 columns">
-                        <h1><a href="..">Hir0C blog</a></h1><h2> <small></small></h2>
-                        <hr>
-                    </div>
-                </div>
-            
-                <div id="contents">
-<div class="row">
-    <div class="small-12 columns article">
-        <h2>storm 基本安装</h2>
-        <div class="row info-bar" style="margin-left:0rem;margin-bottom:6px;">
-    <div class="small-12 columns">
-        <ul class="inline-list">
-            <li><span><i class="fa fa-calendar"></i>&nbsp; 二 22 三月 2016</span></li>
-            <li><span><i class="fa fa-folder-open"></i>&nbsp; <a href="../yun-wei/index.html">运维</a></span></li>
-            <li><span><i class="fa fa-comments"></i>&nbsp; <a href="../yun-wei/2016-03-22-18-09.html#disqus_thread" rel="bookmark" title="Disqus Comments">storm 基本安装</a></span></li>
-            <li>
-                <span>
-                    <i class="fa fa-tags"></i>&nbsp;
-                    <a href="../tag/storm.html"><span class="label">storm</span></a>
-                </span>
-            </li>
-        </ul>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="span8">
+<div id="content">
+    <div class="header">
+        <h1>storm 基本安装</h1>
     </div>
-</div>
-        <section class="article">
-            <h3>storm安装步骤:</h3>
+    <p class="meta"><small><span><a href="../author/hir0c/">Hir0C</a> - </span><span>二 22 三月 2016</span> - <span class="tags"><a href="/tag/storm/">storm</a></span></small></p>
+        <div class="entry-content">
+        <h3>storm安装步骤:</h3>
 <h4>一、安装zookeeper</h4>
 <ol>
 <li>
@@ -181,16 +96,12 @@ ui.port: 8080
 <p>要注意的是,RELEASE文件时必须的,否则启动会报错</p>
 <blockquote>
 <p>only be run from with in a release</p>
-</blockquote>    
-        </section>
-        <hr>
+</blockquote>
+        </div><!-- /.entry-content -->
         <div id="disqus_thread"></div>
         <script type="text/javascript">
             /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = "HiroC"; // required: replace example with your forum shortname
-            var disqus_identifier = "storm-基本安装";
-            var disqus_url = "../yun-wei/2016-03-22-18-09.html";
-            var disqus_title = "storm 基本安装";
+            var disqus_shortname = 'HiroC'; // required: replace example with your forum shortname
 
             /* * * DON'T EDIT BELOW THIS LINE * * */
             (function() {
@@ -200,107 +111,43 @@ ui.port: 8080
             })();
         </script>
         <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-    </div>
 </div>
-                </div>
+        </div>
+        <div class="span3 offset1">
+          <div class="well">
+            <ul class="nav nav-list">
+              <li class="nav-header">Blog</li>
+              <li ><a href="..">Index</a></li>
+              <li ><a href="../tags/">Tags</a></li>
+              <li ><a href="../archives/">Archiv</a></li>
+            </ul>
+          </div><!-- /#menu -->
+        </div>
+      </div>
 
-                <footer class="show-for-large-up">
-<div class="row">
-    <div class="small-6 medium-3 columns">
-        <ul class="left-nav">
-            <li><a href="..">Home &nbsp;<i class="fa fa-home fa-fw"></i></a></li>
-            <li><a href="../categories.html">Categories &nbsp;<i class="fa fa-folder-open fa-fw"></i></a></li>
-        </ul>
-    </div>
-    <div class="small-6 medium-3 medium-push-6 columns">
-        <ul class="right-nav">
-            <li><a href="../archives.html"><i class="fa fa-archive fa-fw"></i>&nbsp; Archives</a></li>
-        </ul>
-    </div>
-    <div class="small-12 medium-6 medium-pull-3 columns text-center">
-        <p class="tag-cloud">
-            <a href="../tags.html"><i class="fa fa-tags"></i>&nbsp;Tags:</a>&nbsp;&nbsp;
-            &nbsp;&hellip;
-        </p>
-    </div>
-    <div class="small-12 columns sub-footer">
-        <hr>
-        <div class="small-12 medium-6 columns">
-            <p class="small-text-center medium-text-left">
-                &copy;  Hir0C 
-                <!-- <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="cc.png" /></a>-->
-            </p>
-        </div>
-        <div class="small-12 medium-6 columns">
-            <p class="small-text-center medium-text-right">
-                Proudly powered by <a href="http://blog.getpelican.com/">Pelican</a>,
-                which takes great advantage of <a href="https://www.python.org/">Python</a>.
-            </p>
-        </div>
-    </div>
-</div>                </footer>
-            </div>
-            
-            <div class="image-pane main-content" style="background: url(''); background-size:cover; background-position: right;">
-                <div class="row">
-                    <div class="small-12 medium-4 large-12 columns">
-                    </div>
+      <hr />
 
-                    <div class="small-12 medium-4  large-12 columns link-list">
-                    </div>
+      <div class="row">
+        <div class="span12">
+          <div id="about">
+            <p>Proudly powered by <a href="http://twitter.github.com/bootstrap/">bootstrap</a>, <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a>, <a href="http://python.org">python</a> and <a href="http://www.julo.ch/about/">Alex</a>!</p>
+          </div><!-- /#about -->
+        </div><!-- /#contentinfo -->
+      </div>
+    </div>
 
-<!--
-                    <div class="small-12 medium-3 large-12 columns">
-                    </div>
--->
-               </div>
-            </div>
-        </div>
-        
-        
-        <div class="row">
-            <footer class="hide-for-large-up">
-<div class="row">
-    <div class="small-6 medium-3 columns">
-        <ul class="left-nav">
-            <li><a href="..">Home &nbsp;<i class="fa fa-home fa-fw"></i></a></li>
-            <li><a href="../categories.html">Categories &nbsp;<i class="fa fa-folder-open fa-fw"></i></a></li>
-        </ul>
-    </div>
-    <div class="small-6 medium-3 medium-push-6 columns">
-        <ul class="right-nav">
-            <li><a href="../archives.html"><i class="fa fa-archive fa-fw"></i>&nbsp; Archives</a></li>
-        </ul>
-    </div>
-    <div class="small-12 medium-6 medium-pull-3 columns text-center">
-        <p class="tag-cloud">
-            <a href="../tags.html"><i class="fa fa-tags"></i>&nbsp;Tags:</a>&nbsp;&nbsp;
-            &nbsp;&hellip;
-        </p>
-    </div>
-    <div class="small-12 columns sub-footer">
-        <hr>
-        <div class="small-12 medium-6 columns">
-            <p class="small-text-center medium-text-left">
-                &copy;  Hir0C 
-                <!-- <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="cc.png" /></a>-->
-            </p>
-        </div>
-        <div class="small-12 medium-6 columns">
-            <p class="small-text-center medium-text-right">
-                Proudly powered by <a href="http://blog.getpelican.com/">Pelican</a>,
-                which takes great advantage of <a href="https://www.python.org/">Python</a>.
-            </p>
-        </div>
-    </div>
-</div>            </footer>
-        </div>
-        
-        
-        <script src="../theme/js/jquery.min.js"></script>
-        <script src="../theme/js/foundation.min.js"></script>
-        <script src="../theme/js/app.js"></script>
-    </body>
-  
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'HiroC'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+
+  </body>
 </html>
