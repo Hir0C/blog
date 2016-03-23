@@ -1,32 +1,41 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
-  <head>
-    <title>Tag 运维 - Hir0C blog</title>
-    <link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../theme/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="../theme/pastie.css" />
-    <link href="/" type="application/atom+xml" rel="alternate" title="Hir0C blog Atom Feed" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
 
+Name       : Brown Stone  
+Description: A two-column, fixed-width design with dark color scheme.
+Version    : 1.0
+Released   : 20100928
 
-  </head>
-
-  <body>
-    <div class="container">
-      <div class="row">
-        <div class="span8">
-<div id="content">
-<h1>Blog</h1>
-
-<ul class="unstyled">
-        <li>
-            <div>
-                <div class="header">
-                    <h2>vsftpd 虚拟用户配置</h2>
-                </div>
-                <p class="meta"><small><span><a href="../author/hir0c/">Hir0C</a> - </span><span>二 22 三月 2016</span> - <span class="tags"><a href="/tag/运维/">运维</a>, <a href="/tag/vsftpd/">vsftpd</a></span></small></p>
-                <div class="entry-content">
-                    <h3>简介</h3>
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Hir0C blog - 运维</title>
+<link href="../theme/css/style.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="../" type="application/atom+xml" rel="alternate" title="Hir0C blog ATOM Feed" />
+</head>
+<body>
+<div id="wrapper">
+	<div id="page">
+		<div id="page-bgtop">
+			<div id="page-bgbtm">
+ 
+        
+				<div id="content">
+					<div class="post">
+						<h2 class="title"><a href="../yun-wei/2016-03-22-16-12.html">vsftpd 虚拟用户配置</a></h2>
+						<p class="meta"><span class="date">Le  </span><span class="posted">Par <a href="#">Hir0C</a></span><span>&nbsp; | Catégorie : <a href="../yun-wei/index.html">运维</a></span></p>
+					<p class="meta">Tags : <span><a href="../tag/yun-wei.html">运维</a> / </span>
+<span><a href="../tag/vsftpd.html">vsftpd</a> / </span>
+</p>
+						<div style="clear: both;">&nbsp;</div>
+						<div class="entry">
+						 <h3>简介</h3>
 <p>ftp 虚拟用户配置</p>
 <h3>配置</h3>
 <ol>
@@ -56,64 +65,85 @@ account sufficient /lib64/security/pam_userdb.so db=vftpusers
 <li>
 <p>修改ftp配置(使用主动模式)</p>
 <div class="highlight"><pre><span></span>port_enable=YES
-write_enable ...</pre></div></li></ol>
-                </div><!-- /.entry-content -->
-                <div class="row">
-                    <div class="span4">
-                        <a class="btn btn-small disabled" href="../yun-wei/2016-03-22-16-12.html#disqus_thread"></a>
-                    </div>
-                    <div class="span1 offset3">
-                        <a class="btn btn-small" href="../yun-wei/2016-03-22-16-12.html" rel="bookmark" title="Permalink to vsftpd 虚拟用户配置">Mehr</a>
-                    </div>
-                </div>
-            </div>
-        </li>
+write_enable=YES
+connect_from_port_20=YES
+anonymous_enable=NO
+local_enable=YES
+local_umask=022
+dirmessage_enable=YES
+xferlog_enable=YES
+connect_from_port_20=YES
+xferlog_file=/var/log/vsftpd.log
+xferlog_std_format=YES
+ascii_upload_enable=YES
+ascii_download_enable=YES
+listen=YES
+chroot_local_user=YES
+guest_enable=YES
+guest_username=vftpusers
+pam_service_name=vsftpd
+user_config_dir=vftpusers_conf
+virtual_use_local_privs=YES
+use_localtime=YES
+cmds_allowed=ABOR,CWD,LIST,MDTM,MKD,NLST,PASS,PASV,PORT,PWD,QUIT,RETR,RNFR,RNTO,SIZE,STOR,TYPE,USER,REST,CDUP,HELP,MODE,NOOP,REIN,STAT,STOU,STRU,SYST,FEAT
+file_open_mode=0444
+</pre></div>
 
-        <li><hr /></li>
-</ul><!-- /#posts-list -->
 
-<div class="pagination pagination-centered">
-    <ul>
-        <li class="active"><a href="#">1</a></li>
-    </ul>
+</li>
+<li>
+<p>重启vsftpd，登陆验证。</p>
+</li>
+</ol>	
+						</div>
+					</div>
+					<div style="clear: both;">&nbsp;</div>
+				</div>
+				<div id="sidebar">
+					<div id="logo">
+						<h1><a href="..">Hir0C blog</a></h1>
+					</div>
+					<div id="menu">
+						<ul>
+							<li ><a href="..">Home</a></li>
+							<li ><a href="../archives.html">Archives</a></li>
+						</ul>
+					</div>
+					<ul>
+						<li>
+							<h2>Catégories</h2>
+							<ul>
+								 <li ><a href="../yun-wei/index.html">运维</a></li>
+							</ul>
+						</li>
+						<li>
+						        <h2>Tags</h2>
+						        <ul>
+                                                                <li><a href="../tag/bian-ji-qi.html">编辑器</a></li>
+                                                                <li><a href="../tag/vsftpd.html">vsftpd</a></li>
+                                                                <li><a href="../tag/nginx.html">nginx</a></li>
+                                                                <li><a href="../tag/wordpress.html">wordpress</a></li>
+                                                                <li><a href="../tag/yun-wei.html">运维</a></li>
+                                                                <li><a href="../tag/storm.html">storm</a></li>
+                                                                <li><a href="../tag/bash.html">bash</a></li>
+						        </ul>
+						</li>
+						
+						
+					</ul>
+				</div>
+				<!-- end #sidebar -->
+				<div style="clear: both;">&nbsp;</div>
+			</div>
+		</div>
+	</div>
+	<!-- end #page -->
+
+<div id="footer">
+	<p>Copyright (c) 2008 Sitename.com. All rights reserved. Design by <a href="http://www.freecsstemplates.org/">CSS Templates</a>.</p>
+	<p>Proudly powered by <a href="http://alexis.notmyidea.org/pelican/">pelican</a>, which takes great advantages of <a href="http://python.org">python</a>.
+</p>
 </div>
-</div><!-- /#content -->
-        </div>
-        <div class="span3 offset1">
-          <div class="well">
-            <ul class="nav nav-list">
-              <li class="nav-header">Blog</li>
-              <li ><a href="..">Index</a></li>
-              <li ><a href="../tags/">Tags</a></li>
-              <li ><a href="../archives/">Archiv</a></li>
-            </ul>
-          </div><!-- /#menu -->
-        </div>
-      </div>
-
-      <hr />
-
-      <div class="row">
-        <div class="span12">
-          <div id="about">
-            <p>Proudly powered by <a href="http://twitter.github.com/bootstrap/">bootstrap</a>, <a href="http://docs.notmyidea.org/alexis/pelican/">pelican</a>, <a href="http://python.org">python</a> and <a href="http://www.julo.ch/about/">Alex</a>!</p>
-          </div><!-- /#about -->
-        </div><!-- /#contentinfo -->
-      </div>
-    </div>
-
-    <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'HiroC'; // required: replace example with your forum shortname
-
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function () {
-            var s = document.createElement('script'); s.async = true;
-            s.type = 'text/javascript';
-            s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-        }());
-    </script>
-
-  </body>
+<!-- end #footer -->
+</body>
 </html>
