@@ -175,17 +175,22 @@ Please restart NameNode with the &quot;-rollingUpgrade started&quot; option if a
 <li>安装agent时一直报错说找不到python2.4的库。google了发现了另一个逗逼和我遇到相同问题，原来是rpm包下成了rhel5的。把这个逗逼链接也贴出来，<a href="http://ciscolang.blog.51cto.com/8976580/1543810" target="_blank">链接点我</a>   </li>
 <li>agent安装完就不要更换ip了，引起各种问题，而且manager上无法修改ip。   </li>
 <li>防火墙有几个端口要提前放行， 7182端口是安装时用来发送parcels包的，卡了我好久。 <br />
-<code>7182，7184，7185，8084，8086，8087，8091，9000，9876，9994，9995，9996，9997，9998，9999，10101，19001</code> <br />
-有些错误从ui里找不到解决的提示，需要到/var/run/cloudera-scm-agent/process/下面，找最近一个生成的目录里logs目录查看错误！
-比如：
-        Deploying Client Configuration Command (280) has failed 。 <br />
-<a href="http://community.cloudera.com/t5/Cloudera-Manager-Installation/deployClientConfig-on-service-Spark-fails-in-CDH5/td-p/17640" target="_blank">解决问题原文链接</a>   </li>
+<code>7182，7184，7185，8084，8086，8087，8091，9000，9876，9994，9995，9996，9997，9998，9999，10101，19001</code>   </li>
+<li>有些错误从ui里找不到解决的提示，需要到/var/run/cloudera-scm-agent/process/下面，找最近一个生成的目录里logs目录查看错误！
+比如：<blockquote>
+<p>Deploying Client Configuration Command (280) has failed 。 <br />
+<a href="http://community.cloudera.com/t5/Cloudera-Manager-Installation/deployClientConfig-on-service-Spark-fails-in-CDH5/td-p/17640" target="_blank">解决问题原文链接</a>   </p>
+</blockquote>
+</li>
 <li>修改sudo配置文件，安装到最后一步更新配置文件就报错：" <a href="https://www.zabbix.com/forum/showthread.php?t=47421" target="_blank">解决问题原文链接</a> ， 修改配置如下：   </li>
 </ul>
-<p><strong>vi /etc/sudoer</strong> <br />
-        改一行：# Defaults    requiretty
-        加一行：cloudera-scm ALL=(ALL) NOPASSWD: ALL
-<strong>另外manager的节点建议内存12G.</strong></p>
+<div class="highlight"><pre><span></span>vi /etc/sudoer
+改一行：# Defaults    requiretty
+加一行：cloudera-scm ALL=(ALL) NOPASSWD: ALL
+</pre></div>
+
+
+<p><strong>另外manager的节点建议内存12G.</strong></p>
 <p>参考链接及文档:</p>
 <p><a href="http://www.abcn.net/2014/04/upgrade-from-cdh5-beta2-to-cdh5-ga.html" target="_blank">报错1解决(可能要翻墙)</a></p>
 <p><a href="http://www.cloudera.com/content/cloudera/en/documentation.html" target="_blank">官方在线文档</a></p>

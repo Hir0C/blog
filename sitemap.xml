@@ -5,34 +5,34 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/</loc>
-<lastmod>2016-03-24T15:16:18-00:00</lastmod>
+<lastmod>2016-03-24T15:24:08-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/archives.html</loc>
-<lastmod>2016-03-24T15:16:18-00:00</lastmod>
+<lastmod>2016-03-24T15:24:08-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/tags.html</loc>
-<lastmod>2016-03-24T15:16:18-00:00</lastmod>
+<lastmod>2016-03-24T15:24:08-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/categories.html</loc>
-<lastmod>2016-03-24T15:16:18-00:00</lastmod>
+<lastmod>2016-03-24T15:24:08-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/ri-chang/2016-03-24-15-08.html</loc>
+<loc>/yun-wei/2016-03-24-15-08.html</loc>
 <lastmod>2016-03-24T15:08:00+08:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
@@ -187,14 +187,14 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/ri-chang/index.html</loc>
-<lastmod>2016-03-24T15:08:00+08:06</lastmod>
+<lastmod>2016-03-23T16:08:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/yun-wei/index.html</loc>
-<lastmod>2016-03-24T15:04:00+08:06</lastmod>
+<lastmod>2016-03-24T15:08:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -277,8 +277,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>/tag/command.html</loc>
-<lastmod>2016-03-23T17:04:00+08:06</lastmod>
+<loc>/tag/yum.html</loc>
+<lastmod>2016-03-23T17:37:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -347,13 +347,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>/tag/ri-chang.html</loc>
-<lastmod>2016-03-24T15:08:00+08:06</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
 <loc>/tag/bian-ji-qi.html</loc>
 <lastmod>2016-03-22T18:26:00+08:06</lastmod>
 <changefreq>daily</changefreq>
@@ -361,8 +354,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>/tag/yum.html</loc>
-<lastmod>2016-03-23T17:37:00+08:06</lastmod>
+<loc>/tag/command.html</loc>
+<lastmod>2016-03-23T17:04:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -370,6 +363,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>/tag/yun-wei.html</loc>
 <lastmod>2016-03-22T16:25:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>/tag/saltstack.html</loc>
+<lastmod>2016-03-24T15:08:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
