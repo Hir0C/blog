@@ -129,34 +129,22 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 
 
 <p><em>2、管理集群</em>   </p>
-<div class="highlight"><pre><span></span>(1) 对集群重新分片（重新分片操作基本上就是将某些节点上的哈希槽移动到另外一些节点上面），整个过程是不会影响业务运行的。
-
-    可以通过执行命令`./redis-trib.rb reshard 1.1.1.13:7000` -&gt; 指定槽位数量 -&gt; 指定从那个节点移动 -&gt; 指定移动到哪个节点/或者选择all 主节点都会成为源节点 -&gt; 完成整个操作。
-
-    整个操作都是针对主节点的，槽位不能移动到slave节点。
-
-(2) 添加集群节点
-
-    `./redis-trib.rb add-node 1.1.1.11:7002 1.1.1.13:7000`  //1.1.1.13:7000 可以是任意集群中的master节点。   
-    但是目前新节点仍然不是一个可用节点，接下来， 只要使用redis-trib程序， 将集群中的某些哈希桶移动到新节点里面， 新节点就会成为真正的主节点了。
-
-(3) 成为从节点     
-    ```shell
-    ./redis-trib.rb add-node --slave 1.1.1.11:7003 1.1.1.11:7002
+<p>(1) 对集群重新分片（重新分片操作基本上就是将某些节点上的哈希槽移动到另外一些节点上面），整个过程是不会影响业务运行的。   </p>
+<p>可以通过执行命令<code>./redis-trib.rb reshard 1.1.1.13:7000</code> -&gt; 指定槽位数量 -&gt; 指定从那个节点移动 -&gt; 指定移动到哪个节点/或者选择all 主节点都会成为源节点 -&gt; 完成整个操作。</p>
+<p>整个操作都是针对主节点的，槽位不能移动到slave节点。</p>
+<p>(2) 添加集群节点   </p>
+<p><code>./redis-trib.rb add-node 1.1.1.11:7002 1.1.1.13:7000</code>  //1.1.1.13:7000 可以是任意集群中的master节点。 <br />
+但是目前新节点仍然不是一个可用节点，接下来， 只要使用redis-trib程序， 将集群中的某些哈希桶移动到新节点里面， 新节点就会成为真正的主节点了。</p>
+<p>(3) 成为从节点     </p>
+<div class="highlight"><pre><span></span>./redis-trib.rb add-node --slave 1.1.1.11:7003 1.1.1.11:7002
 </pre></div>
 
 
-<p>[ERR] Node 1.1.1.11:7003 is not empty. Either the node already knows other nodes (check with CLUSTER NODES) or contains some key in database 0.
-        ``` <br />
-    执行时有可能遇到上面这种问题，清空一下新增节点的数据目录就ok了。</p>
+<p>执行时有可能遇到上面这种问题，清空一下新增节点的数据目录就ok了。</p>
 <p><strong>另一种方法</strong>   </p>
-<blockquote>
 <p>cluster replicate 3c3a0c74aae0b56170ccb03a76b60cfe7dc1912e  //其中命令提供的 3c3a0c74aae0b56170ccb03a76b60cfe7dc1912e 就是主节点 127.0.0.1:7005 的节点 ID 。   </p>
-</blockquote>
-<div class="highlight"><pre><span></span>(4) 删除节点
-```shell
-./redis-trib.rb del-node 1.1.1.11:7000 1e6812dc9884c01d0162124732ba136c6da99e47
-```
+<p>(4) 删除节点</p>
+<div class="highlight"><pre><span></span>./redis-trib.rb del-node 1.1.1.11:7000 1e6812dc9884c01d0162124732ba136c6da99e47
 </pre></div>
 
 
