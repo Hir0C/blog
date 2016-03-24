@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>mysql mongodb 备份脚本 - Hir0C blog</title>
+    <title>Postfix 删除邮件队列 - Hir0C blog</title>
     <meta name="description" content="">
     <meta name="author" content="Hir0C">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,7 +50,7 @@
     <div class='article'>
       <div class="row-fluid">
            <div class="content-title span9">
-             <h1>mysql mongodb 备份脚本</h1>
+             <h1>Postfix 删除邮件队列</h1>
            </div>
       </div>
     <div class="row-fluid">
@@ -62,76 +62,78 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
 <p style="text-align: left;">
  
-    Tags <a href="../tag/mysql.html">mysql</a> <a href="../tag/mongodb.html">mongodb</a> </p>
+    Tags <a href="../tag/mail.html">mail</a> </p>
 <p>
 </p>
       </div>
       
       <div class="span8">
-	<h4>一 准备:</h4>
-<p><a href="https://sourceforge.net/projects/automysqlbackup/" target="_blank">automysqlbackup下载</a> <br />
-<a href="https://github.com/micahwedemeyer/automongobackup" target="_blank">automongobackup下载</a>   </p>
-<p>automongobackup是模仿automysqlbackup项目写的，默认并不带配置文件，可以直接修改脚本里对应变量。   </p>
-<p>​</p>
-<h4>二 配置</h4>
-<p><strong>automysqlbackup</strong>   </p>
-<div class="highlight"><pre><span></span>CONFIG_mysql_dump_username=&#39;user&#39;
-CONFIG_mysql_dump_password=&#39;passwd&#39;
-CONFIG_mysql_dump_host=&#39;localhost&#39;
-CONFIG_backup_dir=&#39;/backup/mysql&#39;
-CONFIG_multicore=&#39;yes&#39;
-CONFIG_multicore_threads=2
-CONFIG_do_monthly=&quot;0&quot;
-CONFIG_do_weekly=&quot;0&quot;
-CONFIG_rotation_daily=6
-CONFIG_mysql_dump_port=3306
-CONFIG_mysql_dump_single_transaction=&#39;yes&#39;
-CONFIG_mysql_dump_compression=&#39;gzip&#39;
+	<h2>转贴</h2>
+<p>Postfix中有一套Mail Queue Management机制,所有队列中的邮件都可以全自动的处理,但在发送大量邮件的时候,有必要对这个队列进行手工的维护处理,比如说,删除队列中的邮件. 以下是一些常用的命令：</p>
+<p><em>列出目前在 Mail Queue 中的邮件</em>   </p>
+<div class="highlight"><pre><span></span>mailq
 </pre></div>
 
 
-<p><strong>automongobackup</strong>   </p>
-<div class="highlight"><pre><span></span>DBHOST=&quot;127.0.0.1&quot;
-DBPORT=&quot;27017&quot;
-BACKUPDIR=&quot;/backup/mongodb&quot;
-DBUSERNAME=&quot;user&quot;
-DBPASSWORD=&quot;passwd&quot;
-DBAUTHDB=&quot;admin&quot;
-MAILCONTENT=&quot;stdout&quot;
-MAXATTSIZE=&quot;4000&quot;
-DODAILY=&quot;yes&quot;
-DAILYRETENTION=6
-DOWEEKLY=&quot;no&quot;
-WEEKLYDAY=0
-WEEKLYRETENTION=0
-DOMONTHLY=&quot;no&quot;
-MONTHLYRETENTION=0
-COMP=&quot;gzip&quot;
-CLEANUP=&quot;yes&quot;
-LATEST=&quot;yes&quot;
-LATESTLINK=&quot;yes&quot;
-OPLOG=&quot;no&quot;
-REPLICAONSLAVE=&quot;yes&quot;
-REQUIREDBAUTHDB=&quot;yes&quot;
+<p><em>刪除所有在 Queue 中的邮件</em>   </p>
+<div class="highlight"><pre><span></span>postsuper -d ALL
 </pre></div>
 
 
-<p><em>两个配置都指定备份文件保存一星期。</em>   </p>
-<h4>三 执行</h4>
-<div class="highlight"><pre><span></span>/usr/local/bin/automysqlbackup /etc/automysqlbackup/myserver.conf
-automongobackup
+<p><em>刪除所有正在 deferred 队列中的邮件 (删除曾经发送失败的邮件 )</em>   </p>
+<div class="highlight"><pre><span></span>postsuper -d ALL deferred
 </pre></div>
 
 
-<h4>四 数据导入</h4>
-<p><strong>mongodb</strong></p>
-<div class="highlight"><pre><span></span>mongorestore -h 127.0.0.1 -d dbname dbbakdir/
+<p><strong>刪除所有正在 deferred 队列中的郵件 ( 可看出哪些信被刪除了 )</strong>   </p>
+<div class="highlight"><pre><span></span>find /var/spool/postfix/deferred -type f -exec rm -vf /<span class="o">{</span>/<span class="o">}</span> /<span class="p">;</span> 
 </pre></div>
 
 
-<p><strong>mysql</strong></p>
-<div class="highlight"><pre><span></span>mysql -uusername -ppassword &lt; bak.sql
+<p><strong>刪掉「三天以前」无法发送的邮件</strong>   </p>
+<div class="highlight"><pre><span></span>find /var/spool/postfix/deferred -type f -mtime +3 -exec rm -f /<span class="o">{</span>/<span class="o">}</span> /<span class="p">;</span> 
 </pre></div>
+
+
+<p><strong>列出目前所有无法发送的邮件</strong>   </p>
+<div class="highlight"><pre><span></span>find /var/spool/postfix/deferred -type f -exec ls -l –time-style<span class="o">=</span>+%Y-%m-%d_%H:%M:%S <span class="o">{}</span> /<span class="p">;</span> 
+</pre></div>
+
+
+<p><strong>刪除超过 5 天的 “defer” 佇列中的退信记录</strong>    </p>
+<div class="highlight"><pre><span></span>find /var/spool/postfix/defer -type f -mtime +5 -exec rm -f /<span class="o">{</span>/<span class="o">}</span> /<span class="p">;</span> 
+</pre></div>
+
+
+<p>预设所有跟Postfix 相关的邮件都会放在/var/spool/postfix/ 目录下,想了解Postfix是如何管理队列的,可以参考<code>qmgr -Postfix queue manager</code> 的手册.</p>
+<p><em>以下是每个目录的用途</em>   </p>
+<p>MAIL QUEUES </p>
+<ul>
+<li>
+<p>incoming 收信箱 </p>
+</li>
+<li>
+<p>active 正在准备发送的邮件</p>
+</li>
+<li>
+<p>defered 无法发送的邮件,等待重发</p>
+</li>
+<li>
+<p>corrupt 无法读取或者损坏的邮件 </p>
+</li>
+<li>
+<p>hold 暂停的邮件,需要手工启动 DELIVERY STATUS REPORTS </p>
+</li>
+<li>
+<p>bounce 每一位收件者的送信状态,记录为什么退信由 bounce(8) 管理</p>
+</li>
+<li>
+<p>defer 每一位收件者的寄送状态,说明为什么延迟由 defer(8) 管理</p>
+</li>
+<li>
+<p>trace 每一位收件者的寄送状态信息，说明被 Postfix 用 “sendmail -v” 或 “sendmail -bv” 命令执行的状态由 trace(8) 管理</p>
+</li>
+</ul>
 	<hr />
       </div>
     </div>
