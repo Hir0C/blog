@@ -74,7 +74,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <li>下载<a href="http://archive-primary.cloudera.com/cm5/installer" target="_blank">cloudera manager installer</a></li>
 <li>因为这次要模拟升级安装,首先要先下载<a href="http://archive-primary.cloudera.com/cm5/redhat/5/x86_64/cm/5.0.0-beta-2/" target="_blank">beta的源</a></li>
 <li>然后下载<a href="http://archive-primary.cloudera.com/cm5/redhat/5/x86_64/cm/5.0.0/" target="_blank">release的源</a></li>
-<li>然后下载<a href="http://archive-primary.cloudera.com/cdh5/parcels/" target="_blank">parcel包</a>,<em>官方推荐这种方式安装</em>
+<li>然后下载<a href="http://archive-primary.cloudera.com/cdh5/parcels/" target="_blank">parcel包</a>,<em>官方推荐这种方式安装</em> <br />
 <em>另外除了parcel包,还要下载json文件,没有那个json文件是无法正常安装的.</em></li>
 <li>
 <p>下载到本地后将rpm包的源,放到webserver目录下,写好yum的repo文件</p>
@@ -123,12 +123,8 @@ tar -cvf /root/nn_backup_data.tar .
 
 
 <ol>
-<li>
-<p>把当前跑的所有服务都停掉,包括服务.</p>
-</li>
-<li>
-<p>停掉cloudera-scm-server和cloudera-scm-server-db</p>
-</li>
+<li>把当前跑的所有服务都停掉,包括服务.</li>
+<li>停掉cloudera-scm-server和cloudera-scm-server-db</li>
 </ol>
 <div class="highlight"><pre><span></span>service cloudera-scm-server stop
 service cloudera-scm-server-db stop
@@ -145,12 +141,8 @@ rpm -qa  <span class="s1">&#39;cloudera-*&#39;</span> 查看版本
 
 
 <ol>
-<li>
-<p>升级完成,启动server和db</p>
-</li>
-<li>
-<p>进入web升级agent们,一进去就会有提示,然后手动指定url,升级就可以鸟.</p>
-</li>
+<li>升级完成,启动server和db</li>
+<li>进入web升级agent们,一进去就会有提示,然后手动指定url,升级就可以鸟.</li>
 </ol>
 <h4>五、升级CDH</h4>
 <p>注意先备份namenode数据</p>
@@ -182,12 +174,10 @@ Please restart NameNode with the "-rollingUpgrade started" option if a rolling u
 <p>Get corrupt file blocks returned error: Cannot run listCorruptFileBlocks because replication queues have not been initialized.</p>
 </li>
 </ol>
-<p>删掉namenode节点的previous/目录即可</p>
-<ol>
-<li>由于前一次安装socket文件(/var/run/hdfs-sockets)没有正常删除，造成datanode启动失败，手动修改其权限为root解决</li>
-</ol>
+<p>删掉namenode节点的previous/目录即可
+3. 由于前一次安装socket文件(/var/run/hdfs-sockets)没有正常删除，造成datanode启动失败，手动修改其权限为root解决</p>
 <p>参考链接及文档:</p>
-<p><a href="http://www.abcn.net/2014/04/upgrade-from-cdh5-beta2-to-cdh5-ga.html" target="_blank">报错解决(可能要翻墙)</a></p>
+<p><a href="http://www.abcn.net/2014/04/upgrade-from-cdh5-beta2-to-cdh5-ga.html" target="_blank">报错1解决(可能要翻墙)</a></p>
 <p><a href="http://www.cloudera.com/content/cloudera/en/documentation.html" target="_blank">官方在线文档</a></p>
 <p><a href="http://www.cloudera.com/content/cloudera-content/cloudera-docs/CM5/latest/Cloudera-Manager-Managing-Clusters/cm5mc_upgrade_tocdh5_using_parcels.html" target="_blank">CDH官方升级文档</a></p>
 	<hr />
