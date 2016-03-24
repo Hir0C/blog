@@ -105,11 +105,11 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <ul>
 <li>单机版hadoop yarn内存分配必须大于3072</li>
 </ul>
-<p>因为渣虚拟机所以只分配了2048的内存，结果跑wordcount就开在0%不动了，下面是<a href="http://stackoverflow.com/questions/23231403/mapreduce-in-hadoop-2-2-0-not-working" target="_blank">解决方法链接</a>  </p>
+<p>&emsp;&emsp;因为渣虚拟机所以只分配了2048的内存，结果跑wordcount就开在0%不动了，下面是<a href="http://stackoverflow.com/questions/23231403/mapreduce-in-hadoop-2-2-0-not-working" target="_blank">解决方法链接</a>  </p>
 <ul>
 <li>yarn配置小问题</li>
 </ul>
-<p><strong>centos2:8994写域名就报错，用0.0.0.0正常</strong>    </p>
+<p><em>centos2:8994写域名就报错，用0.0.0.0正常</em>    </p>
 <div class="highlight"><pre><span></span>    <span class="nt">&lt;property&gt;</span>
     <span class="nt">&lt;name&gt;</span>yarn.nodemanager.address<span class="nt">&lt;/name&gt;</span>
     <span class="nt">&lt;value&gt;</span>0.0.0.0:8994<span class="nt">&lt;/value&gt;</span>
@@ -119,9 +119,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 
 <h4>升级</h4>
 <p>这次从hadoop2.2.0 升级成 2.6.2。过程还是比较顺利，目前来看集群运行正常。   </p>
-<p>因为是测试环境，数据量很小，所以升级过程比较快。升级参考了这位大神的blog
-<a href="https://www.zybuluo.com/layor/note/161370" target="_blank">blog1</a><br />
-<a href="https://www.zybuluo.com/layor/note/162019" target="_blank">blog2</a>  </p>
+<p>因为是测试环境，数据量很小，所以升级过程比较快。升级参考了这位大神的<a href="http://my.oschina.net/MaTech/blog/496102" target="_blank">blog</a>  </p>
 <p>我总结一下我的步骤：</p>
 <p>1） hadoop安装使用软连接设置目录：  ln -s /usr/local/hadoop2.2.0 /usr/local/hadoop 这样方便你升级。</p>
 <p>2） hadoop checknative -a 检查先hadoop库支持情况。</p>
