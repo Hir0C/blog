@@ -94,6 +94,34 @@ Filed under <a href="../ri-chang/index.html">日常</a>
 
 
 <p><a href="http://stackoverflow.com/questions/21059640/wsgiref-error-attributeerror-nonetype-object-has-no-attribute-split" target="_blank">参考链接</a></p>
+<h4>python zabbix-mail server实现</h4>
+<p><a href="http://www.361way.com/zabbix-api-2/3681.html" target="_blank">实现调用zabbix api类</a>
+<a href="http://www.iyunv.com/thread-21332-1-1.html" target="_blank">获取图片</a>
+<a href="http://www.tuicool.com/articles/vaAVri" target="_blank">python发送邮件内嵌图片</a></p>
+<ul>
+<li>获取zabbix历史数据部分代码</li>
+</ul>
+<div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">get_history</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hostids</span><span class="p">,</span> <span class="n">itemids</span><span class="p">,</span> <span class="n">time_from</span><span class="p">,</span> <span class="n">time_till</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>
+            <span class="s2">&quot;jsonrpc&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;history.get&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="s2">&quot;extend&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;history&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+                <span class="s2">&quot;hostids&quot;</span><span class="p">:</span> <span class="n">hostids</span><span class="p">,</span>
+                <span class="s2">&quot;itemids&quot;</span><span class="p">:</span> <span class="n">itemids</span><span class="p">,</span>
+                <span class="s2">&quot;time_from&quot;</span><span class="p">:</span> <span class="n">time_from</span><span class="p">,</span>
+                <span class="s2">&quot;time_till&quot;</span><span class="p">:</span> <span class="n">time_till</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;auth&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">authID</span><span class="p">,</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span>
+        <span class="p">})</span>
+        <span class="n">history_data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_data</span><span class="p">(</span><span class="n">data</span><span class="p">)[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)):</span>
+                <span class="n">history_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">history_data</span>
+</pre></div>
 	<hr />
       </div>
     </div>
