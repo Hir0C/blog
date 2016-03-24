@@ -53,8 +53,104 @@
 
     <div class='row-fluid''>
         <div class="article-title span9">
-            <a href="../yun-wei/2016-03-24-10-33.html"><h1>内网使用sendmail转发邮件</h1></a>
+            <a href="../yun-wei/2016-03-24-10-39.html"><h1>cloudera manager 与 CDH5 安装与升级</h1></a>
         </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>四 24 三月 2016 </p>
+
+<p style="text-align: left;">
+Filed under <a href="../yun-wei/index.html">运维</a>
+</p>
+<p style="text-align: left;">
+ 
+    Tags <a href="../tag/cdh.html">CDH</a> <a href="../tag/hadoop.html">hadoop</a> </p>
+<p>
+</p>
+      </div>
+      <div class="article-content span8">
+	<p>一、 准备工作</p>
+<p>下载cdh的各种源:</p>
+<p>1.下载cloudera manager installer：http://archive-primary.cloudera.com/cm5/installer</p>
+<p>2.因为这次要模拟升级安装,首先要先下载beta的源:http://archive-primary.cloudera.com/cm5/redhat/5/x86_64/cm/5.0.0-beta-2/</p>
+<p>3.然后下载release的源:http://archive-primary.cloudera.com/cm5/redhat/5/x86_64/cm/5.0.0/</p>
+<p>4.然后下载parcel包,官方也推荐这种方式安装:http://archive-primary.cloudera.com/cdh5/parcels/</p>
+<p>另外除了parcel包,还要下载json文件,没有那个json文件是无法正常安装的.</p>
+<p>5.下载到本地后将rpm包的源,放到webserver目录下,写好yum的repo文件</p>
+<p>[cloudera-manager]</p>
+<p>name = Cloudera Manager, Version 5.0.0</p>
+<p>baseurl = http://IP/yum-package/cm5/redhat/5/x86_64/cm/5.0.0/</p>
+<p>gpgcheck = 0</p>
+<p>6.parcel包添加验证文件</p>
+<p>cat manifest.json 把sha那一段沾出来, 写到parcel包.sha文件里,然后为这三个文件授权755</p>
+<p>(之前因为manifest.json文件改错,安装包一直失败,查看manager的log才发现问题)</p>
+<p>至此准备工作完成!</p>
+<p>二 、安装cloudera manager</p>
+<p>./cloudera-manager-installer.bin 直接执行,这个还支持鼠标点击.</p>
+<p>在最后一步前,准备好另一个终端,准备好手动拷贝刚才写的repo文件,因为安装时会被覆盖,所以只能手动反覆盖.......</p>
+<p>完成manager机器的安装 就可以进web配置了,启动略慢</p>
+<p>http://ip:7180</p>
+<p>三、通过web安装cdh</p>
+<p>1.添加完涉及的服务器后，手动指定parcel和agent的本地源</p>
+<p>2.安装完成后选择服务,本次只选择了基本服务hdfs,yarn,zookeeper</p>
+<p>3.指定角色,完成安装.</p>
+<p>4.使用slave节点,测试上传文件ok</p>
+<p>四、升级cloudera manager</p>
+<p>升级cloudera manager</p>
+<h1>备份：</h1>
+<h1>cd /mnt/hadoop/hdfs/name</h1>
+<h1>tar -cvf /root/nn_backup_data.tar .</h1>
+<p>1.把当前跑的所有服务都停掉,包括服务.</p>
+<p>2.停掉cloudera-scm-server和cloudera-scm-server-db</p>
+<p>service cloudera-scm-server stop
+service cloudera-scm-server-db stop
+3.准备好新版本的manager的repo文件</p>
+<p>执行yum clean all &amp;&amp; yum upgrade 'cloudera-*'</p>
+<p>rpm -qa  'cloudera-*' 查看版本</p>
+<p>4.升级完成,启动server和db</p>
+<p>5.进入web升级agent们,一进去就会有提示,然后手动指定url,升级就可以鸟.</p>
+<p>五、升级CDH</p>
+<p>注意先办法namenode数据, </p>
+<h1>cd /mnt/hadoop/hdfs/name</h1>
+<h1>tar -cvf /root/nn_backup_data.tar .</h1>
+<p>点搜索框左边小礼品盒子图标,添加新版本parcel的url,添加后下面会多出个小图,点激活就可以自动升级了</p>
+<p>至此完成所有升级.</p>
+<p>六、错误整理</p>
+<p>升级过程出现namenode启动失败问题,</p>
+<p>java.io.IOException:</p>
+<p>File system image contains an old layout version -51.</p>
+<p>An upgrade to version -55 is required.</p>
+<p>Please restart NameNode with the "-rollingUpgrade started" option if a rolling upgraded is already started; or restart NameNode with the "UPGRADE" to start a new upgrade.</p>
+<p>手动到master节点启动后,停掉,再通过web页面重启后正常</p>
+<p>su - hdfs -c "hdfs --config /var/run/cloudera-scm-agent/process/XXX-hdfs-NAMENODE namenode -upgrade"</p>
+<p>2.另一个可能出现的报错:</p>
+<p>Get corrupt file blocks returned error: Cannot run listCorruptFileBlocks because replication queues have not been initialized.</p>
+<p>删掉namenode节点的previous/目录即可</p>
+<ol>
+<li>由于前一次安装socket文件(/var/run/hdfs-sockets)没有正常删除，造成datanode启动失败，手动修改其权限为root解决</li>
+</ol>
+<p>参考链接及文档:</p>
+<p>报错解决(可能要翻墙):http://www.abcn.net/2014/04/upgrade-from-cdh5-beta2-to-cdh5-ga.html</p>
+<p>官方在线文档:http://www.cloudera.com/content/cloudera/en/documentation.html</p>
+<p>CDH官方升级文档:http://www.cloudera.com/content/cloudera-content/cloudera-docs/CM5/latest/Cloudera-Manager-Managing-Clusters/cm5mc_upgrade_tocdh5_using_parcels.html</p> 
+	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-10-39.html">
+          <i class="icon-comment"></i> Comment </a>
+	<hr />
+      </div>
+      
+    </div>
+    
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="../yun-wei/2016-03-24-10-33.html"><h1>内网使用sendmail转发邮件</h1></a>
+      </div>
     </div>
     <div class="row-fluid">
       <div class="span2">
@@ -69,28 +165,26 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <p>
 </p>
       </div>
-      <div class="article-content span8">
+      <div class="summary span8">
 	<p>目的:做为内网，外网之间的Email集中，发送邮件服务器。</p>
 <p>工作环境中大部分服务器都是无法与外网通信的，有些服务器需要有邮件报警功能，这时可以把所有内网的Email通过一台Email发送到可以访问外网的服务器</p>
 <ol>
-<li>在内网客户端配置文件/etc/mail/sendmail.cf,添加DS</li>
-</ol>
-<blockquote>
-<p>[1.1.1.1]   //这个ip是指定的是能连外网的负责转发邮件的mail server</p>
+<li>在内网客户端配置文件/etc/mail/sendmail.cf,添加DS  <blockquote>
+<p>[1.1.1.1]   //这个ip是指定的是能连外网的负责转发邮件的mail server  </p>
 </blockquote>
-<ol>
-<li>在server端的<code>access文件</code>添加client的ip,做访问限制</li>
-</ol>
-<blockquote>
-<p>Connect:1.1.1.2                       RELAY</p>
-</blockquote> 
+</li>
+<li>在server端的<code>access文件</code>添加client的ip,做访问限制  <blockquote>
+<p>Connect:1.1.1.2                       RELAY  </p>
+</blockquote>
+</li>
+</ol> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-10-33.html">
-          <i class="icon-comment"></i> Comment </a>
+          <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
       
     </div>
-    
+      
 
  
         

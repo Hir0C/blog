@@ -73,17 +73,15 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 	<p>目的:做为内网，外网之间的Email集中，发送邮件服务器。</p>
 <p>工作环境中大部分服务器都是无法与外网通信的，有些服务器需要有邮件报警功能，这时可以把所有内网的Email通过一台Email发送到可以访问外网的服务器</p>
 <ol>
-<li>在内网客户端配置文件/etc/mail/sendmail.cf,添加DS</li>
-</ol>
-<blockquote>
-<p>[1.1.1.1]   //这个ip是指定的是能连外网的负责转发邮件的mail server</p>
+<li>在内网客户端配置文件/etc/mail/sendmail.cf,添加DS  <blockquote>
+<p>[1.1.1.1]   //这个ip是指定的是能连外网的负责转发邮件的mail server  </p>
 </blockquote>
-<ol>
-<li>在server端的<code>access文件</code>添加client的ip,做访问限制</li>
-</ol>
-<blockquote>
-<p>Connect:1.1.1.2                       RELAY</p>
-</blockquote> 
+</li>
+<li>在server端的<code>access文件</code>添加client的ip,做访问限制  <blockquote>
+<p>Connect:1.1.1.2                       RELAY  </p>
+</blockquote>
+</li>
+</ol> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-10-33.html">
           <i class="icon-comment"></i> Comment </a>
 	<hr />
