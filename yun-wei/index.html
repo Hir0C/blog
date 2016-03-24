@@ -53,8 +53,108 @@
 
     <div class='row-fluid''>
         <div class="article-title span9">
-            <a href="../yun-wei/2016-03-24-17-02.html"><h1>HiroC's maven 命令备忘</h1></a>
+            <a href="../yun-wei/2016-03-24-17-06.html"><h1>mysql mongodb 备份脚本</h1></a>
         </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>四 24 三月 2016 </p>
+
+<p style="text-align: left;">
+Filed under <a href="../yun-wei/index.html">运维</a>
+</p>
+<p style="text-align: left;">
+ 
+    Tags <a href="../tag/mysql.html">mysql</a> <a href="../tag/mongodb.html">mongodb</a> </p>
+<p>
+</p>
+      </div>
+      <div class="article-content span8">
+	<h4>一 准备:</h4>
+<div class="highlight"><pre><span></span>[automysqlbackup下载](https://sourceforge.net/projects/automysqlbackup/){:target=&quot;_blank&quot;}   
+[automongobackup下载](https://github.com/micahwedemeyer/automongobackup){:target=&quot;_blank&quot;}
+
+automongobackup是模仿automysqlbackup项目写的，默认并不带配置文件，可以直接修改脚本里对应变量。
+</pre></div>
+
+
+<p>​</p>
+<h4>二 配置</h4>
+<p><strong>automysqlbackup</strong>   </p>
+<div class="highlight"><pre><span></span>CONFIG_mysql_dump_username=&#39;user&#39;
+CONFIG_mysql_dump_password=&#39;passwd&#39;
+CONFIG_mysql_dump_host=&#39;localhost&#39;
+CONFIG_backup_dir=&#39;/backup/mysql&#39;
+CONFIG_multicore=&#39;yes&#39;
+CONFIG_multicore_threads=2
+CONFIG_do_monthly=&quot;0&quot;
+CONFIG_do_weekly=&quot;0&quot;
+CONFIG_rotation_daily=6
+CONFIG_mysql_dump_port=3306
+CONFIG_mysql_dump_single_transaction=&#39;yes&#39;
+CONFIG_mysql_dump_compression=&#39;gzip&#39;
+</pre></div>
+
+
+<p><strong>automongobackup</strong>   </p>
+<div class="highlight"><pre><span></span>DBHOST=&quot;127.0.0.1&quot;
+DBPORT=&quot;27017&quot;
+BACKUPDIR=&quot;/backup/mongodb&quot;
+DBUSERNAME=&quot;user&quot;
+DBPASSWORD=&quot;passwd&quot;
+DBAUTHDB=&quot;admin&quot;
+MAILCONTENT=&quot;stdout&quot;
+MAXATTSIZE=&quot;4000&quot;
+DODAILY=&quot;yes&quot;
+DAILYRETENTION=6
+DOWEEKLY=&quot;no&quot;
+WEEKLYDAY=0
+WEEKLYRETENTION=0
+DOMONTHLY=&quot;no&quot;
+MONTHLYRETENTION=0
+COMP=&quot;gzip&quot;
+CLEANUP=&quot;yes&quot;
+LATEST=&quot;yes&quot;
+LATESTLINK=&quot;yes&quot;
+OPLOG=&quot;no&quot;
+REPLICAONSLAVE=&quot;yes&quot;
+REQUIREDBAUTHDB=&quot;yes&quot;
+</pre></div>
+
+
+<p><em>两个配置都指定备份文件保存一星期。</em>   </p>
+<h4>三 执行</h4>
+<div class="highlight"><pre><span></span>/usr/local/bin/automysqlbackup /etc/automysqlbackup/myserver.conf
+automongobackup
+</pre></div>
+
+
+<h4>四 数据导入</h4>
+<p><strong>mongodb</strong></p>
+<div class="highlight"><pre><span></span>mongorestore -h 127.0.0.1 -d dbname dbbakdir/
+</pre></div>
+
+
+<p><strong>mysql</strong></p>
+<div class="highlight"><pre><span></span>mysql -uusername -ppassword &lt; bak.sql
+</pre></div> 
+	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-17-06.html">
+          <i class="icon-comment"></i> Comment </a>
+	<hr />
+      </div>
+      
+    </div>
+    
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="../yun-wei/2016-03-24-17-02.html"><h1>maven 命令备忘</h1></a>
+      </div>
     </div>
     <div class="row-fluid">
       <div class="span2">
@@ -69,8 +169,8 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <p>
 </p>
       </div>
-      <div class="article-content span8">
-	<p>**maven编译缺少依赖，本地安装依赖、88</p>
+      <div class="summary span8">
+	<p><strong>maven编译缺少依赖，本地安装依赖</strong></p>
 <div class="highlight"><pre><span></span>mvn install:install-file -DgroupId<span class="o">=</span>redis.clients -DartifactId<span class="o">=</span>jedis -Dversion<span class="o">=</span>2.6.3 -Dpackaging<span class="o">=</span>jar -Dfile<span class="o">=</span>./lib/jedis-2.6.3.jar
 </pre></div>
 
@@ -78,7 +178,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <p><strong>常见依赖报错</strong>   </p>
 <p>报错信息通常为   </p>
 <blockquote>
-<p>Could not resolve dependencies for project 。。。
+<p>Could not resolve dependencies for project ... <br />
 Could not find artifacf</p>
 </blockquote>
 <p>如果是因为pom文件未指定依赖，报错通常为   </p>
@@ -86,12 +186,12 @@ Could not find artifacf</p>
 <p>error: package xxx类 does not exist</p>
 </blockquote> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-17-02.html">
-          <i class="icon-comment"></i> Comment </a>
+          <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
       
     </div>
-    
+      
 
  
         
@@ -532,46 +632,6 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 
 <p>不过报错原因暂时不明。</p> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-15-04.html">
-          <i class="icon-plus-sign"></i> Read More </a>
-	<hr />
-      </div>
-      
-    </div>
-      
-
- 
-        
-
-
-
-    <div class='row-fluid'>
-      <div class='article-title span9'> 
-        <a href="../yun-wei/2016-03-24-14-52.html"><h1>Flume windows 平台部署</h1></a>
-      </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span2">
-<p>四 24 三月 2016 </p>
-
-<p style="text-align: left;">
-Filed under <a href="../yun-wei/index.html">运维</a>
-</p>
-<p style="text-align: left;">
- 
-    Tags <a href="../tag/flume.html">Flume</a> </p>
-<p>
-</p>
-      </div>
-      <div class="summary span8">
-	<p>最近有在windows平台部署Flume的需求，看了<a href="http://abloz.com/flume/windows_download.html" target="_blank">浩瀚星空的blog</a> ，不过我编译一直不成功，而且博主提供的预编译版本是1.3，不支持开启flume.monitoring.type=http、flume.monitoring.port监控。   </p>
-<p><strong>实际我们在使用中没必要在windows编译，直接拿flume官方打好的包一样可以直接跑。</strong>   </p>
-<p>部署仍然可以借<a href="http://abloz.com/flume/windows_download.html" target="_blank">鉴浩瀚星空的blog</a> 他压缩包里的flume在windows下启动脚本flume.bat文件，tail.bat和tail.py配合完成。   </p>
-<p>下面我flume程序windows下部署大概流程：   </p>
-<p>1.安装jdk1.7,python2.7 <br />
-2. 解压 flume1.5.2.tar.gz <br />
-3. cd flume1.5\conf,修改flume-conf.properties根据实际修改kafka信息 <br />
-4. cd flume1.5\bin,根据实际安装位置修改flume.bat中 FLUME_HOME ...</p> 
-	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-14-52.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>

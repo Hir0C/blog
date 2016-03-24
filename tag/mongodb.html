@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>Hir0C blog <small>mysql</small></title>
+    <title>Hir0C blog <small>mongodb</small></title>
     <meta name="description" content="">
     <meta name="author" content="Hir0C">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -145,65 +145,11 @@ automongobackup
       
     </div>
     
-
- 
-        
-
-
-
-    <div class='row-fluid'>
-      <div class='article-title span9'> 
-        <a href="../yun-wei/2016-03-23-14-16.html"><h1>mysql5.6使用老格式密码</h1></a>
-      </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span2">
-<p>三 23 三月 2016 </p>
-
-<p style="text-align: left;">
-Filed under <a href="../yun-wei/index.html">运维</a>
-</p>
-<p style="text-align: left;">
- 
-    Tags <a href="../tag/mysql.html">mysql</a> </p>
-<p>
-</p>
-      </div>
-      <div class="summary span8">
-	<p>转发的，找不到原文了。。</p>
-<blockquote>
-<p>SET SESSION old_passwords=0;
-SELECT PASSWORD('123456');
-SET SESSION old_passwords=1;
-SELECT PASSWORD('123456');</p>
-</blockquote>
-<p>实际操作：
-登陆mysql，使用<code>SET SESSION old_passwords=0;</code> //设置老格式密码
-<code>SET PASSWORD FOR 'webuser'@'localhost' = PASSWORD('123456')</code> //然后为用户设置密码。</p>
-<p>修改配置文件：
-        [client]
-        secure_auth = 0
-        [mysqld]
-        old_passwords=1</p>
-<p>成功登陆！</p>
-<p>忘记用户密码时：
-        [mysqld]
-        skip-grant-tables</p>
-<p>然后不用口令进入mysql修改密码：</p>
-<blockquote>
-<p>UPDATE mysql.user SET Password=PASSWORD ...</p></blockquote> 
-	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-23-14-16.html">
-          <i class="icon-plus-sign"></i> Read More </a>
-	<hr />
-      </div>
-      
-    </div>
-      
 <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
 
-    <li class="active"><a href="../tag/mysql.html">1</a></li>
+    <li class="active"><a href="../tag/mongodb.html">1</a></li>
 
     <li class="next disabled"><a href="#">&rarr; Next</a></li>
 

@@ -53,8 +53,108 @@
 
     <div class='row-fluid''>
         <div class="article-title span9">
-            <a href="../yun-wei/2016-03-24-17-02.html"><h1>HiroC's maven 命令备忘</h1></a>
+            <a href="../yun-wei/2016-03-24-17-06.html"><h1>mysql mongodb 备份脚本</h1></a>
         </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>四 24 三月 2016 </p>
+
+<p style="text-align: left;">
+Filed under <a href="../yun-wei/index.html">运维</a>
+</p>
+<p style="text-align: left;">
+ 
+    Tags <a href="../tag/mysql.html">mysql</a> <a href="../tag/mongodb.html">mongodb</a> </p>
+<p>
+</p>
+      </div>
+      <div class="article-content span8">
+	<h4>一 准备:</h4>
+<div class="highlight"><pre><span></span>[automysqlbackup下载](https://sourceforge.net/projects/automysqlbackup/){:target=&quot;_blank&quot;}   
+[automongobackup下载](https://github.com/micahwedemeyer/automongobackup){:target=&quot;_blank&quot;}
+
+automongobackup是模仿automysqlbackup项目写的，默认并不带配置文件，可以直接修改脚本里对应变量。
+</pre></div>
+
+
+<p>​</p>
+<h4>二 配置</h4>
+<p><strong>automysqlbackup</strong>   </p>
+<div class="highlight"><pre><span></span>CONFIG_mysql_dump_username=&#39;user&#39;
+CONFIG_mysql_dump_password=&#39;passwd&#39;
+CONFIG_mysql_dump_host=&#39;localhost&#39;
+CONFIG_backup_dir=&#39;/backup/mysql&#39;
+CONFIG_multicore=&#39;yes&#39;
+CONFIG_multicore_threads=2
+CONFIG_do_monthly=&quot;0&quot;
+CONFIG_do_weekly=&quot;0&quot;
+CONFIG_rotation_daily=6
+CONFIG_mysql_dump_port=3306
+CONFIG_mysql_dump_single_transaction=&#39;yes&#39;
+CONFIG_mysql_dump_compression=&#39;gzip&#39;
+</pre></div>
+
+
+<p><strong>automongobackup</strong>   </p>
+<div class="highlight"><pre><span></span>DBHOST=&quot;127.0.0.1&quot;
+DBPORT=&quot;27017&quot;
+BACKUPDIR=&quot;/backup/mongodb&quot;
+DBUSERNAME=&quot;user&quot;
+DBPASSWORD=&quot;passwd&quot;
+DBAUTHDB=&quot;admin&quot;
+MAILCONTENT=&quot;stdout&quot;
+MAXATTSIZE=&quot;4000&quot;
+DODAILY=&quot;yes&quot;
+DAILYRETENTION=6
+DOWEEKLY=&quot;no&quot;
+WEEKLYDAY=0
+WEEKLYRETENTION=0
+DOMONTHLY=&quot;no&quot;
+MONTHLYRETENTION=0
+COMP=&quot;gzip&quot;
+CLEANUP=&quot;yes&quot;
+LATEST=&quot;yes&quot;
+LATESTLINK=&quot;yes&quot;
+OPLOG=&quot;no&quot;
+REPLICAONSLAVE=&quot;yes&quot;
+REQUIREDBAUTHDB=&quot;yes&quot;
+</pre></div>
+
+
+<p><em>两个配置都指定备份文件保存一星期。</em>   </p>
+<h4>三 执行</h4>
+<div class="highlight"><pre><span></span>/usr/local/bin/automysqlbackup /etc/automysqlbackup/myserver.conf
+automongobackup
+</pre></div>
+
+
+<h4>四 数据导入</h4>
+<p><strong>mongodb</strong></p>
+<div class="highlight"><pre><span></span>mongorestore -h 127.0.0.1 -d dbname dbbakdir/
+</pre></div>
+
+
+<p><strong>mysql</strong></p>
+<div class="highlight"><pre><span></span>mysql -uusername -ppassword &lt; bak.sql
+</pre></div> 
+	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-17-06.html">
+          <i class="icon-comment"></i> Comment </a>
+	<hr />
+      </div>
+      
+    </div>
+    
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="../yun-wei/2016-03-24-17-02.html"><h1>maven 命令备忘</h1></a>
+      </div>
     </div>
     <div class="row-fluid">
       <div class="span2">
@@ -69,8 +169,8 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <p>
 </p>
       </div>
-      <div class="article-content span8">
-	<p>**maven编译缺少依赖，本地安装依赖、88</p>
+      <div class="summary span8">
+	<p><strong>maven编译缺少依赖，本地安装依赖</strong></p>
 <div class="highlight"><pre><span></span>mvn install:install-file -DgroupId<span class="o">=</span>redis.clients -DartifactId<span class="o">=</span>jedis -Dversion<span class="o">=</span>2.6.3 -Dpackaging<span class="o">=</span>jar -Dfile<span class="o">=</span>./lib/jedis-2.6.3.jar
 </pre></div>
 
@@ -78,7 +178,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <p><strong>常见依赖报错</strong>   </p>
 <p>报错信息通常为   </p>
 <blockquote>
-<p>Could not resolve dependencies for project 。。。
+<p>Could not resolve dependencies for project ... <br />
 Could not find artifacf</p>
 </blockquote>
 <p>如果是因为pom文件未指定依赖，报错通常为   </p>
@@ -86,12 +186,12 @@ Could not find artifacf</p>
 <p>error: package xxx类 does not exist</p>
 </blockquote> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-17-02.html">
-          <i class="icon-comment"></i> Comment </a>
+          <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
       
     </div>
-    
+      
 
  
         
@@ -545,47 +645,6 @@ Filed under <a href="../yun-wei/index.html">运维</a>
       
     </div>
       
-
- 
-        
-
-
-
-    <div class='row-fluid'>
-      <div class='article-title span9'> 
-        <a href="../yun-wei/2016-03-24-15-04.html"><h1>rpm包制作遇到的一个小问题</h1></a>
-      </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span2">
-<p>四 24 三月 2016 </p>
-
-<p style="text-align: left;">
-Filed under <a href="../yun-wei/index.html">运维</a>
-</p>
-<p style="text-align: left;">
- 
-    Tags <a href="../tag/linux.html">linux</a> <a href="../tag/rpm.html">rpm</a> </p>
-<p>
-</p>
-      </div>
-      <div class="summary span8">
-	<p>最近rhel6上做rpm遇到一个问题，之前在rhel5上从来没有遇到过。如图：
-<img alt="rpm报错图" src="http://static.oschina.net/uploads/space/2015/0105/015731_Wny3_1428530.png" /></p>
-<p>而且出现这个报错只是在做个别包的时候会有，网上大概查了一下报错也没有啥明确的说法。不过报错的提示倒是很明显，根据你的报错赋值对应的bitmask   </p>
-<p>比如我这回遇到的是<code>invalid RPATHs</code>，所以我打包时就要执行如下命令：   </p>
-<div class="highlight"><pre><span></span><span class="nv">QA_RPATHS</span><span class="o">=</span>$<span class="o">[</span> 0x0002 <span class="o">]</span> rpmbuild -bb SPEC/xxx.spec
-</pre></div>
-
-
-<p>不过报错原因暂时不明。</p> 
-	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-15-04.html">
-          <i class="icon-plus-sign"></i> Read More </a>
-	<hr />
-      </div>
-      
-    </div>
-      
 <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
@@ -593,6 +652,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
     <li class="active"><a href="../author/hir0c.html">1</a></li>
     <li class=""><a href="../author/hir0c2.html">2</a></li>
     <li class=""><a href="../author/hir0c3.html">3</a></li>
+    <li class=""><a href="../author/hir0c4.html">4</a></li>
 
     <li class="next"><a href="../author/hir0c2.html">Next &rarr;</a></li>
 
