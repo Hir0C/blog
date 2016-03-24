@@ -150,13 +150,16 @@ tar -cvf /root/nn_backup_data.tar .
 <p>点搜索框左边小礼品盒子图标,添加新版本parcel的url,添加后下面会多出个小图,点激活就可以自动升级了   </p>
 <p>至此完成所有升级.   </p>
 <h4>六、错误整理</h4>
-<p>1.升级过程出现namenode启动失败问题 <br />
-        java.io.IOException:
-        File system image contains an old layout version -51.
-        An upgrade to version -55 is required.
-        Please restart NameNode with the "-rollingUpgrade started" option if a rolling upgraded is already started; or restart NameNode with the "UPGRADE" to start a new upgrade.   </p>
-<p>手动到master节点启动后,停掉,再通过web页面重启后正常,命令如下</p>
-<div class="highlight"><pre><span></span>su - hdfs -c <span class="s2">&quot;hdfs --config /var/run/cloudera-scm-agent/process/XXX-hdfs-NAMENODE namenode -upgrade&quot;</span>
+<p>1.升级过程出现namenode启动失败问题   </p>
+<div class="highlight"><pre><span></span>&gt; java.io.IOException:
+&gt; File system image contains an old layout version -51.
+&gt; An upgrade to version -55 is required.
+&gt; Please restart NameNode with the &quot;-rollingUpgrade started&quot; option if a rolling upgraded is already started; or restart NameNode with the &quot;UPGRADE&quot; to start a new upgrade.   
+
+
+手动到master节点启动后,停掉,再通过web页面重启后正常,命令如下
+```shell
+su - hdfs -c &quot;hdfs --config /var/run/cloudera-scm-agent/process/XXX-hdfs-NAMENODE namenode -upgrade&quot;
 </pre></div>
 
 
