@@ -5,29 +5,36 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/</loc>
-<lastmod>2016-03-24T15:24:08-00:00</lastmod>
+<lastmod>2016-03-24T15:29:47-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/archives.html</loc>
-<lastmod>2016-03-24T15:24:08-00:00</lastmod>
+<lastmod>2016-03-24T15:29:47-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/tags.html</loc>
-<lastmod>2016-03-24T15:24:08-00:00</lastmod>
+<lastmod>2016-03-24T15:29:47-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/categories.html</loc>
-<lastmod>2016-03-24T15:24:08-00:00</lastmod>
+<lastmod>2016-03-24T15:29:47-00:00</lastmod>
 <changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>/yun-wei/2016-03-24-15-27.html</loc>
+<lastmod>2016-03-24T15:27:00+08:00</lastmod>
+<changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
@@ -194,7 +201,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/yun-wei/index.html</loc>
-<lastmod>2016-03-24T15:08:00+08:06</lastmod>
+<lastmod>2016-03-24T15:27:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -222,7 +229,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/tag/kafka.html</loc>
-<lastmod>2016-03-24T13:55:00+08:06</lastmod>
+<lastmod>2016-03-24T15:27:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -292,7 +299,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/tag/flume.html</loc>
-<lastmod>2016-03-24T14:52:00+08:06</lastmod>
+<lastmod>2016-03-24T15:27:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -383,7 +390,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/author/hir0c.html</loc>
-<lastmod>2016-03-24T15:08:00+08:06</lastmod>
+<lastmod>2016-03-24T15:27:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

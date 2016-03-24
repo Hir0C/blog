@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>Hir0C blog <small>Flume</small></title>
+    <title>Hir0C blog <small>flume</small></title>
     <meta name="description" content="">
     <meta name="author" content="Hir0C">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,8 +53,77 @@
 
     <div class='row-fluid''>
         <div class="article-title span9">
-            <a href="../yun-wei/2016-03-24-14-52.html"><h1>Flume windows 平台部署</h1></a>
+            <a href="../yun-wei/2016-03-24-15-27.html"><h1>flume + kafka 基本配置</h1></a>
         </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>四 24 三月 2016 </p>
+
+<p style="text-align: left;">
+Filed under <a href="../yun-wei/index.html">运维</a>
+</p>
+<p style="text-align: left;">
+ 
+    Tags <a href="../tag/flume.html">flume</a> <a href="../tag/kafka.html">kafka</a> </p>
+<p>
+</p>
+      </div>
+      <div class="article-content span8">
+	<p><em>apache-flume1.6 sink默认支持kafka</em></p>
+<blockquote>
+<p>[FLUME-2242] - Flume Sink and Source for Apache Kafka</p>
+</blockquote>
+<p>官方给的例子很贴心，可以直接运行。   </p>
+<div class="highlight"><pre><span></span>    a1.channels = channel1
+    a1.sources = src-1
+    a1.sinks = k1
+
+    a1.sources.src-1.type = spooldir  #实时性要求不高的话，可以用这种方式，tail实际效率也挺低的
+    a1.sources.src-1.channels = channel1
+    a1.sources.src-1.spoolDir = /opt/flumeSpool/
+    a1.sources.src-1.fileHeader = false
+
+    #a1.sources.src-1.type = exec
+    #a1.sources.src-1.command = tail -F /opt/flumeSpool/abc.log
+    #a1.sources.src-1.channels = channel1
+
+    a1.sinks.k1.type = org.apache.flume.sink.kafka.KafkaSink
+    a1.sinks.k1.topic = testlog
+    a1.sinks.k1.brokerList = 1.1.1.11:9092,1.1.1.12:9092
+    a1.sinks.k1.requiredAcks = 1
+    a1.sinks.k1.batchSize = 20
+    a1.sinks.k1.channel = channel1
+
+    a1.channels.channel1.type   = org.apache.flume.channel.kafka.KafkaChannel
+    a1.channels.channel1.capacity = 10000
+    a1.channels.channel1.transactionCapacity = 1000
+    a1.channels.channel1.brokerList=1.1.1.11:9092,1.1.1.12:9092
+    a1.channels.channel1.topic=testlog
+    a1.channels.channel1.zookeeperConnect=1.1.1.13:2181
+</pre></div>
+
+
+<p>flume启动命令：   </p>
+<div class="highlight"><pre><span></span>../bin/flume-ng agent --conf-file flume-conf.properties --name myagent -Dflume.monitoring.type<span class="o">=</span>http -Dflume.monitoring.port<span class="o">=</span>34545
+</pre></div> 
+	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-15-27.html">
+          <i class="icon-comment"></i> Comment </a>
+	<hr />
+      </div>
+      
+    </div>
+    
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="../yun-wei/2016-03-24-14-52.html"><h1>Flume windows 平台部署</h1></a>
+      </div>
     </div>
     <div class="row-fluid">
       <div class="span2">
@@ -69,7 +138,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <p>
 </p>
       </div>
-      <div class="article-content span8">
+      <div class="summary span8">
 	<p>最近有在windows平台部署Flume的需求，看了<a href="http://abloz.com/flume/windows_download.html" target="_blank">浩瀚星空的blog</a> ，不过我编译一直不成功，而且博主提供的预编译版本是1.3，不支持开启flume.monitoring.type=http、flume.monitoring.port监控。   </p>
 <p><strong>实际我们在使用中没必要在windows编译，直接拿flume官方打好的包一样可以直接跑。</strong>   </p>
 <p>部署仍然可以借<a href="http://abloz.com/flume/windows_download.html" target="_blank">鉴浩瀚星空的blog</a> 他压缩包里的flume在windows下启动脚本flume.bat文件，tail.bat和tail.py配合完成。   </p>
@@ -77,34 +146,14 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <p>1.安装jdk1.7,python2.7 <br />
 2. 解压 flume1.5.2.tar.gz <br />
 3. cd flume1.5\conf,修改flume-conf.properties根据实际修改kafka信息 <br />
-4. cd flume1.5\bin,根据实际安装位置修改flume.bat中 FLUME_HOME 和 JAVA_HOME <br />
-5. 修改tail.py文件:根据实际情况修改需要上传日志的路径。如: F:\nginx-1.7.8\logs\access.log <br />
-6. 将flume1.5\bin,python2.7添加进系统PATH中 <br />
-7. 访问url检查服务运行是否正常：http://ip:34545/metrics <br />
-8. 连接kafka查看日志是否接收到：</p>
-<div class="highlight"><pre><span></span>./bin/kafka-console-consumer.sh --zookeeper kafka1:2181 --topic test1   
-</pre></div>
-
-
-<p>下面贴出我的flume.bat windows下启动脚本，我开启了34545监控端口，另外需要注意的是flume在windonws启动的命令参数的顺序是有要求的：   </p>
-<div class="highlight"><pre><span></span><span class="k">set</span> <span class="nv">FLUME_HOME</span><span class="p">=</span>D:\flume1.5
-<span class="k">set</span> <span class="nv">JAVA_HOME</span><span class="p">=</span>D:\Java\jdk1.6.0_45
-<span class="k">set</span> <span class="nv">JAVA</span><span class="p">=</span><span class="s2">&quot;</span><span class="nv">%JAVA_HOME%</span><span class="s2">\bin\java.exe&quot;</span>
-<span class="k">set</span> <span class="nv">JAVA_OPTS</span><span class="p">=</span>-Xmx1024m
-<span class="k">set</span> <span class="nv">CONF</span><span class="p">=</span><span class="nv">%FLUME_HOME%</span>\conf\flume-conf.properties
-<span class="k">set</span> <span class="nv">AGENT</span><span class="p">=</span>agent
-<span class="nv">%JAVA%</span>  <span class="nv">%JAVA_OPTS%</span> -Dflume.monitoring.type=http -Dflume.monitoring.port=34545 -Dlog4j.configuration=file:\\\<span class="nv">%FLUME_HOME%</span>\conf\log4j.properties -cp <span class="s2">&quot;</span><span class="nv">%FLUME_HOME%</span><span class="s2">\lib\*&quot;</span> org.apache.flume.node.Application -f <span class="nv">%FLUME_HOME%</span>\conf\flume-conf.properties -n <span class="nv">%AGENT%</span>
-</pre></div>
-
-
-<p>另外使用flume在使用tail模式时，貌似不支持直接调用py脚本，需要通过一个批处理调用tail.py。</p> 
+4. cd flume1.5\bin,根据实际安装位置修改flume.bat中 FLUME_HOME ...</p> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-14-52.html">
-          <i class="icon-comment"></i> Comment </a>
+          <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
       
     </div>
-    
+      
 <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
