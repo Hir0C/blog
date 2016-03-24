@@ -76,16 +76,13 @@ Filed under <a href="./yun-wei/index.html">运维</a>
 <li>下载<a href="http://archive-primary.cloudera.com/cm5/installer" target="_blank">cloudera manager installer</a></li>
 <li>因为这次要模拟升级安装,首先要先下载<a href="http://archive-primary.cloudera.com/cm5/redhat/5/x86_64/cm/5.0.0-beta-2/" target="_blank">beta的源</a></li>
 <li>然后下载<a href="http://archive-primary.cloudera.com/cm5/redhat/5/x86_64/cm/5.0.0/" target="_blank">release的源</a></li>
-<li>然后下载(parcel包)(http://archive-primary.cloudera.com/cdh5/parcels/){:target="_blank"},<em>官方推荐这种方式安装</em>
+<li>然后下载<a href="http://archive-primary.cloudera.com/cdh5/parcels/" target="_blank">parcel包</a>,<em>官方推荐这种方式安装</em>
 <em>另外除了parcel包,还要下载json文件,没有那个json文件是无法正常安装的.</em></li>
 <li>
 <p>下载到本地后将rpm包的源,放到webserver目录下,写好yum的repo文件</p>
 <div class="highlight"><pre><span></span><span class="k">[cloudera-manager]</span>
-
 <span class="na">name</span> <span class="o">=</span> <span class="s">Cloudera Manager, Version 5.0.0</span>
-
 <span class="na">baseurl</span> <span class="o">=</span> <span class="s">http://IP/yum-package/cm5/redhat/5/x86_64/cm/5.0.0/</span>
-
 <span class="na">gpgcheck</span> <span class="o">=</span> <span class="s">0</span>
 </pre></div>
 
@@ -95,20 +92,29 @@ Filed under <a href="./yun-wei/index.html">运维</a>
 <p>parcel包添加验证文件</p>
 </li>
 </ol>
-<p>cat manifest.json 把sha那一段沾出来, 写到parcel包.sha文件里,然后为这三个文件授权755</p>
+<p><code>cat manifest.json</code> 把sha那一段沾出来, 写到parcel包.</p>
+<p>sha文件里,然后为这三个文件授权755</p>
 <p><strong>之前因为manifest.json文件改错,安装包一直失败,查看manager的log才发现问题</strong></p>
 <p>至此准备工作完成!</p>
 <h4>二 、安装cloudera manager</h4>
 <p><code>./cloudera-manager-installer.bin</code> 直接执行,这个还支持鼠标点击.</p>
-<p>因为测试环境为纯内网,无法使用安装包里的repo,在最后一步前,准备好另一个终端,准备好手动拷贝刚才写的repo文件,因为安装时会被覆盖,所以只能手动或者写个循环反覆盖.......</p>
+<p>因为测试环境为纯<code>内网</code>,无法使用安装包里的repo,在最后一步前,准备好另一个终端,准备好手动拷贝刚才写的repo文件,因为安装时会被覆盖,所以只能手动或者写个循环反覆盖.......</p>
 <p>完成manager机器的安装 就可以进web配置了,启动略慢,耐心等半分钟</p>
 <p>登陆网址为<code>http://ip:7180</code></p>
 <h4>三、通过web安装cdh</h4>
 <ol>
-<li>添加完涉及的服务器后，手动指定parcel和agent的本地源</li>
-<li>安装完成后选择服务,本次只选择了基本服务hdfs,yarn,zookeeper</li>
-<li>指定角色,完成安装.</li>
-<li>使用slave节点,测试上传文件ok</li>
+<li>
+<p>添加完涉及的服务器后，手动指定parcel和agent的本地源</p>
+</li>
+<li>
+<p>安装完成后选择服务,本次只选择了基本服务hdfs,yarn,zookeeper</p>
+</li>
+<li>
+<p>指定角色,完成安装.</p>
+</li>
+<li>
+<p>使用slave节点,测试上传文件ok</p>
+</li>
 </ol>
 <h4>四、升级cloudera manager</h4>
 <p>升级cloudera manager</p>
