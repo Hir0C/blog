@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>python使用中遇到的一些问题 - Hir0C blog</title>
+    <title>发送邮件Http api - Hir0C blog</title>
     <meta name="description" content="">
     <meta name="author" content="Hir0C">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,9 +32,9 @@
 
       <div class="span3" id="blog-nav">
 	<ul class="nav nav-pills pull-right">
-	    <li  class="active" >
-	      <a href="../ri-chang/index.html ">日常</a>
 	    <li >
+	      <a href="../ri-chang/index.html ">日常</a>
+	    <li  class="active" >
 	      <a href="../yun-wei/index.html ">运维</a>
 	</ul>
       </div>
@@ -50,7 +50,7 @@
     <div class='article'>
       <div class="row-fluid">
            <div class="content-title span9">
-             <h1>python使用中遇到的一些问题</h1>
+             <h1>发送邮件Http api</h1>
            </div>
       </div>
     <div class="row-fluid">
@@ -58,42 +58,43 @@
 <p>四 24 三月 2016 </p>
 
 <p style="text-align: left;">
-Filed under <a href="../ri-chang/index.html">日常</a>
+Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
 <p style="text-align: left;">
  
-    Tags <a href="../tag/python.html">python</a> </p>
+    Tags <a href="../tag/linux.html">linux</a> <a href="../tag/mail.html">mail</a> </p>
 <p>
 </p>
       </div>
       
       <div class="span8">
-	<h4>常用特殊符号</h4>
-<p><strong>左位移 &lt;&lt;</strong>   </p>
-<p>转换二进制后去掉最左边y位   </p>
-<p>计算公式 x * (2 ** y)</p>
-<p>比如 4 &lt;&lt; 3 等于 4 * ( 2 ** 3) 等于 32</p>
-<p><strong>右位移 &gt;&gt;</strong>   </p>
-<p>转换二进制后去掉最右边y位</p>
-<p>计算公式 x / (2 ** y)</p>
-<p>比如 32 &gt;&gt; 3 等于 32 / ( 2 ** 3) 等于 4</p>
-<p>右位移实际应用：</p>
-<p>右位移10位，计算数据占用磁盘空间k(比如1100000 &gt;&gt; 10 = 1074)</p>
-<p>再右位移10位，计算数据占用磁盘空间M(1074 &gt;&gt; 10 = 1)</p>
-<p><strong>按位与 &amp;</strong>   </p>
-<p>转换二进制后比较，只有双方都唯一时才得1</p>
-<p>用来计算奇偶数</p>
-<p>比如 4 &amp;1 = 0 ； 5 &amp; 1 = 1</p>
-<h4>模块</h4>
-<p>输出中文内容报错如下：</p>
-<div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">bytes_sent</span>
-
-<span class="err">需要指定返回编码：</span>
-<span class="k">return</span> <span class="p">[</span><span class="n">stdout</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;gbk&quot;</span><span class="p">)]</span>
+	<h4>简介</h4>
+<p>github上找到个go写的通过http POST请求发送邮件的代码。 <br />
+少有的根据文档顺利安装成功并运行的代码。   </p>
+<p><a href="https://github.com/niean/mailsender" target="_blank">链接在此</a></p>
+<h4>配置</h4>
+<div class="highlight"><pre><span></span>{
+    &quot;debug&quot;:true,
+    &quot;http&quot;:{
+        &quot;enable&quot;:true,
+        &quot;listen&quot;:&quot;0.0.0.0:6666&quot;
+    },
+    &quot;rpc&quot;:{
+        &quot;enable&quot;:false,
+        &quot;listen&quot;:&quot;0.0.0.0:77777&quot;
+    },
+    &quot;mail&quot;:{
+        &quot;enable&quot; : true,
+        &quot;sendConcurrent&quot; : 5,
+        &quot;maxQueueSize&quot; : 100,
+        &quot;fromUser&quot; : &quot;user&quot;,  //随便写
+        &quot;mailServerHost&quot; : &quot;mailserver.com&quot;,
+        &quot;mailServerPort&quot; : 25,
+        &quot;mailServerAccount&quot; : &quot;alert@mailserver.com&quot;,  //邮件发件账号名
+        &quot;mailServerPasswd&quot; : &quot;&quot;  //没验证可以留空
+    }
+}
 </pre></div>
-
-
-<p><a href="http://stackoverflow.com/questions/21059640/wsgiref-error-attributeerror-nonetype-object-has-no-attribute-split" target="_blank">参考链接</a></p>
 	<hr />
       </div>
     </div>

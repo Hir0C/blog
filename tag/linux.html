@@ -53,8 +53,67 @@
 
     <div class='row-fluid''>
         <div class="article-title span9">
-            <a href="../yun-wei/2016-03-24-15-04.html"><h1>rpm包制作遇到的一个小问题</h1></a>
+            <a href="../yun-wei/2016-03-24-16-40.html"><h1>发送邮件Http api</h1></a>
         </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>四 24 三月 2016 </p>
+
+<p style="text-align: left;">
+Filed under <a href="../yun-wei/index.html">运维</a>
+</p>
+<p style="text-align: left;">
+ 
+    Tags <a href="../tag/linux.html">linux</a> <a href="../tag/mail.html">mail</a> </p>
+<p>
+</p>
+      </div>
+      <div class="article-content span8">
+	<h4>简介</h4>
+<p>github上找到个go写的通过http POST请求发送邮件的代码。 <br />
+少有的根据文档顺利安装成功并运行的代码。   </p>
+<p><a href="https://github.com/niean/mailsender" target="_blank">链接在此</a></p>
+<h4>配置</h4>
+<div class="highlight"><pre><span></span>{
+    &quot;debug&quot;:true,
+    &quot;http&quot;:{
+        &quot;enable&quot;:true,
+        &quot;listen&quot;:&quot;0.0.0.0:6666&quot;
+    },
+    &quot;rpc&quot;:{
+        &quot;enable&quot;:false,
+        &quot;listen&quot;:&quot;0.0.0.0:77777&quot;
+    },
+    &quot;mail&quot;:{
+        &quot;enable&quot; : true,
+        &quot;sendConcurrent&quot; : 5,
+        &quot;maxQueueSize&quot; : 100,
+        &quot;fromUser&quot; : &quot;user&quot;,  //随便写
+        &quot;mailServerHost&quot; : &quot;mailserver.com&quot;,
+        &quot;mailServerPort&quot; : 25,
+        &quot;mailServerAccount&quot; : &quot;alert@mailserver.com&quot;,  //邮件发件账号名
+        &quot;mailServerPasswd&quot; : &quot;&quot;  //没验证可以留空
+    }
+}
+</pre></div> 
+	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-16-40.html">
+          <i class="icon-comment"></i> Comment </a>
+	<hr />
+      </div>
+      
+    </div>
+    
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="../yun-wei/2016-03-24-15-04.html"><h1>rpm包制作遇到的一个小问题</h1></a>
+      </div>
     </div>
     <div class="row-fluid">
       <div class="span2">
@@ -69,7 +128,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <p>
 </p>
       </div>
-      <div class="article-content span8">
+      <div class="summary span8">
 	<p>最近rhel6上做rpm遇到一个问题，之前在rhel5上从来没有遇到过。如图：
 <img alt="rpm报错图" src="http://static.oschina.net/uploads/space/2015/0105/015731_Wny3_1428530.png" /></p>
 <p>而且出现这个报错只是在做个别包的时候会有，网上大概查了一下报错也没有啥明确的说法。不过报错的提示倒是很明显，根据你的报错赋值对应的bitmask   </p>
@@ -80,12 +139,12 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 
 <p>不过报错原因暂时不明。</p> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-15-04.html">
-          <i class="icon-comment"></i> Comment </a>
+          <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
       
     </div>
-    
+      
 
  
         
