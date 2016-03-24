@@ -87,14 +87,14 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 
 <p>由于我们的系统是rhel5，glibc版本只到3.4.8，而snappy需要使用3.4.9版本，坑爹。   </p>
 <p>spark1.0.0没有出现过这个问题，为了减少系统改动，重新编译了spark，并将pom.xml 的snappy版本(1.5.3)手动修改成spark1.0.0中的1.5.0版本。但是问题还是没能解决。   </p>
-<p>最终只能编译了更高版本的gcc，我用的gcc4.7.3，将新gcc的libstd++.so.6.x链接过去/usr/lib64/libstd++.so.6， 问题解决。   </p>
+<p>最终只能编译了更高版本的gcc，我用的gcc4.7.3，将新gcc的<code>libstd++.so.6.x</code>链接过去/usr/lib64/libstd++.so.6， 问题解决。   </p>
 <p>gcc编译时依赖的库：</p>
 <div class="highlight"><pre><span></span>../configure --prefix<span class="o">=</span>/usr/local/gcc-4.7.3 --enable-threads<span class="o">=</span>posix --disable-bootstrap --disable-multilib --enable-languages<span class="o">=</span>c
 ,c++,java --with-gmp<span class="o">=</span>/usr/local/gmp-6.0.0/ --with-mpfr<span class="o">=</span>/usr/local/mpfr-3.1.2/ --with-mpc<span class="o">=</span>/usr/local/mpc-1.0.2/
 </pre></div>
 
 
-<p><em>ps：网上那些直接找个库做软连接的方法不用试了，不靠谱。</em></p>
+<p><em>ps：网上那些直接找个库做软连接的方法不用试了，不靠谱。</em>   </p>
 <h4>安装</h4>
 <p><strong>一、spark安装用到的手册</strong></p>
 <p><a href="http://spark.apache.org/docs/latest/spark-standalone.html" target="_blank">spark-standalone</a></p>
@@ -116,9 +116,11 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 
 
 <p><a href="http://zengzhaozheng.blog.51cto.com/8219051/1597902" target="_blank">参照blog</a></p>
-<p><strong>四、添加snappy支持</strong>
-    export SPARK_CLASSPATH=
-    $SPARK_CLASSPATH:/usr/local/hadoop/lib/native:/usr/local/hadoop/share/hadoop/common/:/usr/local/jdk1.7.0_51/jre/lib/amd64/:/usr/local/hadoop/lib/native/Linux-amd64-64/:/usr/local/hadoop/share/hadoop/common/hadoop-lzo-0.4.20-SNAPSHOT.jar:/usr/local/hadoop/share/hadoop/common/lib/hadoop-snappy-0.0.1-SNAPSHOT.jar</p>
+<p><strong>四、添加snappy支持</strong>   </p>
+<div class="highlight"><pre><span></span><span class="x">export SPARK_CLASSPATH=</span><span class="p">$</span><span class="nv">SPARK_CLASSPATH</span><span class="x">:/usr/local/hadoop/lib/native:/usr/local/hadoop/share/hadoop/common/:/usr/local/jdk1.7.0_51/jre/lib/amd64/:/usr/local/hadoop/lib/native/Linux-amd64-64/:/usr/local/hadoop/share/hadoop/common/hadoop-lzo-0.4.20-SNAPSHOT.jar:/usr/local/hadoop/share/hadoop/common/lib/hadoop-snappy-0.0.1-SNAPSHOT.jar</span>
+</pre></div>
+
+
 <p><strong>五、 安装完成后的一些<a href="http://dataunion.org/10345.html" target="_blank">测试用例</a></strong></p>
 <p><strong>六、一些报错</strong></p>
 <p>报错一：</p>
