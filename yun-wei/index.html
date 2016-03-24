@@ -70,20 +70,18 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="article-content span8">
-	<p>最近有在windows平台部署Flume的需求，由于之前部署windows下c++程序开发环境思维定式了，Flume也执着于在windows环境编译，看了<a href="http://abloz.com/flume/windows_download.html" target="_blank">浩瀚星空的blog</a> ，不过编译一直不成功，而且博主提供的1.3版本又不支持开启flume.monitoring.type=http、flume.monitoring.port监控。   </p>
-<p><strong>实际我们在使用中没必要在windows编译，直接拿flume官方打好的包一样可以直接跑。</strong>*   </p>
+	<p>最近有在windows平台部署Flume的需求，看了<a href="http://abloz.com/flume/windows_download.html" target="_blank">浩瀚星空的blog</a> ，不过我编译一直不成功，而且博主提供的预编译版本是1.3，不支持开启flume.monitoring.type=http、flume.monitoring.port监控。   </p>
+<p><strong>实际我们在使用中没必要在windows编译，直接拿flume官方打好的包一样可以直接跑。</strong>   </p>
 <p>部署仍然可以借<a href="http://abloz.com/flume/windows_download.html" target="_blank">鉴浩瀚星空的blog</a> 他压缩包里的flume在windows下启动脚本flume.bat文件，tail.bat和tail.py配合完成。   </p>
 <p>下面我flume程序windows下部署大概流程：   </p>
-<p>安装jdk1.7,python2.7</p>
-<ol>
-<li>解压 flume1.5.2.tar.gz   </li>
-<li>cd flume1.5\conf,修改flume-conf.properties根据实际修改kafka信息   </li>
-<li>cd flume1.5\bin,根据实际安装位置修改flume.bat中 FLUME_HOME 和 JAVA_HOME   </li>
-<li>修改tail.py文件:根据实际情况修改需要上传日志的路径。如: F:\nginx-1.7.8\logs\access.log   </li>
-<li>将flume1.5\bin,python2.7添加进系统PATH中   </li>
-<li>访问url检查服务运行是否正常：http://ip:34545/metrics   </li>
-<li>连接kafka查看日志是否接收到：</li>
-</ol>
+<p>1.安装jdk1.7,python2.7
+2. 解压 flume1.5.2.tar.gz <br />
+3. cd flume1.5\conf,修改flume-conf.properties根据实际修改kafka信息 <br />
+4. cd flume1.5\bin,根据实际安装位置修改flume.bat中 FLUME_HOME 和 JAVA_HOME <br />
+5. 修改tail.py文件:根据实际情况修改需要上传日志的路径。如: F:\nginx-1.7.8\logs\access.log <br />
+6. 将flume1.5\bin,python2.7添加进系统PATH中 <br />
+7. 访问url检查服务运行是否正常：http://ip:34545/metrics <br />
+8. 连接kafka查看日志是否接收到：</p>
 <div class="highlight"><pre><span></span>./bin/kafka-console-consumer.sh --zookeeper kafka1:2181 --topic test1   
 </pre></div>
 
