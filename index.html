@@ -315,12 +315,11 @@ Filed under <a href="./yun-wei/index.html">运维</a>
 <p>2.环境准备：  </p>
 <p>安装JDK7，目前官方推荐版本为<code>1.7 u51</code> 或者更新，并配置JAVA_HOME</p>
 <p>3.配置修改：  </p>
-<p>1）拷贝线上配置到本地kafka目录。
-2）需要注意的是server.properties里broker和ip的指定，必须要唯一。
-3）server.properties中log.dirs必须要手动指定。此配置项是kafka接收日志的存储目录(目前我们保存7天数据log.retention.hours=168)
-4）zookeeper的指定可以是下面这种形式，手动定制zookeeper的目录，并且用逗号分隔ip</p>
-<blockquote>
-<p>zookeeper.connect=1.1.1 ...</p></blockquote> 
+<p>1）拷贝线上配置到本地kafka目录。 <br />
+2）需要注意的是server.properties里broker和ip的指定，必须要唯一。 <br />
+3）server.properties中log.dirs必须要手动指定。此配置项是kafka接收日志的存储目录(目前我们保存7天数据log.retention.hours=168) <br />
+4）zookeeper的指定可以是下面这种形式，手动定制zookeeper的目录，并且用逗号分隔ip <br />
+<code>zookeeper.connect=1.1.1 ...</code></p> 
 	<a class="btn btn-mini xsmall" href="./yun-wei/2016-03-23-17-24.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
