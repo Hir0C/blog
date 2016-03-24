@@ -122,28 +122,22 @@ tar -cvf /root/nn_backup_data.tar .
 </pre></div>
 
 
-<ol>
-<li>把当前跑的所有服务都停掉,包括服务.   </li>
-<li>停掉cloudera-scm-server和cloudera-scm-server-db</li>
-</ol>
+<p>1.把当前跑的所有服务都停掉,包括服务. <br />
+2.停掉cloudera-scm-server和cloudera-scm-server-db</p>
 <div class="highlight"><pre><span></span>service cloudera-scm-server stop
 service cloudera-scm-server-db stop
 </pre></div>
 
 
-<ol>
-<li>准备好新版本的manager的repo文件 <br />
-执行如下命令</li>
-</ol>
+<p>3.准备好新版本的manager的repo文件 <br />
+执行如下命令</p>
 <div class="highlight"><pre><span></span>yum clean all <span class="o">&amp;&amp;</span> yum upgrade <span class="s1">&#39;cloudera-*&#39;</span>
 rpm -qa  <span class="s1">&#39;cloudera-*&#39;</span> 查看版本
 </pre></div>
 
 
-<ol>
-<li>升级完成,启动server和db   </li>
-<li>进入web升级agent们,一进去就会有提示,然后手动指定url,升级就可以鸟.   </li>
-</ol>
+<p>4.升级完成,启动server和db <br />
+5.进入web升级agent们,一进去就会有提示,然后手动指定url,升级就可以鸟.   </p>
 <h4>五、升级CDH</h4>
 <p>注意先备份namenode数据   </p>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> /mnt/hadoop/hdfs/name
