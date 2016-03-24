@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>Hir0C blog <small>spark</small></title>
+    <title>OpenSSH 连接复用 - Hir0C blog</title>
     <meta name="description" content="">
     <meta name="author" content="Hir0C">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,7 +34,7 @@
 	<ul class="nav nav-pills pull-right">
 	    <li >
 	      <a href="../ri-chang/index.html ">日常</a>
-	    <li >
+	    <li  class="active" >
 	      <a href="../yun-wei/index.html ">运维</a>
 	</ul>
       </div>
@@ -47,15 +47,12 @@
     <div class="row-fluid">
 
         <div class="span10">
-        
-
-        
-
-    <div class='row-fluid''>
-        <div class="article-title span9">
-            <a href="../yun-wei/2016-03-24-14-28.html"><h1>spark snappy 依赖</h1></a>
-        </div>
-    </div>
+    <div class='article'>
+      <div class="row-fluid">
+           <div class="content-title span9">
+             <h1>OpenSSH 连接复用</h1>
+           </div>
+      </div>
     <div class="row-fluid">
       <div class="span2">
 <p>四 24 三月 2016 </p>
@@ -65,55 +62,41 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
 <p style="text-align: left;">
  
-    Tags <a href="../tag/spark.html">spark</a> </p>
+    Tags <a href="../tag/linux.html">linux</a> <a href="../tag/ssh.html">ssh</a> </p>
 <p>
 </p>
       </div>
-      <div class="article-content span8">
-	<p>先记录一个启动失败问题</p>
-<div class="highlight"><pre><span></span><span class="x">     INFO RemoteActorRefProvider</span><span class="p">$</span><span class="nv">RemoteDeadLetterActorRef</span><span class="x">: Message [org.apache.spark.deploy.DeployMessages</span><span class="p">$</span><span class="nv">RegisterWorker</span><span class="x">] from Actor[akka://sparkWorker/user/Worker</span><span class="err">#</span><span class="x">-1461285761] to Actor[akka://sparkWorker/deadLetters] was not delivered. [3] dead letters encountered. This logging can be turned off or adjusted with configuration settings &#39;akka.log-dead-letters&#39; and &#39;akka.log-dead-letters-during-shutdown&#39;.</span>
-
-<span class="x">     ERROR Worker: All masters are unresponsive! Giving up.</span>
+      
+      <div class="span8">
+	<p>这是一个openssh的一个功能，可以重用已有的ssh连接，重连的时候会提速不少 :) <br />
+这功能可能很少有人注意到，不过挺实用   </p>
+<p>vi ~/.ssh/config 加入以下内容   </p>
+<div class="highlight"><pre><span></span>Host *
+ControlMaster auto
+ControlPath /tmp/ssh_mux_%h_%p_%r
 </pre></div>
 
 
-<p>spark 和 hadoop 一样，主机名不能包含"_"。   </p>
-<p>最近更新了spark到1.1.0版本, 跑任务出错。   </p>
-<div class="highlight"><pre><span></span>    Caused by: java.lang.UnsatisfiedLinkError: /tmp/snappy-1.0.5.3-6ceb7982-8940-431c-95a8-25b3684fa0be-libsnappyjava.so: /usr/lib64
-        /libstdc++.so.6: version `GLIBCXX_3.4.9&#39; not found (required by /tmp/snappy-1.0.5.3
-</pre></div>
-
-
-<p>由于我们的系统是rhel5，glibc版本只到3.4.8，而snappy需要使用3.4.9版本，坑爹。   </p>
-<p>spark1.0.0没有出现过这个问题，为了减少系统改动，重新编译了spark，并将pom.xml 的snappy版本(1.5.3)手动修改成spark1.0.0中的1.5.0版本。但是问题还是没能解决。   </p>
-<p>最终只能编译了更高版本的gcc，我用的gcc4.7.3，将新gcc的libstd++.so.6.x链接过去/usr/lib64/libstd++.so.6， 问题解决。   </p>
-<p>gcc编译时依赖的库：</p>
-<div class="highlight"><pre><span></span>../configure --prefix<span class="o">=</span>/usr/local/gcc-4.7.3 --enable-threads<span class="o">=</span>posix --disable-bootstrap --disable-multilib --enable-languages<span class="o">=</span>c
-,c++,java --with-gmp<span class="o">=</span>/usr/local/gmp-6.0.0/ --with-mpfr<span class="o">=</span>/usr/local/mpfr-3.1.2/ --with-mpc<span class="o">=</span>/usr/local/mpc-1.0.2/
-</pre></div>
-
-
-<p><em>ps：网上那些直接找个库做软连接的方法不用试了，不靠谱。</em></p> 
-	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-14-28.html">
-          <i class="icon-comment"></i> Comment </a>
+<p><a href="https://www.ibm.com/developerworks/community/blogs/IBMzOS/entry/20150502?lang=en" target="_blank">更多详情</a> </p>
 	<hr />
       </div>
-      
     </div>
+    <div class="span10">
+      <h3>Comments</h3>
     
-<div class="pagination">
-<ul>
-    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'HiroC'; 
 
-    <li class="active"><a href="../tag/spark.html">1</a></li>
-
-    <li class="next disabled"><a href="#">&rarr; Next</a></li>
-
-</ul>
-</div>
-
- 
-  
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>  
+    </div>
         </div>
         
         
