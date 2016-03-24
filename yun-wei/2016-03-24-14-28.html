@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>spark snappy 依赖 - Hir0C blog</title>
+    <title>spark 安装 配置 - Hir0C blog</title>
     <meta name="description" content="">
     <meta name="author" content="Hir0C">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,7 +50,7 @@
     <div class='article'>
       <div class="row-fluid">
            <div class="content-title span9">
-             <h1>spark snappy 依赖</h1>
+             <h1>spark 安装 配置</h1>
            </div>
       </div>
     <div class="row-fluid">
@@ -68,7 +68,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
       </div>
       
       <div class="span8">
-	<p>先记录一个启动失败问题</p>
+	<h4>先记录一个启动失败问题</h4>
 <div class="highlight"><pre><span></span><span class="x">     INFO RemoteActorRefProvider</span><span class="p">$</span><span class="nv">RemoteDeadLetterActorRef</span><span class="x">: Message [org.apache.spark.deploy.DeployMessages</span><span class="p">$</span><span class="nv">RegisterWorker</span><span class="x">] from Actor[akka://sparkWorker/user/Worker</span><span class="err">#</span><span class="x">-1461285761] to Actor[akka://sparkWorker/deadLetters] was not delivered. [3] dead letters encountered. This logging can be turned off or adjusted with configuration settings &#39;akka.log-dead-letters&#39; and &#39;akka.log-dead-letters-during-shutdown&#39;.</span>
 
 <span class="x">     ERROR Worker: All masters are unresponsive! Giving up.</span>
@@ -76,6 +76,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 
 
 <p>spark 和 hadoop 一样，主机名不能包含"_"。   </p>
+<h4>snappy依赖问题</h4>
 <p>最近更新了spark到1.1.0版本, 跑任务出错。   </p>
 <div class="highlight"><pre><span></span>    Caused by: java.lang.UnsatisfiedLinkError: /tmp/snappy-1.0.5.3-6ceb7982-8940-431c-95a8-25b3684fa0be-libsnappyjava.so: /usr/lib64
         /libstdc++.so.6: version `GLIBCXX_3.4.9&#39; not found (required by /tmp/snappy-1.0.5.3
@@ -92,6 +93,53 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 
 
 <p><em>ps：网上那些直接找个库做软连接的方法不用试了，不靠谱。</em></p>
+<h4>安装</h4>
+<p><strong>一、spark安装用到的手册</strong></p>
+<p><a href="http://spark.apache.org/docs/latest/spark-standalone.html" target="_blank">spark-standalone</a></p>
+<p><a href="https://spark.apache.org/docs/latest/running-on-yarn.html" target="_blank">ruunning-on-yarn</a></p>
+<p><a href="http://www.tuicool.com/articles/M3mym2" target="_blank">安装blog</a></p>
+<p><strong>二、编译 scala2.11 - spark</strong></p>
+<p><a href="http://zhangyi.farbox.com/post/wen-ti-jie-jue/solve-spark-issue-of-all-masters-are-unresponsive" target="_blank">编译1</a></p>
+<p><a href="http://www.open-open.com/lib/view/open1397180071590.html" target="_blank">编译2</a></p>
+<p>遇到的问题是spark-shell进去以后链接不上master，所以看来上面的博客，重编了2.11版的spark，然而对我的问题并没有用。</p>
+<p>最终发现启动时要指定ip。。</p>
+<div class="highlight"><pre><span></span>spark-shell --master spark://115.29.55.100:7077
+</pre></div>
+
+
+<p><strong>三、spark添加lzo支持</strong></p>
+<div class="highlight"><pre><span></span><span class="x">export SPARK_LIBRARY_PATH=</span><span class="p">$</span><span class="nv">SPARK_LIBRARY_PATH</span><span class="x">:/usr/local/hadoop/lib/native</span>
+<span class="x">export SPARK_CLASSPATH=</span><span class="p">$</span><span class="nv">SPARK_CLASSPATH</span><span class="x">:/usr/local/hadoop/lib/native:/usr/local/hadoop/share/hadoop/common/hadoop-lzo-0.4.20-SNAPSHOT.jar</span>
+</pre></div>
+
+
+<p><a href="http://zengzhaozheng.blog.51cto.com/8219051/1597902" target="_blank">参照blog</a></p>
+<p><strong>四、添加snappy支持</strong>
+    export SPARK_CLASSPATH=
+    $SPARK_CLASSPATH:/usr/local/hadoop/lib/native:/usr/local/hadoop/share/hadoop/common/:/usr/local/jdk1.7.0_51/jre/lib/amd64/:/usr/local/hadoop/lib/native/Linux-amd64-64/:/usr/local/hadoop/share/hadoop/common/hadoop-lzo-0.4.20-SNAPSHOT.jar:/usr/local/hadoop/share/hadoop/common/lib/hadoop-snappy-0.0.1-SNAPSHOT.jar</p>
+<p><strong>五、 安装完成后的一些<a href="http://dataunion.org/10345.html" target="_blank">测试用例</a></strong></p>
+<p><strong>六、一些报错</strong></p>
+<p>报错一：</p>
+<blockquote>
+<p>Application report for application_1434263747091_0023 (state: ACCEPTED)</p>
+</blockquote>
+<p>说明可能之前有提交任务需要你先kill掉</p>
+<div class="highlight"><pre><span></span>yarn application --list
+yarn application -kill xxxid
+</pre></div>
+
+
+<p>报错二：</p>
+<blockquote>
+<p>Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient memory</p>
+</blockquote>
+<p><a href="http://pkoperek.github.io/braindump/2015/02/18/spark-not-accepting-resources/" target="_blank">一种解决思路</a>   </p>
+<p>检查你的用户有没有权限执行yarn job，然后别把你的机器资源使用限制的太低。下面是我资源的配置：</p>
+<div class="highlight"><pre><span></span>spark.driver.memory             512m
+spark.executor.memory           512m
+export SPARK_WORKER_CORES=2
+export SPARK_WORKER_MEMORY=2g
+</pre></div>
 	<hr />
       </div>
     </div>
