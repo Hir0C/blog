@@ -55,6 +55,63 @@
 
     <div class='row-fluid'>
       <div class='article-title span9'> 
+        <a href="./yun-wei/2016-03-22-18-15.html"><h1>VIM插件安装</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>二 22 三月 2016 </p>
+
+<p style="text-align: left;">
+Filed under <a href="./yun-wei/index.html">运维</a>
+</p>
+<p style="text-align: left;">
+ 
+    Tags <a href="./tag/bian-ji-qi.html">编辑器</a> </p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<h3>vim ide 基本配置</h3>
+<h4>一、安装VIM</h4>
+<p>只是记录下vim的编译选项</p>
+<blockquote>
+<p>--with-features=huge 一定要加</p>
+</blockquote>
+<div class="highlight"><pre><span></span>    ./configure --prefix=/usr/local/vim74 \
+     **--with-features=huge** \
+     --enable-pythoninterp --enable-perlinterp \
+     --enable-rubyinterp --enable-luainterp \
+     --enable-multibyte --enable-sniff --enable-fontset \
+     --disable-selinux --enable-cscope
+</pre></div>
+
+
+<h4>二、插件安装</h4>
+<ul>
+<li><a href="http://www.vim.org/scripts/script.php?script_id=1213">VJDE</a><div class="highlight"><pre><span></span>tar -xzf vjde.tgz -C /usr/share/vim/vimfiles 
+chmod +x /usr/share/vim/vimfiles/plugin/vjde/readtags
+</pre></div>
+
+
+</li>
+</ul>
+<p>使用官网的方法就可以，自己编译安装的vim就解压到 <code>/usr/local ...</code></p> 
+	<a class="btn btn-mini xsmall" href="./yun-wei/2016-03-22-18-15.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
         <a href="./yun-wei/2016-03-22-18-09.html"><h1>storm 基本安装</h1></a>
       </div>
     </div>
