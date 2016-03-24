@@ -80,7 +80,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 2）需要注意的是server.properties里broker和ip的指定，必须要唯一。 <br />
 3）server.properties中log.dirs必须要手动指定。此配置项是kafka接收日志的存储目录(目前我们保存7天数据log.retention.hours=168) <br />
 4）zookeeper的指定可以是下面这种形式，手动定制zookeeper的目录，并且用逗号分隔ip <br />
-<code>zookeeper.connect=1.1.1.1:2181,1.1.1.2:2181,1.1.1.3:2181/kafka-0.8.1</code>
+<code>zookeeper.connect=1.1.1.1:2181,1.1.1.2:2181,1.1.1.3:2181/kafka-0.8.1</code> <br />
 5）默认分区和备份数分别为10和3（num.partitions=10 / default.replication.factor=3）当然这也可以在创建topic时手动指定。 <br />
 详细配置介绍项请看链接：<a href="http://kafka.apache.org/documentation.html#configuration" target="_blank">kafka配置</a>   </p>
 <p>4.部署：  </p>
@@ -139,7 +139,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 
 
 <h4>扩容：</h4>
-<p>1）先部署好新节点环境，并根据上文"配置修改"修改配置，然后启动集群，确保新节点为可用状态。
+<p>1）先部署好新节点环境，并根据上文"配置修改"修改配置，然后启动集群，确保新节点为可用状态。 <br />
 2）<a href="http://kafka.apache.org/documentation.html#operations" target="_blank">高级命令</a>中的<code>Expanding your cluster</code>小节介绍了扩容的基本方法：</p>
 <p>生成扩容使用的json文件：</p>
 <div class="highlight"><pre><span></span>cat topics-to-move.json
@@ -151,14 +151,13 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 
 
 <p>通过上一步写好的json文件，使用kafka命令生成数据迁移配置</p>
-<div class="highlight"><pre><span></span> bin/kafka-reassign-partitions.sh --topics-to-move-json-file topics-to-move.json --zookeeper 1.1.1.99:2181/kafka-0.8.1 --broker-list <span class="s2">&quot;0,1,2,3,4&quot;</span> --generate   //加粗部分是指定数据迁移到那些broker。
- <span class="sb">```</span>
+<div class="highlight"><pre><span></span>bin/kafka-reassign-partitions.sh --topics-to-move-json-file topics-to-move.json --zookeeper 1.1.1.99:2181/kafka-0.8.1 --broker-list <span class="s2">&quot;0,1,2,3,4&quot;</span> --generate   //加粗部分是指定数据迁移到那些broker。
+</pre></div>
 
-将第一部分保存留作回退备份<span class="o">(</span>即Proposed partition reassignment configuration上面的json串<span class="o">)</span>，下面json串为扩容将要使用的到的配置，将其保存为expand-cluster-reassignment.json
 
-执行扩容命令： 
-<span class="sb">```</span>shell
-bin/kafka-reassign-partitions.sh --zookeeper 1.1.1.99:2181/kafka-0.8.1 --reassignment-json-file expand-cluster-reassignment.json --execute  正常执行的话会生成同上图类似的json串，表示原始状态和目标状态
+<p>将第一部分保存留作回退备份(即Proposed partition reassignment configuration上面的json串)，下面json串为扩容将要使用的到的配置，将其保存为expand-cluster-reassignment.json</p>
+<p>执行扩容命令： </p>
+<div class="highlight"><pre><span></span>bin/kafka-reassign-partitions.sh --zookeeper 1.1.1.99:2181/kafka-0.8.1 --reassignment-json-file expand-cluster-reassignment.json --execute  正常执行的话会生成同上图类似的json串，表示原始状态和目标状态
 </pre></div>
 
 
@@ -178,8 +177,8 @@ bin/kafka-reassign-partitions.sh --zookeeper 1.1.1.99:2181/kafka-0.8.1 --reassig
 
 
 <p>数据迁移一旦开始无法停止，也不要强行停止集群，这样会造成数据不一致，带来无法挽回的后果。   </p>
-<p><strong>注意：</strong>kafka数据迁移的原理是先<em>拷贝</em>数据到目标节点，然后再删除原节点的数据。这样的话如果集群原节点空间不足，不要继续指定其为迁移broker，这样将造成原节点空间用尽，例如原节点是broker为0，1，2，3，4就不要这样指定 --broker-list "0,1,2,3,4"，应该这样 --broker-list "5,6"。
-另外数据迁移也可以通过手工定制。</p> 
+<p><strong>注意：</strong>kafka数据迁移的原理是先<strong>拷贝</strong>数据到目标节点，然后再删除原节点的数据。这样的话如果集群原节点<strong>空间不足</strong>，不要继续指定其为迁移broker，这样将造成原节点<strong>空间用尽</strong>，例如原节点是broker为0，1，2，3，4就不要这样指定 --broker-list "0,1,2,3,4"，应该这样 --broker-list "5,6"。   </p>
+<p>另外数据迁移也可以通过手工定制。</p> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-23-17-24.html">
           <i class="icon-comment"></i> Comment </a>
 	<hr />
