@@ -117,16 +117,16 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </li>
 </ol>
 <h4>四、升级cloudera manager</h4>
-<p>升级cloudera manager</p>
-<p>备份：</p>
+<p>升级cloudera manager <br />
+备份：</p>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> /mnt/hadoop/hdfs/name
 tar -cvf /root/nn_backup_data.tar .
 </pre></div>
 
 
 <ol>
-<li>把当前跑的所有服务都停掉,包括服务.</li>
-<li>停掉cloudera-scm-server和cloudera-scm-server-db</li>
+<li>把当前跑的所有服务都停掉,包括服务.   </li>
+<li>停掉cloudera-scm-server和cloudera-scm-server-db   </li>
 </ol>
 <div class="highlight"><pre><span></span>service cloudera-scm-server stop
 service cloudera-scm-server-db stop
@@ -134,50 +134,46 @@ service cloudera-scm-server-db stop
 
 
 <ol>
-<li>准备好新版本的manager的repo文件</li>
+<li>准备好新版本的manager的repo文件 <br />
+执行如下命令   </li>
 </ol>
-<p>执行如下命令</p>
 <div class="highlight"><pre><span></span>yum clean all <span class="o">&amp;&amp;</span> yum upgrade <span class="s1">&#39;cloudera-*&#39;</span>
 rpm -qa  <span class="s1">&#39;cloudera-*&#39;</span> 查看版本
 </pre></div>
 
 
 <ol>
-<li>升级完成,启动server和db</li>
-<li>进入web升级agent们,一进去就会有提示,然后手动指定url,升级就可以鸟.</li>
+<li>升级完成,启动server和db   </li>
+<li>进入web升级agent们,一进去就会有提示,然后手动指定url,升级就可以鸟.   </li>
 </ol>
 <h4>五、升级CDH</h4>
-<p>注意先备份namenode数据</p>
+<p>注意先备份namenode数据   </p>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> /mnt/hadoop/hdfs/name
 tar -cvf /root/nn_backup_data.tar .
 </pre></div>
 
 
-<p>点搜索框左边小礼品盒子图标,添加新版本parcel的url,添加后下面会多出个小图,点激活就可以自动升级了</p>
-<p>至此完成所有升级.</p>
+<p>点搜索框左边小礼品盒子图标,添加新版本parcel的url,添加后下面会多出个小图,点激活就可以自动升级了 <br />
+至此完成所有升级.   </p>
 <h4>六、错误整理</h4>
 <ol>
-<li>
-<p>升级过程出现namenode启动失败问题,</p>
-<p>java.io.IOException:
-File system image contains an old layout version -51.
-An upgrade to version -55 is required.
-Please restart NameNode with the "-rollingUpgrade started" option if a rolling upgraded is already started; or restart NameNode with the "UPGRADE" to start a new upgrade.</p>
-</li>
+<li>升级过程出现namenode启动失败问题 <br />
+    java.io.IOException:
+    File system image contains an old layout version -51.
+    An upgrade to version -55 is required.
+    Please restart NameNode with the "-rollingUpgrade started" option if a rolling upgraded is already started; or restart NameNode with the "UPGRADE" to start a new upgrade. <br />
+手动到master节点启动后,停掉,再通过web页面重启后正常,命令如下</li>
 </ol>
-<p>手动到master节点启动后,停掉,再通过web页面重启后正常,命令如下</p>
 <div class="highlight"><pre><span></span>su - hdfs -c <span class="s2">&quot;hdfs --config /var/run/cloudera-scm-agent/process/XXX-hdfs-NAMENODE namenode -upgrade&quot;</span>
 </pre></div>
 
 
 <ol>
-<li>
-<p>另一个可能出现的报错:</p>
-<p>Get corrupt file blocks returned error: Cannot run listCorruptFileBlocks because replication queues have not been initialized.</p>
-</li>
+<li>另一个可能出现的报错 <br />
+    Get corrupt file blocks returned error: Cannot run listCorruptFileBlocks because replication queues have not been initialized. <br />
+删掉namenode节点的previous/目录即可   </li>
+<li>由于前一次安装socket文件(/var/run/hdfs-sockets)没有正常删除，造成datanode启动失败，手动修改其权限为root解决</li>
 </ol>
-<p>删掉namenode节点的previous/目录即可
-3. 由于前一次安装socket文件(/var/run/hdfs-sockets)没有正常删除，造成datanode启动失败，手动修改其权限为root解决</p>
 <p>参考链接及文档:</p>
 <p><a href="http://www.abcn.net/2014/04/upgrade-from-cdh5-beta2-to-cdh5-ga.html" target="_blank">报错1解决(可能要翻墙)</a></p>
 <p><a href="http://www.cloudera.com/content/cloudera/en/documentation.html" target="_blank">官方在线文档</a></p>
