@@ -53,8 +53,96 @@
 
     <div class='row-fluid''>
         <div class="article-title span9">
-            <a href="../yun-wei/2016-03-25-11-27.html"><h1>zabbix 3.0.0 LTS 安装与升级</h1></a>
+            <a href="../yun-wei/2016-03-25-11-37.html"><h1>nginx 使用免费https</h1></a>
         </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>五 25 三月 2016 </p>
+
+<p style="text-align: left;">
+Filed under <a href="../yun-wei/index.html">运维</a>
+</p>
+<p style="text-align: left;">
+ 
+    Tags <a href="../tag/ri-chang.html">日常</a> </p>
+<p>
+</p>
+      </div>
+      <div class="article-content span8">
+	<h2>转发自小众软件这片<a href="http://www.appinn.com/use-letsencrypt-with-nginx/" target="_blank">文章</a></h2>
+<h4>安装</h4>
+<div class="highlight"><pre><span></span>git clone https://github.com/letsencrypt/letsencrypt /opt/letsencrypt
+</pre></div>
+
+
+<h4>配置</h4>
+<p>先关闭nginx并开启防火墙80 和 443端口，避免申请证书时端口占用。</p>
+<div class="highlight"><pre><span></span><span class="nt">server</span> <span class="p">{</span>
+    <span class="n">listen</span>       <span class="m">80</span><span class="p">;</span>
+    <span class="n">server_name</span>  <span class="n">www</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">com</span><span class="p">;</span>
+    <span class="n">root</span>   <span class="n">html</span><span class="p">;</span>
+    <span class="n">return</span> <span class="m">301</span> <span class="n">https</span><span class="o">://</span><span class="err">$</span><span class="n">host</span><span class="err">$</span><span class="n">request_uri</span><span class="p">;</span>
+
+    <span class="n">location</span> <span class="o">/</span> <span class="err">{</span>
+        <span class="n">index</span>  <span class="n">index</span><span class="o">.</span><span class="n">html</span> <span class="n">index</span><span class="o">.</span><span class="n">php</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="err">}</span>
+<span class="nt">server</span> <span class="p">{</span>
+    <span class="n">listen</span> <span class="m">443</span> <span class="n">ssl</span><span class="p">;</span>
+    <span class="n">server_name</span> <span class="n">www</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">com</span><span class="p">;</span>
+    <span class="n">ssl</span> <span class="n">on</span><span class="p">;</span>
+    <span class="n">ssl_certificate</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">letsencrypt</span><span class="o">/</span><span class="n">live</span><span class="o">/</span><span class="n">www</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">fullchain</span><span class="o">.</span><span class="n">pem</span><span class="p">;</span>
+    <span class="n">ssl_certificate_key</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">letsencrypt</span><span class="o">/</span><span class="n">live</span><span class="o">/</span><span class="n">www</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">privkey</span><span class="o">.</span><span class="n">pem</span><span class="p">;</span>
+    <span class="n">ssl_protocols</span> <span class="n">TLSv1</span> <span class="n">TLSv1</span><span class="o">.</span><span class="m">1</span> <span class="n">TLSv1</span><span class="o">.</span><span class="m">2</span><span class="p">;</span>
+    <span class="n">ssl_prefer_server_ciphers</span> <span class="n">on</span><span class="p">;</span>
+    <span class="n">ssl_ciphers</span> <span class="s1">&#39;EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH&#39;</span><span class="p">;</span>
+
+    <span class="n">location</span> <span class="o">~</span> <span class="o">/.</span><span class="n">well</span><span class="o">-</span><span class="n">known</span> <span class="err">{</span>
+        <span class="n">allow</span> <span class="n">all</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="err">}</span>
+</pre></div>
+
+
+<h4>证书续签</h4>
+<p><strong>1.修改配置文件</strong>   </p>
+<div class="highlight"><pre><span></span>cp /opt/letsencrypt/examples/cli.ini /usr/local/etc/le-renew-webroot.in
+</pre></div>
+
+
+<p>编辑该文件   </p>
+<div class="highlight"><pre><span></span>rsa-key-size = 4096
+email = you@example.com
+domains = www.test.com
+webroot-path = /usr/share/nginx/html //这个路径之后脚本会用到
+</pre></div>
+
+
+<p><strong>2.下载脚本并设置权限</strong>   </p>
+<div class="highlight"><pre><span></span>curl -L -o /usr/local/sbin/le-renew-webroot https://gist.githubusercontent.com/thisismitch/e1b603165523df66d5cc/raw/fbffbf358e96110d5566f13677d9bd5f4f65794c/le-renew-webroot
+chmod +x /usr/local/sbin/le-renew-webroot
+</pre></div>
+
+
+<p>脚本会先检测证书日期，如果没到期不会去服务端申请延期。</p> 
+	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-25-11-37.html">
+          <i class="icon-comment"></i> Comment </a>
+	<hr />
+      </div>
+      
+    </div>
+    
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="../yun-wei/2016-03-25-11-27.html"><h1>zabbix 3.0.0 LTS 安装与升级</h1></a>
+      </div>
     </div>
     <div class="row-fluid">
       <div class="span2">
@@ -69,77 +157,15 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <p>
 </p>
       </div>
-      <div class="article-content span8">
-	<h4>安装</h4>
-<p><a href="https://www.zabbix.com/documentation/3.0/manual/installation/install" target="_blank">安装文档</a>  <br />
-<a href="http://www.zabbix.com/download.php" target="_blank">zabbix源码下载</a> <br />
-<a href="https://github.com/zabbixcn/curl-rpm/tree/master/RPMS" target="_blank">依赖下载</a>   </p>
-<p><em>3.0 web页面暂时没有翻译成中文的选项。</em></p>
-<p><strong>1.创建用户</strong>   </p>
-<div class="highlight"><pre><span></span>groupadd zabbix
-useradd -g zabbix zabbix
-</pre></div>
-
-
-<p><strong>2. 依赖包汇总</strong>   </p>
-<div class="highlight"><pre><span></span>yum -y install gcc OpenIPMI-devel net-snmp-devel.x86_64 libxml2-devel mysql-devel
-</pre></div>
-
-
-<p><strong>3.编译安装及配置修改飘过</strong></p>
-<p>注意php和mysql的参数修改，至少满足官网的要求。   </p>
-<p>php配置如下   </p>
-<div class="highlight"><pre><span></span>php_value max_execution_time 300
-php_value memory_limit 128M
-php_value post_max_size 16M
-php_value upload_max_filesize 2M
-php_value max_input_time 300
-php_value always_populate_raw_post_data -1
-php_value date.timezone Asia/Shanghai
-</pre></div>
-
-
-<p>mysql配置如下:</p>
-<div class="highlight"><pre><span></span><span class="k">[mysqld]</span>
-<span class="na">max_allowed_packet</span> <span class="o">=</span> <span class="s">32M</span>
-</pre></div>
-
-
-<p><em>4.拷贝zabbix-3.0.0/frontends/php/</em> ，修改nginx指定目录，权限设置为php启动用户可读写*   </p>
-<p>zabbix3.0的入口文件不再是<code>dashboard.php</code>了，修改nginx配置，index 字段为 <code>index.php</code>   </p>
-<p><em>5.进入web页面根据提示执行下一步，没有特殊要注意的事项。</em>   </p>
-<h4>升级步骤</h4>
-<p>从2.x版本升级到3.0非常简单，官方给出了<a href="https://www.zabbix.com/documentation/3.0/manual/installation/upgrade" target="_blank">文档</a>    </p>
-<ol>
-<li>
-<p>先把zabbix3.0.0编译好，实际需要更新的只是编译出来的二进制文件。配置文件可以沿用上一版本的。   </p>
-</li>
-<li>
-<p>停掉zabbix_server进程，保证没有新数据写入   </p>
-</li>
-<li>
-<p>备份数据库，配置文件。拷贝zabbix-3.0.0/frontends/php/* ，修改nginx配置(如安装步骤4)   </p>
-</li>
-<li>
-<p>启动zabbix3.0.0.    </p>
-</li>
-<li>
-<p>启程成功后，会自动升级数据库“Zabbix server will automatically upgrade the database.”   </p>
-</li>
-<li>
-<p>进入web控制台，和安装时一样，根据提示执行下一步就可以了。   </p>
-</li>
-<li>
-<p>客户端升级，更新bin和sbin目录就可以了，重启以后，zabbix server会报警Version of zabbix_agent(d) was changed </p>
-</li>
-</ol> 
+      <div class="summary span8">
+	<p>Short version for index and feeds</p> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-25-11-27.html">
-          <i class="icon-comment"></i> Comment </a>
+          <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
       
     </div>
-    
+      
 
  
         
@@ -567,70 +593,6 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 }
 </pre></div> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-16-40.html">
-          <i class="icon-plus-sign"></i> Read More </a>
-	<hr />
-      </div>
-      
-    </div>
-      
-
- 
-        
-
-
-
-    <div class='row-fluid'>
-      <div class='article-title span9'> 
-        <a href="../yun-wei/2016-03-24-15-58.html"><h1>hadoop安装 升级</h1></a>
-      </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span2">
-<p>四 24 三月 2016 </p>
-
-<p style="text-align: left;">
-Filed under <a href="../yun-wei/index.html">运维</a>
-</p>
-<p style="text-align: left;">
- 
-    Tags <a href="../tag/hadoop.html">hadoop</a> </p>
-<p>
-</p>
-      </div>
-      <div class="summary span8">
-	<p><em>暂无配置</em></p>
-<h4>编译</h4>
-<p><a href="http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/NativeLibraries.html" target="_blank">官方手册</a>   </p>
-<ul>
-<li>几个常用依赖要先装好：   </li>
-</ul>
-<blockquote>
-<p>autoconf automake libtool openssl-devel.x86_64 ant cmake snappy snappy-devel protobuf-2.5.0(必须是2.5.0以上版本！)   </p>
-</blockquote>
-<ul>
-<li>编译命令：</li>
-</ul>
-<div class="highlight"><pre><span></span>mvn package -Pdist,native -DskipTests -Dtar -Drequire.snappy<span class="o">(</span>支持snappy<span class="o">)</span>
-</pre></div>
-
-
-<ul>
-<li>
-<p>编译成功后会打包，放在hadoop-dist/target   </p>
-</li>
-<li>
-<p>添加lzo支持<a href="http://www.iteblog.com/archives/992" target="_blank">参考链接</a>  <br />
-上面blog里写的很详细了，下面我只总结一些需要注意的地方：</p>
-</li>
-<li>
-<p>依赖lzo和lzo-devel需要提前装好   </p>
-</li>
-<li>
-<p>使用twitter的hadoop-lzo，地址是：https://github.com/twitter/hadoop-lzo   </p>
-</li>
-<li>
-<p>除了拷贝.so .a文件，别忘了还要拷hadoop-lzo-*-SNAPSHOT.jar ...</p></li></ul> 
-	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-15-58.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
