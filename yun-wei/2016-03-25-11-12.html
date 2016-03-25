@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>vpn搭建 - Hir0C blog</title>
+    <title>tcpcopy 1.0 安装使用 - Hir0C blog</title>
     <meta name="description" content="">
     <meta name="author" content="Hir0C">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,7 +50,7 @@
     <div class='article'>
       <div class="row-fluid">
            <div class="content-title span9">
-             <h1>vpn搭建</h1>
+             <h1>tcpcopy 1.0 安装使用</h1>
            </div>
       </div>
     <div class="row-fluid">
@@ -62,57 +62,49 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
 <p style="text-align: left;">
  
-    Tags <a href="../tag/vpn.html">vpn</a> </p>
+    Tags <a href="../tag/tcpcopy.html">tcpcopy</a> </p>
 <p>
 </p>
       </div>
       
       <div class="span8">
-	<p><em>转发一篇vpn搭建文章，搭建步骤很简单，让我这小白也一次搭建成功了。</em>   </p>
-<h4>安装</h4>
-<p><em>rpm包需要梯子下载</em>   </p>
-<p><a href="http://poptop.sourceforge.net/yum/stable/packages/pptpd-1.4.0-1.el6.x86_64.rpm" target="_blank">pptpd-1.4.0-1.el6.x86_64.rpm</a> <br />
-<a href="http://poptop.sourceforge.net/yum/stable/packages/ppp-devel-2.4.5-33.0.rhel6.x86_64.rpm" target="_blank">ppp-devel-2.4.5-33.0.rhel6.x86_64.rpm</a> <br />
-<a href="http://poptop.sourceforge.net/yum/stable/packages/ppp-2.4.5-33.0.rhel6.x86_64.rpm" target="_blank">ppp-2.4.5-33.0.rhel6.x86_64.rpm</a>   </p>
-<div class="highlight"><pre><span></span>rpm -ivh * 安装
+	<h2>转载文章(99%)</h2>
+<p><strong>tcpcopy1.0.0安装使用</strong>   </p>
+<p>在tcpcopy 1.0版本中对整个架构的一个改进，将原本需要运行在测试机上的intercept移除放到一个独立的辅助机上来，使得测试机需要做的操作少到仅仅是添加一条路由而已，对整个测试机的性能损耗可以忽略，排除了intercept运行在测试机上时产生的性能影响，使得测试数据更加接近真实水平。   </p>
+<h4>一、系统环境</h4>
+<p>centos6.7 x86_64   </p>
+<p>线上服务器：192.168.241.130  (tcpcopy安装配置)   </p>
+<p>辅助服务器：192.168.241.131  (intercept安装配置)   </p>
+<p>测试服务器：192.168.241.132  (添加路由)   </p>
+<h4>二、线上服务器部署tcpcopy-1.0.0</h4>
+<div class="highlight"><pre><span></span>git clone git://github.com/session-replay-tools/tcpcopy.git
+<span class="nb">cd</span> tcpcopy
+./configure  <span class="c1"># 无特殊需求不需要加其他选项，默认安装在/usr/local/tcpcopy。</span>
+make <span class="o">&amp;&amp;</span> make install
+<span class="c1">#先不要启动，需要先启动intercept,而且如果intercept停止，tcpcopy也会停掉。</span>
+/usr/local/tcpcopy/sbin/tcpcopy -x 80-192.168.241.132:80 -s 192.168.241.131 -c 192.168.100.x -d -C <span class="m">4</span> -l /tmp/tcpcopy.log
+<span class="c1"># -C 指定线程， -n 指定复制倍数</span>
 </pre></div>
 
 
-<h4>配置</h4>
-<p><strong><a href="https://www.nigesb.com/setup-your-own-vpn-with-pptp.html" target="_blank">这部分我完全照搬转发博主的博客了</a></strong></p>
-<div class="highlight"><pre><span></span>1. 修改配置文件/etc/pptpd.conf
-
-localip 10.0.0.1
-remoteip 10.0.0.100-200
-上面的IP地址是可以随便填的，ABC三类的内网地址都可以，主要兼顾其他地方的IP配置，不要出现IP冲突就可以了，后面的remoteip，默认从第一个10.0.0.100开始分配给客户，localip表示分配给服务器的内部网关地址。
-
-2. 修改/etc/ppp/options.pptpd
-添加DNS地址(可选)
-
-3. 修改/etc/ppp/chap-secrets
-
-添加账号，协议，密码，ip地址
-
-如：test pptpd 123456 *
-
-*表示随机分配拨通vpn后的地址
-
-系统设置
-
-net.ipv4.ip_forward = 1
-iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-iptables -A FORWARD -p tcp --syn -s 10.0.0.0/24 -j TCPMSS --set-mss 1356
-iptables -A INPUT -p gre -j ACCEPT
-iptables -A INPUT -p tcp --dport 1723 -j ACCEPT
-启动服务
-
-/etc/init.d/pptpd start
-客户端设置
+<p><em>原理：将80端口收到的流量复制到测试机ip 192.168.241.132的80端口，并设置辅助机的ip地址为192.168.241.131，且将复制过去的流量中的源地址统一更改为192.168.100.x，这样做的好处是我们在测试机上可以直接针对整个更改后的网段设置一条路由即可。</em>   </p>
+<h4>三、辅助服务器部署intercept-1.0.0</h4>
+<div class="highlight"><pre><span></span>yum install -y libpcap
+git clone  
+<span class="nb">cd</span> intercept
+./configuremake <span class="o">&amp;&amp;</span> make install
+/usr/local/intercept/sbin/intercept -i eth0 -l /tmp/intercept.log -F <span class="s1">&#39;tcp and src port 80 and src host 192.168.241.132&#39;</span> -d
 </pre></div>
 
 
-<h4>win10客户端设置，解决拨通vpn后不能上网的问题。</h4>
-<p><img alt="img" src="http://static.oschina.net/uploads/space/2016/0309/111950_vi8j_1428530.png" /></p>
+<p><em>原理：辅助机的 intercept 通过-F 参数制定捕获规则，捕获tcp连接中源端口为80的所有数据，也即是测试机的回应数据。其作用是将测试机路由过来的响应数据捕获下来，完成整个请求回应的流程且保证测试机产生的回应数据不会流向线上环境。intercept 会监听 tcp 36524 端口，并和线上机192.168.241.130的 tcpcopy 之间建立通信，我们通过ss命令可以观察到。需要注意的是辅助机和测试机一定要是同一网段。</em>   </p>
+<h4>四、测试服务器部署</h4>
+<p>//添加路由   </p>
+<div class="highlight"><pre><span></span>route add -net 192.168.100.0 netmask 255.255.255.0 gw 192.168.241.131
+</pre></div>
+
+
+<p><em>原理：线上机tcpcopy复制流量时将源地址改写为192.168.100网段的地址，那么在测试机上看到的流量中源地址全部是来源于这个网段，我们仅仅需要将返回给这个网段的所有客户端的请求全部通过辅助机 192.168.241.131 路由出去，这样在辅助机上就可以对全部的回应包进行截获处理了</em></p>
 	<hr />
       </div>
     </div>

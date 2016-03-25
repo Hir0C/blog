@@ -55,6 +55,58 @@
 
     <div class='row-fluid'>
       <div class='article-title span9'> 
+        <a href="../yun-wei/2016-03-23-17-37.html"><h1>自建yum源服务group配置片段</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>三 23 三月 2016 </p>
+
+<p style="text-align: left;">
+Filed under <a href="../yun-wei/index.html">运维</a>
+</p>
+<p style="text-align: left;">
+ 
+    Tags <a href="../tag/linux.html">linux</a> <a href="../tag/yum.html">yum</a> </p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<p><a href="http://yum.baseurl.org/wiki/YumGroups" target="_blank">yum group制作官方文档</a></p>
+<p><em>文档里给出了基本格式和初始化命令,以及制定组文件创建repodata</em></p>
+<p><strong>1. 以下是制作SDL_ttf的spec文件</strong></p>
+<div class="highlight"><pre><span></span>    <span class="nl">Summary</span><span class="p">:</span> <span class="n">SDL_ttf</span>
+    <span class="nl">Name</span><span class="p">:</span> <span class="n">SDL_ttf</span>
+    <span class="nl">Version</span><span class="p">:</span> <span class="mf">2.0.11</span>
+    <span class="nl">Release</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="nl">Requires</span><span class="p">:</span> <span class="n">SDL</span>  <span class="err">#这个很重要</span><span class="p">,</span><span class="err">不要加版本号</span><span class="p">,</span><span class="err">否则依赖无法解决</span>
+    <span class="nl">Source0</span><span class="p">:</span> <span class="o">%</span><span class="p">{</span><span class="n">name</span><span class="p">}</span><span class="o">-%</span><span class="p">{</span><span class="n">version</span><span class="p">}.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span>
+    <span class="nl">License</span><span class="p">:</span> <span class="n">GPL</span>
+    <span class="nl">Group</span><span class="p">:</span> <span class="n">Applications</span><span class="o">/</span><span class="n">Productivity</span>
+    <span class="nl">AutoReq</span><span class="p">:</span> <span class="n">no</span>
+    <span class="nl">BuildRoot</span><span class="p">:</span> <span class="o">%</span><span class="p">{</span><span class="n">_builddir</span><span class="p">}</span><span class="o">/%</span><span class="p">{</span><span class="n">name</span><span class="p">}</span><span class="o">-</span><span class="n">root</span>
+    <span class="nf">%description</span>
+    <span class="n">SDL_ttf</span><span class="o">-</span><span class="mf">2.0.11</span> <span class="k">for</span> <span class="n">pygame</span>
+    <span class="nf">%prep</span>
+    <span class="nf">%setup</span> <span class="o">-</span><span class="n">q</span>
+    <span class="nf">%build</span>
+    <span class="p">.</span><span class="o">/</span><span class="n">configure</span>
+    <span class="n">make ...</span></pre></div> 
+	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-23-17-37.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
         <a href="../yun-wei/2016-03-23-17-24.html"><h1>Apache Kafka 安装 升级 数据迁移</h1></a>
       </div>
     </div>
@@ -471,62 +523,6 @@ hostname3:2888:3888
 </ol>
 <p>http://download.zeromq.org/zeromq-4.0.3.tar ...</p> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-22-18-09.html">
-          <i class="icon-plus-sign"></i> Read More </a>
-	<hr />
-      </div>
-      
-    </div>
-      
-
- 
-        
-
-
-
-    <div class='row-fluid'>
-      <div class='article-title span9'> 
-        <a href="../yun-wei/2016-03-22-16-56.html"><h1>Zsh安装配置</h1></a>
-      </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span2">
-<p>二 22 三月 2016 </p>
-
-<p style="text-align: left;">
-Filed under <a href="../yun-wei/index.html">运维</a>
-</p>
-<p style="text-align: left;">
- 
-    Tags <a href="../tag/bash.html">bash</a> <a href="../tag/bian-ji-qi.html">编辑器</a> </p>
-<p>
-</p>
-      </div>
-      <div class="summary span8">
-	<h2>zsh是个好东西，关键是能装逼</h2>
-<h3>一、安装zsh</h3>
-<p>略</p>
-<h4>二、切换用户使用shell</h4>
-<div class="highlight"><pre><span></span>    usermod -s /usr/local/bin/zsh root
-</pre></div>
-
-
-<p>或者</p>
-<div class="highlight"><pre><span></span>    chsh -s /bin/zsh
-</pre></div>
-
-
-<h4>三、git安装</h4>
-<p>没啥好说的，官网步骤都有</p>
-<div class="highlight"><pre><span></span>    yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel -y
-    make prefix=/usr/local all
-    make prefix=/usr/local install
-</pre></div>
-
-
-<h4>四、安装python2.7.x</h4>
-<p>老三步</p>
-<div class="highlight"><pre><span></span>    ./configure --prefix=/usr/local ...</pre></div> 
-	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-22-16-56.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>

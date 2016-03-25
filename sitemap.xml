@@ -5,29 +5,36 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/</loc>
-<lastmod>2016-03-25T11:10:59-00:00</lastmod>
+<lastmod>2016-03-25T11:26:09-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/archives.html</loc>
-<lastmod>2016-03-25T11:10:59-00:00</lastmod>
+<lastmod>2016-03-25T11:26:09-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/tags.html</loc>
-<lastmod>2016-03-25T11:10:59-00:00</lastmod>
+<lastmod>2016-03-25T11:26:09-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/categories.html</loc>
-<lastmod>2016-03-25T11:10:59-00:00</lastmod>
+<lastmod>2016-03-25T11:26:09-00:00</lastmod>
 <changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>/yun-wei/2016-03-25-11-12.html</loc>
+<lastmod>2016-03-25T11:12:00+08:00</lastmod>
+<changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
@@ -285,7 +292,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/yun-wei/index.html</loc>
-<lastmod>2016-03-25T11:06:00+08:06</lastmod>
+<lastmod>2016-03-25T11:12:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -515,6 +522,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>/tag/yum.html</loc>
+<lastmod>2016-03-23T17:37:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>/tag/windows.html</loc>
 <lastmod>2016-03-25T10:41:00+08:06</lastmod>
 <changefreq>daily</changefreq>
@@ -536,8 +550,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>/tag/yum.html</loc>
-<lastmod>2016-03-23T17:37:00+08:06</lastmod>
+<loc>/tag/tcpcopy.html</loc>
+<lastmod>2016-03-25T11:12:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -558,7 +572,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/author/hir0c.html</loc>
-<lastmod>2016-03-25T11:06:00+08:06</lastmod>
+<lastmod>2016-03-25T11:12:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
