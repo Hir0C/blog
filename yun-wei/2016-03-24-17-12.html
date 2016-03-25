@@ -68,19 +68,20 @@ Filed under <a href="../yun-wei/index.html">运维</a>
       </div>
       
       <div class="span8">
-	<h2>转贴</h2>
-<p>Postfix中有一套Mail Queue Management机制,所有队列中的邮件都可以全自动的处理,但在发送大量邮件的时候,有必要对这个队列进行手工的维护处理,比如说,删除队列中的邮件. 以下是一些常用的命令：</p>
-<p><em>列出目前在 Mail Queue 中的邮件</em>   </p>
+	<p>因为我们使用了<a href="http://hir0c.github.io/blog/yun-wei/2016-03-24-16-40.html" target="_blank">mail http api</a> 接口发邮件,如果同时爆出大量发邮件请求,讲会堆积大量邮件队列,造成服务器卡死,临时解决方案就是不断循环检测邮件队列数量进行清理。</p>
+<h2>转贴</h2>
+<p>Postfix中有一套<code>Mail Queue Management</code>机制,所有队列中的邮件都可以全自动的处理,但在发送大量邮件的时候,有必要对这个队列进行手工的维护处理,比如说,删除队列中的邮件. 以下是一些常用的命令：</p>
+<p><strong>列出目前在 Mail Queue 中的邮件</strong>   </p>
 <div class="highlight"><pre><span></span>mailq
 </pre></div>
 
 
-<p><em>刪除所有在 Queue 中的邮件</em>   </p>
+<p><strong>刪除所有在 Queue 中的邮件</strong>   </p>
 <div class="highlight"><pre><span></span>postsuper -d ALL
 </pre></div>
 
 
-<p><em>刪除所有正在 deferred 队列中的邮件 (删除曾经发送失败的邮件 )</em>   </p>
+<p><strong>刪除所有正在 deferred 队列中的邮件 (删除曾经发送失败的邮件 )</strong>   </p>
 <div class="highlight"><pre><span></span>postsuper -d ALL deferred
 </pre></div>
 
