@@ -53,8 +53,85 @@
 
     <div class='row-fluid''>
         <div class="article-title span9">
-            <a href="../yun-wei/2016-03-25-10-48.html"><h1>elk安装 配置</h1></a>
+            <a href="../yun-wei/2016-03-25-11-06.html"><h1>vpn搭建</h1></a>
         </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>五 25 三月 2016 </p>
+
+<p style="text-align: left;">
+Filed under <a href="../yun-wei/index.html">运维</a>
+</p>
+<p style="text-align: left;">
+ 
+    Tags <a href="../tag/vpn.html">vpn</a> </p>
+<p>
+</p>
+      </div>
+      <div class="article-content span8">
+	<p><em>转发一篇vpn搭建文章，搭建步骤很简单，让我这小白也一次搭建成功了。</em>   </p>
+<h4>安装</h4>
+<p><em>rpm包需要梯子下载</em>   </p>
+<p><a href="http://poptop.sourceforge.net/yum/stable/packages/pptpd-1.4.0-1.el6.x86_64.rpm" target="_blank">pptpd-1.4.0-1.el6.x86_64.rpm</a> <br />
+<a href="http://poptop.sourceforge.net/yum/stable/packages/ppp-devel-2.4.5-33.0.rhel6.x86_64.rpm" target="_blank">ppp-devel-2.4.5-33.0.rhel6.x86_64.rpm</a> <br />
+<a href="http://poptop.sourceforge.net/yum/stable/packages/ppp-2.4.5-33.0.rhel6.x86_64.rpm" target="_blank">ppp-2.4.5-33.0.rhel6.x86_64.rpm</a>   </p>
+<div class="highlight"><pre><span></span>rpm -ivh * 安装
+</pre></div>
+
+
+<h4>配置</h4>
+<p><strong><a href="https://www.nigesb.com/setup-your-own-vpn-with-pptp.html" target="_blank">这部分我完全照搬转发博主的博客了</a></strong></p>
+<div class="highlight"><pre><span></span>1. 修改配置文件/etc/pptpd.conf
+
+localip 10.0.0.1
+remoteip 10.0.0.100-200
+上面的IP地址是可以随便填的，ABC三类的内网地址都可以，主要兼顾其他地方的IP配置，不要出现IP冲突就可以了，后面的remoteip，默认从第一个10.0.0.100开始分配给客户，localip表示分配给服务器的内部网关地址。
+
+2. 修改/etc/ppp/options.pptpd
+添加DNS地址(可选)
+
+3. 修改/etc/ppp/chap-secrets
+
+添加账号，协议，密码，ip地址
+
+如：test pptpd 123456 *
+
+*表示随机分配拨通vpn后的地址
+
+系统设置
+
+net.ipv4.ip_forward = 1
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+iptables -A FORWARD -p tcp --syn -s 10.0.0.0/24 -j TCPMSS --set-mss 1356
+iptables -A INPUT -p gre -j ACCEPT
+iptables -A INPUT -p tcp --dport 1723 -j ACCEPT
+启动服务
+
+/etc/init.d/pptpd start
+客户端设置
+</pre></div>
+
+
+<h4>win10客户端设置，解决拨通vpn后不能上网的问题。</h4>
+<p><a href="http://static.oschina.net/uploads/space/2016/0309/111950_vi8j_1428530.png">!img</a></p> 
+	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-25-11-06.html">
+          <i class="icon-comment"></i> Comment </a>
+	<hr />
+      </div>
+      
+    </div>
+    
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="../yun-wei/2016-03-25-10-48.html"><h1>elk安装 配置</h1></a>
+      </div>
     </div>
     <div class="row-fluid">
       <div class="span2">
@@ -69,7 +146,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <p>
 </p>
       </div>
-      <div class="article-content span8">
+      <div class="summary span8">
 	<h4>相关资源</h4>
 <p><strong>安装包</strong></p>
 <p><a href="https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.2.0/elasticsearch-2.2.0.tar.gz" target="_blank">elasticsearch-2.2.0下载</a> <br />
@@ -96,178 +173,14 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <li>设置bootstrap.mlockall: true,并且启动指定tmp目录 ./bin/elasticsearch -Djna.tmpdir=/path/to/new/dir   </li>
 </ol>
 <h4>filebeat配置</h4>
-<div class="highlight"><pre><span></span><span class="n">filebeat</span><span class="o">:</span>
-  <span class="n">registry_file</span><span class="o">:</span> <span class="s2">&quot;/usr/local/filebeat/.filebeat&quot;</span>
-  <span class="n">prospectors</span><span class="o">:</span>
-    <span class="o">-</span>
-      <span class="n">paths</span><span class="o">:</span>
-        <span class="o">-</span> <span class="sr">/usr/local/nginx/logs/</span><span class="n">access</span><span class="o">.</span><span class="na">log</span>
-      <span class="n">document_type</span><span class="o">:</span> <span class="n">type1</span>
-    <span class="o">-</span>
-      <span class="n">paths</span><span class="o">:</span>
-        <span class="o">-</span> <span class="sr">/usr/local/nginx/logs/</span><span class="n">error</span><span class="o">.</span><span class="na">log</span>
-      <span class="n">document_type</span><span class="o">:</span> <span class="n">type2</span>
-    <span class="o">-</span>
-      <span class="n">paths</span><span class="o">:</span>
-        <span class="o">-</span> <span class="sr">/usr/local/nginx/logs/</span><span class="n">other</span><span class="o">.</span><span class="na">log</span>
-      <span class="n">document_type</span><span class="o">:</span> <span class="n">type3</span>
-<span class="n">output</span><span class="o">:</span>
-  <span class="n">logstash</span><span class="o">:</span>
-    <span class="n">hosts</span><span class="o">:</span> <span class="o">[</span><span class="s2">&quot;192.168.241.130:5044&quot;</span><span class="o">]</span>
-    <span class="n">worker</span><span class="o">:</span> <span class="mi">1</span>
-</pre></div>
-
-
-<h4>logstash配置</h4>
-<div class="highlight"><pre><span></span>input {
-    beats {
-        port =&gt; 5044
-        # ssl =&gt; false
-        # ssl_certificate =&gt; &quot;/etc/pki/tls/certs/logstash-forwarder.crt&quot;
-        # ssl_key =&gt; &quot;/etc/pki/tls/private/logstash-forwarder.key&quot;
-    }
-}
-
-filter {
-    if [type] == &quot;type1&quot; {
-       grok {
-           patterns_dir =&gt; &quot;./patterns&quot;
-           match =&gt; { &quot;message&quot; =&gt; &quot;%{NGINXLOG}&quot; }
-       }
-       geoip {
-            source =&gt; &quot;remote_addr&quot;
-            target =&gt; &quot;geoip&quot;
-            database =&gt;&quot;/usr/local/logstash/geoip/GeoLiteCity.dat&quot;
-            add_field =&gt; [ &quot;[geoip][coordinates]&quot;, &quot;%{[geoip][longitude]}&quot; ]
-            add_field =&gt; [ &quot;[geoip][coordinates]&quot;, &quot;%{[geoip][latitude]}&quot;  ]
-       }
-       # 下面这部分使用日志时间作为索引字段，默认是使用日志导入时间。
-       date {
-           locale =&gt; &quot;en&quot;
-           match =&gt; [ &quot;timestamp&quot;, &quot;dd/MMM/yyyy:HH:mm:ss Z&quot; ]
-       }
-       mutate {
-           remove_field =&gt; &quot;timestamp&quot;
-       }
-    }
-    else if [type] == &quot;type2&quot; {
-        # 下面这部分为了解析json，先把日志里非json筛选出来。
-        grok {
-            patterns_dir =&gt; &quot;./patterns/&quot;
-            match =&gt; {&quot;message&quot; =&gt; &quot;%{DATETIME:timestamp} \[%{WORD:level}\] %{GREEDYDATA:jsonmessage}&quot;}
-        }
-        json {
-            source =&gt; &quot;jsonmessage&quot;
-            remove_field =&gt; [&quot;jsonmessage&quot;]
-        }
-    }
-    else if [type] == &quot;type3&quot; {
-        # 处理多行日志
-        multiline {
-            pattern =&gt; &quot;^\d{4}\/\d{2}\/\d{2} \d{2}\:\d{2}\:\d{2}&quot;
-            negate =&gt; true
-            what =&gt; previous
-        }
-        grok {
-            patterns_dir =&gt; &quot;./patterns/&quot;
-            match =&gt; {&quot;message&quot; =&gt; &quot;%{LUALOG}&quot;}
-        }
-        # 匹配失败走下面
-        if &quot;_grokparsefailure&quot; in [tags] {
-            grok {
-                patterns_dir =&gt; &quot;./patterns&quot;
-                match =&gt; { &quot;message&quot; =&gt; &quot;%{NGINX_ERROR_LOG}&quot;}
-            }
-            date {
-                locale =&gt; &quot;en&quot;
-                match =&gt; [ &quot;timestamp&quot;, &quot;yyyy/MM/dd HH:mm:ss&quot;, &quot;yyyy/MMM/dd HH:mm:ss&quot; ] #匹配多种格式
-            }
-            mutate {
-                remove_field =&gt; &quot;timestamp&quot;
-            }
-            geoip {
-                 source =&gt; &quot;client&quot;
-                 target =&gt; &quot;geoip&quot;
-                 database =&gt;&quot;/usr/local/logstash/geoip/GeoLiteCity.dat&quot;
-                 add_field =&gt; [ &quot;[geoip][coordinates]&quot;, &quot;%{[geoip][longitude]}&quot; ]
-                 add_field =&gt; [ &quot;[geoip][coordinates]&quot;, &quot;%{[geoip][latitude]}&quot;  ]
-            }
-        }
-    }
-}
-
-output {
-  elasticsearch { hosts =&gt; &quot;192.168.241.130&quot;
-        index =&gt; &quot;logstash-%{type}-%{+YYYY.MM.dd}&quot;
-        document_type =&gt; &quot;%{type}&quot;
-        workers =&gt; 2
-        flush_size =&gt; 20000
-        idle_flush_time =&gt; 10
-    }
-}
-</pre></div>
-
-
-<ul>
-<li>filebeat指定type类型，logstash判断区分日志</li>
-<li>日志格式复杂的话，可以在filter中使用grok+json类似这种多层解析。</li>
-<li>if之内可以再嵌套if，通过if "_grokparsefailure" in [tags]来匹配上一个匹配失败的日志。</li>
-<li>使用日志时间作为索引字段，默认是使用日志导入时间。</li>
-</ul>
-<h4>logstash patterns配置</h4>
-<div class="highlight"><pre><span></span><span class="c1"># COMMON</span>
-DATETIME <span class="p">(</span><span class="o">?</span><span class="l">&lt;timestamp&gt;</span><span class="err">\</span>d<span class="p">{</span><span class="mi">4</span><span class="p">}</span><span class="err">-\</span>d<span class="p">{</span><span class="mi">2</span><span class="p">}</span><span class="err">-\</span>d<span class="p">{</span><span class="mi">2</span><span class="p">}</span> <span class="err">\</span>d<span class="p">{</span><span class="mi">2</span><span class="p">}:</span><span class="err">\</span>d<span class="p">{</span><span class="mi">2</span><span class="p">}:</span><span class="err">\</span>d<span class="p">{</span><span class="mi">2</span><span class="p">})</span>
-
-<span class="c1"># FOR NGINX</span>
-DATETIME <span class="p">(</span><span class="o">?</span><span class="l">&lt;timestamp&gt;</span><span class="err">\</span>d<span class="p">{</span><span class="mi">4</span><span class="p">}</span><span class="err">-\</span>d<span class="p">{</span><span class="mi">2</span><span class="p">}</span><span class="err">-\</span>d<span class="p">{</span><span class="mi">2</span><span class="p">}</span> <span class="err">\</span>d<span class="p">{</span><span class="mi">2</span><span class="p">}:</span><span class="err">\</span>d<span class="p">{</span><span class="mi">2</span><span class="p">}:</span><span class="err">\</span>d<span class="p">{</span><span class="mi">2</span><span class="p">})</span>
-NGINX_ERROR_DATE_TIME <span class="err">%</span><span class="p">{</span>YEAR<span class="p">}</span><span class="err">\/%</span><span class="p">{</span>MONTHNUM<span class="p">}</span><span class="err">\/%</span><span class="p">{</span>MONTHDAY<span class="p">}</span> <span class="err">%</span><span class="p">{</span>TIME<span class="p">}</span>
-NGINXLOG <span class="err">\</span><span class="p">[</span><span class="err">%</span><span class="p">{</span><span class="l">HTTPDATE:timestamp</span><span class="p">}</span><span class="err">\</span><span class="p">]</span> <span class="err">%</span><span class="p">{</span><span class="l">NUMBER:request_time</span><span class="p">}</span> <span class="err">%</span><span class="p">{</span><span class="l">IPORHOST:remote_addr</span><span class="p">}</span> <span class="err">%</span><span class="p">{</span><span class="l">INT:status</span><span class="p">}</span> <span class="err">%</span><span class="p">{</span><span class="l">INT:body_bytes_sent</span><span class="p">}</span> <span class="s2">&quot;%{WORD:method} %{URIPATH:path}(?:%{URIPARAM:param})? HTTP/%{NUMBER:httpversion}&quot;</span> <span class="err">%</span><span class="p">{</span><span class="l">QS:http_referer</span><span class="p">}</span> <span class="err">%</span><span class="p">{</span><span class="l">QS:http_user_agent</span><span class="p">}</span> <span class="err">%</span><span class="p">{</span><span class="l">QS:cookie</span><span class="p">}</span>
-NGINX_ERROR_LOG <span class="p">(</span><span class="o">?</span><span class="l">&lt;timestamp&gt;</span><span class="err">\</span>d<span class="p">{</span><span class="mi">4</span><span class="p">}</span><span class="err">/\</span>d<span class="p">{</span><span class="mi">2</span><span class="p">}</span><span class="err">/\</span>d<span class="p">{</span><span class="mi">2</span><span class="p">}</span> <span class="err">\</span>d<span class="p">{</span><span class="mi">2</span><span class="p">}:</span><span class="err">\</span>d<span class="p">{</span><span class="mi">2</span><span class="p">}:</span><span class="err">\</span>d<span class="p">{</span><span class="mi">2</span><span class="p">})</span> <span class="err">\</span><span class="p">[</span><span class="err">%</span><span class="p">{</span><span class="l">DATA:err_severity</span><span class="p">}</span><span class="err">\</span><span class="p">]</span> <span class="p">(</span><span class="err">%</span><span class="p">{</span><span class="l">NUMBER:pid:int</span><span class="p">}</span><span class="c1">#%{NUMBER}: \*%{NUMBER}|\*%{NUMBER}) %{DATA:err_message}(?:, client: (?&lt;client_ip&gt;%{IP}|%{HOSTNAME}))(?:, server: %{IPORHOST:server})(?:, request: %{QS:request})?(?:, host: %{QS:client_ip})?(?:, referrer: \&quot;%{URI:referrer})?</span>
-
-<span class="c1"># FOR JAVA</span>
-JAVACLASS <span class="p">(</span><span class="o">?</span><span class="p">:[</span>a-zA-Z0-9-<span class="p">]</span><span class="o">+</span><span class="err">\</span><span class="o">.</span><span class="p">)</span><span class="o">+</span><span class="p">[</span>A-Za-z0-9<span class="err">$</span><span class="p">]</span><span class="o">+</span>
-JAVALOGMESSAGE <span class="p">(</span><span class="o">.</span><span class="err">*</span><span class="p">)</span>
-CATALINA_EXEC <span class="err">%</span><span class="p">{</span>WORD<span class="p">}</span><span class="err">-%</span><span class="p">{</span>WORD<span class="p">}</span><span class="err">-%</span><span class="p">{</span>WORD<span class="p">}</span>
-TOMCAT_DATESTAMP <span class="err">%</span><span class="p">{</span>YEAR<span class="p">}</span><span class="err">-%</span><span class="p">{</span>MONTHNUM<span class="p">}</span><span class="err">-%</span><span class="p">{</span>MONTHDAY<span class="p">}</span> <span class="err">%</span><span class="p">{</span>HOUR<span class="p">}:</span><span class="o">?</span><span class="err">%</span><span class="p">{</span>MINUTE<span class="p">}(</span><span class="o">?</span><span class="p">::</span><span class="o">?</span><span class="err">%</span><span class="p">{</span>SECOND<span class="p">})</span>
-TOMCAT_ERROR <span class="err">%</span><span class="p">{</span>TOMCAT_DATESTAMP<span class="p">:</span>timestamp<span class="p">}</span> <span class="err">\</span><span class="p">[</span><span class="err">%</span><span class="p">{</span>CATALINA_EXEC<span class="p">:</span>catalina_exec<span class="p">}</span><span class="err">\</span><span class="p">]</span> <span class="err">%</span><span class="p">{</span><span class="l">LOGLEVEL:level</span><span class="p">}</span> <span class="err">%</span><span class="p">{</span><span class="l">JAVACLASS:class</span><span class="p">}</span> <span class="err">-</span> <span class="err">%</span><span class="p">{</span>JAVALOGMESSAGE_NONGREEDY<span class="p">:</span>logmessage<span class="p">}</span><span class="err">\</span>n<span class="err">%</span><span class="p">{</span>JAVALOGMESSAGE_NONGREEDY<span class="p">:</span>logmessage<span class="p">}</span><span class="err">\</span>n<span class="err">\</span>t<span class="err">%</span><span class="p">{</span><span class="l">GREEDYDATA:fulllogmessge</span><span class="p">}</span>
-
-<span class="c1"># FOR openresty lua相关日志</span>
-<span class="p">(</span><span class="o">?</span><span class="l">&lt;timestamp&gt;</span><span class="err">\</span>d<span class="p">{</span><span class="mi">4</span><span class="p">}</span><span class="err">/\</span>d<span class="p">{</span><span class="mi">2</span><span class="p">}</span><span class="err">/\</span>d<span class="p">{</span><span class="mi">2</span><span class="p">}</span> <span class="err">\</span>d<span class="p">{</span><span class="mi">2</span><span class="p">}:</span><span class="err">\</span>d<span class="p">{</span><span class="mi">2</span><span class="p">}:</span><span class="err">\</span>d<span class="p">{</span><span class="mi">2</span><span class="p">})</span> <span class="err">\</span><span class="p">[</span><span class="err">%</span><span class="p">{</span><span class="l">LOGLEVEL:severity</span><span class="p">}</span><span class="err">\</span><span class="p">]</span> <span class="err">%</span><span class="p">{</span><span class="l">POSINT:pid</span><span class="p">}</span><span class="c1">#%{NUMBER}: %{GREEDYDATA:errormessage}\n(?&lt;traceback&gt;\S+ \S+):\n(?&lt;coroutine&gt;\S+ \d):\s+(?&lt;function&gt;\[C]: in function &#39;require&#39;)?\s+?(?&lt;func-errmsg&gt;.*&gt;), (client: (?&lt;client_ip&gt;%{IP}|%{HOSTNAME}))(?:, server: %{IPORHOST:server})(?:, request: %{QS:request})(?:, host: %{QS:client_ip})</span>
-</pre></div>
-
-
-<p><em>error 格式不固定，不好处理，上面的方法也只能处理个别的errorlog。</em>   </p>
-<h4>es配置</h4>
-<div class="highlight"><pre><span></span>cluster.name: my-application
-bootstrap.mlockall: true
-network.host: 192.168.241.130
-http.port: 9200
-security.manager.enabled: false # 如果链接hadoop，要设置false
-kibana配置：
-
-elasticsearch.url: &quot;http://192.168.241.130:9200&quot;
-</pre></div>
-
-
-<h4>常用命令</h4>
-<p>清理elasticsearch过期数据：   </p>
-<div class="highlight"><pre><span></span>curl -XDELETE <span class="s1">&#39;http://192.168.241.130:9200/logstash-2016.02.24&#39;</span>
-</pre></div>
-
-
-<h4>坑</h4>
-<ol>
-<li>不要用vim修改被监控文件，会造成保存后，之前存在的内容也被发送给logstash。    </li>
-<li>目前filebeat ssl验证貌似有问题。    </li>
-<li>filebeat出现过一次丢数据情况，还是flume靠谱一些。</li>
-</ol> 
+<div class="highlight"><pre><span></span><span class="n">filebeat ...</span></pre></div> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-25-10-48.html">
-          <i class="icon-comment"></i> Comment </a>
+          <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
       
     </div>
-    
+      
 
  
         
@@ -697,55 +610,6 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <li>
 <p>除了拷贝.so .a文件，别忘了还要拷hadoop-lzo-*-SNAPSHOT.jar ...</p></li></ul> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-15-58.html">
-          <i class="icon-plus-sign"></i> Read More </a>
-	<hr />
-      </div>
-      
-    </div>
-      
-
- 
-        
-
-
-
-    <div class='row-fluid'>
-      <div class='article-title span9'> 
-        <a href="../yun-wei/2016-03-24-15-46.html"><h1>jenkins权限管理</h1></a>
-      </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span2">
-<p>四 24 三月 2016 </p>
-
-<p style="text-align: left;">
-Filed under <a href="../yun-wei/index.html">运维</a>
-</p>
-<p style="text-align: left;">
- 
-    Tags <a href="../tag/jenkins.html">jenkins</a> </p>
-<p>
-</p>
-      </div>
-      <div class="summary span8">
-	<p>jenkins安装非常简便，权限管理相对麻烦一些，下面记录一下我的配置过程。</p>
-<p><strong>先扔两个开源中国上的同学写好的权限配置教程。</strong></p>
-<p><strong><a href="http://my.oschina.net/boltwu/blog/408145" target="_blank">Jenkins配置基于角色的项目权限管理</a></strong><br />
-<strong><a href="http://my.oschina.net/boltwu/blog/410925" target="_blank">配置Jenkins用户和权限</a></strong>  </p>
-<h4>权限管理：</h4>
-<p>1.安装插件<code>Role-Based Strategy</code>，然后再configure global security选择这个插件。   </p>
-<p>2.系统管理 -&gt; 管理用户 -&gt; 新建用户。   </p>
-<p>3.系统管理 -&gt; Manage and Assign Roles -&gt; Manage Roles </p>
-<ul>
-<li>Global roles 设置账号权限组。   </li>
-<li>Project roles 设置账号对项目的权限组。 <br />
-  下面是我的配置(查看大图请在新建标签页打开)：    </li>
-</ul>
-<p><img alt="配置图1" src="http://static.oschina.net/uploads/space/2015/1023/143042_j6yU_1428530.jpg" />   </p>
-<p><strong>说明：<code>global roles</code> 设置了一个只读组，防止登陆用户修改系统配置。</strong>
-  <strong><code>project roles</code> 设置了一个dev组，研发同学只能对<code>dev-project</code>开头的项目可见，并可以自己部署。</strong></p>
-<p>4.系统管理 -&gt; Manage and ...</p> 
-	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-15-46.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
