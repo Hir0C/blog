@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>Hir0C blog <small>nginx</small></title>
+    <title>安装火焰图生成工具 - Hir0C blog</title>
     <meta name="description" content="">
     <meta name="author" content="Hir0C">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,7 +34,7 @@
 	<ul class="nav nav-pills pull-right">
 	    <li >
 	      <a href="../ri-chang/index.html ">日常</a>
-	    <li >
+	    <li  class="active" >
 	      <a href="../yun-wei/index.html ">运维</a>
 	</ul>
       </div>
@@ -47,15 +47,12 @@
     <div class="row-fluid">
 
         <div class="span10">
-        
-
-        
-
-    <div class='row-fluid''>
-        <div class="article-title span9">
-            <a href="../yun-wei/2016-03-25-12-10.html"><h1>安装火焰图生成工具</h1></a>
-        </div>
-    </div>
+    <div class='article'>
+      <div class="row-fluid">
+           <div class="content-title span9">
+             <h1>安装火焰图生成工具</h1>
+           </div>
+      </div>
     <div class="row-fluid">
       <div class="span2">
 <p>五 25 三月 2016 </p>
@@ -69,7 +66,8 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <p>
 </p>
       </div>
-      <div class="article-content span8">
+      
+      <div class="span8">
 	<h4>准备</h4>
 <p>查看内核版本</p>
 <div class="highlight"><pre><span></span>uname -a
@@ -133,130 +131,26 @@ Pass 5: run completed in 20usr/30sys/354real ms.
 </pre></div>
 
 
-<p><a href="https://moonbingbing.gitbooks.io/openresty-best-practices/content/flame_graph/install.html" target="_blank">参考链接</a> </p> 
-	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-25-12-10.html">
-          <i class="icon-comment"></i> Comment </a>
+<p><a href="https://moonbingbing.gitbooks.io/openresty-best-practices/content/flame_graph/install.html" target="_blank">参考链接</a> </p>
 	<hr />
       </div>
-      
     </div>
+    <div class="span10">
+      <h3>Comments</h3>
     
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'HiroC'; 
 
- 
-        
-
-
-
-    <div class='row-fluid'>
-      <div class='article-title span9'> 
-        <a href="../yun-wei/2016-03-24-11-48.html"><h1>一些常用nginx配置</h1></a>
-      </div>
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>  
     </div>
-    <div class="row-fluid">
-      <div class="span2">
-<p>四 24 三月 2016 </p>
-
-<p style="text-align: left;">
-Filed under <a href="../yun-wei/index.html">运维</a>
-</p>
-<p style="text-align: left;">
- 
-    Tags <a href="../tag/nginx.html">nginx</a> </p>
-<p>
-</p>
-      </div>
-      <div class="summary span8">
-	<h4>一、关闭内网ip的access日志</h4>
-<div class="highlight"><pre><span></span><span class="x">location ~ xxxxxx</span><span class="err">{</span><span class="x"> </span>
-<span class="x">    if ( </span><span class="p">$</span><span class="nv">remote_addr</span><span class="x"> ~ &quot;1.1.1.*&quot; ) </span><span class="err">{</span><span class="x"></span>
-<span class="x">        access_log off;</span>
-<span class="x">    }</span>
-<span class="x">}</span>
-</pre></div>
-
-
-<h4>二、if的or条件</h4>
-<div class="highlight"><pre><span></span><span class="nt">location</span> <span class="o">/</span> <span class="p">{</span>
-    <span class="n">set</span> <span class="err">$</span><span class="n">flag</span> <span class="m">0</span><span class="p">;</span>
-    <span class="n">if</span> <span class="p">(</span><span class="err">$</span><span class="n">query_string</span> <span class="o">~</span> <span class="s2">&quot;xxx&quot;</span><span class="p">)</span><span class="err">{</span>
-            <span class="n">set</span> <span class="err">$</span><span class="n">flag</span> <span class="m">1</span><span class="p">;</span>
-            <span class="n">proxy_pass</span> <span class="n">http</span><span class="o">://</span><span class="n">s1</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="nt">if</span> <span class="o">($</span><span class="nt">query_string</span> <span class="o">~</span> <span class="s2">&quot;OOO&quot;</span><span class="o">)</span><span class="p">{</span>
-            <span class="n">set</span> <span class="err">$</span><span class="n">flag</span> <span class="m">1</span><span class="p">;</span>
-            <span class="n">proxy_pass</span> <span class="n">http</span><span class="o">://</span><span class="n">s1</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="nt">if</span> <span class="o">($</span><span class="nt">flag</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span><span class="o">)</span><span class="p">{</span>
-            <span class="n">return</span> <span class="m">200</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="err">}</span>
-</pre></div>
-
-
-<p><strong>如果不加return 200的话 所有非匹配请求都会404</strong></p>
-<h4>三、nginx+fcgi参数</h4>
-<p>nginx+fcgi, fcgi中变量名不能用大写字母和"-" <br />
-fcgi传递header参数时需要用 ...</p> 
-	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-11-48.html">
-          <i class="icon-plus-sign"></i> Read More </a>
-	<hr />
-      </div>
-      
-    </div>
-      
-
- 
-        
-
-
-
-    <div class='row-fluid'>
-      <div class='article-title span9'> 
-        <a href="../yun-wei/2016-03-22-18-34.html"><h1>wordpress on nginx 搭建</h1></a>
-      </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span2">
-<p>二 22 三月 2016 </p>
-
-<p style="text-align: left;">
-Filed under <a href="../yun-wei/index.html">运维</a>
-</p>
-<p style="text-align: left;">
- 
-    Tags <a href="../tag/nginx.html">nginx</a> <a href="../tag/wordpress.html">wordpress</a> </p>
-<p>
-</p>
-      </div>
-      <div class="summary span8">
-	<p><em>内网搞了了bolg，采用了nginx+php+mysql+wordpress。整个过程并不复杂，记录下遇到的问题。</em></p>
-<h4>1. 安装nginx</h4>
-<div class="highlight"><pre><span></span>    ./configure --prefix=/usr/local/nginx --with-zlib --with-pcre=/opt/ftp/http-server/pcre-8.34 --with-http_perl_module --with-http_stub_status_module --with-http_image_filter_module --with-http_gunzip_module --with-http_gzip_static_module
-</pre></div>
-
-
-<h4>2. php</h4>
-<div class="highlight"><pre><span></span>    ./configure --prefix=/usr/local/php &#39;--with-config-file-path=/usr/local/php-5.4.23/etc&#39; &#39;--enable-fpm&#39; &#39;--enable-pcntl&#39; &#39;--enable-shmop&#39; &#39;--enable-sysvsem&#39; &#39;--enable-inline-optimization&#39; &#39;--disable-rpath&#39; &#39;--enable-safe-mode&#39; &#39;--with-mysql=mysqlnd&#39; &#39;--with-mysqli ...</pre></div> 
-	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-22-18-34.html">
-          <i class="icon-plus-sign"></i> Read More </a>
-	<hr />
-      </div>
-      
-    </div>
-      
-<div class="pagination">
-<ul>
-    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
-
-    <li class="active"><a href="../tag/nginx.html">1</a></li>
-
-    <li class="next disabled"><a href="#">&rarr; Next</a></li>
-
-</ul>
-</div>
-
- 
-  
         </div>
         
         

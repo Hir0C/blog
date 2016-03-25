@@ -53,8 +53,104 @@
 
     <div class='row-fluid''>
         <div class="article-title span9">
-            <a href="../yun-wei/2016-03-25-11-37.html"><h1>nginx 使用免费https</h1></a>
+            <a href="../yun-wei/2016-03-25-12-10.html"><h1>安装火焰图生成工具</h1></a>
         </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>五 25 三月 2016 </p>
+
+<p style="text-align: left;">
+Filed under <a href="../yun-wei/index.html">运维</a>
+</p>
+<p style="text-align: left;">
+ 
+    Tags <a href="../tag/nginx.html">nginx</a> <a href="../tag/openresty.html">openresty</a> </p>
+<p>
+</p>
+      </div>
+      <div class="article-content span8">
+	<h4>准备</h4>
+<p>查看内核版本</p>
+<div class="highlight"><pre><span></span>uname -a
+</pre></div>
+
+
+<p>根据内核版本下载内核开发补丁   </p>
+<p><a href="http://debuginfo.centos.org/6/x86_64/" target="_blank">CentOS源</a>   </p>
+<p>以我虚拟机为例需要下载如下三个包   </p>
+<div class="highlight"><pre><span></span>kernel-debug-debuginfo-2.6.32-573.el6.x86_64.rpm
+kernel-debuginfo-2.6.32-573.el6.x86_64.rpm
+kernel-debuginfo-common-x86_64-2.6.32-573.el6.x86_64.rpm
+</pre></div>
+
+
+<h4>安装</h4>
+<p>1.装rpm包</p>
+<div class="highlight"><pre><span></span>rpm -ivh *
+yum install systemtap
+</pre></div>
+
+
+<p>2.安装openresty   </p>
+<p>重新编译openresty，打开--debug选项   </p>
+<p>3.下载Flame-Graphic生成包   </p>
+<p><a href="https://github.com/brendangregg/FlameGraph" target="_blank">下载地址点我</a>    </p>
+<h4>使用</h4>
+<p>1.测试systemtap是否安装成功   </p>
+<div class="highlight"><pre><span></span>stap -v -e <span class="s1">&#39;probe vfs.read {printf(&quot;read performed\n&quot;); exit()}&#39;</span>
+</pre></div>
+
+
+<p>有如下显示证明安装成功   </p>
+<div class="highlight"><pre><span></span>Pass 1: parsed user script and 103 library script(s) using 201628virt/29508res/3144shr/26860data kb, in 10usr/190sys/219real ms.
+Pass 2: analyzed script: 1 probe(s), 1 function(s), 3 embed(s), 0 global(s) using 296120virt/124876res/4120shr/121352data kb, in 660usr/1020sys/1889real ms.
+Pass 3: translated to C into &quot;/tmp/stapffFP7E/stap_82c0f95e47d351a956e1587c4dd4cee1_1459_src.c&quot; using 296120virt/125204res/4448shr/121352data kb, in 10usr/50sys/56real ms.
+Pass 4: compiled C into &quot;stap_82c0f95e47d351a956e1587c4dd4cee1_1459.ko&quot; in 620usr/620sys/1379real ms.
+Pass 5: starting run.
+read performed
+Pass 5: run completed in 20usr/30sys/354real ms.
+</pre></div>
+
+
+<p>2.画图   </p>
+<p><em>脚本</em>   </p>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="nv">pid</span><span class="o">=</span><span class="nv">$1</span>
+<span class="nv">t</span><span class="o">=</span><span class="nv">$2</span>
+<span class="nv">filepath</span><span class="o">=</span><span class="k">$(</span><span class="nb">cd</span> <span class="s2">&quot;</span><span class="k">$(</span>dirname <span class="s2">&quot;</span><span class="nv">$0</span><span class="s2">&quot;</span><span class="k">)</span><span class="s2">&quot;</span><span class="p">;</span> <span class="nb">pwd</span><span class="k">)</span>
+<span class="nb">echo</span> <span class="si">${</span><span class="nv">filepath</span><span class="si">}</span>
+<span class="nb">cd</span> <span class="si">${</span><span class="nv">filepath</span><span class="si">}</span>
+./nginx-systemtap-toolkit-master/ngx-sample-lua-bt -p <span class="si">${</span><span class="nv">pid</span><span class="si">}</span> --luajit20 -t <span class="si">${</span><span class="nv">t</span><span class="si">}</span> &gt; result/tmp.bt
+./nginx-systemtap-toolkit-master/fix-lua-bt result/tmp.bt &gt; result/flame.bt
+./FlameGraph-master/stackcollapse-stap.pl result/flame.bt &gt; result/flame.cbt
+./FlameGraph-master/flamegraph.pl result/flame.cbt &gt; result/flame.svg
+</pre></div>
+
+
+<p><strong>执行</strong>   </p>
+<div class="highlight"><pre><span></span>bash /opt/flamegraph/make_svg.sh <span class="m">29857</span> <span class="m">60</span> <span class="c1"># 执行脚本，指定nginx其中一个线程pid，和脚本执行时间</span>
+</pre></div>
+
+
+<p><a href="https://moonbingbing.gitbooks.io/openresty-best-practices/content/flame_graph/install.html" target="_blank">参考链接</a> </p> 
+	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-25-12-10.html">
+          <i class="icon-comment"></i> Comment </a>
+	<hr />
+      </div>
+      
+    </div>
+    
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="../yun-wei/2016-03-25-11-37.html"><h1>nginx 使用免费https</h1></a>
+      </div>
     </div>
     <div class="row-fluid">
       <div class="span2">
@@ -69,70 +165,15 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <p>
 </p>
       </div>
-      <div class="article-content span8">
-	<h2>转发自小众软件这片<a href="http://www.appinn.com/use-letsencrypt-with-nginx/" target="_blank">文章</a></h2>
-<h4>安装</h4>
-<div class="highlight"><pre><span></span>git clone https://github.com/letsencrypt/letsencrypt /opt/letsencrypt
-</pre></div>
-
-
-<h4>配置</h4>
-<p>先关闭nginx并开启防火墙80 和 443端口，避免申请证书时端口占用。</p>
-<div class="highlight"><pre><span></span><span class="nt">server</span> <span class="p">{</span>
-    <span class="n">listen</span>       <span class="m">80</span><span class="p">;</span>
-    <span class="n">server_name</span>  <span class="n">www</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">com</span><span class="p">;</span>
-    <span class="n">root</span>   <span class="n">html</span><span class="p">;</span>
-    <span class="n">return</span> <span class="m">301</span> <span class="n">https</span><span class="o">://</span><span class="err">$</span><span class="n">host</span><span class="err">$</span><span class="n">request_uri</span><span class="p">;</span>
-
-    <span class="n">location</span> <span class="o">/</span> <span class="err">{</span>
-        <span class="n">index</span>  <span class="n">index</span><span class="o">.</span><span class="n">html</span> <span class="n">index</span><span class="o">.</span><span class="n">php</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="err">}</span>
-<span class="nt">server</span> <span class="p">{</span>
-    <span class="n">listen</span> <span class="m">443</span> <span class="n">ssl</span><span class="p">;</span>
-    <span class="n">server_name</span> <span class="n">www</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">com</span><span class="p">;</span>
-    <span class="n">ssl</span> <span class="n">on</span><span class="p">;</span>
-    <span class="n">ssl_certificate</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">letsencrypt</span><span class="o">/</span><span class="n">live</span><span class="o">/</span><span class="n">www</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">fullchain</span><span class="o">.</span><span class="n">pem</span><span class="p">;</span>
-    <span class="n">ssl_certificate_key</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">letsencrypt</span><span class="o">/</span><span class="n">live</span><span class="o">/</span><span class="n">www</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">privkey</span><span class="o">.</span><span class="n">pem</span><span class="p">;</span>
-    <span class="n">ssl_protocols</span> <span class="n">TLSv1</span> <span class="n">TLSv1</span><span class="o">.</span><span class="m">1</span> <span class="n">TLSv1</span><span class="o">.</span><span class="m">2</span><span class="p">;</span>
-    <span class="n">ssl_prefer_server_ciphers</span> <span class="n">on</span><span class="p">;</span>
-    <span class="n">ssl_ciphers</span> <span class="s1">&#39;EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH&#39;</span><span class="p">;</span>
-
-    <span class="n">location</span> <span class="o">~</span> <span class="o">/.</span><span class="n">well</span><span class="o">-</span><span class="n">known</span> <span class="err">{</span>
-        <span class="n">allow</span> <span class="n">all</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="err">}</span>
-</pre></div>
-
-
-<h4>证书续签</h4>
-<p><strong>1.修改配置文件</strong>   </p>
-<div class="highlight"><pre><span></span>cp /opt/letsencrypt/examples/cli.ini /usr/local/etc/le-renew-webroot.in
-</pre></div>
-
-
-<p>编辑该文件   </p>
-<div class="highlight"><pre><span></span>rsa-key-size = 4096
-email = you@example.com
-domains = www.test.com
-webroot-path = /usr/share/nginx/html //这个路径之后脚本会用到
-</pre></div>
-
-
-<p><strong>2.下载脚本并设置权限</strong>   </p>
-<div class="highlight"><pre><span></span>curl -L -o /usr/local/sbin/le-renew-webroot https://gist.githubusercontent.com/thisismitch/e1b603165523df66d5cc/raw/fbffbf358e96110d5566f13677d9bd5f4f65794c/le-renew-webroot
-chmod +x /usr/local/sbin/le-renew-webroot
-</pre></div>
-
-
-<p>脚本会先检测证书日期，如果没到期不会去服务端申请延期。</p> 
+      <div class="summary span8">
+	<p>Short version for index and feeds</p> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-25-11-37.html">
-          <i class="icon-comment"></i> Comment </a>
+          <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
       
     </div>
-    
+      
 
  
         
@@ -534,65 +575,6 @@ yum install python-crypto python-paramiko
 <div class="highlight"><pre><span></span><span class="x">- name: deploy file and backup</span>
 <span class="x">  synchronize ...</span></pre></div> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-16-58.html">
-          <i class="icon-plus-sign"></i> Read More </a>
-	<hr />
-      </div>
-      
-    </div>
-      
-
- 
-        
-
-
-
-    <div class='row-fluid'>
-      <div class='article-title span9'> 
-        <a href="../yun-wei/2016-03-24-16-40.html"><h1>发送邮件Http api</h1></a>
-      </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span2">
-<p>四 24 三月 2016 </p>
-
-<p style="text-align: left;">
-Filed under <a href="../yun-wei/index.html">运维</a>
-</p>
-<p style="text-align: left;">
- 
-    Tags <a href="../tag/linux.html">linux</a> <a href="../tag/mail.html">mail</a> </p>
-<p>
-</p>
-      </div>
-      <div class="summary span8">
-	<h4>简介</h4>
-<p>github上找到个go写的通过http POST请求发送邮件的代码。 <br />
-少有的根据文档顺利安装成功并运行的代码。   </p>
-<p><a href="https://github.com/niean/mailsender" target="_blank">链接在此</a></p>
-<h4>配置</h4>
-<div class="highlight"><pre><span></span>{
-    &quot;debug&quot;:true,
-    &quot;http&quot;:{
-        &quot;enable&quot;:true,
-        &quot;listen&quot;:&quot;0.0.0.0:6666&quot;
-    },
-    &quot;rpc&quot;:{
-        &quot;enable&quot;:false,
-        &quot;listen&quot;:&quot;0.0.0.0:77777&quot;
-    },
-    &quot;mail&quot;:{
-        &quot;enable&quot; : true,
-        &quot;sendConcurrent&quot; : 5,
-        &quot;maxQueueSize&quot; : 100,
-        &quot;fromUser&quot; : &quot;user&quot;,  //随便写
-        &quot;mailServerHost&quot; : &quot;mailserver.com&quot;,
-        &quot;mailServerPort&quot; : 25,
-        &quot;mailServerAccount&quot; : &quot;alert@mailserver.com&quot;,  //邮件发件账号名
-        &quot;mailServerPasswd&quot; : &quot;&quot;  //没验证可以留空
-    }
-}
-</pre></div> 
-	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-16-40.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
