@@ -55,6 +55,66 @@
 
     <div class='row-fluid'>
       <div class='article-title span9'> 
+        <a href="../yun-wei/2016-03-24-17-06.html"><h1>mysql mongodb 备份脚本</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>四 24 三月 2016 </p>
+
+<p style="text-align: left;">
+Filed under <a href="../yun-wei/index.html">运维</a>
+</p>
+<p style="text-align: left;">
+ 
+    Tags <a href="../tag/mysql.html">mysql</a> <a href="../tag/mongodb.html">mongodb</a> </p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<h4>一 准备:</h4>
+<p><a href="https://sourceforge.net/projects/automysqlbackup/" target="_blank">automysqlbackup下载</a> <br />
+<a href="https://github.com/micahwedemeyer/automongobackup" target="_blank">automongobackup下载</a>   </p>
+<p>automongobackup是模仿automysqlbackup项目写的，默认并不带配置文件，可以直接修改脚本里对应变量。   </p>
+<p>​</p>
+<h4>二 配置</h4>
+<p><strong>automysqlbackup</strong>   </p>
+<div class="highlight"><pre><span></span>CONFIG_mysql_dump_username=&#39;user&#39;
+CONFIG_mysql_dump_password=&#39;passwd&#39;
+CONFIG_mysql_dump_host=&#39;localhost&#39;
+CONFIG_backup_dir=&#39;/backup/mysql&#39;
+CONFIG_multicore=&#39;yes&#39;
+CONFIG_multicore_threads=2
+CONFIG_do_monthly=&quot;0&quot;
+CONFIG_do_weekly=&quot;0&quot;
+CONFIG_rotation_daily=6
+CONFIG_mysql_dump_port=3306
+CONFIG_mysql_dump_single_transaction=&#39;yes&#39;
+CONFIG_mysql_dump_compression=&#39;gzip&#39;
+</pre></div>
+
+
+<p><strong>automongobackup</strong>   </p>
+<div class="highlight"><pre><span></span>DBHOST=&quot;127.0.0.1&quot;
+DBPORT=&quot;27017&quot;
+BACKUPDIR=&quot;/backup/mongodb&quot;
+DBUSERNAME=&quot;user&quot;
+DBPASSWORD=&quot;passwd ...</pre></div> 
+	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-17-06.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
         <a href="../yun-wei/2016-03-24-17-02.html"><h1>maven 命令备忘</h1></a>
       </div>
     </div>
@@ -547,47 +607,6 @@ Filed under <a href="../yun-wei/index.html">运维</a>
       
     </div>
       
-
- 
-        
-
-
-
-    <div class='row-fluid'>
-      <div class='article-title span9'> 
-        <a href="../yun-wei/2016-03-24-15-04.html"><h1>rpm包制作遇到的一个小问题</h1></a>
-      </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span2">
-<p>四 24 三月 2016 </p>
-
-<p style="text-align: left;">
-Filed under <a href="../yun-wei/index.html">运维</a>
-</p>
-<p style="text-align: left;">
- 
-    Tags <a href="../tag/linux.html">linux</a> <a href="../tag/rpm.html">rpm</a> </p>
-<p>
-</p>
-      </div>
-      <div class="summary span8">
-	<p>最近rhel6上做rpm遇到一个问题，之前在rhel5上从来没有遇到过。如图：
-<img alt="rpm报错图" src="http://static.oschina.net/uploads/space/2015/0105/015731_Wny3_1428530.png" /></p>
-<p>而且出现这个报错只是在做个别包的时候会有，网上大概查了一下报错也没有啥明确的说法。不过报错的提示倒是很明显，根据你的报错赋值对应的bitmask   </p>
-<p>比如我这回遇到的是<code>invalid RPATHs</code>，所以我打包时就要执行如下命令：   </p>
-<div class="highlight"><pre><span></span><span class="nv">QA_RPATHS</span><span class="o">=</span>$<span class="o">[</span> 0x0002 <span class="o">]</span> rpmbuild -bb SPEC/xxx.spec
-</pre></div>
-
-
-<p>不过报错原因暂时不明。</p> 
-	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-15-04.html">
-          <i class="icon-plus-sign"></i> Read More </a>
-	<hr />
-      </div>
-      
-    </div>
-      
 <div class="pagination">
 <ul>
     <li class="prev"><a href="../author/hir0c.html">&larr; Previous</a></li>
@@ -596,6 +615,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
     <li class="active"><a href="../author/hir0c2.html">2</a></li>
     <li class=""><a href="../author/hir0c3.html">3</a></li>
     <li class=""><a href="../author/hir0c4.html">4</a></li>
+    <li class=""><a href="../author/hir0c5.html">5</a></li>
 
     <li class="next"><a href="../author/hir0c3.html">Next &rarr;</a></li>
 

@@ -53,8 +53,50 @@
 
     <div class='row-fluid''>
         <div class="article-title span9">
-            <a href="../ri-chang/2016-03-25-12-17.html"><h1>markdown使用</h1></a>
+            <a href="../yun-wei/2016-04-22-11-19.html"><h1>MySQL AB复制学习</h1></a>
         </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>五 22 四月 2016 </p>
+
+<p style="text-align: left;">
+Filed under <a href="../yun-wei/index.html">运维</a>
+</p>
+<p style="text-align: left;">
+ 
+    Tags <a href="../tag/mysql.html">mysql</a> </p>
+<p>
+</p>
+      </div>
+      <div class="article-content span8">
+	<h4>环境准备</h4>
+<p>用了docker做实验<a href="https://hub.docker.com/_/mysql/" target="_blank">链接：</a> ，版本我选择5.6.30</p>
+<p>Dockerfile里不包含vim，而且mysql的数据目录权限为root，所以需要稍加修改
+需要添加如下内容</p>
+<div class="highlight"><pre><span></span>RUN apt-get update &amp;&amp; apt-get install -y perl pwgen `vim` --no-install-recommends &amp;&amp; rm -rf /var/lib/apt/lists/*
+RUN chown -R mysql.mysql /var/lib/mysql
+</pre></div>
+
+
+<p>然后创建镜像<code>docker build -t=debian:mysql56 .</code></p> 
+	<a class="btn btn-mini xsmall" href="../yun-wei/2016-04-22-11-19.html">
+          <i class="icon-comment"></i> Comment </a>
+	<hr />
+      </div>
+      
+    </div>
+    
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="../ri-chang/2016-03-25-12-17.html"><h1>markdown使用</h1></a>
+      </div>
     </div>
     <div class="row-fluid">
       <div class="span2">
@@ -69,7 +111,7 @@ Filed under <a href="../ri-chang/index.html">日常</a>
 <p>
 </p>
       </div>
-      <div class="article-content span8">
+      <div class="summary span8">
 	<p>记录几个markdown常用方法</p>
 <ol>
 <li>行首空格使用<code>&amp;emsp;&amp;emsp;</code></li>
@@ -78,12 +120,12 @@ Filed under <a href="../ri-chang/index.html">日常</a>
 <li>水平分割线<code>***</code></li>
 </ol> 
 	<a class="btn btn-mini xsmall" href="../ri-chang/2016-03-25-12-17.html">
-          <i class="icon-comment"></i> Comment </a>
+          <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
       
     </div>
-    
+      
 
  
         
@@ -477,66 +519,6 @@ Filed under <a href="../yun-wei/index.html">运维</a>
       
     </div>
       
-
- 
-        
-
-
-
-    <div class='row-fluid'>
-      <div class='article-title span9'> 
-        <a href="../yun-wei/2016-03-24-17-06.html"><h1>mysql mongodb 备份脚本</h1></a>
-      </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span2">
-<p>四 24 三月 2016 </p>
-
-<p style="text-align: left;">
-Filed under <a href="../yun-wei/index.html">运维</a>
-</p>
-<p style="text-align: left;">
- 
-    Tags <a href="../tag/mysql.html">mysql</a> <a href="../tag/mongodb.html">mongodb</a> </p>
-<p>
-</p>
-      </div>
-      <div class="summary span8">
-	<h4>一 准备:</h4>
-<p><a href="https://sourceforge.net/projects/automysqlbackup/" target="_blank">automysqlbackup下载</a> <br />
-<a href="https://github.com/micahwedemeyer/automongobackup" target="_blank">automongobackup下载</a>   </p>
-<p>automongobackup是模仿automysqlbackup项目写的，默认并不带配置文件，可以直接修改脚本里对应变量。   </p>
-<p>​</p>
-<h4>二 配置</h4>
-<p><strong>automysqlbackup</strong>   </p>
-<div class="highlight"><pre><span></span>CONFIG_mysql_dump_username=&#39;user&#39;
-CONFIG_mysql_dump_password=&#39;passwd&#39;
-CONFIG_mysql_dump_host=&#39;localhost&#39;
-CONFIG_backup_dir=&#39;/backup/mysql&#39;
-CONFIG_multicore=&#39;yes&#39;
-CONFIG_multicore_threads=2
-CONFIG_do_monthly=&quot;0&quot;
-CONFIG_do_weekly=&quot;0&quot;
-CONFIG_rotation_daily=6
-CONFIG_mysql_dump_port=3306
-CONFIG_mysql_dump_single_transaction=&#39;yes&#39;
-CONFIG_mysql_dump_compression=&#39;gzip&#39;
-</pre></div>
-
-
-<p><strong>automongobackup</strong>   </p>
-<div class="highlight"><pre><span></span>DBHOST=&quot;127.0.0.1&quot;
-DBPORT=&quot;27017&quot;
-BACKUPDIR=&quot;/backup/mongodb&quot;
-DBUSERNAME=&quot;user&quot;
-DBPASSWORD=&quot;passwd ...</pre></div> 
-	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-17-06.html">
-          <i class="icon-plus-sign"></i> Read More </a>
-	<hr />
-      </div>
-      
-    </div>
-      
 <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
@@ -545,6 +527,7 @@ DBPASSWORD=&quot;passwd ...</pre></div>
     <li class=""><a href="../author/hir0c2.html">2</a></li>
     <li class=""><a href="../author/hir0c3.html">3</a></li>
     <li class=""><a href="../author/hir0c4.html">4</a></li>
+    <li class=""><a href="../author/hir0c5.html">5</a></li>
 
     <li class="next"><a href="../author/hir0c2.html">Next &rarr;</a></li>
 

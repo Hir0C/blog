@@ -53,8 +53,50 @@
 
     <div class='row-fluid''>
         <div class="article-title span9">
-            <a href="../yun-wei/2016-03-24-17-06.html"><h1>mysql mongodb 备份脚本</h1></a>
+            <a href="../yun-wei/2016-04-22-11-19.html"><h1>MySQL AB复制学习</h1></a>
         </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>五 22 四月 2016 </p>
+
+<p style="text-align: left;">
+Filed under <a href="../yun-wei/index.html">运维</a>
+</p>
+<p style="text-align: left;">
+ 
+    Tags <a href="../tag/mysql.html">mysql</a> </p>
+<p>
+</p>
+      </div>
+      <div class="article-content span8">
+	<h4>环境准备</h4>
+<p>用了docker做实验<a href="https://hub.docker.com/_/mysql/" target="_blank">链接：</a> ，版本我选择5.6.30</p>
+<p>Dockerfile里不包含vim，而且mysql的数据目录权限为root，所以需要稍加修改
+需要添加如下内容</p>
+<div class="highlight"><pre><span></span>RUN apt-get update &amp;&amp; apt-get install -y perl pwgen `vim` --no-install-recommends &amp;&amp; rm -rf /var/lib/apt/lists/*
+RUN chown -R mysql.mysql /var/lib/mysql
+</pre></div>
+
+
+<p>然后创建镜像<code>docker build -t=debian:mysql56 .</code></p> 
+	<a class="btn btn-mini xsmall" href="../yun-wei/2016-04-22-11-19.html">
+          <i class="icon-comment"></i> Comment </a>
+	<hr />
+      </div>
+      
+    </div>
+    
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="../yun-wei/2016-03-24-17-06.html"><h1>mysql mongodb 备份脚本</h1></a>
+      </div>
     </div>
     <div class="row-fluid">
       <div class="span2">
@@ -69,7 +111,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <p>
 </p>
       </div>
-      <div class="article-content span8">
+      <div class="summary span8">
 	<h4>一 准备:</h4>
 <p><a href="https://sourceforge.net/projects/automysqlbackup/" target="_blank">automysqlbackup下载</a> <br />
 <a href="https://github.com/micahwedemeyer/automongobackup" target="_blank">automongobackup下载</a>   </p>
@@ -97,50 +139,14 @@ CONFIG_mysql_dump_compression=&#39;gzip&#39;
 DBPORT=&quot;27017&quot;
 BACKUPDIR=&quot;/backup/mongodb&quot;
 DBUSERNAME=&quot;user&quot;
-DBPASSWORD=&quot;passwd&quot;
-DBAUTHDB=&quot;admin&quot;
-MAILCONTENT=&quot;stdout&quot;
-MAXATTSIZE=&quot;4000&quot;
-DODAILY=&quot;yes&quot;
-DAILYRETENTION=6
-DOWEEKLY=&quot;no&quot;
-WEEKLYDAY=0
-WEEKLYRETENTION=0
-DOMONTHLY=&quot;no&quot;
-MONTHLYRETENTION=0
-COMP=&quot;gzip&quot;
-CLEANUP=&quot;yes&quot;
-LATEST=&quot;yes&quot;
-LATESTLINK=&quot;yes&quot;
-OPLOG=&quot;no&quot;
-REPLICAONSLAVE=&quot;yes&quot;
-REQUIREDBAUTHDB=&quot;yes&quot;
-</pre></div>
-
-
-<p><em>两个配置都指定备份文件保存一星期。</em>   </p>
-<h4>三 执行</h4>
-<div class="highlight"><pre><span></span>/usr/local/bin/automysqlbackup /etc/automysqlbackup/myserver.conf
-automongobackup
-</pre></div>
-
-
-<h4>四 数据导入</h4>
-<p><strong>mongodb</strong></p>
-<div class="highlight"><pre><span></span>mongorestore -h 127.0.0.1 -d dbname dbbakdir/
-</pre></div>
-
-
-<p><strong>mysql</strong></p>
-<div class="highlight"><pre><span></span>mysql -uusername -ppassword &lt; bak.sql
-</pre></div> 
+DBPASSWORD=&quot;passwd ...</pre></div> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-17-06.html">
-          <i class="icon-comment"></i> Comment </a>
+          <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
       
     </div>
-    
+      
 
  
         
