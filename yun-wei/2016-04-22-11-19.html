@@ -101,7 +101,7 @@ server-id       = 1
 <p><strong>slave</strong></p>
 <div class="highlight"><pre><span></span>#vi /etc/mysql/my.cnf
 [mysqld]
-server-id       = 1
+server-id       = 2
 </pre></div>
 
 
@@ -125,7 +125,7 @@ server-id       = 1
 
 
 <p><strong>slave</strong></p>
-<div class="highlight"><pre><span></span><span class="o">#</span><span class="err">恢复数据库</span><span class="p">(</span><span class="err">来自与</span><span class="n">master</span><span class="err">的备份文件</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="err">恢复数据库</span><span class="p">(</span><span class="err">来自与</span><span class="n">master</span><span class="err">的备份文件</span><span class="p">)</span>
 <span class="n">mysql</span> <span class="o">-</span><span class="n">u</span> <span class="n">root</span> <span class="o">-</span><span class="n">p</span> <span class="o">&lt;</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="k">all</span><span class="p">.</span><span class="k">sql</span>
 </pre></div>
 
@@ -151,7 +151,7 @@ server-id       = 1
 
 <h5>查看复制状态：</h5>
 <p><strong>slave</strong></p>
-<div class="highlight"><pre><span></span><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">show</span> <span class="n">slave</span> <span class="n">status</span><span class="err">\</span><span class="k">G</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">show</span> <span class="n">slave</span> <span class="n">status</span> <span class="err">\</span><span class="k">G</span>
 </pre></div>
 	<hr />
       </div>
