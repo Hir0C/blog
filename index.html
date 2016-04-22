@@ -71,15 +71,83 @@ Filed under <a href="./yun-wei/index.html">运维</a>
       </div>
       <div class="article-content span8">
 	<h4>环境准备</h4>
-<p>用了docker做实验<a href="https://hub.docker.com/_/mysql/" target="_blank">链接：</a> ，版本我选择5.6.30</p>
-<p>Dockerfile里不包含vim，而且mysql的数据目录权限为root，所以需要稍加修改
-需要添加如下内容</p>
-<div class="highlight"><pre><span></span>RUN apt-get update &amp;&amp; apt-get install -y perl pwgen `vim` --no-install-recommends &amp;&amp; rm -rf /var/lib/apt/lists/*
+<p>用了docker做实验<a href="https://hub.docker.com/_/mysql/" target="_blank">链接：</a> 
+mysql版本我选择5.6.30</p>
+<h4>安装</h4>
+<h5>创建docker-mysql</h5>
+<p>Dockerfile里默认不包含vim，而且mysql的数据目录权限为root，直接启动会报错，所以需要稍加修改   </p>
+<p>修改添加如下内容</p>
+<div class="highlight"><pre><span></span>RUN apt-get update &amp;&amp; apt-get install -y perl pwgen vim --no-install-recommends &amp;&amp; rm -rf /var/lib/apt/lists/*
 RUN chown -R mysql.mysql /var/lib/mysql
 </pre></div>
 
 
-<p>然后创建镜像<code>docker build -t=debian:mysql56 .</code></p> 
+<p>然后创建镜像<code>docker build -t=debian:mysql56 .</code></p>
+<h4>启动</h4>
+<p>我启动了三个mysql容器，3306端口为master，3307/3308为slave。   </p>
+<div class="highlight"><pre><span></span>docker run -it -p 3306:3306 --name mysql1 debian:mysql56 /bin/bash
+docker run -it -p 3307:3307 --name mysql2 debian:mysql56 /bin/bash
+docker run -it -p 3308:3308 --name mysql3 debian:mysql56 /bin/bash
+</pre></div>
+
+
+<h4>配置mysql</h4>
+<h5>初始化，保证server-id唯一</h5>
+<p><strong>master</strong></p>
+<div class="highlight"><pre><span></span>#vi /etc/mysql/my.cnf
+[mysqld]
+server-id       = 1
+</pre></div>
+
+
+<p><strong>slave</strong></p>
+<div class="highlight"><pre><span></span>#vi /etc/mysql/my.cnf
+[mysqld]
+server-id       = 1
+</pre></div>
+
+
+<p>然后重启mysql</p>
+<div class="highlight"><pre><span></span>/etc/init.d/mysqld restart
+</pre></div>
+
+
+<h5>授权</h5>
+<p><strong>master</strong>   </p>
+<div class="highlight"><pre><span></span><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">grant</span> <span class="n">replication</span> <span class="n">slave</span> <span class="k">on</span> <span class="o">*</span><span class="p">.</span><span class="o">*</span> <span class="k">to</span> <span class="n">slave</span><span class="o">@</span><span class="s1">&#39;172.17.0.2&#39;</span> <span class="n">identified</span> <span class="k">by</span> <span class="s1">&#39;slave&#39;</span><span class="p">;</span>
+<span class="n">mysql</span><span class="o">&gt;</span> <span class="n">flush</span> <span class="k">privileges</span><span class="p">;</span>
+</pre></div>
+
+
+<h5>数据同步</h5>
+<p><strong>master</strong></p>
+<div class="highlight"><pre><span></span><span class="n">mysql</span><span class="o">&gt;</span> <span class="n">flush</span> <span class="n">tables</span> <span class="k">with</span> <span class="k">read</span> <span class="k">lock</span><span class="p">;</span>   
+<span class="n">mysqldump</span> <span class="o">-</span><span class="n">uroot</span> <span class="o">-</span><span class="n">p</span> <span class="c1">--all-databases --triggers --routines --events --set-gtid-purged=OFF &gt; /root/all.sql #全库备份</span>
+</pre></div>
+
+
+<p><strong>slave</strong></p>
+<div class="highlight"><pre><span></span><span class="o">#</span><span class="err">恢复数据库</span><span class="p">(</span><span class="err">来自与</span><span class="n">master</span><span class="err">的备份文件</span><span class="p">)</span>
+<span class="n">mysql</span> <span class="o">-</span><span class="n">u</span> <span class="n">root</span> <span class="o">-</span><span class="n">p</span> <span class="o">&lt;</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="k">all</span><span class="p">.</span><span class="k">sql</span>
+</pre></div>
+
+
+<h5>配置AB复制</h5>
+<p><strong>slave</strong></p>
+<div class="highlight"><pre><span></span><span class="n">mysql</span><span class="o">&gt;</span> <span class="n">change</span> <span class="n">master</span> <span class="k">to</span> <span class="n">master_host</span><span class="o">=</span><span class="ss">&quot;172.17.0.2&quot;</span><span class="p">,</span><span class="n">master_port</span><span class="o">=</span><span class="mi">3306</span><span class="p">,</span><span class="n">master_user</span><span class="o">=</span><span class="ss">&quot;slave&quot;</span><span class="p">,</span><span class="n">master_password</span><span class="o">=</span><span class="s1">&#39;slave&#39;</span><span class="p">,</span><span class="n">master_auto_position</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<span class="n">mysql</span><span class="o">&gt;</span> <span class="n">slave</span> <span class="k">start</span><span class="p">;</span>
+</pre></div>
+
+
+<p><strong>master</strong></p>
+<div class="highlight"><pre><span></span><span class="n">mysql</span><span class="o">&gt;</span> <span class="n">unlock</span> <span class="n">tables</span><span class="p">;</span>
+</pre></div>
+
+
+<h5>查看复制状态：</h5>
+<p><strong>slave</strong></p>
+<div class="highlight"><pre><span></span><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">show</span> <span class="n">slave</span> <span class="n">status</span><span class="err">\</span><span class="k">G</span><span class="p">;</span>
+</pre></div> 
 	<a class="btn btn-mini xsmall" href="./yun-wei/2016-04-22-11-19.html">
           <i class="icon-comment"></i> Comment </a>
 	<hr />
