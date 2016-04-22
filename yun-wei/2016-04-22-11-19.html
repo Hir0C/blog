@@ -117,7 +117,7 @@ server-id       = 1
 </pre></div>
 
 
-<h5>数据同步</h5>
+<h5>数据同步(可选)，如果有数据则需执行如下命令</h5>
 <p><strong>master</strong></p>
 <div class="highlight"><pre><span></span><span class="n">mysql</span><span class="o">&gt;</span> <span class="n">flush</span> <span class="n">tables</span> <span class="k">with</span> <span class="k">read</span> <span class="k">lock</span><span class="p">;</span>   
 <span class="n">mysqldump</span> <span class="o">-</span><span class="n">uroot</span> <span class="o">-</span><span class="n">p</span> <span class="c1">--all-databases --triggers --routines --events --set-gtid-purged=OFF &gt; /root/all.sql #全库备份</span>
@@ -130,6 +130,11 @@ server-id       = 1
 </pre></div>
 
 
+<p><strong>master</strong></p>
+<div class="highlight"><pre><span></span><span class="n">mysql</span><span class="o">&gt;</span> <span class="n">unlock</span> <span class="n">tables</span><span class="p">;</span>
+</pre></div>
+
+
 <h5>配置AB复制</h5>
 <p><strong>slave</strong></p>
 <div class="highlight"><pre><span></span><span class="n">mysql</span><span class="o">&gt;</span> <span class="n">change</span> <span class="n">master</span> <span class="k">to</span> <span class="n">master_host</span><span class="o">=</span><span class="ss">&quot;172.17.0.2&quot;</span><span class="p">,</span><span class="n">master_port</span><span class="o">=</span><span class="mi">3306</span><span class="p">,</span><span class="n">master_user</span><span class="o">=</span><span class="ss">&quot;slave&quot;</span><span class="p">,</span><span class="n">master_password</span><span class="o">=</span><span class="s1">&#39;slave&#39;</span><span class="p">,</span><span class="n">master_auto_position</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
@@ -137,8 +142,10 @@ server-id       = 1
 </pre></div>
 
 
-<p><strong>master</strong></p>
-<div class="highlight"><pre><span></span><span class="n">mysql</span><span class="o">&gt;</span> <span class="n">unlock</span> <span class="n">tables</span><span class="p">;</span>
+<p><em>如果失败可以尝试执行如下命令</em></p>
+<div class="highlight"><pre><span></span><span class="n">mysql</span><span class="o">&gt;</span> <span class="n">stop</span> <span class="n">slave</span><span class="p">;</span>
+<span class="n">mysql</span><span class="o">&gt;</span> <span class="k">reset</span> <span class="n">slave</span><span class="p">;</span>
+<span class="n">mysql</span><span class="o">&gt;</span> <span class="k">start</span> <span class="n">slave</span><span class="p">;</span>
 </pre></div>
 
 
