@@ -70,7 +70,8 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="article-content span8">
-	<h4>Atlas wiki</h4>
+	<p><strong>前提是做好了mysql AB复制</strong>   </p>
+<h4>Atlas wiki</h4>
 <p><a href="https://github.com/Qihoo360/Atlas/wiki" target="_blank">官方wiki</a>   </p>
 <p><em>下面是配置实例</em></p>
 <div class="highlight"><pre><span></span>admin-username = root
@@ -90,14 +91,14 @@ admin-address = 0.0.0.0:2345
 
 
 <h4>sysbench 0.5</h4>
-<p><strong>安装依赖</strong>   </p>
+<p><em>安装依赖</em>  </p>
 <div class="highlight"><pre><span></span>yum -y install gcc automake libtool
 yum install mariadb mariadb-devel.x86_64 mariadb-libs.x86_64
 </pre></div>
 
 
 <p><strong>源码安装</strong>
-(git地址)[https://github.com/akopytov/sysbench]{:target="_blank"} </p>
+<a href="https://github.com/akopytov/sysbench" target="_blank">git地址</a> </p>
 <p><em>安装步骤</em></p>
 <div class="highlight"><pre><span></span>./autogen.sh
 ./configure --prefix<span class="o">=</span>/usr/local/sysbench/ --with-mysql --with-mysql-includes<span class="o">=</span>/usr/include/mysql/ --with-mysql-libs<span class="o">=</span>/usr/lib64/mysql/
