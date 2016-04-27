@@ -55,6 +55,60 @@
 
     <div class='row-fluid'>
       <div class='article-title span9'> 
+        <a href="../yun-wei/2016-03-23-17-06.html"><h1>Gitolite+gitweb 源码搭建及迁移</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>三 23 三月 2016 </p>
+
+<p style="text-align: left;">
+Filed under <a href="../yun-wei/index.html">运维</a>
+</p>
+<p style="text-align: left;">
+ 
+    Tags <a href="../tag/linux.html">linux</a> <a href="../tag/git.html">git</a> </p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<h3>推荐使用gitlab</h3>
+<h4>一、软件下载</h4>
+<p>gitolite下载：<code>git clone git://github.com/sitaramc/gitolite</code>
+<a href="http://git-scm.com/" target="_blank">git下载</a>
+gitweb下载: <code>git clone git://git.kernel.org/pub/scm/git/git.git</code>
+<a href="https://github.com/kogakure/gitweb-theme" target="_blank">gitweb样式</a>
+<a href="http://git-scm.com/book/zh/" target="_blank">git官方中文文档</a>
+<a href="http://git-scm.com/book/zh/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-GitWeb" target="_blank">gitweb官方中文文档</a></p>
+<h4>二、安装</h4>
+<ol>
+<li>创建git账号</li>
+</ol>
+<div class="highlight"><pre><span></span>groupadd git
+useradd -g git -d /DATA/git -s /bin/bash git <span class="o">(</span>将家目录指向gitolite项目目录<span class="o">)</span>
+ssh-keygen
+</pre></div>
+
+
+<ol>
+<li>安装并初始化gitolite</li>
+</ol>
+<div class="highlight"><pre><span></span>gitolite/install -to /usr/local ...</pre></div> 
+	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-23-17-06.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
         <a href="../yun-wei/2016-03-23-17-04.html"><h1>linux screen 命令</h1></a>
       </div>
     </div>
@@ -466,62 +520,6 @@ hostname3:2888:3888
 </ol>
 <p>http://download.zeromq.org/zeromq-4.0.3.tar ...</p> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-22-18-09.html">
-          <i class="icon-plus-sign"></i> Read More </a>
-	<hr />
-      </div>
-      
-    </div>
-      
-
- 
-        
-
-
-
-    <div class='row-fluid'>
-      <div class='article-title span9'> 
-        <a href="../yun-wei/2016-03-22-16-56.html"><h1>Zsh安装配置</h1></a>
-      </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span2">
-<p>二 22 三月 2016 </p>
-
-<p style="text-align: left;">
-Filed under <a href="../yun-wei/index.html">运维</a>
-</p>
-<p style="text-align: left;">
- 
-    Tags <a href="../tag/bash.html">bash</a> <a href="../tag/bian-ji-qi.html">编辑器</a> </p>
-<p>
-</p>
-      </div>
-      <div class="summary span8">
-	<h2>zsh是个好东西，关键是能装逼</h2>
-<h3>一、安装zsh</h3>
-<p>略</p>
-<h4>二、切换用户使用shell</h4>
-<div class="highlight"><pre><span></span>    usermod -s /usr/local/bin/zsh root
-</pre></div>
-
-
-<p>或者</p>
-<div class="highlight"><pre><span></span>    chsh -s /bin/zsh
-</pre></div>
-
-
-<h4>三、git安装</h4>
-<p>没啥好说的，官网步骤都有</p>
-<div class="highlight"><pre><span></span>    yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel -y
-    make prefix=/usr/local all
-    make prefix=/usr/local install
-</pre></div>
-
-
-<h4>四、安装python2.7.x</h4>
-<p>老三步</p>
-<div class="highlight"><pre><span></span>    ./configure --prefix=/usr/local ...</pre></div> 
-	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-22-16-56.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>

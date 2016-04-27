@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+
+    <meta charset="utf-8">
+    <title>360-Atlas安装、测试 - Hir0C blog</title>
+    <meta name="description" content="">
+    <meta name="author" content="Hir0C">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="../theme/html5.js"></script>
+    <![endif]-->
+
+
+    <!-- Le styles -->
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.no-icons.min.css" rel="stylesheet">
+    <link href="../theme/local.css" rel="stylesheet">
+    <link href="../theme/pygments.css" rel="stylesheet">
+    <link href="../theme/font-awesome.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Gudea:400,400italic|Alegreya+SC' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+<header class="blog-header">
+  <div class="container">
+    <div class="row-fluid">
+      <div class="span9">
+	<a href=".." class="brand">Hir0C blog</a>
+      </div>
+
+      <div class="span3" id="blog-nav">
+	<ul class="nav nav-pills pull-right">
+	    <li >
+	      <a href="../ri-chang/index.html ">日常</a>
+	    <li  class="active" >
+	      <a href="../yun-wei/index.html ">运维</a>
+	</ul>
+      </div>
+    </div> <!-- End of fluid row-->
+  </div>   <!-- End of Container-->
+</header>
+    
+<div class="container">
+    <div class="content">
+    <div class="row-fluid">
+
+        <div class="span10">
+    <div class='article'>
+      <div class="row-fluid">
+           <div class="content-title span9">
+             <h1>360-Atlas安装、测试</h1>
+           </div>
+      </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>三 27 四月 2016 </p>
+
+<p style="text-align: left;">
+Filed under <a href="../yun-wei/index.html">运维</a>
+</p>
+<p style="text-align: left;">
+ 
+    Tags <a href="../tag/shu-ju-ku.html">数据库</a> </p>
+<p>
+</p>
+      </div>
+      
+      <div class="span8">
+	<h4>Atlas wiki</h4>
+<p><a href="https://github.com/Qihoo360/Atlas/wiki">官方wiki</a>   </p>
+<p><em>下面是配置实例</em></p>
+<div class="highlight"><pre><span></span>admin-username = root
+admin-password = root
+proxy-backend-addresses = 172.17.0.2:3306
+proxy-read-only-backend-addresses = 172.17.0.3:3307,172.17.0.4:3308
+pwds = root:DAJnl8cVzy8=
+daemon = true
+keepalive = true
+event-threads = 4
+log-level = message
+log-path = /usr/local/mysql-proxy/log
+instance = test
+proxy-address = 0.0.0.0:1234
+admin-address = 0.0.0.0:2345
+</pre></div>
+
+
+<h4>sysbench 0.5</h4>
+<p><strong>安装依赖</strong>   </p>
+<div class="highlight"><pre><span></span>yum -y install gcc automake libtool
+yum install mariadb mariadb-devel.x86_64 mariadb-libs.x86_64
+</pre></div>
+
+
+<p><strong>源码安装</strong></p>
+<div class="highlight"><pre><span></span>./autogen.sh
+./configure --prefix<span class="o">=</span>/usr/local/sysbench/ --with-mysql --with-mysql-includes<span class="o">=</span>/usr/include/mysql/ --with-mysql-libs<span class="o">=</span>/usr/lib64/mysql/
+make
+make install
+cp -r ./sysbench/sysbench/tests/ /usr/local/sysbench/
+</pre></div>
+
+
+<h4>sysbench 使用</h4>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="nb">source</span> /etc/profile
+
+<span class="c1"># prepare</span>
+./sysbench --test<span class="o">=</span>../tests/db/oltp.lua --oltp-table-size<span class="o">=</span><span class="m">80000</span> --mysql-table-engine<span class="o">=</span>innodb --mysql-user<span class="o">=</span>root --mysql-password<span class="o">=</span>root --mysql-port<span class="o">=</span><span class="m">1234</span> --mysql-host<span class="o">=</span>172.17.0.5 --mysql-db<span class="o">=</span>sbtest --oltp-tables-count<span class="o">=</span><span class="m">5</span> --num-threads<span class="o">=</span><span class="m">4</span> --max-requests<span class="o">=</span><span class="m">1000</span> --report-interval<span class="o">=</span><span class="m">1</span> prepare
+
+<span class="c1"># select</span>
+./sysbench --test<span class="o">=</span>../tests/db/select.lua --mysql-table-engine<span class="o">=</span>innodb --mysql-user<span class="o">=</span>root --mysql-password<span class="o">=</span>root --mysql-port<span class="o">=</span><span class="m">1234</span> --mysql-host<span class="o">=</span>172.17.0.5 --mysql-db<span class="o">=</span>sbtest --max-requests<span class="o">=</span><span class="m">100000</span> --num-threads<span class="o">=</span><span class="m">4</span> --max-time<span class="o">=</span><span class="m">600</span> --oltp-tables-count<span class="o">=</span><span class="m">5</span> --report-interval<span class="o">=</span><span class="m">10</span> run
+
+<span class="c1"># update</span>
+./sysbench --test<span class="o">=</span>../tests/db/update_index.lua --mysql-table-engine<span class="o">=</span>innodb --mysql-user<span class="o">=</span>root --mysql-password<span class="o">=</span>root --mysql-port<span class="o">=</span><span class="m">1234</span> --mysql-host<span class="o">=</span>172.17.0.5 --mysql-db<span class="o">=</span>sbtest --max-requests<span class="o">=</span><span class="m">5000</span> --max-time<span class="o">=</span><span class="m">600</span> --oltp-tables-count<span class="o">=</span><span class="m">5</span> --report-interval<span class="o">=</span><span class="m">10</span> --num_threads<span class="o">=</span><span class="m">4</span> run
+</pre></div>
+	<hr />
+      </div>
+    </div>
+    <div class="span10">
+      <h3>Comments</h3>
+    
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'HiroC'; 
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>  
+    </div>
+        </div>
+        
+        
+    </div>     </div> </div>
+
+<!--footer-->
+<div class="container">
+  <div class="well" style="background-color: #E9EFF6">
+    <div id="blog-footer">
+      <div class="row-fluid">
+	<div class="site-nav span2" align="center">
+          <ul class="nav nav-list" id="site-links">
+            <li class="nav-header"> 
+              Site
+            </li>
+            <li><a href=".."><i class="icon-home" style="color: #1f334b">
+                </i>Home</a></li>
+            <li><a href="../archives.html"><i class="icon-list" style="color: #1f334b">
+                </i>Archives</a></li>
+	    <li><a href="../tags.html"><i class="icon-tags" style="color: #1f334b">
+                </i>Tags</a></li>
+	    
+	  </ul>
+
+        </div>
+
+      </div> <!--end of fluid row-->
+    </div> <!--end of blog-footer-->
+    <hr />
+    <p align="center"><a href="..">Hir0C blog</a>
+      &copy; Hir0C
+    Powered by <a href="https://github.com/getpelican/pelican">Pelican</a> and
+        <a href="https://twitter.github.com/bootstrap">Twitter Bootstrap</a>. 
+        Icons by <a href="https://fortawesome.github.com/Font-Awesome">Font Awesome</a> and 
+        <a href="https://gregoryloucas.github.com/Font-Awesome-More">Font Awesome More</a></p>
+
+  </div> <!--end of well -->
+</div> <!--end of container -->
+
+<!--/footer-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+
+
+
+</body>
+</html>
