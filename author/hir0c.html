@@ -70,13 +70,13 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="article-content span8">
-	<h3>源地址</h3>
-<p><a href="http://nginx.org/download/nginx-1.11.1.tar.gz">nginx-1.11.1</a>
-<a href="http://zlib.net/zlib-1.2.8.tar.gz">zlib-1.2.8</a>
-<a href="http://h264.code-shop.com/download/nginx_mod_h264_streaming-2.2.7.tar.gz">nginx_mod_h264_streaming-2.2.7</a>
-<a href="https://sourceforge.net/projects/pcre/">pcre</a></p>
+	<h3>下载地址</h3>
+<p><a href="http://nginx.org/download/nginx-1.11.1.tar.gz">nginx-1.11.1</a> <br />
+<a href="http://zlib.net/zlib-1.2.8.tar.gz">zlib-1.2.8</a> <br />
+<a href="http://h264.code-shop.com/download/nginx_mod_h264_streaming-2.2.7.tar.gz">nginx_mod_h264_streaming-2.2.7</a> <br />
+<a href="https://sourceforge.net/projects/pcre/">pcre</a>   </p>
 <h3>修改</h3>
-<p>需要修改<code>nginx_mod_h264_streaming</code>一处源码，否则编译会报错。158~161行注释掉。修改后为：</p>
+<p>需要先修改<code>nginx_mod_h264_streaming</code>一处源码，否则编译会报错。158~161行注释掉，修改后代码如下：</p>
 <div class="highlight"><pre><span></span>      /* TODO: Win32
       if (r-&gt;zero_in_uri)
       {
