@@ -68,7 +68,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
       </div>
       
       <div class="span8">
-	<h4>先记录一个启动失败问题</h4>
+	<h4 id="_1">先记录一个启动失败问题</h4>
 <div class="highlight"><pre><span></span><span class="x">     INFO RemoteActorRefProvider</span><span class="p">$</span><span class="nv">RemoteDeadLetterActorRef</span><span class="x">: Message [org.apache.spark.deploy.DeployMessages</span><span class="p">$</span><span class="nv">RegisterWorker</span><span class="x">] from Actor[akka://sparkWorker/user/Worker</span><span class="err">#</span><span class="x">-1461285761] to Actor[akka://sparkWorker/deadLetters] was not delivered. [3] dead letters encountered. This logging can be turned off or adjusted with configuration settings &#39;akka.log-dead-letters&#39; and &#39;akka.log-dead-letters-during-shutdown&#39;.</span>
 
 <span class="x">     ERROR Worker: All masters are unresponsive! Giving up.</span>
@@ -76,7 +76,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 
 
 <p>spark 和 hadoop 一样，主机名不能包含"_"。   </p>
-<h4>snappy依赖问题</h4>
+<h4 id="snappy">snappy依赖问题</h4>
 <p>最近更新了spark到1.1.0版本, 跑任务出错。   </p>
 <div class="highlight"><pre><span></span>    Caused by: java.lang.UnsatisfiedLinkError: /tmp/snappy-1.0.5.3-6ceb7982-8940-431c-95a8-25b3684fa0be-libsnappyjava.so: /usr/lib64
         /libstdc++.so.6: version `GLIBCXX_3.4.9&#39; not found (required by /tmp/snappy-1.0.5.3
@@ -93,7 +93,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 
 
 <p><em>ps：网上那些直接找个库做软连接的方法不用试了，不靠谱。</em>   </p>
-<h4>安装</h4>
+<h4 id="_2">安装</h4>
 <p><strong>一、spark安装用到的手册</strong></p>
 <p><a href="http://spark.apache.org/docs/latest/spark-standalone.html" target="_blank">spark-standalone</a></p>
 <p><a href="https://spark.apache.org/docs/latest/running-on-yarn.html" target="_blank">ruunning-on-yarn</a></p>

@@ -71,7 +71,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
       </div>
       <div class="article-content span8">
 	<p><em>转发一篇vpn搭建文章，搭建步骤很简单，让我这小白也一次搭建成功了。</em>   </p>
-<h4>安装</h4>
+<h4 id="_1">安装</h4>
 <p><em>rpm包需要梯子下载</em>   </p>
 <p><a href="http://poptop.sourceforge.net/yum/stable/packages/pptpd-1.4.0-1.el6.x86_64.rpm" target="_blank">pptpd-1.4.0-1.el6.x86_64.rpm</a> <br />
 <a href="http://poptop.sourceforge.net/yum/stable/packages/ppp-devel-2.4.5-33.0.rhel6.x86_64.rpm" target="_blank">ppp-devel-2.4.5-33.0.rhel6.x86_64.rpm</a> <br />
@@ -80,7 +80,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </pre></div>
 
 
-<h4>配置</h4>
+<h4 id="_2">配置</h4>
 <p><strong><a href="https://www.nigesb.com/setup-your-own-vpn-with-pptp.html" target="_blank">这部分我完全照搬转发博主的博客了</a></strong></p>
 <div class="highlight"><pre><span></span>1. 修改配置文件/etc/pptpd.conf
 
@@ -113,7 +113,7 @@ iptables -A INPUT -p tcp --dport 1723 -j ACCEPT
 </pre></div>
 
 
-<h4>win10客户端设置，解决拨通vpn后不能上网的问题。</h4>
+<h4 id="win10vpn">win10客户端设置，解决拨通vpn后不能上网的问题。</h4>
 <p><img alt="img" src="http://static.oschina.net/uploads/space/2016/0309/111950_vi8j_1428530.png" /></p> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-25-11-06.html">
           <i class="icon-comment"></i> Comment </a>

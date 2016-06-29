@@ -70,12 +70,12 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="article-content span8">
-	<h3>下载地址</h3>
+	<h3 id="_1">下载地址</h3>
 <p><a href="http://nginx.org/download/nginx-1.11.1.tar.gz">nginx-1.11.1</a> <br />
 <a href="http://zlib.net/zlib-1.2.8.tar.gz">zlib-1.2.8</a> <br />
 <a href="http://h264.code-shop.com/download/nginx_mod_h264_streaming-2.2.7.tar.gz">nginx_mod_h264_streaming-2.2.7</a> <br />
 <a href="https://sourceforge.net/projects/pcre/">pcre</a>   </p>
-<h3>修改</h3>
+<h3 id="_2">修改</h3>
 <p>需要先修改<code>nginx_mod_h264_streaming</code>一处源码，否则编译会报错。158~161行注释掉，修改后代码如下：</p>
 <div class="highlight"><pre><span></span>      /* TODO: Win32
       if (r-&gt;zero_in_uri)
@@ -85,12 +85,12 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </pre></div>
 
 
-<h3>编译</h3>
+<h3 id="_3">编译</h3>
 <div class="highlight"><pre><span></span>./configure --prefix<span class="o">=</span>/usr/local/nginx-1.11.1 --user<span class="o">=</span>www --group<span class="o">=</span>www --with-threads --with-http_flv_module --with-http_mp4_module --with-http_gunzip_module --with-http_gzip_static_module --without-mail_pop3_module --without-mail_imap_module --without-mail_smtp_module --with-pcre<span class="o">=</span>/tmp/yy/pcre-8.38 --with-zlib --with-http_ssl_module --add-module<span class="o">=</span>/tmp/yy/nginx_mod_h264_streaming-2.2.7 --with-cc-opt<span class="o">=</span><span class="s1">&#39;-O3&#39;</span>
 </pre></div>
 
 
-<h3>配置</h3>
+<h3 id="_4">配置</h3>
 <div class="highlight"><pre><span></span><span class="nt">user</span>  <span class="nt">www</span> <span class="nt">www</span><span class="o">;</span>
 <span class="nt">worker_processes</span>  <span class="nt">2</span><span class="o">;</span>
 
@@ -196,7 +196,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="summary span8">
-	<h3>Docker command</h3>
+	<h3 id="docker-command">Docker command</h3>
 <div class="highlight"><pre><span></span>docker <span class="nb">exec</span> -ti ID /bin/bash
 </pre></div> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-05-03-10-43.html">
@@ -238,7 +238,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </pre></div>
 
 
-<h4>Atlas wiki</h4>
+<h4 id="atlas-wiki">Atlas wiki</h4>
 <p><a href="https://github.com/Qihoo360/Atlas/wiki" target="_blank">官方wiki</a>   </p>
 <p><em>下面是配置实例</em></p>
 <div class="highlight"><pre><span></span>admin-username = root
@@ -279,11 +279,11 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="summary span8">
-	<h4>环境准备</h4>
-<p>用了docker做实验<a href="https://hub.docker.com/_/mysql/" target="_blank">链接：</a> 
+	<h4 id="_1">环境准备</h4>
+<p>用了docker做实验<a href="https://hub.docker.com/_/mysql/" target="_blank">链接：</a> <br />
 mysql版本我选择5.6.30</p>
-<h4>安装</h4>
-<h5>创建docker-mysql</h5>
+<h4 id="_2">安装</h4>
+<h5 id="docker-mysql">创建docker-mysql</h5>
 <p>Dockerfile里默认不包含vim，而且mysql的数据目录权限为root，直接启动会报错，所以需要稍加修改   </p>
 <p>修改添加如下内容</p>
 <div class="highlight"><pre><span></span>RUN apt-get update &amp;&amp; apt-get install -y perl pwgen vim --no-install-recommends &amp;&amp; rm -rf /var/lib/apt/lists/*
@@ -292,7 +292,7 @@ RUN chown -R mysql.mysql /var/lib/mysql
 
 
 <p>然后创建镜像<code>docker build -t=debian:mysql56 .</code></p>
-<h4>启动</h4>
+<h4 id="_3">启动</h4>
 <p>我启动了三个mysql容器，3306端口为master，3307/3308为slave。   </p>
 <div class="highlight"><pre><span></span>docker run ...</pre></div> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-04-22-11-19.html">
@@ -327,7 +327,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="summary span8">
-	<h4>准备</h4>
+	<h4 id="_1">准备</h4>
 <p>查看内核版本</p>
 <div class="highlight"><pre><span></span>uname -a
 </pre></div>
@@ -342,7 +342,7 @@ kernel-debuginfo-common-x86_64-2.6.32-573.el6.x86_64.rpm
 </pre></div>
 
 
-<h4>安装</h4>
+<h4 id="_2">安装</h4>
 <p>1.装rpm包</p>
 <div class="highlight"><pre><span></span>rpm -ivh *
 yum install systemtap
@@ -353,7 +353,7 @@ yum install systemtap
 <p>重新编译openresty，打开--debug选项   </p>
 <p>3.下载Flame-Graphic生成包   </p>
 <p><a href="https://github.com/brendangregg/FlameGraph" target="_blank">下载地址点我</a>    </p>
-<h4>使用</h4>
+<h4 id="_3">使用</h4>
 <p>1.测试systemtap是否安装成功   </p>
 <div class="highlight"><pre><span></span>stap -v -e <span class="s1">&#39;probe vfs.read {printf ...</span></pre></div> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-25-12-10.html">
@@ -388,13 +388,13 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="summary span8">
-	<h2>转发自小众软件这片<a href="http://www.appinn.com/use-letsencrypt-with-nginx/" target="_blank">文章</a></h2>
-<h4>安装</h4>
+	<h2 id="_1">转发自小众软件这片<a href="http://www.appinn.com/use-letsencrypt-with-nginx/" target="_blank">文章</a></h2>
+<h4 id="_2">安装</h4>
 <div class="highlight"><pre><span></span>git clone https://github.com/letsencrypt/letsencrypt /opt/letsencrypt
 </pre></div>
 
 
-<h4>配置</h4>
+<h4 id="_3">配置</h4>
 <p>先关闭nginx并开启防火墙80 和 443端口，避免申请证书时端口占用。</p>
 <div class="highlight"><pre><span></span><span class="nt">server</span> <span class="p">{</span>
     <span class="n">listen</span>       <span class="m">80</span><span class="p">;</span>
@@ -476,15 +476,15 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="summary span8">
-	<h2>转载文章(99%)</h2>
+	<h2 id="99">转载文章(99%)</h2>
 <p><strong>tcpcopy1.0.0安装使用</strong>   </p>
 <p>在tcpcopy 1.0版本中对整个架构的一个改进，将原本需要运行在测试机上的intercept移除放到一个独立的辅助机上来，使得测试机需要做的操作少到仅仅是添加一条路由而已，对整个测试机的性能损耗可以忽略，排除了intercept运行在测试机上时产生的性能影响，使得测试数据更加接近真实水平。   </p>
-<h4>一、系统环境</h4>
+<h4 id="_1">一、系统环境</h4>
 <p>centos6.7 x86_64   </p>
 <p>线上服务器：192.168.241.130  (tcpcopy安装配置)   </p>
 <p>辅助服务器：192.168.241.131  (intercept安装配置)   </p>
 <p>测试服务器：192.168.241.132  (添加路由)   </p>
-<h4>二、线上服务器部署tcpcopy-1.0.0</h4>
+<h4 id="tcpcopy-100">二、线上服务器部署tcpcopy-1.0.0</h4>
 <div class="highlight"><pre><span></span>git clone git://github.com/session-replay-tools/tcpcopy.git
 <span class="nb">cd</span> tcpcopy ...</pre></div> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-25-11-12.html">
@@ -520,7 +520,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
       </div>
       <div class="summary span8">
 	<p><em>转发一篇vpn搭建文章，搭建步骤很简单，让我这小白也一次搭建成功了。</em>   </p>
-<h4>安装</h4>
+<h4 id="_1">安装</h4>
 <p><em>rpm包需要梯子下载</em>   </p>
 <p><a href="http://poptop.sourceforge.net/yum/stable/packages/pptpd-1.4.0-1.el6.x86_64.rpm" target="_blank">pptpd-1.4.0-1.el6.x86_64.rpm</a> <br />
 <a href="http://poptop.sourceforge.net/yum/stable/packages/ppp-devel-2.4.5-33.0.rhel6.x86_64.rpm" target="_blank">ppp-devel-2.4.5-33.0.rhel6.x86_64.rpm</a> <br />
@@ -529,7 +529,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </pre></div>
 
 
-<h4>配置</h4>
+<h4 id="_2">配置</h4>
 <p><strong><a href="https://www.nigesb.com/setup-your-own-vpn-with-pptp.html" target="_blank">这部分我完全照搬转发博主的博客了</a></strong></p>
 <div class="highlight"><pre><span></span>1. 修改配置文件/etc/pptpd.conf
 
@@ -568,7 +568,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="summary span8">
-	<h4>相关资源</h4>
+	<h4 id="_1">相关资源</h4>
 <p><strong>安装包</strong></p>
 <p><a href="https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.2.0/elasticsearch-2.2.0.tar.gz" target="_blank">elasticsearch-2.2.0下载</a> <br />
 <a href="https://download.elastic.co/logstash/logstash/logstash-2.2.1.tar.gz" target="_blank">logstash下载</a> <br />
@@ -576,10 +576,10 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <p><strong>常用网址</strong>   </p>
 <p><a href="https://grokdebug.herokuapp.com/" target="_blank">grok debugger 验证grok表达式网站</a> <br />
 <a href="http://wiki.jikexueyuan.com/project/elasticsearch-definitive-guide-cn/" target="_blank">es中文文档</a> <br />
-<a href="http://kibana.logstash.es/" target="_blank">elk中文文档</a>
-<a href="https://segmentfault.com/a/1190000002972420" target="_blank">kibaba搜索语法</a>
+<a href="http://kibana.logstash.es/" target="_blank">elk中文文档</a><br />
+<a href="https://segmentfault.com/a/1190000002972420" target="_blank">kibaba搜索语法</a><br />
 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-configuration.html" target="_blank">es配置</a></p>
-<h4>es 官方推荐配置</h4>
+<h4 id="es">es 官方推荐配置</h4>
 <p><em>检测命令</em></p>
 <div class="highlight"><pre><span></span>curl localhost:9200/_nodes/stats/process?pretty
 </pre></div>
@@ -593,7 +593,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <li>关闭swap或者swappiness设置为0   </li>
 <li>设置bootstrap.mlockall: true,并且启动指定tmp目录 ./bin/elasticsearch -Djna.tmpdir=/path/to/new/dir   </li>
 </ol>
-<h4>filebeat配置</h4>
+<h4 id="filebeat">filebeat配置</h4>
 <div class="highlight"><pre><span></span><span class="n">filebeat ...</span></pre></div> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-25-10-48.html">
           <i class="icon-plus-sign"></i> Read More </a>

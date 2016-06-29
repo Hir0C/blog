@@ -68,12 +68,12 @@ Filed under <a href="../yun-wei/index.html">运维</a>
       </div>
       
       <div class="span8">
-	<h4>一 准备:</h4>
+	<h4 id="_1">一 准备:</h4>
 <p><a href="https://sourceforge.net/projects/automysqlbackup/" target="_blank">automysqlbackup下载</a> <br />
 <a href="https://github.com/micahwedemeyer/automongobackup" target="_blank">automongobackup下载</a>   </p>
 <p>automongobackup是模仿automysqlbackup项目写的，默认并不带配置文件，可以直接修改脚本里对应变量。   </p>
 <p>​</p>
-<h4>二 配置</h4>
+<h4 id="_2">二 配置</h4>
 <p><strong>automysqlbackup</strong>   </p>
 <div class="highlight"><pre><span></span>CONFIG_mysql_dump_username=&#39;user&#39;
 CONFIG_mysql_dump_password=&#39;passwd&#39;
@@ -117,13 +117,13 @@ REQUIREDBAUTHDB=&quot;yes&quot;
 
 
 <p><em>两个配置都指定备份文件保存一星期。</em>   </p>
-<h4>三 执行</h4>
+<h4 id="_3">三 执行</h4>
 <div class="highlight"><pre><span></span>/usr/local/bin/automysqlbackup /etc/automysqlbackup/myserver.conf
 automongobackup
 </pre></div>
 
 
-<h4>四 数据导入</h4>
+<h4 id="_4">四 数据导入</h4>
 <p><strong>mongodb</strong></p>
 <div class="highlight"><pre><span></span>mongorestore -h 127.0.0.1 -d dbname dbbakdir/
 </pre></div>

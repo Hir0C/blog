@@ -70,7 +70,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="article-content span8">
-	<h4>一、安装：</h4>
+	<h4 id="_1">一、安装：</h4>
 <p>因为最近刚开始接触salt，用了一点点salt的东西，首先需要redis已经做成了rpm包，主部署配置文件为：</p>
 <div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">include</span><span class="p p-Indicator">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">yumconf     //自定义引入yum内网源配置</span>
@@ -87,7 +87,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 
 
 <p><em>虽然创建集群ruby包不是必须的，不过<code>redis-trib.rb</code>功能不仅限于此，还可以进一步管理集群，所以推荐安装ruby。</em>    </p>
-<h4>二、配置集群</h4>
+<h4 id="_2">二、配置集群</h4>
 <p><em>1、redis官方源码的util目录下有安装文件./install_server.sh，可以轻松完成部署，启动脚本都会帮你弄好</em>   </p>
 <p><em>2、然后通过install_server.sh脚本创建多个实例，为集群做准备</em>   </p>
 <p><em>3、自己写了小脚本对每个配置文件sed替换关键字，开启集群功能</em>    </p>
@@ -122,7 +122,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </pre></div>
 
 
-<h4>三、命令</h4>
+<h4 id="_3">三、命令</h4>
 <p><em>1、官方一些命令的使用，为了方便测试，官方提供了一个小工具快速添加kv，<a href="https://github.com/antirez/redis-rb-cluster" target="_blank">地址点我</a></em>   </p>
 <div class="highlight"><pre><span></span>ruby example.rb 169.254.229.153 17000
 </pre></div>

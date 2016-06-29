@@ -70,15 +70,15 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="article-content span8">
-	<h2>转载文章(99%)</h2>
+	<h2 id="99">转载文章(99%)</h2>
 <p><strong>tcpcopy1.0.0安装使用</strong>   </p>
 <p>在tcpcopy 1.0版本中对整个架构的一个改进，将原本需要运行在测试机上的intercept移除放到一个独立的辅助机上来，使得测试机需要做的操作少到仅仅是添加一条路由而已，对整个测试机的性能损耗可以忽略，排除了intercept运行在测试机上时产生的性能影响，使得测试数据更加接近真实水平。   </p>
-<h4>一、系统环境</h4>
+<h4 id="_1">一、系统环境</h4>
 <p>centos6.7 x86_64   </p>
 <p>线上服务器：192.168.241.130  (tcpcopy安装配置)   </p>
 <p>辅助服务器：192.168.241.131  (intercept安装配置)   </p>
 <p>测试服务器：192.168.241.132  (添加路由)   </p>
-<h4>二、线上服务器部署tcpcopy-1.0.0</h4>
+<h4 id="tcpcopy-100">二、线上服务器部署tcpcopy-1.0.0</h4>
 <div class="highlight"><pre><span></span>git clone git://github.com/session-replay-tools/tcpcopy.git
 <span class="nb">cd</span> tcpcopy
 ./configure  <span class="c1"># 无特殊需求不需要加其他选项，默认安装在/usr/local/tcpcopy。</span>
@@ -90,7 +90,7 @@ make <span class="o">&amp;&amp;</span> make install
 
 
 <p><em>原理：将80端口收到的流量复制到测试机ip 192.168.241.132的80端口，并设置辅助机的ip地址为192.168.241.131，且将复制过去的流量中的源地址统一更改为192.168.100.x，这样做的好处是我们在测试机上可以直接针对整个更改后的网段设置一条路由即可。</em>   </p>
-<h4>三、辅助服务器部署intercept-1.0.0</h4>
+<h4 id="intercept-100">三、辅助服务器部署intercept-1.0.0</h4>
 <div class="highlight"><pre><span></span>yum install -y libpcap
 git clone  
 <span class="nb">cd</span> intercept
@@ -100,7 +100,7 @@ git clone
 
 
 <p><em>原理：辅助机的 intercept 通过-F 参数制定捕获规则，捕获tcp连接中源端口为80的所有数据，也即是测试机的回应数据。其作用是将测试机路由过来的响应数据捕获下来，完成整个请求回应的流程且保证测试机产生的回应数据不会流向线上环境。intercept 会监听 tcp 36524 端口，并和线上机192.168.241.130的 tcpcopy 之间建立通信，我们通过ss命令可以观察到。需要注意的是辅助机和测试机一定要是同一网段。</em>   </p>
-<h4>四、测试服务器部署</h4>
+<h4 id="_2">四、测试服务器部署</h4>
 <p>添加路由   </p>
 <div class="highlight"><pre><span></span>route add -net 192.168.100.0 netmask 255.255.255.0 gw 192.168.241.131
 </pre></div>

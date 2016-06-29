@@ -70,7 +70,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="article-content span8">
-	<h4>准备</h4>
+	<h4 id="_1">准备</h4>
 <p>查看内核版本</p>
 <div class="highlight"><pre><span></span>uname -a
 </pre></div>
@@ -85,7 +85,7 @@ kernel-debuginfo-common-x86_64-2.6.32-573.el6.x86_64.rpm
 </pre></div>
 
 
-<h4>安装</h4>
+<h4 id="_2">安装</h4>
 <p>1.装rpm包</p>
 <div class="highlight"><pre><span></span>rpm -ivh *
 yum install systemtap
@@ -96,7 +96,7 @@ yum install systemtap
 <p>重新编译openresty，打开--debug选项   </p>
 <p>3.下载Flame-Graphic生成包   </p>
 <p><a href="https://github.com/brendangregg/FlameGraph" target="_blank">下载地址点我</a>    </p>
-<h4>使用</h4>
+<h4 id="_3">使用</h4>
 <p>1.测试systemtap是否安装成功   </p>
 <div class="highlight"><pre><span></span>stap -v -e <span class="s1">&#39;probe vfs.read {printf(&quot;read performed\n&quot;); exit()}&#39;</span>
 </pre></div>

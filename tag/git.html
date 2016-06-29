@@ -70,15 +70,15 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="article-content span8">
-	<h3>推荐使用gitlab</h3>
-<h4>一、软件下载</h4>
-<p>gitolite下载：<code>git clone git://github.com/sitaramc/gitolite</code>
-<a href="http://git-scm.com/" target="_blank">git下载</a>
-gitweb下载: <code>git clone git://git.kernel.org/pub/scm/git/git.git</code>
-<a href="https://github.com/kogakure/gitweb-theme" target="_blank">gitweb样式</a>
-<a href="http://git-scm.com/book/zh/" target="_blank">git官方中文文档</a>
+	<h3 id="gitlab">推荐使用gitlab</h3>
+<h4 id="_1">一、软件下载</h4>
+<p>gitolite下载：<code>git clone git://github.com/sitaramc/gitolite</code><br />
+<a href="http://git-scm.com/" target="_blank">git下载</a><br />
+gitweb下载: <code>git clone git://git.kernel.org/pub/scm/git/git.git</code><br />
+<a href="https://github.com/kogakure/gitweb-theme" target="_blank">gitweb样式</a><br />
+<a href="http://git-scm.com/book/zh/" target="_blank">git官方中文文档</a><br />
 <a href="http://git-scm.com/book/zh/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-GitWeb" target="_blank">gitweb官方中文文档</a></p>
-<h4>二、安装</h4>
+<h4 id="_2">二、安装</h4>
 <ol>
 <li>创建git账号</li>
 </ol>
@@ -134,21 +134,21 @@ git clone git@IP:gitolite-admin
 <li>修改cgi文件git命令地址，lists等，前端样式定制(待研究)</li>
 </ol>
 <p><em>至此全部搭建完毕！</em>  </p>
-<h4>四、迁移</h4>
+<h4 id="_3">四、迁移</h4>
 <ol>
 <li>进入gitolite初始化后的目录gitolite-admin内，将之前线上config和keydir内文件全部拷贝过来。</li>
 <li>git push后 client就有权限做操作了。</li>
 <li>将原有服务repositories目录打包拷贝至git家目录下。</li>
-<li>替换gitolite-admin.git目录。
+<li>替换gitolite-admin.git目录。<br />
 <em>迁移详细步骤记不清了，实际操作还需结合google。 X )</em></li>
 </ol>
 <p>迁移完毕！</p>
-<h4>五、gitweb样式优化</h4>
+<h4 id="gitweb">五、gitweb样式优化</h4>
 <ol>
 <li>
-<p>网上提供了开源方案
-<em>gitweb-theme</em>
-解压进入clone下来的gitweb-theme
+<p>网上提供了开源方案<br />
+<em>gitweb-theme</em><br />
+解压进入clone下来的gitweb-theme<br />
 修改setup文件，修改target目录至Gtiweb项目目录</p>
 </li>
 <li>

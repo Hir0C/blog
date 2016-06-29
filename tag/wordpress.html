@@ -71,26 +71,26 @@ Filed under <a href="../yun-wei/index.html">运维</a>
       </div>
       <div class="article-content span8">
 	<p><em>内网搞了了bolg，采用了nginx+php+mysql+wordpress。整个过程并不复杂，记录下遇到的问题。</em></p>
-<h4>1. 安装nginx</h4>
+<h4 id="1-nginx">1. 安装nginx</h4>
 <div class="highlight"><pre><span></span>    ./configure --prefix=/usr/local/nginx --with-zlib --with-pcre=/opt/ftp/http-server/pcre-8.34 --with-http_perl_module --with-http_stub_status_module --with-http_image_filter_module --with-http_gunzip_module --with-http_gzip_static_module
 </pre></div>
 
 
-<h4>2. php</h4>
+<h4 id="2-php">2. php</h4>
 <div class="highlight"><pre><span></span>    ./configure --prefix=/usr/local/php &#39;--with-config-file-path=/usr/local/php-5.4.23/etc&#39; &#39;--enable-fpm&#39; &#39;--enable-pcntl&#39; &#39;--enable-shmop&#39; &#39;--enable-sysvsem&#39; &#39;--enable-inline-optimization&#39; &#39;--disable-rpath&#39; &#39;--enable-safe-mode&#39; &#39;--with-mysql=mysqlnd&#39; &#39;--with-mysqli=mysqlnd&#39; &#39;--with-pdo-mysql=mysqlnd&#39; &#39;--with-libxml-dir=/usr/local&#39; &#39;--enable-xml=/usr/local&#39; &#39;--with-openssl&#39; --with-zlib &#39;--enable-bcmath&#39; &#39;--with-bz2&#39; &#39;--enable-zip&#39; &#39;--enable-exif&#39; &#39;--with-gd&#39; &#39;--enable-gd-native-ttf&#39; &#39;--with-freetype-dir=/usr/local&#39; &#39;--with-jpeg-dir=/usr/local&#39; &#39;--with-png-dir&#39; &#39;--with-mhash&#39; &#39;--with-mcrypt=/usr/local&#39; &#39;--enable-mbstring&#39; &#39;--enable-mbregex&#39; &#39;--with-iconv-dir=/usr/local&#39; &#39;--with-curl&#39; &#39;--with-curlwrappers&#39; &#39;--enable-ftp&#39; &#39;--enable-sockets&#39;
 </pre></div>
 
 
-<h4>3. mysql</h4>
+<h4 id="3-mysql">3. mysql</h4>
 <div class="highlight"><pre><span></span>    cmake -DCMAKE_INSTALL_PREFIX=/opt/mysql/ -DSYSCONFDIR=/etc/my.cnf -DMYSQL_UNIX_ADDR=/opt/mysql/tmp/mysqld.sock -DMYSQL_USER=mysql -DDEFAULT_CHARSET=all -DDEFAULT_CHARSET=utf8 -DDEFAULT_COLLATION=utf8_general_ci -DWITH_INNOBASE_STORAGE_ENGINE=1 -DWITH_ZLIB=/usr/local/lib/ -DWITH_READLINE=1 -DWITH_DATADIR=/opt/mysql/data/ -DWITH_SSL=bundled -DENABLED_LOCAL_INFILE=1-DWITH_READLINE=1 -DWITH_DEBUG=0
 
     make &amp;&amp; make install
 </pre></div>
 
 
-<h4>4. wordpress安装</h4>
+<h4 id="4-wordpress">4. wordpress安装</h4>
 <p>略</p>
-<h4>5. 配置</h4>
+<h4 id="5">5. 配置</h4>
 <p>这次遇到麻烦的地方主要有三点:</p>
 <ul>
 <li>

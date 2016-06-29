@@ -74,7 +74,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <p><strong>先扔两个开源中国上的同学写好的权限配置教程。</strong></p>
 <p><strong><a href="http://my.oschina.net/boltwu/blog/408145" target="_blank">Jenkins配置基于角色的项目权限管理</a></strong><br />
 <strong><a href="http://my.oschina.net/boltwu/blog/410925" target="_blank">配置Jenkins用户和权限</a></strong>  </p>
-<h4>权限管理：</h4>
+<h4 id="_1">权限管理：</h4>
 <p>1.安装插件<code>Role-Based Strategy</code>，然后再configure global security选择这个插件。   </p>
 <p>2.系统管理 -&gt; 管理用户 -&gt; 新建用户。   </p>
 <p>3.系统管理 -&gt; Manage and Assign Roles -&gt; Manage Roles </p>
@@ -84,8 +84,8 @@ Filed under <a href="../yun-wei/index.html">运维</a>
   下面是我的配置(查看大图请在新建标签页打开)：    </li>
 </ul>
 <p><img alt="配置图1" src="http://static.oschina.net/uploads/space/2015/1023/143042_j6yU_1428530.jpg" />   </p>
-<p><strong>说明：<code>global roles</code> 设置了一个只读组，防止登陆用户修改系统配置。</strong>
-  <strong><code>project roles</code> 设置了一个dev组，研发同学只能对<code>dev-project</code>开头的项目可见，并可以自己部署。</strong></p>
+<p><strong>说明：<code>global roles</code> 设置了一个只读组，防止登陆用户修改系统配置。</strong><br />
+<strong><code>project roles</code> 设置了一个dev组，研发同学只能对<code>dev-project</code>开头的项目可见，并可以自己部署。</strong></p>
 <p>4.系统管理 -&gt; Manage and Assign Roles -&gt; Assign Roles （这里就是把你的账号分入对应的组里。）</p>
 <p>题外话，使用qq邮箱发送邮件需要提前做一些小配置，设置-&gt;账户-&gt;POP3/SMTP服务-&gt;开启-&gt;设置独立密码。</p> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-15-46.html">

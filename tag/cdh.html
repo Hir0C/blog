@@ -70,7 +70,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="article-content span8">
-	<h4>一、 准备工作</h4>
+	<h4 id="_1">一、 准备工作</h4>
 <p>下载cdh的各种源:</p>
 <ol>
 <li>下载<a href="http://archive-primary.cloudera.com/cm5/installer" target="_blank">cloudera manager installer</a></li>
@@ -96,12 +96,12 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <p>sha文件里,然后为这三个文件授权755</p>
 <p><strong>之前因为manifest.json文件改错,安装包一直失败,查看manager的log才发现问题</strong></p>
 <p>至此准备工作完成!</p>
-<h4>二 、安装cloudera manager</h4>
+<h4 id="cloudera-manager">二 、安装cloudera manager</h4>
 <p><code>./cloudera-manager-installer.bin</code> 直接执行,这个还支持鼠标点击.</p>
 <p>因为测试环境为纯<code>内网</code>,无法使用安装包里的repo,在最后一步前,准备好另一个终端,准备好手动拷贝刚才写的repo文件,因为安装时会被覆盖,所以只能手动或者写个循环反覆盖.......</p>
 <p>完成manager机器的安装 就可以进web配置了,启动略慢,耐心等半分钟</p>
 <p>登陆网址为<code>http://ip:7180</code></p>
-<h4>三、通过web安装cdh</h4>
+<h4 id="webcdh">三、通过web安装cdh</h4>
 <ol>
 <li>
 <p>添加完涉及的服务器后，手动指定parcel和agent的本地源</p>
@@ -116,7 +116,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <p>使用slave节点,测试上传文件ok</p>
 </li>
 </ol>
-<h4>四、升级cloudera manager</h4>
+<h4 id="cloudera-manager_1">四、升级cloudera manager</h4>
 <p>升级cloudera manager <br />
 备份：</p>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> /mnt/hadoop/hdfs/name
@@ -140,7 +140,7 @@ rpm -qa  <span class="s1">&#39;cloudera-*&#39;</span> 查看版本
 
 <p>4.升级完成,启动server和db   </p>
 <p>5.进入web升级agent们,一进去就会有提示,然后手动指定url,升级就可以鸟.   </p>
-<h4>五、升级CDH</h4>
+<h4 id="cdh">五、升级CDH</h4>
 <p>注意先备份namenode数据   </p>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> /mnt/hadoop/hdfs/name
 tar -cvf /root/nn_backup_data.tar .
@@ -149,7 +149,7 @@ tar -cvf /root/nn_backup_data.tar .
 
 <p>点搜索框左边小礼品盒子图标,添加新版本parcel的url,添加后下面会多出个小图,点激活就可以自动升级了   </p>
 <p>至此完成所有升级.   </p>
-<h4>六、错误整理</h4>
+<h4 id="_2">六、错误整理</h4>
 <p>1.升级过程出现namenode启动失败问题   </p>
 <div class="highlight"><pre><span></span>java.io.IOException:
 File system image contains an old layout version -51.
@@ -176,7 +176,7 @@ Please restart NameNode with the &quot;-rollingUpgrade started&quot; option if a
 <li>agent安装完就不要更换ip了，引起各种问题，而且manager上无法修改ip。   </li>
 <li>防火墙有几个端口要提前放行， 7182端口是安装时用来发送parcels包的，卡了我好久。 <br />
 <code>7182，7184，7185，8084，8086，8087，8091，9000，9876，9994，9995，9996，9997，9998，9999，10101，19001</code>   </li>
-<li>有些错误从ui里找不到解决的提示，需要到/var/run/cloudera-scm-agent/process/下面，找最近一个生成的目录里logs目录查看错误！
+<li>有些错误从ui里找不到解决的提示，需要到/var/run/cloudera-scm-agent/process/下面，找最近一个生成的目录里logs目录查看错误！<br />
 比如：<blockquote>
 <p>Deploying Client Configuration Command (280) has failed 。 <br />
 <a href="http://community.cloudera.com/t5/Cloudera-Manager-Installation/deployClientConfig-on-service-Spark-fails-in-CDH5/td-p/17640" target="_blank">解决问题原文链接</a>   </p>

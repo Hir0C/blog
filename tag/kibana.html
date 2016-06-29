@@ -70,7 +70,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="article-content span8">
-	<h4>相关资源</h4>
+	<h4 id="_1">相关资源</h4>
 <p><strong>安装包</strong></p>
 <p><a href="https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.2.0/elasticsearch-2.2.0.tar.gz" target="_blank">elasticsearch-2.2.0下载</a> <br />
 <a href="https://download.elastic.co/logstash/logstash/logstash-2.2.1.tar.gz" target="_blank">logstash下载</a> <br />
@@ -78,10 +78,10 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <p><strong>常用网址</strong>   </p>
 <p><a href="https://grokdebug.herokuapp.com/" target="_blank">grok debugger 验证grok表达式网站</a> <br />
 <a href="http://wiki.jikexueyuan.com/project/elasticsearch-definitive-guide-cn/" target="_blank">es中文文档</a> <br />
-<a href="http://kibana.logstash.es/" target="_blank">elk中文文档</a>
-<a href="https://segmentfault.com/a/1190000002972420" target="_blank">kibaba搜索语法</a>
+<a href="http://kibana.logstash.es/" target="_blank">elk中文文档</a><br />
+<a href="https://segmentfault.com/a/1190000002972420" target="_blank">kibaba搜索语法</a><br />
 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-configuration.html" target="_blank">es配置</a></p>
-<h4>es 官方推荐配置</h4>
+<h4 id="es">es 官方推荐配置</h4>
 <p><em>检测命令</em></p>
 <div class="highlight"><pre><span></span>curl localhost:9200/_nodes/stats/process?pretty
 </pre></div>
@@ -95,7 +95,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <li>关闭swap或者swappiness设置为0   </li>
 <li>设置bootstrap.mlockall: true,并且启动指定tmp目录 ./bin/elasticsearch -Djna.tmpdir=/path/to/new/dir   </li>
 </ol>
-<h4>filebeat配置</h4>
+<h4 id="filebeat">filebeat配置</h4>
 <div class="highlight"><pre><span></span><span class="n">filebeat</span><span class="o">:</span>
   <span class="n">registry_file</span><span class="o">:</span> <span class="s2">&quot;/usr/local/filebeat/.filebeat&quot;</span>
   <span class="n">prospectors</span><span class="o">:</span>
@@ -118,7 +118,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </pre></div>
 
 
-<h4>logstash配置</h4>
+<h4 id="logstash">logstash配置</h4>
 <div class="highlight"><pre><span></span>input {
     beats {
         port =&gt; 5044
@@ -214,7 +214,7 @@ output {
 <li>if之内可以再嵌套if，通过if "_grokparsefailure" in [tags]来匹配上一个匹配失败的日志。</li>
 <li>使用日志时间作为索引字段，默认是使用日志导入时间。</li>
 </ul>
-<h4>logstash patterns配置</h4>
+<h4 id="logstash-patterns">logstash patterns配置</h4>
 <div class="highlight"><pre><span></span><span class="c1"># COMMON</span>
 DATETIME <span class="p">(</span><span class="o">?</span><span class="l">&lt;timestamp&gt;</span><span class="err">\</span>d<span class="p">{</span><span class="mi">4</span><span class="p">}</span><span class="err">-\</span>d<span class="p">{</span><span class="mi">2</span><span class="p">}</span><span class="err">-\</span>d<span class="p">{</span><span class="mi">2</span><span class="p">}</span> <span class="err">\</span>d<span class="p">{</span><span class="mi">2</span><span class="p">}:</span><span class="err">\</span>d<span class="p">{</span><span class="mi">2</span><span class="p">}:</span><span class="err">\</span>d<span class="p">{</span><span class="mi">2</span><span class="p">})</span>
 
@@ -237,7 +237,7 @@ TOMCAT_ERROR <span class="err">%</span><span class="p">{</span>TOMCAT_DATESTAMP<
 
 
 <p><em>error 格式不固定，不好处理，上面的方法也只能处理个别的errorlog。</em>   </p>
-<h4>es配置</h4>
+<h4 id="es_1">es配置</h4>
 <div class="highlight"><pre><span></span>cluster.name: my-application
 bootstrap.mlockall: true
 network.host: 192.168.241.130
@@ -249,13 +249,13 @@ elasticsearch.url: &quot;http://192.168.241.130:9200&quot;
 </pre></div>
 
 
-<h4>常用命令</h4>
+<h4 id="_2">常用命令</h4>
 <p>清理elasticsearch过期数据：   </p>
 <div class="highlight"><pre><span></span>curl -XDELETE <span class="s1">&#39;http://192.168.241.130:9200/logstash-2016.02.24&#39;</span>
 </pre></div>
 
 
-<h4>坑</h4>
+<h4 id="_3">坑</h4>
 <ol>
 <li>不要用vim修改被监控文件，会造成保存后，之前存在的内容也被发送给logstash。    </li>
 <li>目前filebeat ssl验证貌似有问题。    </li>

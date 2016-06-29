@@ -72,7 +72,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="summary span8">
-	<p>最近rhel6上做rpm遇到一个问题，之前在rhel5上从来没有遇到过。如图：
+	<p>最近rhel6上做rpm遇到一个问题，之前在rhel5上从来没有遇到过。如图：<br />
 <img alt="rpm报错图" src="http://static.oschina.net/uploads/space/2015/0105/015731_Wny3_1428530.png" /></p>
 <p>而且出现这个报错只是在做个别包的时候会有，网上大概查了一下报错也没有啥明确的说法。不过报错的提示倒是很明显，根据你的报错赋值对应的bitmask   </p>
 <p>比如我这回遇到的是<code>invalid RPATHs</code>，所以我打包时就要执行如下命令：   </p>
@@ -195,7 +195,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="summary span8">
-	<h4>先记录一个启动失败问题</h4>
+	<h4 id="_1">先记录一个启动失败问题</h4>
 <div class="highlight"><pre><span></span><span class="x">     INFO RemoteActorRefProvider</span><span class="p">$</span><span class="nv">RemoteDeadLetterActorRef</span><span class="x">: Message [org.apache.spark.deploy.DeployMessages</span><span class="p">$</span><span class="nv">RegisterWorker</span><span class="x">] from Actor[akka://sparkWorker/user/Worker</span><span class="err">#</span><span class="x">-1461285761] to Actor[akka://sparkWorker/deadLetters] was not delivered. [3] dead letters encountered. This logging can be turned off or adjusted with configuration settings &#39;akka.log-dead-letters&#39; and &#39;akka.log-dead-letters-during-shutdown&#39;.</span>
 
 <span class="x">     ERROR Worker: All masters ...</span></pre></div> 
@@ -231,7 +231,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="summary span8">
-	<h4>一、关闭内网ip的access日志</h4>
+	<h4 id="ipaccess">一、关闭内网ip的access日志</h4>
 <div class="highlight"><pre><span></span><span class="x">location ~ xxxxxx</span><span class="err">{</span><span class="x"> </span>
 <span class="x">    if ( </span><span class="p">$</span><span class="nv">remote_addr</span><span class="x"> ~ &quot;1.1.1.*&quot; ) </span><span class="err">{</span><span class="x"></span>
 <span class="x">        access_log off;</span>
@@ -240,7 +240,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </pre></div>
 
 
-<h4>二、if的or条件</h4>
+<h4 id="ifor">二、if的or条件</h4>
 <div class="highlight"><pre><span></span><span class="nt">location</span> <span class="o">/</span> <span class="p">{</span>
     <span class="n">set</span> <span class="err">$</span><span class="n">flag</span> <span class="m">0</span><span class="p">;</span>
     <span class="n">if</span> <span class="p">(</span><span class="err">$</span><span class="n">query_string</span> <span class="o">~</span> <span class="s2">&quot;xxx&quot;</span><span class="p">)</span><span class="err">{</span>
@@ -259,7 +259,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 
 
 <p><strong>如果不加return 200的话 所有非匹配请求都会404</strong></p>
-<h4>三、nginx+fcgi参数</h4>
+<h4 id="nginxfcgi">三、nginx+fcgi参数</h4>
 <p>nginx+fcgi, fcgi中变量名不能用大写字母和"-" <br />
 fcgi传递header参数时需要用 ...</p> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-11-48.html">
@@ -294,7 +294,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="summary span8">
-	<h4>一、 准备工作</h4>
+	<h4 id="_1">一、 准备工作</h4>
 <p>下载cdh的各种源:</p>
 <ol>
 <li>下载<a href="http://archive-primary.cloudera.com/cm5/installer" target="_blank">cloudera manager installer</a></li>
@@ -446,7 +446,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="summary span8">
-	<h4>集群安装：</h4>
+	<h4 id="_1">集群安装：</h4>
 <p>1.版本介绍：  </p>
 <p>目前最新版本为 <code>kafka_2.11-0.9.0.1</code>（scala-2.11为kafka官方推荐版本，此外还有2.10可以选择，scale2.9将被废弃）</p>
 <p>2.环境准备：  </p>
@@ -489,15 +489,15 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="summary span8">
-	<h3>推荐使用gitlab</h3>
-<h4>一、软件下载</h4>
-<p>gitolite下载：<code>git clone git://github.com/sitaramc/gitolite</code>
-<a href="http://git-scm.com/" target="_blank">git下载</a>
-gitweb下载: <code>git clone git://git.kernel.org/pub/scm/git/git.git</code>
-<a href="https://github.com/kogakure/gitweb-theme" target="_blank">gitweb样式</a>
-<a href="http://git-scm.com/book/zh/" target="_blank">git官方中文文档</a>
+	<h3 id="gitlab">推荐使用gitlab</h3>
+<h4 id="_1">一、软件下载</h4>
+<p>gitolite下载：<code>git clone git://github.com/sitaramc/gitolite</code><br />
+<a href="http://git-scm.com/" target="_blank">git下载</a><br />
+gitweb下载: <code>git clone git://git.kernel.org/pub/scm/git/git.git</code><br />
+<a href="https://github.com/kogakure/gitweb-theme" target="_blank">gitweb样式</a><br />
+<a href="http://git-scm.com/book/zh/" target="_blank">git官方中文文档</a><br />
 <a href="http://git-scm.com/book/zh/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-GitWeb" target="_blank">gitweb官方中文文档</a></p>
-<h4>二、安装</h4>
+<h4 id="_2">二、安装</h4>
 <ol>
 <li>创建git账号</li>
 </ol>

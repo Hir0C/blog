@@ -70,12 +70,12 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="article-content span8">
-	<h3>下载地址</h3>
+	<h3 id="_1">下载地址</h3>
 <p><a href="http://nginx.org/download/nginx-1.11.1.tar.gz">nginx-1.11.1</a> <br />
 <a href="http://zlib.net/zlib-1.2.8.tar.gz">zlib-1.2.8</a> <br />
 <a href="http://h264.code-shop.com/download/nginx_mod_h264_streaming-2.2.7.tar.gz">nginx_mod_h264_streaming-2.2.7</a> <br />
 <a href="https://sourceforge.net/projects/pcre/">pcre</a>   </p>
-<h3>修改</h3>
+<h3 id="_2">修改</h3>
 <p>需要先修改<code>nginx_mod_h264_streaming</code>一处源码，否则编译会报错。158~161行注释掉，修改后代码如下：</p>
 <div class="highlight"><pre><span></span>      /* TODO: Win32
       if (r-&gt;zero_in_uri)
@@ -85,12 +85,12 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </pre></div>
 
 
-<h3>编译</h3>
+<h3 id="_3">编译</h3>
 <div class="highlight"><pre><span></span>./configure --prefix<span class="o">=</span>/usr/local/nginx-1.11.1 --user<span class="o">=</span>www --group<span class="o">=</span>www --with-threads --with-http_flv_module --with-http_mp4_module --with-http_gunzip_module --with-http_gzip_static_module --without-mail_pop3_module --without-mail_imap_module --without-mail_smtp_module --with-pcre<span class="o">=</span>/tmp/yy/pcre-8.38 --with-zlib --with-http_ssl_module --add-module<span class="o">=</span>/tmp/yy/nginx_mod_h264_streaming-2.2.7 --with-cc-opt<span class="o">=</span><span class="s1">&#39;-O3&#39;</span>
 </pre></div>
 
 
-<h3>配置</h3>
+<h3 id="_4">配置</h3>
 <div class="highlight"><pre><span></span><span class="nt">user</span>  <span class="nt">www</span> <span class="nt">www</span><span class="o">;</span>
 <span class="nt">worker_processes</span>  <span class="nt">2</span><span class="o">;</span>
 
@@ -196,7 +196,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="summary span8">
-	<h4>准备</h4>
+	<h4 id="_1">准备</h4>
 <p>查看内核版本</p>
 <div class="highlight"><pre><span></span>uname -a
 </pre></div>
@@ -211,7 +211,7 @@ kernel-debuginfo-common-x86_64-2.6.32-573.el6.x86_64.rpm
 </pre></div>
 
 
-<h4>安装</h4>
+<h4 id="_2">安装</h4>
 <p>1.装rpm包</p>
 <div class="highlight"><pre><span></span>rpm -ivh *
 yum install systemtap
@@ -222,7 +222,7 @@ yum install systemtap
 <p>重新编译openresty，打开--debug选项   </p>
 <p>3.下载Flame-Graphic生成包   </p>
 <p><a href="https://github.com/brendangregg/FlameGraph" target="_blank">下载地址点我</a>    </p>
-<h4>使用</h4>
+<h4 id="_3">使用</h4>
 <p>1.测试systemtap是否安装成功   </p>
 <div class="highlight"><pre><span></span>stap -v -e <span class="s1">&#39;probe vfs.read {printf ...</span></pre></div> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-25-12-10.html">
@@ -257,13 +257,13 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="summary span8">
-	<h2>转发自小众软件这片<a href="http://www.appinn.com/use-letsencrypt-with-nginx/" target="_blank">文章</a></h2>
-<h4>安装</h4>
+	<h2 id="_1">转发自小众软件这片<a href="http://www.appinn.com/use-letsencrypt-with-nginx/" target="_blank">文章</a></h2>
+<h4 id="_2">安装</h4>
 <div class="highlight"><pre><span></span>git clone https://github.com/letsencrypt/letsencrypt /opt/letsencrypt
 </pre></div>
 
 
-<h4>配置</h4>
+<h4 id="_3">配置</h4>
 <p>先关闭nginx并开启防火墙80 和 443端口，避免申请证书时端口占用。</p>
 <div class="highlight"><pre><span></span><span class="nt">server</span> <span class="p">{</span>
     <span class="n">listen</span>       <span class="m">80</span><span class="p">;</span>
@@ -312,7 +312,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="summary span8">
-	<h4>一、关闭内网ip的access日志</h4>
+	<h4 id="ipaccess">一、关闭内网ip的access日志</h4>
 <div class="highlight"><pre><span></span><span class="x">location ~ xxxxxx</span><span class="err">{</span><span class="x"> </span>
 <span class="x">    if ( </span><span class="p">$</span><span class="nv">remote_addr</span><span class="x"> ~ &quot;1.1.1.*&quot; ) </span><span class="err">{</span><span class="x"></span>
 <span class="x">        access_log off;</span>
@@ -321,7 +321,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </pre></div>
 
 
-<h4>二、if的or条件</h4>
+<h4 id="ifor">二、if的or条件</h4>
 <div class="highlight"><pre><span></span><span class="nt">location</span> <span class="o">/</span> <span class="p">{</span>
     <span class="n">set</span> <span class="err">$</span><span class="n">flag</span> <span class="m">0</span><span class="p">;</span>
     <span class="n">if</span> <span class="p">(</span><span class="err">$</span><span class="n">query_string</span> <span class="o">~</span> <span class="s2">&quot;xxx&quot;</span><span class="p">)</span><span class="err">{</span>
@@ -340,7 +340,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 
 
 <p><strong>如果不加return 200的话 所有非匹配请求都会404</strong></p>
-<h4>三、nginx+fcgi参数</h4>
+<h4 id="nginxfcgi">三、nginx+fcgi参数</h4>
 <p>nginx+fcgi, fcgi中变量名不能用大写字母和"-" <br />
 fcgi传递header参数时需要用 ...</p> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-11-48.html">
@@ -376,12 +376,12 @@ Filed under <a href="../yun-wei/index.html">运维</a>
       </div>
       <div class="summary span8">
 	<p><em>内网搞了了bolg，采用了nginx+php+mysql+wordpress。整个过程并不复杂，记录下遇到的问题。</em></p>
-<h4>1. 安装nginx</h4>
+<h4 id="1-nginx">1. 安装nginx</h4>
 <div class="highlight"><pre><span></span>    ./configure --prefix=/usr/local/nginx --with-zlib --with-pcre=/opt/ftp/http-server/pcre-8.34 --with-http_perl_module --with-http_stub_status_module --with-http_image_filter_module --with-http_gunzip_module --with-http_gzip_static_module
 </pre></div>
 
 
-<h4>2. php</h4>
+<h4 id="2-php">2. php</h4>
 <div class="highlight"><pre><span></span>    ./configure --prefix=/usr/local/php &#39;--with-config-file-path=/usr/local/php-5.4.23/etc&#39; &#39;--enable-fpm&#39; &#39;--enable-pcntl&#39; &#39;--enable-shmop&#39; &#39;--enable-sysvsem&#39; &#39;--enable-inline-optimization&#39; &#39;--disable-rpath&#39; &#39;--enable-safe-mode&#39; &#39;--with-mysql=mysqlnd&#39; &#39;--with-mysqli ...</pre></div> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-22-18-34.html">
           <i class="icon-plus-sign"></i> Read More </a>

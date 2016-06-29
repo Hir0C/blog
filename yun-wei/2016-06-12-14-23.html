@@ -68,12 +68,12 @@ Filed under <a href="../yun-wei/index.html">运维</a>
       </div>
       
       <div class="span8">
-	<h3>下载地址</h3>
+	<h3 id="_1">下载地址</h3>
 <p><a href="http://nginx.org/download/nginx-1.11.1.tar.gz">nginx-1.11.1</a> <br />
 <a href="http://zlib.net/zlib-1.2.8.tar.gz">zlib-1.2.8</a> <br />
 <a href="http://h264.code-shop.com/download/nginx_mod_h264_streaming-2.2.7.tar.gz">nginx_mod_h264_streaming-2.2.7</a> <br />
 <a href="https://sourceforge.net/projects/pcre/">pcre</a>   </p>
-<h3>修改</h3>
+<h3 id="_2">修改</h3>
 <p>需要先修改<code>nginx_mod_h264_streaming</code>一处源码，否则编译会报错。158~161行注释掉，修改后代码如下：</p>
 <div class="highlight"><pre><span></span>      /* TODO: Win32
       if (r-&gt;zero_in_uri)
@@ -83,12 +83,12 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </pre></div>
 
 
-<h3>编译</h3>
+<h3 id="_3">编译</h3>
 <div class="highlight"><pre><span></span>./configure --prefix<span class="o">=</span>/usr/local/nginx-1.11.1 --user<span class="o">=</span>www --group<span class="o">=</span>www --with-threads --with-http_flv_module --with-http_mp4_module --with-http_gunzip_module --with-http_gzip_static_module --without-mail_pop3_module --without-mail_imap_module --without-mail_smtp_module --with-pcre<span class="o">=</span>/tmp/yy/pcre-8.38 --with-zlib --with-http_ssl_module --add-module<span class="o">=</span>/tmp/yy/nginx_mod_h264_streaming-2.2.7 --with-cc-opt<span class="o">=</span><span class="s1">&#39;-O3&#39;</span>
 </pre></div>
 
 
-<h3>配置</h3>
+<h3 id="_4">配置</h3>
 <div class="highlight"><pre><span></span><span class="nt">user</span>  <span class="nt">www</span> <span class="nt">www</span><span class="o">;</span>
 <span class="nt">worker_processes</span>  <span class="nt">2</span><span class="o">;</span>
 

@@ -70,9 +70,9 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="article-content span8">
-	<h3>简介</h3>
+	<h3 id="_1">简介</h3>
 <p>ftp 虚拟用户配置</p>
-<h3>配置</h3>
+<h3 id="_2">配置</h3>
 <ol>
 <li>
 <p>创建nologin用户</p>
@@ -89,7 +89,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 
 </li>
 <li>
-<p>添加pam认证
+<p>添加pam认证<br />
 /etc/pam.d/vsftpd起始两行添加：</p>
 <div class="highlight"><pre><span></span>auth sufficient /lib64/security/pam_userdb.so db=vftpusers
 account sufficient /lib64/security/pam_userdb.so db=vftpusers
