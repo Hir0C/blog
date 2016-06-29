@@ -70,7 +70,7 @@ Filed under <a href="../ri-chang/index.html">日常</a>
 </p>
       </div>
       <div class="article-content span8">
-	<h4 id="_1">常用特殊符号</h4>
+	<h4>常用特殊符号</h4>
 <p><strong>左位移 &lt;&lt;</strong>   </p>
 <p>转换二进制后去掉最左边y位   </p>
 <p>计算公式 x * (2 ** y)</p>
@@ -86,7 +86,7 @@ Filed under <a href="../ri-chang/index.html">日常</a>
 <p>转换二进制后比较，只有双方都唯一时才得1</p>
 <p>用来计算奇偶数</p>
 <p>比如 4 &amp;1 = 0 ； 5 &amp; 1 = 1</p>
-<h4 id="_2">模块</h4>
+<h4>模块</h4>
 <p>输出中文内容报错如下：</p>
 <div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">bytes_sent</span>
 
@@ -96,7 +96,7 @@ Filed under <a href="../ri-chang/index.html">日常</a>
 
 
 <p><a href="http://stackoverflow.com/questions/21059640/wsgiref-error-attributeerror-nonetype-object-has-no-attribute-split" target="_blank">参考链接</a></p>
-<h4 id="python-zabbix-mail-server">python zabbix-mail server实现</h4>
+<h4>python zabbix-mail server实现</h4>
 <p><a href="http://www.361way.com/zabbix-api-2/3681.html" target="_blank">实现调用zabbix api类</a> <br />
 <a href="http://www.iyunv.com/thread-21332-1-1.html" target="_blank">获取图片</a> <br />
 <a href="http://www.tuicool.com/articles/vaAVri" target="_blank">python发送邮件内嵌图片</a>   </p>
@@ -159,18 +159,18 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 	<p><em>先说下选pip而不是eazy_install的理由，pip安装可维护性好，安装卸载都是一条命令搞定，而且还支持多个参数选项，eazy_install卸载只能手动，功能很单一。</em></p>
 <p>在内网机器使用pip安装很不方便，所以准备在内网弄个源server，就用Fabric安装做例子。</p>
 <p>下面说下内网源服务搭建:</p>
-<h4 id="web-server">一、web server</h4>
+<h4>一、web server</h4>
 <p>web server可以用python自己的pypiserve，也可以用nginx或者apache，我这里就直接使用nginx。</p>
-<h4 id="_1">二、获取安装文件</h4>
+<h4>二、获取安装文件</h4>
 <div class="highlight"><pre><span></span>pip install --no-install Fabric -d /var/www/pypydir
 </pre></div>
 
 
 <p>通过命令直接获取，不过前提是你这台机器也要能访问外网。  <br />
-或者<br />
-直接去页面下载改模块，手动放到目标目录下(需要创建以模块名命名的目录，再把压缩包放到目录中)<br />
+或者
+直接去页面下载改模块，手动放到目标目录下(需要创建以模块名命名的目录，再把压缩包放到目录中)
 下载地址为:https://pypi.python.org/pypi/</p>
-<h4 id="_2">三、安装</h4>
+<h4>三、安装</h4>
 <p>使用命令<code>pip install Fabric -i http://ip:port ...</code></p> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-23-12-36.html">
           <i class="icon-plus-sign"></i> Read More </a>

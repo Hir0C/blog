@@ -70,10 +70,10 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="article-content span8">
-	<h2 id="zsh">zsh是个好东西，关键是能装逼</h2>
-<h3 id="zsh_1">一、安装zsh</h3>
+	<h2>zsh是个好东西，关键是能装逼</h2>
+<h3>一、安装zsh</h3>
 <p>略</p>
-<h4 id="shell">二、切换用户使用shell</h4>
+<h4>二、切换用户使用shell</h4>
 <div class="highlight"><pre><span></span>    usermod -s /usr/local/bin/zsh root
 </pre></div>
 
@@ -83,7 +83,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </pre></div>
 
 
-<h4 id="git">三、git安装</h4>
+<h4>三、git安装</h4>
 <p>没啥好说的，官网步骤都有</p>
 <div class="highlight"><pre><span></span>    yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel -y
     make prefix=/usr/local all
@@ -91,19 +91,19 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </pre></div>
 
 
-<h4 id="python27x">四、安装python2.7.x</h4>
+<h4>四、安装python2.7.x</h4>
 <p>老三步</p>
 <div class="highlight"><pre><span></span>    ./configure --prefix=/usr/local/python2.7.11 --with-ensurepip=yes --disable-ipv6 --with-threads --with-pymalloc --with-fpectl
 </pre></div>
 
 
-<h4 id="oh-my-zsh">五、下载安装oh-my-zsh</h4>
+<h4>五、下载安装oh-my-zsh</h4>
 <ol>
 <li><a href="https://github.com/robbyrussell/oh-my-zsh" target="_blank">github地址</a></li>
 <li>解压后 mv 到/root/目录下改名为.oh-my-zsh</li>
 <li>cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc</li>
 <li>
-<p>改了小部分配置：<br />
+<p>改了小部分配置：
 zshrc</p>
 <div class="highlight"><pre><span></span>plugins=(git osx autojump cp history systemadmin mvn screen)
 </pre></div>
@@ -119,8 +119,8 @@ zshrc</p>
 
 </li>
 <li>
-<p>安装autojump<br />
-直接./install 安装<br />
+<p>安装autojump
+直接./install 安装
 .zshrc添加</p>
 <div class="highlight"><pre><span></span>[[ -s /etc/profile.d/autojump.zsh ]] &amp;&amp; . /etc/profile.d/autojump.zsh
 </pre></div>
@@ -128,8 +128,8 @@ zshrc</p>
 
 </li>
 </ol>
-<h4 id="zsh_2">六、zsh使用</h4>
-<p>直接引用MacTalk-池建强大神的介绍<br />
+<h4>六、zsh使用</h4>
+<p>直接引用MacTalk-池建强大神的介绍
 1. 兼容 bash，原来使用 bash 的兄弟切换过来毫无压力，该咋用咋用。</p>
 <ol>
 <li>

@@ -68,7 +68,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
       </div>
       
       <div class="span8">
-	<h4 id="ipaccess">一、关闭内网ip的access日志</h4>
+	<h4>一、关闭内网ip的access日志</h4>
 <div class="highlight"><pre><span></span><span class="x">location ~ xxxxxx</span><span class="err">{</span><span class="x"> </span>
 <span class="x">    if ( </span><span class="p">$</span><span class="nv">remote_addr</span><span class="x"> ~ &quot;1.1.1.*&quot; ) </span><span class="err">{</span><span class="x"></span>
 <span class="x">        access_log off;</span>
@@ -77,7 +77,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </pre></div>
 
 
-<h4 id="ifor">二、if的or条件</h4>
+<h4>二、if的or条件</h4>
 <div class="highlight"><pre><span></span><span class="nt">location</span> <span class="o">/</span> <span class="p">{</span>
     <span class="n">set</span> <span class="err">$</span><span class="n">flag</span> <span class="m">0</span><span class="p">;</span>
     <span class="n">if</span> <span class="p">(</span><span class="err">$</span><span class="n">query_string</span> <span class="o">~</span> <span class="s2">&quot;xxx&quot;</span><span class="p">)</span><span class="err">{</span>
@@ -96,15 +96,15 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 
 
 <p><strong>如果不加return 200的话 所有非匹配请求都会404</strong></p>
-<h4 id="nginxfcgi">三、nginx+fcgi参数</h4>
+<h4>三、nginx+fcgi参数</h4>
 <p>nginx+fcgi, fcgi中变量名不能用大写字母和"-" <br />
 fcgi传递header参数时需要用$http_xxx_xxx</p>
-<h4 id="nginx-99-cannot-assign-requested-address">四、nginx 报错 99: Cannot assign requested address</h4>
+<h4>四、nginx 报错 99: Cannot assign requested address</h4>
 <div class="highlight"><pre><span></span>net.ipv4.ip_local_port_range <span class="o">=</span> <span class="m">10240</span> <span class="m">65535</span> &gt;&gt; /etc/sysctl.conf
 </pre></div>
 
 
-<h4 id="memcached">四、后端配置读写memcached</h4>
+<h4>四、后端配置读写memcached</h4>
 <p><em>配置官方已经给的基本拿来直接用了。</em></p>
 <div class="highlight"><pre><span></span><span class="x">    location ^~ /uri1/ </span><span class="err">{</span><span class="x"></span>
 <span class="x">        set            </span><span class="p">$</span><span class="nv">memcached_key</span><span class="x"> &quot;</span><span class="p">$</span><span class="nv">uri</span><span class="x">&quot;;  </span><span class="err">#</span><span class="x">我这里就用获得的</span><span class="p">$</span><span class="nv">uri</span><span class="x">，做memcached里的key了。 如果需要解析uri里某一个query，写个if加正则吧。</span>

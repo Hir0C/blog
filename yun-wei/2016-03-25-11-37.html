@@ -68,13 +68,13 @@ Filed under <a href="../yun-wei/index.html">运维</a>
       </div>
       
       <div class="span8">
-	<h2 id="_1">转发自小众软件这片<a href="http://www.appinn.com/use-letsencrypt-with-nginx/" target="_blank">文章</a></h2>
-<h4 id="_2">安装</h4>
+	<h2>转发自小众软件这片<a href="http://www.appinn.com/use-letsencrypt-with-nginx/" target="_blank">文章</a></h2>
+<h4>安装</h4>
 <div class="highlight"><pre><span></span>git clone https://github.com/letsencrypt/letsencrypt /opt/letsencrypt
 </pre></div>
 
 
-<h4 id="_3">配置</h4>
+<h4>配置</h4>
 <p>先关闭nginx并开启防火墙80 和 443端口，避免申请证书时端口占用。</p>
 <div class="highlight"><pre><span></span><span class="nt">server</span> <span class="p">{</span>
     <span class="n">listen</span>       <span class="m">80</span><span class="p">;</span>
@@ -103,7 +103,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </pre></div>
 
 
-<h4 id="_4">证书续签</h4>
+<h4>证书续签</h4>
 <p><strong>1.修改配置文件</strong>   </p>
 <div class="highlight"><pre><span></span>cp /opt/letsencrypt/examples/cli.ini /usr/local/etc/le-renew-webroot.in
 </pre></div>

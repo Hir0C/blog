@@ -70,23 +70,23 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="article-content span8">
-	<h4 id="_1">安装</h4>
+	<h4>安装</h4>
 <p><a href="https://www.zabbix.com/documentation/3.0/manual/installation/install" target="_blank">安装文档</a>  <br />
 <a href="http://www.zabbix.com/download.php" target="_blank">zabbix源码下载</a> <br />
 <a href="https://github.com/zabbixcn/curl-rpm/tree/master/RPMS" target="_blank">依赖下载</a>   </p>
 <p><em>3.0 web页面暂时没有翻译成中文的选项。</em></p>
-<h5 id="1">1.创建用户</h5>
+<h5>1.创建用户</h5>
 <div class="highlight"><pre><span></span>groupadd zabbix
 useradd -g zabbix zabbix
 </pre></div>
 
 
-<h5 id="2">2. 依赖包汇总</h5>
+<h5>2. 依赖包汇总</h5>
 <div class="highlight"><pre><span></span>yum -y install gcc OpenIPMI-devel net-snmp-devel.x86_64 libxml2-devel mysql-devel
 </pre></div>
 
 
-<h5 id="3">3.编译安装及配置修改飘过</h5>
+<h5>3.编译安装及配置修改飘过</h5>
 <p>注意php和mysql的参数修改，至少满足官网的要求。   </p>
 <p>php配置如下   </p>
 <div class="highlight"><pre><span></span>php_value max_execution_time 300
@@ -105,10 +105,10 @@ php_value date.timezone Asia/Shanghai
 </pre></div>
 
 
-<h5 id="4zabbix-300frontendsphp-nginxphp">4.拷贝zabbix-3.0.0/frontends/php/* ，修改nginx指定目录，权限设置为php启动用户可读写</h5>
+<h5>4.拷贝zabbix-3.0.0/frontends/php/* ，修改nginx指定目录，权限设置为php启动用户可读写</h5>
 <p>zabbix3.0的入口文件不再是<code>dashboard.php</code>了，修改nginx配置，index 字段为 <code>index.php</code>   </p>
-<h5 id="5web">5.进入web页面根据提示执行下一步，没有特殊要注意的事项。</h5>
-<h4 id="_2">升级步骤</h4>
+<h5>5.进入web页面根据提示执行下一步，没有特殊要注意的事项。</h5>
+<h4>升级步骤</h4>
 <p>从2.x版本升级到3.0非常简单，官方给出了<a href="https://www.zabbix.com/documentation/3.0/manual/installation/upgrade" target="_blank">文档</a>    </p>
 <ol>
 <li>
@@ -133,7 +133,7 @@ php_value date.timezone Asia/Shanghai
 <p>客户端升级，更新bin和sbin目录就可以了，重启以后，zabbix server会报警Version of zabbix_agent(d) was changed </p>
 </li>
 </ol>
-<h4 id="_3">变量使用</h4>
+<h4>变量使用</h4>
 <p><code>{ITEM.VALUE}</code> 代表zabbix接收的key对应值 <br />
 可以用来当作报警内容</p> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-25-11-27.html">

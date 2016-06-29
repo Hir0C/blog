@@ -71,13 +71,13 @@ Filed under <a href="../yun-wei/index.html">运维</a>
       </div>
       <div class="article-content span8">
 	<p><em>使用Package Control组件，在sublime3下安装插件，按照网上方法会出现urllib2模块找不到的报错，但是之前并没出现过错误，查看了下之前是使用的urllib，在此记录下。</em></p>
-<h3 id="_1">简单说下导入步骤：</h3>
-<h4 id="1-ctrl">1. `ctrl + ``键，呼出命令行，键入命令:</h4>
+<h3>简单说下导入步骤：</h3>
+<h4>1. `ctrl + ``键，呼出命令行，键入命令:</h4>
 <div class="highlight"><pre><span></span>    <span class="kn">import</span> <span class="nn">urllib.request</span><span class="o">,</span><span class="nn">os</span><span class="p">;</span> <span class="n">pf</span> <span class="o">=</span> <span class="s1">&#39;Package Control.sublime-package&#39;</span><span class="p">;</span> <span class="n">ipp</span> <span class="o">=</span> <span class="n">sublime</span><span class="o">.</span><span class="n">installed_packages_path</span><span class="p">();</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">install_opener</span><span class="p">(</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">build_opener</span><span class="p">(</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">ProxyHandler</span><span class="p">())</span> <span class="p">);</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ipp</span><span class="p">,</span> <span class="n">pf</span><span class="p">),</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span> <span class="s1">&#39;http://sublime.wbond.net/&#39;</span> <span class="o">+</span> <span class="n">pf</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="s1">&#39;%20&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 </pre></div>
 
 
-<h4 id="2-ctrlshiftp-install">2. <code>ctrl+shift+p</code> 呼出下拉对话框，输入<code>install</code>会调出插件安装界面，输入要安装插件的名字就可以自动安装了。</h4> 
+<h4>2. <code>ctrl+shift+p</code> 呼出下拉对话框，输入<code>install</code>会调出插件安装界面，输入要安装插件的名字就可以自动安装了。</h4> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-22-18-26.html">
           <i class="icon-comment"></i> Comment </a>
 	<hr />
@@ -110,8 +110,8 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="summary span8">
-	<h3 id="vim-ide">vim ide 基本配置</h3>
-<h4 id="vim">一、安装VIM</h4>
+	<h3>vim ide 基本配置</h3>
+<h4>一、安装VIM</h4>
 <p>只是记录下vim的编译选项</p>
 <blockquote>
 <p>--with-features=huge 一定要加</p>
@@ -125,7 +125,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </pre></div>
 
 
-<h4 id="_1">二、插件安装</h4>
+<h4>二、插件安装</h4>
 <ul>
 <li><a href="http://www.vim.org/scripts/script.php?script_id=1213">VJDE</a><div class="highlight"><pre><span></span>tar -xzf vjde.tgz -C /usr/share/vim/vimfiles 
 chmod +x /usr/share/vim/vimfiles/plugin/vjde/readtags
@@ -167,10 +167,10 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="summary span8">
-	<h2 id="zsh">zsh是个好东西，关键是能装逼</h2>
-<h3 id="zsh_1">一、安装zsh</h3>
+	<h2>zsh是个好东西，关键是能装逼</h2>
+<h3>一、安装zsh</h3>
 <p>略</p>
-<h4 id="shell">二、切换用户使用shell</h4>
+<h4>二、切换用户使用shell</h4>
 <div class="highlight"><pre><span></span>    usermod -s /usr/local/bin/zsh root
 </pre></div>
 
@@ -180,7 +180,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </pre></div>
 
 
-<h4 id="git">三、git安装</h4>
+<h4>三、git安装</h4>
 <p>没啥好说的，官网步骤都有</p>
 <div class="highlight"><pre><span></span>    yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel -y
     make prefix=/usr/local all
@@ -188,7 +188,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </pre></div>
 
 
-<h4 id="python27x">四、安装python2.7.x</h4>
+<h4>四、安装python2.7.x</h4>
 <p>老三步</p>
 <div class="highlight"><pre><span></span>    ./configure --prefix=/usr/local ...</pre></div> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-22-16-56.html">

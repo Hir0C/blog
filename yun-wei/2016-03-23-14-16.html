@@ -70,22 +70,22 @@ Filed under <a href="../yun-wei/index.html">运维</a>
       <div class="span8">
 	<p>转发的，找不到原文了。。</p>
 <blockquote>
-<p>SET SESSION old_passwords=0;<br />
-SELECT PASSWORD('123456');<br />
-SET SESSION old_passwords=1;<br />
+<p>SET SESSION old_passwords=0;
+SELECT PASSWORD('123456');
+SET SESSION old_passwords=1;
 SELECT PASSWORD('123456');</p>
 </blockquote>
-<p>实际操作：<br />
-登陆mysql，使用<code>SET SESSION old_passwords=0;</code> //设置老格式密码<br />
+<p>实际操作：
+登陆mysql，使用<code>SET SESSION old_passwords=0;</code> //设置老格式密码
 <code>SET PASSWORD FOR 'webuser'@'localhost' = PASSWORD('123456')</code> //然后为用户设置密码。</p>
-<p>修改配置文件：<br />
-        [client]<br />
-        secure_auth = 0<br />
-        [mysqld]<br />
+<p>修改配置文件：
+        [client]
+        secure_auth = 0
+        [mysqld]
         old_passwords=1</p>
 <p>成功登陆！</p>
-<p>忘记用户密码时：<br />
-        [mysqld]<br />
+<p>忘记用户密码时：
+        [mysqld]
         skip-grant-tables</p>
 <p>然后不用口令进入mysql修改密码：</p>
 <blockquote>

@@ -71,7 +71,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
       </div>
       <div class="article-content span8">
 	<p><em>暂无配置</em></p>
-<h4 id="_1">编译</h4>
+<h4>编译</h4>
 <p><a href="http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/NativeLibraries.html" target="_blank">官方手册</a>   </p>
 <ul>
 <li>几个常用依赖要先装好：   </li>
@@ -104,7 +104,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <p>除了拷贝.so .a文件，别忘了还要拷hadoop-lzo-*-SNAPSHOT.jar   </p>
 </li>
 </ul>
-<h4 id="_2">遇到的问题</h4>
+<h4>遇到的问题</h4>
 <ul>
 <li>单机版hadoop yarn内存分配必须大于3072</li>
 </ul>
@@ -120,7 +120,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </pre></div>
 
 
-<h4 id="_3">升级</h4>
+<h4>升级</h4>
 <p>这次从hadoop2.2.0 升级成 2.6.2。过程还是比较顺利，目前来看集群运行正常。   </p>
 <p>因为是测试环境，数据量很小，所以升级过程比较快。升级参考了这位大神的<a href="http://my.oschina.net/MaTech/blog/496102" target="_blank">blog</a>  </p>
 <p>我总结一下我的步骤：</p>
@@ -130,7 +130,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <p>4） 启动其他服务 ./sbin/start-all.sh</p>
 <p>5） 启动以后离开safe模式(升级完自动进入safe模式)  hadoop dfsadmin -safemode leave</p>
 <p>6） 检查数据。</p>
-<h4 id="_4">补充</h4>
+<h4>补充</h4>
 <p>1） 需要手动指定PID文件，不要存在默认的/tmp/目录下，会造成被系统自动清理，无法使用命令正常关闭集群。</p> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-15-58.html">
           <i class="icon-comment"></i> Comment </a>
@@ -164,7 +164,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="summary span8">
-	<h4 id="_1">一、 准备工作</h4>
+	<h4>一、 准备工作</h4>
 <p>下载cdh的各种源:</p>
 <ol>
 <li>下载<a href="http://archive-primary.cloudera.com/cm5/installer" target="_blank">cloudera manager installer</a></li>

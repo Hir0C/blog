@@ -71,7 +71,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
       </div>
       <div class="article-content span8">
 	<p>因为我们使用了<a href="http://hir0c.github.io/blog/yun-wei/2016-03-24-16-40.html" target="_blank">mail http api</a> 接口发邮件,如果同时爆出大量发邮件请求,讲会堆积大量邮件队列,造成服务器卡死,临时解决方案就是不断循环检测邮件队列数量进行清理。</p>
-<h2 id="_1">转贴</h2>
+<h2>转贴</h2>
 <p>Postfix中有一套<code>Mail Queue Management</code>机制,所有队列中的邮件都可以全自动的处理,但在发送大量邮件的时候,有必要对这个队列进行手工的维护处理,比如说,删除队列中的邮件. 以下是一些常用的命令：</p>
 <p><strong>列出目前在 Mail Queue 中的邮件</strong>   </p>
 <div class="highlight"><pre><span></span>mailq
@@ -169,11 +169,11 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="summary span8">
-	<h4 id="_1">简介</h4>
+	<h4>简介</h4>
 <p>github上找到个go写的通过http POST请求发送邮件的代码。 <br />
 少有的根据文档顺利安装成功并运行的代码。   </p>
 <p><a href="https://github.com/niean/mailsender" target="_blank">链接在此</a></p>
-<h4 id="_2">配置</h4>
+<h4>配置</h4>
 <div class="highlight"><pre><span></span>{
     &quot;debug&quot;:true,
     &quot;http&quot;:{

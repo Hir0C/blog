@@ -68,7 +68,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
       </div>
       
       <div class="span8">
-	<h4 id="_1">集群安装：</h4>
+	<h4>集群安装：</h4>
 <p>1.版本介绍：  </p>
 <p>目前最新版本为 <code>kafka_2.11-0.9.0.1</code>（scala-2.11为kafka官方推荐版本，此外还有2.10可以选择，scale2.9将被废弃）</p>
 <p>2.环境准备：  </p>
@@ -90,7 +90,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <p>部署新节点，然后通过命令启动kafka，<code>JMX_PORT</code>是为了打开kafka的可管理端口（默认不启用）。</p>
 <p>5.命令：  </p>
 <p>常用增删改查命令：<a href="http://kafka.apache.org/documentation.html#quickstart" target="_blank">kafka基本命令</a>，<a href="http://kafka.apache.org/documentation.html#operations" target="_blank">高级命令</a></p>
-<h4 id="kafka-080-081">kafka 0.8.0 升级 0.8.1 流程</h4>
+<h4>kafka 0.8.0 升级 0.8.1 流程</h4>
 <p>升级很简单,引用官方的话:</p>
 <div class="highlight"><pre><span></span>    Upgrading from 0.8.0 to 0.8.1
     0.8.1 is fully compatible with 0.8. The upgrade can be done one broker at a time by simply bringing it down, updating the code, and
@@ -136,7 +136,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </pre></div>
 
 
-<h4 id="_2">扩容：</h4>
+<h4>扩容：</h4>
 <p>1）先部署好新节点环境，并根据上文"配置修改"修改配置，然后启动集群，确保新节点为可用状态。 <br />
 2）<a href="http://kafka.apache.org/documentation.html#operations" target="_blank">高级命令</a>中的<code>Expanding your cluster</code>小节介绍了扩容的基本方法：</p>
 <p>生成扩容使用的json文件：</p>

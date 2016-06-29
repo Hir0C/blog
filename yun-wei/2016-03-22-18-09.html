@@ -68,15 +68,15 @@ Filed under <a href="../yun-wei/index.html">运维</a>
       </div>
       
       <div class="span8">
-	<h3 id="storm">storm安装步骤:</h3>
-<h4 id="zookeeper">一、安装zookeeper</h4>
+	<h3>storm安装步骤:</h3>
+<h4>一、安装zookeeper</h4>
 <ol>
 <li>
-<p>全部选用CDH的产品，不用担心版本问题，省心。<br />
+<p>全部选用CDH的产品，不用担心版本问题，省心。
 包都在这里:http://archive.cloudera.com/cdh4/cdh/4/</p>
 </li>
 <li>
-<p>配置zookeeper<br />
+<p>配置zookeeper
 解压稍微修改配置就可以使用，只需要定义dataDir和server.1/2/3</p>
 <div class="highlight"><pre><span></span>dataDir=/data/zookeeper/tmp
 hostname1:2888:3888
@@ -87,24 +87,24 @@ hostname3:2888:3888
 
 </li>
 <li>
-<p>启动<br />
+<p>启动
         ./zkServer.sh start</p>
 </li>
 </ol>
-<h4 id="zeromq">二、安装消息队列ZeroMQ</h4>
+<h4>二、安装消息队列ZeroMQ</h4>
 <ol>
 <li>直接上最新版本zeromq-4.0.3</li>
 </ol>
-<p>http://download.zeromq.org/zeromq-4.0.3.tar.gz<br />
-编译安装:<code>./configure &amp;&amp; make &amp;&amp; make install &amp;&amp; ldconfig</code><br />
+<p>http://download.zeromq.org/zeromq-4.0.3.tar.gz
+编译安装:<code>./configure &amp;&amp; make &amp;&amp; make install &amp;&amp; ldconfig</code>
 不要忘记<code>ldconfig</code></p>
 <ol>
 <li>安装zemq</li>
 </ol>
-<p>https://github.com/zeromq/jzmq<br />
+<p>https://github.com/zeromq/jzmq
 编译安装:<code>./configure &amp;&amp; make &amp;&amp; make install &amp;&amp; ldconfig</code></p>
 <p>两个模块都默认安装/usr/local/了，这样storm就不用单独配置java.library.path了</p>
-<h4 id="storm_1">三、安装storm</h4>
+<h4>三、安装storm</h4>
 <ol>
 <li>
 <p>storm需要python2.6以上版本。安装略</p>

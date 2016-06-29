@@ -73,7 +73,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
       </div>
       <div class="summary span8">
 	<p>因为我们使用了<a href="http://hir0c.github.io/blog/yun-wei/2016-03-24-16-40.html" target="_blank">mail http api</a> 接口发邮件,如果同时爆出大量发邮件请求,讲会堆积大量邮件队列,造成服务器卡死,临时解决方案就是不断循环检测邮件队列数量进行清理。</p>
-<h2 id="_1">转贴</h2>
+<h2>转贴</h2>
 <p>Postfix中有一套<code>Mail Queue Management</code>机制,所有队列中的邮件都可以全自动的处理,但在发送大量邮件的时候,有必要对这个队列进行手工的维护处理,比如说,删除队列中的邮件. 以下是一些常用的命令：</p>
 <p><strong>列出目前在 Mail Queue 中的邮件</strong>   </p>
 <div class="highlight"><pre><span></span>mailq
@@ -124,12 +124,12 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="summary span8">
-	<h4 id="_1">一 准备:</h4>
+	<h4>一 准备:</h4>
 <p><a href="https://sourceforge.net/projects/automysqlbackup/" target="_blank">automysqlbackup下载</a> <br />
 <a href="https://github.com/micahwedemeyer/automongobackup" target="_blank">automongobackup下载</a>   </p>
 <p>automongobackup是模仿automysqlbackup项目写的，默认并不带配置文件，可以直接修改脚本里对应变量。   </p>
 <p>​</p>
-<h4 id="_2">二 配置</h4>
+<h4>二 配置</h4>
 <p><strong>automysqlbackup</strong>   </p>
 <div class="highlight"><pre><span></span>CONFIG_mysql_dump_username=&#39;user&#39;
 CONFIG_mysql_dump_password=&#39;passwd&#39;
@@ -231,7 +231,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="summary span8">
-	<h4 id="_1">安装</h4>
+	<h4>安装</h4>
 <p>系统centos6.7，ansible 1.9.4   </p>
 <p>一上去就出了个问题，用pip方式安装完执行命令报错，内容如下：   </p>
 <p>找到解决办法：   </p>
@@ -242,7 +242,7 @@ yum install python-crypto python-paramiko
 
 
 <ul>
-<li>常用参考链接：<br />
+<li>常用参考链接：
 <a href="https://galaxy.ansible.com/" target="_blank">Galaxy资源库</a></li>
 </ul>
 <p>备份文件例子：</p>
@@ -295,11 +295,11 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="summary span8">
-	<h4 id="_1">简介</h4>
+	<h4>简介</h4>
 <p>github上找到个go写的通过http POST请求发送邮件的代码。 <br />
 少有的根据文档顺利安装成功并运行的代码。   </p>
 <p><a href="https://github.com/niean/mailsender" target="_blank">链接在此</a></p>
-<h4 id="_2">配置</h4>
+<h4>配置</h4>
 <div class="highlight"><pre><span></span>{
     &quot;debug&quot;:true,
     &quot;http&quot;:{
@@ -355,7 +355,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
       </div>
       <div class="summary span8">
 	<p><em>暂无配置</em></p>
-<h4 id="_1">编译</h4>
+<h4>编译</h4>
 <p><a href="http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/NativeLibraries.html" target="_blank">官方手册</a>   </p>
 <ul>
 <li>几个常用依赖要先装好：   </li>
@@ -422,7 +422,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <p><strong>先扔两个开源中国上的同学写好的权限配置教程。</strong></p>
 <p><strong><a href="http://my.oschina.net/boltwu/blog/408145" target="_blank">Jenkins配置基于角色的项目权限管理</a></strong><br />
 <strong><a href="http://my.oschina.net/boltwu/blog/410925" target="_blank">配置Jenkins用户和权限</a></strong>  </p>
-<h4 id="_1">权限管理：</h4>
+<h4>权限管理：</h4>
 <p>1.安装插件<code>Role-Based Strategy</code>，然后再configure global security选择这个插件。   </p>
 <p>2.系统管理 -&gt; 管理用户 -&gt; 新建用户。   </p>
 <p>3.系统管理 -&gt; Manage and Assign Roles -&gt; Manage Roles </p>
@@ -432,8 +432,8 @@ Filed under <a href="../yun-wei/index.html">运维</a>
   下面是我的配置(查看大图请在新建标签页打开)：    </li>
 </ul>
 <p><img alt="配置图1" src="http://static.oschina.net/uploads/space/2015/1023/143042_j6yU_1428530.jpg" />   </p>
-<p><strong>说明：<code>global roles</code> 设置了一个只读组，防止登陆用户修改系统配置。</strong><br />
-<strong><code>project roles</code> 设置了一个dev组，研发同学只能对<code>dev-project</code>开头的项目可见，并可以自己部署。</strong></p>
+<p><strong>说明：<code>global roles</code> 设置了一个只读组，防止登陆用户修改系统配置。</strong>
+  <strong><code>project roles</code> 设置了一个dev组，研发同学只能对<code>dev-project</code>开头的项目可见，并可以自己部署。</strong></p>
 <p>4.系统管理 -&gt; Manage and ...</p> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-15-46.html">
           <i class="icon-plus-sign"></i> Read More </a>
@@ -467,7 +467,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="summary span8">
-	<h4 id="_1">一、安装：</h4>
+	<h4>一、安装：</h4>
 <p>因为最近刚开始接触salt，用了一点点salt的东西，首先需要redis已经做成了rpm包，主部署配置文件为：</p>
 <div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">include</span><span class="p p-Indicator">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">yumconf     //自定义引入yum内网源配置</span>
@@ -563,7 +563,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 </p>
       </div>
       <div class="summary span8">
-	<h4 id="_1">一、先转几个入门学习链接慢慢看</h4>
+	<h4>一、先转几个入门学习链接慢慢看</h4>
 <ol>
 <li>
 <p>作者这个系列的<a href="http://www.ituring.com.cn/article/41632" target="_blank">blog</a> 是翻译官网的文档，写的很清楚</p>
@@ -587,7 +587,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <p><a href="http://segmentfault.com/a/1190000000513137" target="_blank">多环境部署</a>   </p>
 </li>
 </ol>
-<h4 id="_2">二、命令，配置备忘：</h4>
+<h4>二、命令，配置备忘：</h4>
 <p><em>刷新模块(让minion编译模块)</em>   </p>
 <div class="highlight"><pre><span></span>salt <span class="s1">&#39;*&#39;</span> sys.reload_modules
 </pre></div>
