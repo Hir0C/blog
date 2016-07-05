@@ -55,6 +55,55 @@
 
     <div class='row-fluid'>
       <div class='article-title span9'> 
+        <a href="./yun-wei/2016-03-25-11-06.html"><h1>vpn搭建</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>五 25 三月 2016 </p>
+
+<p style="text-align: left;">
+Filed under <a href="./yun-wei/index.html">运维</a>
+</p>
+<p style="text-align: left;">
+ 
+    Tags <a href="./tag/vpn.html">vpn</a> </p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<p><em>转发一篇vpn搭建文章，搭建步骤很简单，让我这小白也一次搭建成功了。</em>   </p>
+<h4>安装</h4>
+<p><em>rpm包需要梯子下载</em>   </p>
+<p><a href="http://poptop.sourceforge.net/yum/stable/packages/pptpd-1.4.0-1.el6.x86_64.rpm" target="_blank">pptpd-1.4.0-1.el6.x86_64.rpm</a> <br />
+<a href="http://poptop.sourceforge.net/yum/stable/packages/ppp-devel-2.4.5-33.0.rhel6.x86_64.rpm" target="_blank">ppp-devel-2.4.5-33.0.rhel6.x86_64.rpm</a> <br />
+<a href="http://poptop.sourceforge.net/yum/stable/packages/ppp-2.4.5-33.0.rhel6.x86_64.rpm" target="_blank">ppp-2.4.5-33.0.rhel6.x86_64.rpm</a>   </p>
+<div class="highlight"><pre><span></span>rpm -ivh * 安装
+</pre></div>
+
+
+<h4>配置</h4>
+<p><strong><a href="https://www.nigesb.com/setup-your-own-vpn-with-pptp.html" target="_blank">这部分我完全照搬转发博主的博客了</a></strong></p>
+<div class="highlight"><pre><span></span>1. 修改配置文件/etc/pptpd.conf
+
+localip 10.0.0.1
+remoteip 10.0.0.100-200
+上面的IP地址是可以随便填的，ABC三类的内网地址都可以，主要兼顾其他地方的IP配置，不要出现IP冲突就可以了，后面的remoteip ...</pre></div> 
+	<a class="btn btn-mini xsmall" href="./yun-wei/2016-03-25-11-06.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
         <a href="./yun-wei/2016-03-25-10-48.html"><h1>elk安装 配置</h1></a>
       </div>
     </div>
@@ -535,55 +584,6 @@ Filed under <a href="./yun-wei/index.html">运维</a>
 <li>
 <p>除了拷贝.so .a文件，别忘了还要拷hadoop-lzo-*-SNAPSHOT.jar ...</p></li></ul> 
 	<a class="btn btn-mini xsmall" href="./yun-wei/2016-03-24-15-58.html">
-          <i class="icon-plus-sign"></i> Read More </a>
-	<hr />
-      </div>
-      
-    </div>
-      
-
- 
-        
-
-
-
-    <div class='row-fluid'>
-      <div class='article-title span9'> 
-        <a href="./yun-wei/2016-03-24-15-46.html"><h1>jenkins权限管理</h1></a>
-      </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span2">
-<p>四 24 三月 2016 </p>
-
-<p style="text-align: left;">
-Filed under <a href="./yun-wei/index.html">运维</a>
-</p>
-<p style="text-align: left;">
- 
-    Tags <a href="./tag/jenkins.html">jenkins</a> </p>
-<p>
-</p>
-      </div>
-      <div class="summary span8">
-	<p>jenkins安装非常简便，权限管理相对麻烦一些，下面记录一下我的配置过程。</p>
-<p><strong>先扔两个开源中国上的同学写好的权限配置教程。</strong></p>
-<p><strong><a href="http://my.oschina.net/boltwu/blog/408145" target="_blank">Jenkins配置基于角色的项目权限管理</a></strong><br />
-<strong><a href="http://my.oschina.net/boltwu/blog/410925" target="_blank">配置Jenkins用户和权限</a></strong>  </p>
-<h4>权限管理：</h4>
-<p>1.安装插件<code>Role-Based Strategy</code>，然后再configure global security选择这个插件。   </p>
-<p>2.系统管理 -&gt; 管理用户 -&gt; 新建用户。   </p>
-<p>3.系统管理 -&gt; Manage and Assign Roles -&gt; Manage Roles </p>
-<ul>
-<li>Global roles 设置账号权限组。   </li>
-<li>Project roles 设置账号对项目的权限组。 <br />
-  下面是我的配置(查看大图请在新建标签页打开)：    </li>
-</ul>
-<p><img alt="配置图1" src="http://static.oschina.net/uploads/space/2015/1023/143042_j6yU_1428530.jpg" />   </p>
-<p><strong>说明：<code>global roles</code> 设置了一个只读组，防止登陆用户修改系统配置。</strong>
-  <strong><code>project roles</code> 设置了一个dev组，研发同学只能对<code>dev-project</code>开头的项目可见，并可以自己部署。</strong></p>
-<p>4.系统管理 -&gt; Manage and ...</p> 
-	<a class="btn btn-mini xsmall" href="./yun-wei/2016-03-24-15-46.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+
+    <meta charset="utf-8">
+    <title>Hir0C blog <small>django</small></title>
+    <meta name="description" content="">
+    <meta name="author" content="Hir0C">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="../theme/html5.js"></script>
+    <![endif]-->
+
+
+    <!-- Le styles -->
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.no-icons.min.css" rel="stylesheet">
+    <link href="../theme/local.css" rel="stylesheet">
+    <link href="../theme/pygments.css" rel="stylesheet">
+    <link href="../theme/font-awesome.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Gudea:400,400italic|Alegreya+SC' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+<header class="blog-header">
+  <div class="container">
+    <div class="row-fluid">
+      <div class="span9">
+	<a href=".." class="brand">Hir0C blog</a>
+      </div>
+
+      <div class="span3" id="blog-nav">
+	<ul class="nav nav-pills pull-right">
+	    <li >
+	      <a href="../ri-chang/index.html ">日常</a>
+	    <li >
+	      <a href="../yun-wei/index.html ">运维</a>
+	</ul>
+      </div>
+    </div> <!-- End of fluid row-->
+  </div>   <!-- End of Container-->
+</header>
+    
+<div class="container">
+    <div class="content">
+    <div class="row-fluid">
+
+        <div class="span10">
+        
+
+        
+
+    <div class='row-fluid''>
+        <div class="article-title span9">
+            <a href="../yun-wei/2016-07-05-14-59.html"><h1>Nginx + Django 部署</h1></a>
+        </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>二 05 七月 2016 </p>
+
+<p style="text-align: left;">
+Filed under <a href="../yun-wei/index.html">运维</a>
+</p>
+<p style="text-align: left;">
+ 
+    Tags <a href="../tag/nginx.html">nginx</a> <a href="../tag/django.html">django</a> </p>
+<p>
+</p>
+      </div>
+      <div class="article-content span8">
+	<h3>配置</h3>
+<h4>nginx配置</h4>
+<div class="highlight"><pre><span></span><span class="nt">server</span> <span class="p">{</span>
+    <span class="n">listen</span>      <span class="m">80</span><span class="p">;</span>
+    <span class="n">server_name</span> <span class="n">localhost</span>
+    <span class="n">charset</span>     <span class="n">utf</span><span class="m">-8</span><span class="p">;</span>
+
+    <span class="n">client_max_body_size</span> <span class="m">75</span><span class="n">M</span><span class="p">;</span>
+
+    <span class="n">location</span> <span class="o">/</span><span class="nb">static</span> <span class="err">{</span>
+        <span class="n">alias</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">django_site</span><span class="o">/</span><span class="nb">static</span><span class="p">;</span> 
+        <span class="n">mp4</span><span class="p">;</span> <span class="err">#项目中的视频文件存在这个目录里</span>
+        <span class="n">proxy_ignore_headers</span> <span class="n">X</span><span class="o">-</span><span class="n">Accel</span><span class="o">-</span><span class="n">Expires</span> <span class="n">Expires</span> <span class="n">Cache</span><span class="o">-</span><span class="n">Control</span> <span class="n">Set</span><span class="o">-</span><span class="n">Cookie</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nt">location</span> <span class="o">/</span> <span class="p">{</span>
+        <span class="n">include</span>     <span class="n">uwsgi_params</span><span class="p">;</span>
+        <span class="n">uwsgi_pass</span>  <span class="n">unix</span><span class="o">:///</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">uwsgi</span><span class="o">.</span><span class="n">sock</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="err">}</span>
+</pre></div>
+
+
+<h4>uwsgi配置</h4>
+<div class="highlight"><pre><span></span><span class="k">[uwsgi]</span>
+<span class="na">socket</span> <span class="o">=</span> <span class="s">/usr/local/nginx/uwsgi.sock</span>
+<span class="na">chdir</span> <span class="o">=</span> <span class="s">/home/django_site/</span>
+<span class="na">wsgi-file</span> <span class="o">=</span> <span class="s">django_site/wsgi.py</span>
+
+<span class="na">processes</span> <span class="o">=</span> <span class="s">2</span>
+<span class="na">threads</span> <span class="o">=</span> <span class="s">4</span>
+
+<span class="na">chmod-socket</span> <span class="o">=</span> <span class="s">664</span>
+<span class="na">chown-socket</span> <span class="o">=</span> <span class="s">www:www</span>
+</pre></div>
+
+
+<h4>django配置</h4>
+<p><em>关闭DEBUG。别忘了设置允许所有主机访问，否则会报错400</em>   </p>
+<div class="highlight"><pre><span></span>DEBUG = False
+ALLOWED_HOSTS = [&#39;*&#39;]
+</pre></div>
+
+
+<h3>运行</h3>
+<h4>启动uwsgi</h4>
+<div class="highlight"><pre><span></span>uwsgi --ini ./conf.ini &gt; /dev/null 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
+</pre></div>
+
+
+<p><em>每次更新py文件后，需要重启uwsgi</em></p>
+<h4></h4>
+<h3>其他</h3>
+<p><a href="http://hir0c.github.io/blog/yun-wei/2016-06-12-14-23.html" target="_blank">nginx支持mp4点我</a>   </p> 
+	<a class="btn btn-mini xsmall" href="../yun-wei/2016-07-05-14-59.html">
+          <i class="icon-comment"></i> Comment </a>
+	<hr />
+      </div>
+      
+    </div>
+    
+<div class="pagination">
+<ul>
+    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
+
+    <li class="active"><a href="../tag/django.html">1</a></li>
+
+    <li class="next disabled"><a href="#">&rarr; Next</a></li>
+
+</ul>
+</div>
+
+ 
+  
+        </div>
+        
+        
+    </div>     </div> </div>
+
+<!--footer-->
+<div class="container">
+  <div class="well" style="background-color: #E9EFF6">
+    <div id="blog-footer">
+      <div class="row-fluid">
+	<div class="site-nav span2" align="center">
+          <ul class="nav nav-list" id="site-links">
+            <li class="nav-header"> 
+              Site
+            </li>
+            <li><a href=".."><i class="icon-home" style="color: #1f334b">
+                </i>Home</a></li>
+            <li><a href="../archives.html"><i class="icon-list" style="color: #1f334b">
+                </i>Archives</a></li>
+	    <li><a href="../tags.html"><i class="icon-tags" style="color: #1f334b">
+                </i>Tags</a></li>
+	    
+	  </ul>
+
+        </div>
+
+      </div> <!--end of fluid row-->
+    </div> <!--end of blog-footer-->
+    <hr />
+    <p align="center"><a href="..">Hir0C blog</a>
+      &copy; Hir0C
+    Powered by <a href="https://github.com/getpelican/pelican">Pelican</a> and
+        <a href="https://twitter.github.com/bootstrap">Twitter Bootstrap</a>. 
+        Icons by <a href="https://fortawesome.github.com/Font-Awesome">Font Awesome</a> and 
+        <a href="https://gregoryloucas.github.com/Font-Awesome-More">Font Awesome More</a></p>
+
+  </div> <!--end of well -->
+</div> <!--end of container -->
+
+<!--/footer-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+
+
+
+</body>
+</html>
