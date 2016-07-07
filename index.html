@@ -82,7 +82,7 @@ Filed under <a href="./yun-wei/index.html">运维</a>
 <h3>分析</h3>
 <h4>先是google了一下报错，并没有发现什么解决方案。</h4>
 <h4>访问报错给出的链接，<a href="http://wiki.apache.org/hadoop/BindException" target="_blank">地址点我</a></h4>
-<p>链接中提到了端口0为随机端口，所以感觉应该不是端口冲突导致。最好文档里提到这个问题不是hadoop本身导致，应该是系统或者网络问题。无奈使用文档中给出的命令查看了一下端口状态，发现了问题，端口竟然被占满了，全是close_wait状态。</p>
+<p>链接中提到了端口0为随机端口，所以开始感觉应该不是端口冲突导致。文档后面又提到这个问题不是hadoop本身导致，应该是系统或者网络问题。无奈使用文档中给出的命令查看了一下端口状态，发现了问题，端口竟然被占满了，全是close_wait状态。</p>
 <h3>处理</h3>
 <p><strong>查询端口占用情况</strong></p>
 <div class="highlight"><pre><span></span>netstat -a -t --numeric <span class="p">|</span> wc -l
