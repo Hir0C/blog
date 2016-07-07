@@ -55,6 +55,70 @@
 
     <div class='row-fluid'>
       <div class='article-title span9'> 
+        <a href="./yun-wei/2016-03-24-15-58.html"><h1>hadoop安装 升级</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>四 24 三月 2016 </p>
+
+<p style="text-align: left;">
+Filed under <a href="./yun-wei/index.html">运维</a>
+</p>
+<p style="text-align: left;">
+ 
+    Tags <a href="./tag/hadoop.html">hadoop</a> </p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<p><em>暂无配置</em></p>
+<h4>编译</h4>
+<p><a href="http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/NativeLibraries.html" target="_blank">官方手册</a>   </p>
+<ul>
+<li>几个常用依赖要先装好：   </li>
+</ul>
+<blockquote>
+<p>autoconf automake libtool openssl-devel.x86_64 ant cmake snappy snappy-devel protobuf-2.5.0(必须是2.5.0以上版本！)   </p>
+</blockquote>
+<ul>
+<li>编译命令：</li>
+</ul>
+<div class="highlight"><pre><span></span>mvn package -Pdist,native -DskipTests -Dtar -Drequire.snappy<span class="o">(</span>支持snappy<span class="o">)</span>
+</pre></div>
+
+
+<ul>
+<li>
+<p>编译成功后会打包，放在hadoop-dist/target   </p>
+</li>
+<li>
+<p>添加lzo支持<a href="http://www.iteblog.com/archives/992" target="_blank">参考链接</a>  <br />
+上面blog里写的很详细了，下面我只总结一些需要注意的地方：</p>
+</li>
+<li>
+<p>依赖lzo和lzo-devel需要提前装好   </p>
+</li>
+<li>
+<p>使用twitter的hadoop-lzo，地址是：https://github.com/twitter/hadoop-lzo   </p>
+</li>
+<li>
+<p>除了拷贝.so .a文件，别忘了还要拷hadoop-lzo-*-SNAPSHOT.jar ...</p></li></ul> 
+	<a class="btn btn-mini xsmall" href="./yun-wei/2016-03-24-15-58.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
         <a href="./yun-wei/2016-03-24-15-46.html"><h1>jenkins权限管理</h1></a>
       </div>
     </div>
@@ -481,62 +545,6 @@ Filed under <a href="./yun-wei/index.html">运维</a>
 <p>nginx+fcgi, fcgi中变量名不能用大写字母和"-" <br />
 fcgi传递header参数时需要用 ...</p> 
 	<a class="btn btn-mini xsmall" href="./yun-wei/2016-03-24-11-48.html">
-          <i class="icon-plus-sign"></i> Read More </a>
-	<hr />
-      </div>
-      
-    </div>
-      
-
- 
-        
-
-
-
-    <div class='row-fluid'>
-      <div class='article-title span9'> 
-        <a href="./yun-wei/2016-03-24-10-39.html"><h1>cloudera manager 与 CDH5 安装与升级</h1></a>
-      </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span2">
-<p>四 24 三月 2016 </p>
-
-<p style="text-align: left;">
-Filed under <a href="./yun-wei/index.html">运维</a>
-</p>
-<p style="text-align: left;">
- 
-    Tags <a href="./tag/cdh.html">CDH</a> <a href="./tag/hadoop.html">hadoop</a> </p>
-<p>
-</p>
-      </div>
-      <div class="summary span8">
-	<h4>一、 准备工作</h4>
-<p>下载cdh的各种源:</p>
-<ol>
-<li>下载<a href="http://archive-primary.cloudera.com/cm5/installer" target="_blank">cloudera manager installer</a></li>
-<li>因为这次要模拟升级安装,首先要先下载<a href="http://archive-primary.cloudera.com/cm5/redhat/5/x86_64/cm/5.0.0-beta-2/" target="_blank">beta的源</a></li>
-<li>然后下载<a href="http://archive-primary.cloudera.com/cm5/redhat/5/x86_64/cm/5.0.0/" target="_blank">release的源</a></li>
-<li>然后下载<a href="http://archive-primary.cloudera.com/cdh5/parcels/" target="_blank">parcel包</a>,<em>官方推荐这种方式安装</em> <br />
-<em>另外除了parcel包,还要下载json文件,没有那个json文件是无法正常安装的.</em></li>
-<li>
-<p>下载到本地后将rpm包的源,放到webserver目录下,写好yum的repo文件</p>
-<div class="highlight"><pre><span></span><span class="k">[cloudera-manager]</span>
-<span class="na">name</span> <span class="o">=</span> <span class="s">Cloudera Manager, Version 5.0.0</span>
-<span class="na">baseurl</span> <span class="o">=</span> <span class="s">http://IP/yum-package/cm5/redhat/5/x86_64/cm/5.0.0/</span>
-<span class="na">gpgcheck</span> <span class="o">=</span> <span class="s">0</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>parcel包添加验证文件</p>
-</li>
-</ol>
-<p><code>cat manifest.json</code> 把sha那一段沾出来, 写到parcel包.</p>
-<p>sha文件里 ...</p> 
-	<a class="btn btn-mini xsmall" href="./yun-wei/2016-03-24-10-39.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>

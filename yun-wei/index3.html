@@ -55,6 +55,53 @@
 
     <div class='row-fluid'>
       <div class='article-title span9'> 
+        <a href="../yun-wei/2016-03-24-15-27.html"><h1>flume + kafka 基本配置</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>四 24 三月 2016 </p>
+
+<p style="text-align: left;">
+Filed under <a href="../yun-wei/index.html">运维</a>
+</p>
+<p style="text-align: left;">
+ 
+    Tags <a href="../tag/flume.html">flume</a> <a href="../tag/kafka.html">kafka</a> </p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<p><strong>apache-flume1.6 sink默认支持kafka</strong></p>
+<blockquote>
+<p>[FLUME-2242] - Flume Sink and Source for Apache Kafka</p>
+</blockquote>
+<p>官方给的例子很贴心，可以直接运行。   </p>
+<div class="highlight"><pre><span></span>    a1.channels = channel1
+    a1.sources = src-1
+    a1.sinks = k1
+
+    a1.sources.src-1.type = spooldir  #实时性要求不高的话，可以用这种方式，tail实际效率也挺低的
+    a1.sources.src-1.channels = channel1
+    a1.sources.src-1.spoolDir = /opt/flumeSpool/
+    a1.sources.src-1.fileHeader = false
+
+    #a1.sources.src-1.type ...</pre></div> 
+	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-24-15-27.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
         <a href="../yun-wei/2016-03-24-15-08.html"><h1>Saltstack基本安装使用</h1></a>
       </div>
     </div>
@@ -494,49 +541,6 @@ Filed under <a href="../yun-wei/index.html">运维</a>
       
     </div>
       
-
- 
-        
-
-
-
-    <div class='row-fluid'>
-      <div class='article-title span9'> 
-        <a href="../yun-wei/2016-03-23-17-24.html"><h1>Apache Kafka 安装 升级 数据迁移</h1></a>
-      </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span2">
-<p>三 23 三月 2016 </p>
-
-<p style="text-align: left;">
-Filed under <a href="../yun-wei/index.html">运维</a>
-</p>
-<p style="text-align: left;">
- 
-    Tags <a href="../tag/kafka.html">kafka</a> </p>
-<p>
-</p>
-      </div>
-      <div class="summary span8">
-	<h4>集群安装：</h4>
-<p>1.版本介绍：  </p>
-<p>目前最新版本为 <code>kafka_2.11-0.9.0.1</code>（scala-2.11为kafka官方推荐版本，此外还有2.10可以选择，scale2.9将被废弃）</p>
-<p>2.环境准备：  </p>
-<p>安装JDK7，目前官方推荐版本为<code>1.7 u51</code> 或者更新，并配置JAVA_HOME</p>
-<p>3.配置修改：  </p>
-<p>1）拷贝线上配置到本地kafka目录。 <br />
-2）需要注意的是server.properties里broker和ip的指定，必须要唯一。 <br />
-3）server.properties中log.dirs必须要手动指定。此配置项是kafka接收日志的存储目录(目前我们保存7天数据log.retention.hours=168) <br />
-4）zookeeper的指定可以是下面这种形式，手动定制zookeeper的目录，并且用逗号分隔ip <br />
-<code>zookeeper.connect=1.1.1 ...</code></p> 
-	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-23-17-24.html">
-          <i class="icon-plus-sign"></i> Read More </a>
-	<hr />
-      </div>
-      
-    </div>
-      
 <div class="pagination">
 <ul>
     <li class="prev"><a href="../yun-wei/index2.html">&larr; Previous</a></li>
@@ -545,6 +549,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
     <li class=""><a href="../yun-wei/index2.html">2</a></li>
     <li class="active"><a href="../yun-wei/index3.html">3</a></li>
     <li class=""><a href="../yun-wei/index4.html">4</a></li>
+    <li class=""><a href="../yun-wei/index5.html">5</a></li>
 
     <li class="next"><a href="../yun-wei/index4.html">Next &rarr;</a></li>
 
