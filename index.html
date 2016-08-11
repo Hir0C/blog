@@ -72,7 +72,7 @@ Filed under <a href="./yun-wei/index.html">运维</a>
       <div class="article-content span8">
 	<h3>测试安装了一下spark2.0，默认取消了一些参数</h3>
 <h4>默认spark2.0不使用akka，所以<code>spark.akka.threads</code>已经失效</h4>
-<h4><code>JAVA_LIBRARY_PATH SPARK_CLASSPATH SPARK_LIBRARY_PATH LD_LIBRARY_PATH SPARK_WORKER_INSTANCES</code> 这些参数已经没用了，可以使用<code>spark.executor.extraClassPath spark.driver.extraClassPath</code>代替。</h4> 
+<h4>使用<code>spark.executor.extraClassPath spark.driver.extraClassPath</code>配置classpath。比如lzo支持</h4> 
 	<a class="btn btn-mini xsmall" href="./yun-wei/2016-08-11-18-01.html">
           <i class="icon-comment"></i> Comment </a>
 	<hr />
