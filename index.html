@@ -53,8 +53,43 @@
 
     <div class='row-fluid''>
         <div class="article-title span9">
-            <a href="./yun-wei/2016-07-07-10-51.html"><h1>Hadoop 端口占用报错</h1></a>
+            <a href="./yun-wei/2016-08-11-18-01.html"><h1>Spark 2.0 一些参数变化记录ing..</h1></a>
         </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>四 11 八月 2016 </p>
+
+<p style="text-align: left;">
+Filed under <a href="./yun-wei/index.html">运维</a>
+</p>
+<p style="text-align: left;">
+ 
+    Tags <a href="./tag/spark.html">spark</a> </p>
+<p>
+</p>
+      </div>
+      <div class="article-content span8">
+	<h3>测试安装了一下spark2.0，默认取消了一些参数</h3>
+<h4>默认spark2.0不使用akka，所以<code>spark.akka.threads</code>已经失效</h4>
+<h4><code>JAVA_LIBRARY_PATH SPARK_CLASSPATH SPARK_LIBRARY_PATH LD_LIBRARY_PATH SPARK_WORKER_INSTANCES</code> 这些参数已经没用了，可以使用<code>spark.executor.extraClassPath spark.driver.extraClassPath</code>代替。</h4> 
+	<a class="btn btn-mini xsmall" href="./yun-wei/2016-08-11-18-01.html">
+          <i class="icon-comment"></i> Comment </a>
+	<hr />
+      </div>
+      
+    </div>
+    
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="./yun-wei/2016-07-07-10-51.html"><h1>Hadoop 端口占用报错</h1></a>
+      </div>
     </div>
     <div class="row-fluid">
       <div class="span2">
@@ -69,37 +104,15 @@ Filed under <a href="./yun-wei/index.html">运维</a>
 <p>
 </p>
       </div>
-      <div class="article-content span8">
-	<h3>问题描述</h3>
-<p><em>报错内容</em>   </p>
-<div class="highlight"><pre><span></span><span class="nt">2016-07-07</span> <span class="nt">10</span><span class="nd">:11:57</span><span class="o">,</span><span class="nt">583</span> <span class="nt">FATAL</span> <span class="cp">[</span><span class="nx">main</span><span class="cp">]</span> <span class="nt">org</span><span class="nc">.apache.hadoop.mapreduce.v2.app.MRAppMaster</span><span class="o">:</span> <span class="nt">Error</span> <span class="nt">starting</span> <span class="nt">MRAppMaster</span>
-<span class="nt">org</span><span class="nc">.apache.hadoop.yarn.exceptions.YarnRuntimeException</span><span class="o">:</span> <span class="nt">java</span><span class="nc">.net.BindException</span><span class="o">:</span> <span class="nt">Problem</span> <span class="nt">binding</span> <span class="nt">to</span> <span class="cp">[</span><span class="mf">0.0.0.0</span><span class="p">:</span><span class="mi">0</span><span class="cp">]</span> <span class="nt">java</span><span class="nc">.net.BindException</span><span class="o">:</span> <span class="nt">Address</span> <span class="nt">already</span> <span class="nt">in</span> <span class="nt">use</span><span class="o">;</span> <span class="nt">For</span> <span class="nt">more</span> <span class="nt">details</span> <span class="nt">see</span><span class="o">:</span>  <span class="nt">http</span><span class="o">://</span><span class="nt">wiki</span><span class="nc">.apache.org</span><span class="o">/</span><span class="nt">hadoop</span><span class="o">/</span><span class="nt">BindException</span>
-
-<span class="nt">Caused</span> <span class="nt">by</span><span class="o">:</span> <span class="nt">java</span><span class="nc">.net.BindException</span><span class="o">:</span> <span class="nt">Problem</span> <span class="nt">binding</span> <span class="nt">to</span> <span class="cp">[</span><span class="mf">0.0.0.0</span><span class="p">:</span><span class="mi">0</span><span class="cp">]</span> <span class="nt">java</span><span class="nc">.net.BindException</span><span class="o">:</span> <span class="nt">Address</span> <span class="nt">already</span> <span class="nt">in</span> <span class="nt">use</span><span class="o">;</span> <span class="nt">For</span> <span class="nt">more</span> <span class="nt">details</span> <span class="nt">see</span><span class="o">:</span>  <span class="nt">http</span><span class="o">://</span><span class="nt">wiki</span><span class="nc">.apache.org</span><span class="o">/</span><span class="nt">hadoop</span><span class="o">/</span><span class="nt">BindException</span>
-</pre></div>
-
-
-<h3>分析</h3>
-<h4>先是google了一下报错，并没有发现什么解决方案。</h4>
-<h4>访问报错给出的链接，<a href="http://wiki.apache.org/hadoop/BindException" target="_blank">地址点我</a></h4>
-<p>链接中提到了端口0为随机端口，所以开始感觉应该不是端口冲突导致。文档后面又提到这个问题不是hadoop本身导致，应该是系统或者网络问题。无奈使用文档中给出的命令查看了一下端口状态，发现了问题，端口竟然被占满了，全是close_wait状态。</p>
-<h3>处理</h3>
-<p><strong>查询端口占用情况</strong></p>
-<div class="highlight"><pre><span></span>netstat -a -t --numeric <span class="p">|</span> wc -l
-</pre></div>
-
-
-<p><strong>重启集群</strong></p>
-<div class="highlight"><pre><span></span>./sbin/stop-all.sh
-./sbin/start-all.sh
-</pre></div> 
+      <div class="summary span8">
+	<p>hadoop Address already in use</p> 
 	<a class="btn btn-mini xsmall" href="./yun-wei/2016-07-07-10-51.html">
-          <i class="icon-comment"></i> Comment </a>
+          <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
       
     </div>
-    
+      
 
  
         
@@ -462,39 +475,6 @@ Filed under <a href="./yun-wei/index.html">运维</a>
     <span class="n">ssl</span> <span class="n">on</span><span class="p">;</span>
     <span class="n">ssl_certificate</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">letsencrypt ...</span></pre></div> 
 	<a class="btn btn-mini xsmall" href="./yun-wei/2016-03-25-11-37.html">
-          <i class="icon-plus-sign"></i> Read More </a>
-	<hr />
-      </div>
-      
-    </div>
-      
-
- 
-        
-
-
-
-    <div class='row-fluid'>
-      <div class='article-title span9'> 
-        <a href="./yun-wei/2016-03-25-11-27.html"><h1>zabbix 3.0.0 LTS 安装与升级</h1></a>
-      </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span2">
-<p>五 25 三月 2016 </p>
-
-<p style="text-align: left;">
-Filed under <a href="./yun-wei/index.html">运维</a>
-</p>
-<p style="text-align: left;">
- 
-    Tags <a href="./tag/zabbix.html">zabbix</a> </p>
-<p>
-</p>
-      </div>
-      <div class="summary span8">
-	<p>Short version for index and feeds</p> 
-	<a class="btn btn-mini xsmall" href="./yun-wei/2016-03-25-11-27.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
