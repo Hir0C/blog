@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>Hir0C blog <small>django</small></title>
+    <title>Django 1.10 一些变化 - Hir0C blog</title>
     <meta name="description" content="">
     <meta name="author" content="Hir0C">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,7 +34,7 @@
 	<ul class="nav nav-pills pull-right">
 	    <li >
 	      <a href="../ri-chang/index.html ">日常</a>
-	    <li >
+	    <li  class="active" >
 	      <a href="../yun-wei/index.html ">运维</a>
 	</ul>
       </div>
@@ -47,15 +47,12 @@
     <div class="row-fluid">
 
         <div class="span10">
-        
-
-        
-
-    <div class='row-fluid''>
-        <div class="article-title span9">
-            <a href="../yun-wei/2016-09-20-11-06.html"><h1>Django 1.10 一些变化</h1></a>
-        </div>
-    </div>
+    <div class='article'>
+      <div class="row-fluid">
+           <div class="content-title span9">
+             <h1>Django 1.10 一些变化</h1>
+           </div>
+      </div>
     <div class="row-fluid">
       <div class="span2">
 <p>二 20 九月 2016 </p>
@@ -69,7 +66,8 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <p>
 </p>
       </div>
-      <div class="article-content span8">
+      
+      <div class="span8">
 	<h3>django 1.10相对于 1.8版本一些使用变化</h3>
 <div class="highlight"><pre><span></span><span class="o">*</span><span class="err">即将废弃</span><span class="n">TEMPLATES_</span><span class="o">*</span><span class="err">的参数，统一写道</span><span class="n">TEMPLATES</span><span class="o">=</span><span class="p">[]</span><span class="err">内，比如</span><span class="n">TEMPLATES_LOADERS</span><span class="err">，现在需要写成</span><span class="o">*</span>
 <span class="sb">``</span><span class="err">`</span>
@@ -112,60 +110,26 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
     <span class="n">url</span><span class="p">(</span><span class="s1">r&#39;^login/$&#39;</span><span class="p">,</span> <span class="n">user_views</span><span class="o">.</span><span class="n">login</span><span class="p">)</span>
 <span class="p">]</span>
-</pre></div> 
-	<a class="btn btn-mini xsmall" href="../yun-wei/2016-09-20-11-06.html">
-          <i class="icon-comment"></i> Comment </a>
+</pre></div>
 	<hr />
       </div>
-      
     </div>
+    <div class="span10">
+      <h3>Comments</h3>
     
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'HiroC'; 
 
- 
-        
-
-
-
-    <div class='row-fluid'>
-      <div class='article-title span9'> 
-        <a href="../yun-wei/2016-07-05-14-59.html"><h1>Nginx + Django 部署</h1></a>
-      </div>
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>  
     </div>
-    <div class="row-fluid">
-      <div class="span2">
-<p>二 05 七月 2016 </p>
-
-<p style="text-align: left;">
-Filed under <a href="../yun-wei/index.html">运维</a>
-</p>
-<p style="text-align: left;">
- 
-    Tags <a href="../tag/nginx.html">nginx</a> <a href="../tag/django.html">django</a> </p>
-<p>
-</p>
-      </div>
-      <div class="summary span8">
-	<p>nginx + uswgi + django 配置部署</p> 
-	<a class="btn btn-mini xsmall" href="../yun-wei/2016-07-05-14-59.html">
-          <i class="icon-plus-sign"></i> Read More </a>
-	<hr />
-      </div>
-      
-    </div>
-      
-<div class="pagination">
-<ul>
-    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
-
-    <li class="active"><a href="../tag/django.html">1</a></li>
-
-    <li class="next disabled"><a href="#">&rarr; Next</a></li>
-
-</ul>
-</div>
-
- 
-  
         </div>
         
         

@@ -5,29 +5,36 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/</loc>
-<lastmod>2016-08-11T18:13:52-00:00</lastmod>
+<lastmod>2016-09-20T15:18:25-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/archives.html</loc>
-<lastmod>2016-08-11T18:13:52-00:00</lastmod>
+<lastmod>2016-09-20T15:18:25-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/tags.html</loc>
-<lastmod>2016-08-11T18:13:52-00:00</lastmod>
+<lastmod>2016-09-20T15:18:25-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/categories.html</loc>
-<lastmod>2016-08-11T18:13:52-00:00</lastmod>
+<lastmod>2016-09-20T15:18:25-00:00</lastmod>
 <changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>/yun-wei/2016-09-20-11-06.html</loc>
+<lastmod>2016-09-20T11:06:00+08:00</lastmod>
+<changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
@@ -369,7 +376,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/yun-wei/index.html</loc>
-<lastmod>2016-08-11T18:01:00+08:06</lastmod>
+<lastmod>2016-09-20T11:06:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -628,7 +635,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/tag/django.html</loc>
-<lastmod>2016-07-05T14:59:00+08:06</lastmod>
+<lastmod>2016-09-20T11:06:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -691,7 +698,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/author/hir0c.html</loc>
-<lastmod>2016-08-11T18:01:00+08:06</lastmod>
+<lastmod>2016-09-20T11:06:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
