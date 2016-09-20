@@ -71,47 +71,52 @@ Filed under <a href="./yun-wei/index.html">运维</a>
       </div>
       <div class="article-content span8">
 	<h3>django 1.10相对于 1.8版本一些使用变化</h3>
-<div class="highlight"><pre><span></span><span class="o">*</span><span class="err">即将废弃</span><span class="n">TEMPLATES_</span><span class="o">*</span><span class="err">的参数，统一写道</span><span class="n">TEMPLATES</span><span class="o">=</span><span class="p">[]</span><span class="err">内，比如</span><span class="n">TEMPLATES_LOADERS</span><span class="err">，现在需要写成</span><span class="o">*</span>
-<span class="sb">``</span><span class="err">`</span>
-    <span class="n">TEMPLATES</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">{</span>
-        <span class="s1">&#39;BACKEND&#39;</span><span class="p">:</span> <span class="s1">&#39;django.template.backends.django.DjangoTemplates&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;DIRS&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">)],</span>
+<p><em>即将废弃TEMPLATES_</em>的参数，统一写道TEMPLATES=[]内，比如TEMPLATES_LOADERS* <br />
+现在需要写成：
+    ```
+        TEMPLATES = [
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            'DIRS': [os.path.join(BASE_DIR)],</p>
+<div class="highlight"><pre><span></span>        &#39;APP_DIRS&#39;: True,
+        &#39;OPTIONS&#39;: {
+            &#39;context_processors&#39;: [
+                &#39;django.template.context_processors.debug&#39;,
+                &#39;django.template.context_processors.request&#39;,
+                &#39;django.contrib.auth.context_processors.auth&#39;,
+                &#39;django.contrib.messages.context_processors.messages&#39;,
+            ],
 
-        <span class="s1">&#39;APP_DIRS&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
-        <span class="s1">&#39;OPTIONS&#39;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;context_processors&#39;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="s1">&#39;django.template.context_processors.debug&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;django.template.context_processors.request&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;django.contrib.auth.context_processors.auth&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;django.contrib.messages.context_processors.messages&#39;</span><span class="p">,</span>
-            <span class="p">],</span>
-            <span class="o">**</span><span class="s1">&#39;loaders&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">**</span>
-            <span class="o">**</span>    <span class="s1">&#39;django.template.loaders.filesystem.Loader&#39;</span><span class="p">,</span><span class="o">**</span>
-            <span class="o">**</span>    <span class="s1">&#39;django.template.loaders.app_directories.Loader&#39;</span><span class="p">,</span><span class="o">**</span>
-            <span class="o">**</span>  <span class="p">],</span><span class="o">**</span>
-            <span class="p">},</span>
-        <span class="p">},</span>
-    <span class="p">]</span>
-<span class="sb">``</span><span class="err">`</span>
+            #放到options里
+            &#39;loaders&#39;: [
+                &#39;django.template.loaders.filesystem.Loader&#39;,
+                &#39;django.template.loaders.app_directories.Loader&#39;,
+                ],
+            },
+        },
+    ]
+```
+</pre></div>
 
-<span class="o">*</span><span class="n">url</span><span class="p">()</span><span class="err">使不能使用字符串，比如登陆方法</span><span class="o">*</span>
-<span class="err">原写法为：</span>
-<span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">url</span>
-<span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
-<span class="kn">from</span> <span class="nn">app.views</span> <span class="kn">import</span> <span class="o">*</span>
 
-<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">url</span><span class="p">(</span><span class="s1">r&#39;^login/$&#39;</span><span class="p">,</span> <span class="s1">&#39;django.contrib.auth.views.login&#39;</span><span class="p">)</span>
-<span class="p">]</span>
-<span class="err">新写法为：</span>
-<span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">url</span>
-<span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
-<span class="kn">from</span> <span class="nn">django.contrib.auth</span> <span class="kn">import</span> <span class="n">views</span> <span class="k">as</span> <span class="n">user_views</span>
+<p><em>url()使不能使用字符串，比如登陆方法</em>
+原写法为：
+    from django.conf.urls import url
+    from django.contrib import admin
+    from app.views import *</p>
+<div class="highlight"><pre><span></span>urlpatterns = [
+    url(r&#39;^login/$&#39;, &#39;django.contrib.auth.views.login&#39;)
+]
+</pre></div>
 
-<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">url</span><span class="p">(</span><span class="s1">r&#39;^login/$&#39;</span><span class="p">,</span> <span class="n">user_views</span><span class="o">.</span><span class="n">login</span><span class="p">)</span>
-<span class="p">]</span>
+
+<p>新写法为：
+    from django.conf.urls import url
+    from django.contrib import admin
+    from django.contrib.auth import views as user_views</p>
+<div class="highlight"><pre><span></span>urlpatterns = [
+    url(r&#39;^login/$&#39;, user_views.login)
+]
 </pre></div> 
 	<a class="btn btn-mini xsmall" href="./yun-wei/2016-09-20-11-06.html">
           <i class="icon-comment"></i> Comment </a>
