@@ -227,11 +227,10 @@ Filed under <a href="./yun-wei/index.html">运维</a>
 <p><em>使用api的时候还有一个小问题，运行报错如下</em>   </p>
 <p>FAILED! =&gt; {"failed": true, "msg": "using -c ssh on certain older ssh versions may not support ControlPersist, set ANSIBLE_SSH_ARGS=\"\" (or ssh_args in [ssh_connection] section of the config file) before running again"}   </p>
 <p>需要在<code>ansible.cfg</code>配置文件中添加一行配置：   </p>
-<blockquote>
-<p>[ssh_connection]</p>
-<h1>添加如下一行配置</h1>
-<p>ssh_args = ""</p>
-</blockquote> 
+<div class="highlight"><pre><span></span><span class="k">[ssh_connection]</span>
+<span class="c1"># 添加如下一行配置</span>
+<span class="na">ssh_args</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+</pre></div> 
 	<a class="btn btn-mini xsmall" href="./yun-wei/2016-09-22-17-50.html">
           <i class="icon-comment"></i> Comment </a>
 	<hr />
