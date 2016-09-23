@@ -53,8 +53,189 @@
 
     <div class='row-fluid''>
         <div class="article-title span9">
-            <a href="../yun-wei/2016-09-20-11-06.html"><h1>Django 1.10 一些变化</h1></a>
+            <a href="../yun-wei/2016-09-22-17-50.html"><h1>Ansible 2.0 Api 例子</h1></a>
         </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>四 22 九月 2016 </p>
+
+<p style="text-align: left;">
+Filed under <a href="../yun-wei/index.html">运维</a>
+</p>
+<p style="text-align: left;">
+ 
+    Tags <a href="../tag/ansible.html">ansible</a> <a href="../tag/python.html">python</a> </p>
+<p>
+</p>
+      </div>
+      <div class="article-content span8">
+	<h3>Ansbile 2.0 api 例子</h3>
+<p><em>简单说只要继承CallbackBase类，并重写v2_runner_on_</em> 就可以了<em> <br />
+重点部分如下：
+  class ResultsCollector(CallbackBase):
+    def <strong>init</strong>(self, </em>args, <strong>kwargs):
+        super(ResultsCollector, self).<strong>init</strong>(*args, </strong>kwargs)
+        self.host_ok = {}
+        self.host_unreachable = {}
+        self.host_failed = {}</p>
+<div class="highlight"><pre><span></span>def v2_runner_on_unreachable(self, result):
+    self.host_unreachable[result._host.get_name()] = result
+
+def v2_runner_on_ok(self, result,  *args, **kwargs):
+    self.host_ok[result._host.get_name()] = result
+
+def v2_runner_on_failed(self, result,  *args, **kwargs):
+    self.host_failed[result._host.get_name()] = result
+
+callback = ResultsCollector()
+tqm._stdout_callback = callback
+
+# 根据需要返回结果
+for _, result in callback.host_ok.items():
+    self.results_raw[&#39;success&#39;][host_list] = result._result
+
+for _, result in callback.host_failed.items():
+    self.results_raw[&#39;failed&#39;][host_list] = result._result[&#39;msg&#39;]
+
+for _, result in callback.host_unreachable.items():
+    self.results_raw[&#39;unreachable&#39;][host_list] = result._result[&#39;msg&#39;]
+
+logger.debug(self.results_raw)
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+<span class="kn">from</span> <span class="nn">ansible.parsing.dataloader</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+<span class="kn">from</span> <span class="nn">ansible.vars</span> <span class="kn">import</span> <span class="n">VariableManager</span>
+<span class="kn">from</span> <span class="nn">ansible.inventory</span> <span class="kn">import</span> <span class="n">Inventory</span>
+<span class="kn">from</span> <span class="nn">ansible.playbook.play</span> <span class="kn">import</span> <span class="n">Play</span>
+<span class="kn">from</span> <span class="nn">ansible.executor.task_queue_manager</span> <span class="kn">import</span> <span class="n">TaskQueueManager</span>
+<span class="kn">from</span> <span class="nn">ansible.plugins.callback</span> <span class="kn">import</span> <span class="n">CallbackBase</span>
+<span class="kn">import</span> <span class="nn">logging</span> <span class="kn">as</span> <span class="nn">logger</span>
+
+
+<span class="c1"># 重写task执行成功，失败，无法连接时的输出</span>
+<span class="k">class</span> <span class="nc">ResultsCollector</span><span class="p">(</span><span class="n">CallbackBase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ResultsCollector</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">host_ok</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">host_unreachable</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">host_failed</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">v2_runner_on_unreachable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">host_unreachable</span><span class="p">[</span><span class="n">result</span><span class="o">.</span><span class="n">_host</span><span class="o">.</span><span class="n">get_name</span><span class="p">()]</span> <span class="o">=</span> <span class="n">result</span>
+
+    <span class="k">def</span> <span class="nf">v2_runner_on_ok</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span>  <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">host_ok</span><span class="p">[</span><span class="n">result</span><span class="o">.</span><span class="n">_host</span><span class="o">.</span><span class="n">get_name</span><span class="p">()]</span> <span class="o">=</span> <span class="n">result</span>
+
+    <span class="k">def</span> <span class="nf">v2_runner_on_failed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span>  <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">host_failed</span><span class="p">[</span><span class="n">result</span><span class="o">.</span><span class="n">_host</span><span class="o">.</span><span class="n">get_name</span><span class="p">()]</span> <span class="o">=</span> <span class="n">result</span>
+
+
+<span class="c1"># 重写任务输出格式</span>
+<span class="k">class</span> <span class="nc">ResultCallback</span><span class="p">(</span><span class="n">CallbackBase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">v2_runner_on_ok</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">host</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">_host</span>
+        <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="n">host</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">result</span><span class="o">.</span><span class="n">_result</span><span class="p">},</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">MyRunner</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results_raw</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hosts_file</span><span class="p">,</span> <span class="n">host_list</span><span class="p">,</span> <span class="n">module_name</span><span class="p">,</span> <span class="n">module_args</span><span class="p">,):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">results_raw</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;success&#39;</span><span class="p">:{},</span> <span class="s1">&#39;failed&#39;</span><span class="p">:{},</span> <span class="s1">&#39;unreachable&#39;</span><span class="p">:{}}</span>
+        <span class="n">Options</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Options&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;connection&#39;</span><span class="p">,</span><span class="s1">&#39;module_path&#39;</span><span class="p">,</span> <span class="s1">&#39;forks&#39;</span><span class="p">,</span> <span class="s1">&#39;timeout&#39;</span><span class="p">,</span>  <span class="s1">&#39;remote_user&#39;</span><span class="p">,</span>
+                                         <span class="s1">&#39;ask_pass&#39;</span><span class="p">,</span> <span class="s1">&#39;private_key_file&#39;</span><span class="p">,</span> <span class="s1">&#39;ssh_common_args&#39;</span><span class="p">,</span> <span class="s1">&#39;ssh_extra_args&#39;</span><span class="p">,</span>
+                                         <span class="s1">&#39;sftp_extra_args&#39;</span><span class="p">,</span> <span class="s1">&#39;scp_extra_args&#39;</span><span class="p">,</span> <span class="s1">&#39;become&#39;</span><span class="p">,</span> <span class="s1">&#39;become_method&#39;</span><span class="p">,</span>
+                                         <span class="s1">&#39;become_user&#39;</span><span class="p">,</span> <span class="s1">&#39;ask_value_pass&#39;</span><span class="p">,</span> <span class="s1">&#39;verbosity&#39;</span><span class="p">,</span> <span class="s1">&#39;check&#39;</span><span class="p">])</span>
+        <span class="c1"># initialize needed objects</span>
+        <span class="n">variable_manager</span> <span class="o">=</span> <span class="n">VariableManager</span><span class="p">()</span>
+        <span class="n">loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">()</span>
+        <span class="n">options</span> <span class="o">=</span> <span class="n">Options</span><span class="p">(</span><span class="n">connection</span><span class="o">=</span><span class="s1">&#39;ssh&#39;</span><span class="p">,</span> <span class="n">module_path</span><span class="o">=</span><span class="s1">&#39;/usr/local/python/lib/python2.7/site-packages/ansible&#39;</span><span class="p">,</span>
+                          <span class="n">forks</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">remote_user</span><span class="o">=</span><span class="s1">&#39;root&#39;</span><span class="p">,</span> <span class="n">ask_pass</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">private_key_file</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                          <span class="n">ssh_common_args</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ssh_extra_args</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">sftp_extra_args</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">scp_extra_args</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                          <span class="n">become</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">become_method</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">become_user</span><span class="o">=</span><span class="s1">&#39;root&#39;</span><span class="p">,</span><span class="n">ask_value_pass</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">verbosity</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                          <span class="n">check</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">passwords</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">vault_pass</span><span class="o">=</span><span class="s1">&#39;secret&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Instantiate our ResultCallback for handling results as they come in</span>
+        <span class="n">results_callback</span> <span class="o">=</span> <span class="n">ResultCallback</span><span class="p">()</span>
+
+        <span class="c1"># create inventory and pass to var manager</span>
+        <span class="n">inventory</span> <span class="o">=</span> <span class="n">Inventory</span><span class="p">(</span><span class="n">loader</span><span class="o">=</span><span class="n">loader</span><span class="p">,</span> <span class="n">variable_manager</span><span class="o">=</span><span class="n">variable_manager</span><span class="p">,</span> <span class="n">host_list</span><span class="o">=</span><span class="n">hosts_file</span><span class="p">)</span>
+        <span class="n">variable_manager</span><span class="o">.</span><span class="n">set_inventory</span><span class="p">(</span><span class="n">inventory</span><span class="p">)</span>
+
+        <span class="c1"># create play with tasks</span>
+        <span class="n">play_source</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Ansible Play&quot;</span><span class="p">,</span>
+                <span class="n">hosts</span><span class="o">=</span><span class="n">host_list</span><span class="p">,</span>
+                <span class="n">gather_facts</span><span class="o">=</span><span class="s1">&#39;no&#39;</span><span class="p">,</span>
+                <span class="n">tasks</span><span class="o">=</span><span class="p">[</span>
+                    <span class="nb">dict</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">module</span><span class="o">=</span><span class="n">module_name</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">module_args</span><span class="p">)),</span>
+                 <span class="p">]</span>
+            <span class="p">)</span>
+        <span class="n">play</span> <span class="o">=</span> <span class="n">Play</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">play_source</span><span class="p">,</span> <span class="n">variable_manager</span><span class="o">=</span><span class="n">variable_manager</span><span class="p">,</span> <span class="n">loader</span><span class="o">=</span><span class="n">loader</span><span class="p">)</span>
+
+        <span class="c1"># actually run it</span>
+        <span class="n">tqm</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="n">callback</span> <span class="o">=</span> <span class="n">ResultsCollector</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">tqm</span> <span class="o">=</span> <span class="n">TaskQueueManager</span><span class="p">(</span>
+                      <span class="n">inventory</span><span class="o">=</span><span class="n">inventory</span><span class="p">,</span>
+                      <span class="n">variable_manager</span><span class="o">=</span><span class="n">variable_manager</span><span class="p">,</span>
+                      <span class="n">loader</span><span class="o">=</span><span class="n">loader</span><span class="p">,</span>
+                      <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span>
+                      <span class="n">passwords</span><span class="o">=</span><span class="n">passwords</span><span class="p">,</span>
+                      <span class="n">stdout_callback</span><span class="o">=</span><span class="n">results_callback</span><span class="p">,</span>  <span class="c1"># Use our custom callback instead of the ``default`` callback plugin</span>
+                  <span class="p">)</span>
+            <span class="n">tqm</span><span class="o">.</span><span class="n">_stdout_callback</span> <span class="o">=</span> <span class="n">callback</span>
+            <span class="n">tqm</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">play</span><span class="p">)</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">tqm</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">tqm</span><span class="o">.</span><span class="n">cleanup</span><span class="p">()</span>
+
+        <span class="c1"># 根据需要返回结果</span>
+        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">callback</span><span class="o">.</span><span class="n">host_ok</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results_raw</span><span class="p">[</span><span class="s1">&#39;success&#39;</span><span class="p">][</span><span class="n">host_list</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">_result</span>
+
+        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">callback</span><span class="o">.</span><span class="n">host_failed</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results_raw</span><span class="p">[</span><span class="s1">&#39;failed&#39;</span><span class="p">][</span><span class="n">host_list</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">_result</span><span class="p">[</span><span class="s1">&#39;msg&#39;</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">callback</span><span class="o">.</span><span class="n">host_unreachable</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results_raw</span><span class="p">[</span><span class="s1">&#39;unreachable&#39;</span><span class="p">][</span><span class="n">host_list</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">_result</span><span class="p">[</span><span class="s1">&#39;msg&#39;</span><span class="p">]</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results_raw</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">results_raw</span>
+
+
+<span class="n">mr</span> <span class="o">=</span> <span class="n">MyRunner</span><span class="p">()</span>
+<span class="n">datastructure</span> <span class="o">=</span> <span class="n">mr</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;./host.tmp&#39;</span><span class="p">,</span> <span class="n">check_ip</span><span class="p">,</span> <span class="s1">&#39;setup&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">datastructure</span>
+</pre></div> 
+	<a class="btn btn-mini xsmall" href="../yun-wei/2016-09-22-17-50.html">
+          <i class="icon-comment"></i> Comment </a>
+	<hr />
+      </div>
+      
+    </div>
+    
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="../yun-wei/2016-09-20-11-06.html"><h1>Django 1.10 一些变化</h1></a>
+      </div>
     </div>
     <div class="row-fluid">
       <div class="span2">
@@ -69,7 +250,7 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 <p>
 </p>
       </div>
-      <div class="article-content span8">
+      <div class="summary span8">
 	<h3>django 1.10相对于 1.8版本一些使用变化</h3>
 <p><em>一、 即将废弃TEMPLATES_</em>的参数，统一写道TEMPLATES=[]内，比如TEMPLATES_LOADERS*  <br />
 现在需要写成：</p>
@@ -89,43 +270,14 @@ Filed under <a href="../yun-wei/index.html">运维</a>
 
         <span class="c1">#放到options里</span>
         <span class="s1">&#39;loaders&#39;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s1">&#39;django.template.loaders.filesystem.Loader&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;django.template.loaders.app_directories.Loader&#39;</span><span class="p">,</span>
-            <span class="p">],</span>
-        <span class="p">},</span>
-    <span class="p">},</span>
-<span class="p">]</span>
-</pre></div>
-
-
-<p><em>二、 url()使不能使用字符串，比如登陆方法</em> <br />
-原写法为：</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">url</span>
-<span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
-<span class="kn">from</span> <span class="nn">app.views</span> <span class="kn">import</span> <span class="o">*</span>
-
-<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">url</span><span class="p">(</span><span class="s1">r&#39;^login/$&#39;</span><span class="p">,</span> <span class="s1">&#39;django.contrib.auth.views.login&#39;</span><span class="p">)</span>
-<span class="p">]</span>
-</pre></div>
-
-
-<p>新写法为：</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">url</span>
-<span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
-<span class="kn">from</span> <span class="nn">django.contrib.auth</span> <span class="kn">import</span> <span class="n">views</span> <span class="k">as</span> <span class="n">user_views</span>
-
-<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">url</span><span class="p">(</span><span class="s1">r&#39;^login/$&#39;</span><span class="p">,</span> <span class="n">user_views</span><span class="o">.</span><span class="n">login</span><span class="p">)</span>
-<span class="p">]</span>
-</pre></div> 
+            <span class="s1">&#39;django.template ...</span></pre></div> 
 	<a class="btn btn-mini xsmall" href="../yun-wei/2016-09-20-11-06.html">
-          <i class="icon-comment"></i> Comment </a>
+          <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
       
     </div>
-    
+      
 
  
         
@@ -438,67 +590,6 @@ Filed under <a href="../ri-chang/index.html">日常</a>
 <li>水平分割线<code>***</code></li>
 </ol> 
 	<a class="btn btn-mini xsmall" href="../ri-chang/2016-03-25-12-17.html">
-          <i class="icon-plus-sign"></i> Read More </a>
-	<hr />
-      </div>
-      
-    </div>
-      
-
- 
-        
-
-
-
-    <div class='row-fluid'>
-      <div class='article-title span9'> 
-        <a href="../yun-wei/2016-03-25-12-10.html"><h1>安装火焰图生成工具</h1></a>
-      </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span2">
-<p>五 25 三月 2016 </p>
-
-<p style="text-align: left;">
-Filed under <a href="../yun-wei/index.html">运维</a>
-</p>
-<p style="text-align: left;">
- 
-    Tags <a href="../tag/nginx.html">nginx</a> <a href="../tag/openresty.html">openresty</a> </p>
-<p>
-</p>
-      </div>
-      <div class="summary span8">
-	<h4>准备</h4>
-<p>查看内核版本</p>
-<div class="highlight"><pre><span></span>uname -a
-</pre></div>
-
-
-<p>根据内核版本下载内核开发补丁   </p>
-<p><a href="http://debuginfo.centos.org/6/x86_64/" target="_blank">CentOS源</a>   </p>
-<p>以我虚拟机为例需要下载如下三个包   </p>
-<div class="highlight"><pre><span></span>kernel-debug-debuginfo-2.6.32-573.el6.x86_64.rpm
-kernel-debuginfo-2.6.32-573.el6.x86_64.rpm
-kernel-debuginfo-common-x86_64-2.6.32-573.el6.x86_64.rpm
-</pre></div>
-
-
-<h4>安装</h4>
-<p>1.装rpm包</p>
-<div class="highlight"><pre><span></span>rpm -ivh *
-yum install systemtap
-</pre></div>
-
-
-<p>2.安装openresty   </p>
-<p>重新编译openresty，打开--debug选项   </p>
-<p>3.下载Flame-Graphic生成包   </p>
-<p><a href="https://github.com/brendangregg/FlameGraph" target="_blank">下载地址点我</a>    </p>
-<h4>使用</h4>
-<p>1.测试systemtap是否安装成功   </p>
-<div class="highlight"><pre><span></span>stap -v -e <span class="s1">&#39;probe vfs.read {printf ...</span></pre></div> 
-	<a class="btn btn-mini xsmall" href="../yun-wei/2016-03-25-12-10.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
