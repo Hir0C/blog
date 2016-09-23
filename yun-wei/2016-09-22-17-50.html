@@ -68,11 +68,15 @@ Filed under <a href="../yun-wei/index.html">运维</a>
       </div>
       
       <div class="span8">
-	<h3>Ansbile 2.0 api 例子</h3>
-<p><em>简单说只要继承CallbackBase类，并重写v2_runner_on_</em> 就可以了<em> <br />
-重点部分如下：
+	<h3>Ansbile 2.0 api使用</h3>
+<p>需求是获取task执行结果再存入数据库，一直没找到好方法，比1.x的api麻烦多了，而且网上文档实在不多，好在最后还是让我找到了，主要参考了如下两个文章。 <br />
+<strong><a href="http://www.voidcn.com/blog/python_tty/article/p-5980963.html" target="_blank">Ansible 2.0 API解析</a></strong> <br />
+<strong><a href="https://serversforhackers.com/running-ansible-2-programmatically" target="_blank">Running Ansible 2 Programmatically</a></strong>   </p>
+<p><em>简单说只要定义一个继承CallbackBase的类，并重写v2_runner_on_</em> 就可以了*   </p>
+<p>重点部分如下：   </p>
+<p># 重写task执行成功，失败，无法连接时的输出
   class ResultsCollector(CallbackBase):
-    def <strong>init</strong>(self, </em>args, <strong>kwargs):
+    def <strong>init</strong>(self, *args, <strong>kwargs):
         super(ResultsCollector, self).<strong>init</strong>(*args, </strong>kwargs)
         self.host_ok = {}
         self.host_unreachable = {}
@@ -89,7 +93,7 @@ def v2_runner_on_failed(self, result,  *args, **kwargs):
 callback = ResultsCollector()
 tqm._stdout_callback = callback
 
-# 根据需要返回结果
+# 根据需要返回结果，格式可以自定义
 for _, result in callback.host_ok.items():
     self.results_raw[&#39;success&#39;][host_list] = result._result
 
@@ -98,11 +102,10 @@ for _, result in callback.host_failed.items():
 
 for _, result in callback.host_unreachable.items():
     self.results_raw[&#39;unreachable&#39;][host_list] = result._result[&#39;msg&#39;]
-
-logger.debug(self.results_raw)
 </pre></div>
 
 
+<p><strong>下面是个完整的例子</strong>   </p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
 <span class="kn">from</span> <span class="nn">ansible.parsing.dataloader</span> <span class="kn">import</span> <span class="n">DataLoader</span>
@@ -114,7 +117,6 @@ logger.debug(self.results_raw)
 <span class="kn">import</span> <span class="nn">logging</span> <span class="kn">as</span> <span class="nn">logger</span>
 
 
-<span class="c1"># 重写task执行成功，失败，无法连接时的输出</span>
 <span class="k">class</span> <span class="nc">ResultsCollector</span><span class="p">(</span><span class="n">CallbackBase</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -217,6 +219,14 @@ logger.debug(self.results_raw)
 <span class="n">datastructure</span> <span class="o">=</span> <span class="n">mr</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;./host.tmp&#39;</span><span class="p">,</span> <span class="n">check_ip</span><span class="p">,</span> <span class="s1">&#39;setup&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
 <span class="k">print</span> <span class="n">datastructure</span>
 </pre></div>
+
+
+<p><em>使用api的时候还有一个小问题，运行报错如下</em>   </p>
+<p>FAILED! =&gt; {"failed": true, "msg": "using -c ssh on certain older ssh versions may not support ControlPersist, set ANSIBLE_SSH_ARGS=\"\" (or ssh_args in [ssh_connection] section of the config file) before running again"}   </p>
+<p>需要在<code>ansible.cfg</code>配置文件中添加一行配置： <br />
+  [ssh_connection]
+  # 添加如下一行配置
+  ssh_args = ""</p>
 	<hr />
       </div>
     </div>
