@@ -76,34 +76,35 @@ Filed under <a href="./yun-wei/index.html">运维</a>
 <strong><a href="https://serversforhackers.com/running-ansible-2-programmatically" target="_blank">Running Ansible 2 Programmatically</a></strong>   </p>
 <p><em>简单说只要定义一个继承CallbackBase的类，并重写v2_runner_on_</em> 就可以了*   </p>
 <p>重点部分如下：   </p>
-<p># 重写task执行成功，失败，无法连接时的输出
-  class ResultsCollector(CallbackBase):
-    def <strong>init</strong>(self, *args, <strong>kwargs):
-        super(ResultsCollector, self).<strong>init</strong>(*args, </strong>kwargs)
-        self.host_ok = {}
-        self.host_unreachable = {}
-        self.host_failed = {}</p>
-<div class="highlight"><pre><span></span>def v2_runner_on_unreachable(self, result):
-    self.host_unreachable[result._host.get_name()] = result
+<div class="highlight"><pre><span></span><span class="c1"># 重写task执行成功，失败，无法连接时的输出</span>
+<span class="k">class</span> <span class="nc">ResultsCollector</span><span class="p">(</span><span class="n">CallbackBase</span><span class="p">):</span>
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+      <span class="nb">super</span><span class="p">(</span><span class="n">ResultsCollector</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">host_ok</span> <span class="o">=</span> <span class="p">{}</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">host_unreachable</span> <span class="o">=</span> <span class="p">{}</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">host_failed</span> <span class="o">=</span> <span class="p">{}</span>
 
-def v2_runner_on_ok(self, result,  *args, **kwargs):
-    self.host_ok[result._host.get_name()] = result
+  <span class="k">def</span> <span class="nf">v2_runner_on_unreachable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">host_unreachable</span><span class="p">[</span><span class="n">result</span><span class="o">.</span><span class="n">_host</span><span class="o">.</span><span class="n">get_name</span><span class="p">()]</span> <span class="o">=</span> <span class="n">result</span>
 
-def v2_runner_on_failed(self, result,  *args, **kwargs):
-    self.host_failed[result._host.get_name()] = result
+  <span class="k">def</span> <span class="nf">v2_runner_on_ok</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span>  <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">host_ok</span><span class="p">[</span><span class="n">result</span><span class="o">.</span><span class="n">_host</span><span class="o">.</span><span class="n">get_name</span><span class="p">()]</span> <span class="o">=</span> <span class="n">result</span>
 
-callback = ResultsCollector()
-tqm._stdout_callback = callback
+  <span class="k">def</span> <span class="nf">v2_runner_on_failed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span>  <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">host_failed</span><span class="p">[</span><span class="n">result</span><span class="o">.</span><span class="n">_host</span><span class="o">.</span><span class="n">get_name</span><span class="p">()]</span> <span class="o">=</span> <span class="n">result</span>
 
-# 根据需要返回结果，格式可以自定义
-for _, result in callback.host_ok.items():
-    self.results_raw[&#39;success&#39;][host_list] = result._result
+  <span class="n">callback</span> <span class="o">=</span> <span class="n">ResultsCollector</span><span class="p">()</span>
+  <span class="n">tqm</span><span class="o">.</span><span class="n">_stdout_callback</span> <span class="o">=</span> <span class="n">callback</span>
 
-for _, result in callback.host_failed.items():
-    self.results_raw[&#39;failed&#39;][host_list] = result._result[&#39;msg&#39;]
+  <span class="c1"># 根据需要返回结果，格式可以自定义</span>
+  <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">callback</span><span class="o">.</span><span class="n">host_ok</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">results_raw</span><span class="p">[</span><span class="s1">&#39;success&#39;</span><span class="p">][</span><span class="n">host_list</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">_result</span>
 
-for _, result in callback.host_unreachable.items():
-    self.results_raw[&#39;unreachable&#39;][host_list] = result._result[&#39;msg&#39;]
+  <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">callback</span><span class="o">.</span><span class="n">host_failed</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">results_raw</span><span class="p">[</span><span class="s1">&#39;failed&#39;</span><span class="p">][</span><span class="n">host_list</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">_result</span><span class="p">[</span><span class="s1">&#39;msg&#39;</span><span class="p">]</span>
+
+  <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">callback</span><span class="o">.</span><span class="n">host_unreachable</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">results_raw</span><span class="p">[</span><span class="s1">&#39;unreachable&#39;</span><span class="p">][</span><span class="n">host_list</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">_result</span><span class="p">[</span><span class="s1">&#39;msg&#39;</span><span class="p">]</span>   
 </pre></div>
 
 
@@ -226,9 +227,9 @@ for _, result in callback.host_unreachable.items():
 <p><em>使用api的时候还有一个小问题，运行报错如下</em>   </p>
 <p>FAILED! =&gt; {"failed": true, "msg": "using -c ssh on certain older ssh versions may not support ControlPersist, set ANSIBLE_SSH_ARGS=\"\" (or ssh_args in [ssh_connection] section of the config file) before running again"}   </p>
 <p>需要在<code>ansible.cfg</code>配置文件中添加一行配置： <br />
-  [ssh_connection]
-  # 添加如下一行配置
-  ssh_args = ""</p> 
+    [ssh_connection]
+    # 添加如下一行配置
+    ssh_args = ""</p> 
 	<a class="btn btn-mini xsmall" href="./yun-wei/2016-09-22-17-50.html">
           <i class="icon-comment"></i> Comment </a>
 	<hr />
